@@ -1,0 +1,4 @@
+header {
+  display: grid;
+  grid-template-columns: 100px 100px 1fr 1fr;
+}
