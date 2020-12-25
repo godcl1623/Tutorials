@@ -1,0 +1,27 @@
+body {
+  width: 200px;
+}
+#greeting {
+  background-color: #405ca4;
+  color: white;
+  padding: 10px;
+}
+.board {
+  background-color: #e6e8eb;
+  padding: 10px;
+}
+#park {
+  background-color: white;
+  padding: 5px;
+  margin: 10px;
+}
+#ahn {
+  background-color: white;
+  padding: 5px;
+  margin: 10px;
+}
+#lee {
+  background-color: white;
+  padding: 5px;
+  margin: 10px;
+}
