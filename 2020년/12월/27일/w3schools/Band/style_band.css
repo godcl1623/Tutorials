@@ -1,0 +1,68 @@
+body {
+  margin: 0;
+}
+header {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  align-items: baseline;
+  height: 46px;
+  background-color: black;
+  color: white;
+}
+
+header div {
+  margin: 10px 20px;
+}
+
+span {
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.about {
+  display: grid;
+  grid-template-columns: auto;
+}
+
+.about div {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+.tour {
+  display: grid;
+  grid-template-columns: auto;
+  background-color: black;
+  color: white;
+}
+
+.month {
+  display: flex;
+  flex-flow: column wrap;
+  background-color: white;
+  color: black;
+  margin: 10px 80px;
+}
+
+.location {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+.location div {
+  background-color: white;
+  color: black;
+}
+
+.contact {
+  display: grid;
+  grid-template-columns: auto;
+}
+
+footer {
+  display: grid;
+  grid-template-columns: auto;
+}
