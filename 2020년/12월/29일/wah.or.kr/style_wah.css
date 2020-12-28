@@ -1,0 +1,56 @@
+/*@media {
+
+}*/
+
+body {
+  margin: 0;
+}
+
+header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  height: 81px;
+  /*어떻게 구성된건지 확인하고 나중에 지울 것!!*/
+  border-bottom: 3px solid black;
+}
+
+nav {
+  display: block;
+  height: 32px;
+  /*나중에 지울 것!!*/
+  border-bottom: 1px solid gray;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  float: left;
+}
+
+main {
+  display: grid;
+  grid-template-areas:
+    "a b b c"
+    "a b b c"
+    "a b b c"
+    "d d e e";
+  grid-template-rows: 80px 1fr 70px;
+  grid-auto-columns: 20% 1fr 15%;
+  grid-gap: 10px;
+  height: 100vh;
+  margin: 0;
+}
+
+footer {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.copyright {
+  display: grid;
+  grid-template-rows: 20px 40px;
+  font-size: 12px;
+}
