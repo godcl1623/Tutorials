@@ -1,0 +1,112 @@
+/*@media {
+
+}*/
+
+body {
+  margin: 0;
+}
+
+header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  height: 81px;
+  /*어떻게 구성된건지 확인하고 나중에 지울 것!!*/
+  border-bottom: 3px solid black;
+}
+
+nav {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  width: max-content;
+  height: 49px;
+  margin: 0;
+  padding-bottom: 15px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline;
+}
+
+button {
+  border: 1px solid #ededec;
+  border-radius: 0px;
+  background-color: white;
+  padding: 10px;
+  height: 49px;
+  width: 174px;
+  outline: none;
+  box-shadow: none;
+}
+
+main {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+main [class^="container"] {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.container1 [id*="e"] {
+  width: 270px;
+  height: 444px;
+  margin-bottom: 15px;
+}
+
+#imagenotice {
+  width: 432px;
+  margin: 0 15px 15px 15px;
+}
+
+.container2 [id*="e"] {
+  width: 493px;
+  height: 222px;
+}
+
+main [id*="e"] {
+  border: 5px solid black;
+}
+
+footer {
+  display: flex;
+  flex-flow: row nowrap;
+  border: 1px solid gray;
+  margin-top: 30px;
+}
+
+#nialogo {
+  width: 150px;
+}
+
+.copyright {
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: 12px;
+}
+
+.copyright ul {
+  padding: 0;
+  width: 100%;
+  position: relative;
+}
+
+.copyright li {
+  position: relative;
+  height: 100%;
+  width: 25%;
+}
+
+.copyright p {
+  color: gray;
+  margin: 0;
+}

@@ -1,0 +1,261 @@
+/*@media {
+
+}*/
+
+body {
+  margin: 0;
+  background: url(assets/nav/doc_bg.gif) repeat-x top;
+  font-size: 12px;
+  letter-spacing: -0.5px;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  display: inline;
+}
+
+header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 81px;
+  /*어떻게 구성된건지 확인하고 나중에 지울 것!!*/
+  /*border-bottom: 3px solid black;*/
+}
+
+header fieldset {
+  position: relative;
+  width: 336px;
+  height: 39px;
+  border: 0;
+  background-image: url(assets/header/search_bg.gif);
+  padding: 0;
+  display: inline-block;
+}
+
+header fieldset input[type="text"] {
+  vertical-align: middle;
+  border: 0;
+  width: 262px;
+  margin: 5px 5px 5px 7px;
+  font-size: 18px;
+}
+
+header fieldset input[type="submit"] {
+  vertical-align: middle;
+  border: 0;
+  background-color: white;
+  background-image: url(assets/header/btn_search.gif);
+  width: 52px;
+  height: 39px;
+  padding: 0;
+}
+
+header ul {
+  padding: 0;
+}
+
+header li {
+  font-size: 13px;
+}
+
+.login {
+  padding: 0 15px;
+  float: left;
+}
+
+.signin {
+  background: url(assets/header/line.gif) no-repeat left 5px;
+  padding: 0 15px;
+  float: left;
+}
+
+.sitemap {
+  background: url(assets/header/line.gif) no-repeat left 5px;
+  padding: 0 15px;
+  float: left;
+}
+
+nav {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 49px;
+  margin-bottom: 15px;
+  font-size: initial;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin: 10px;
+  width: 174px;
+  height: 49px;
+  display: list-item;
+  float: left;
+  background: url(assets/nav/muen_line.gif) no-repeat right 3px;
+  text-align: center;
+  margin: 0;
+}
+
+nav li.first a {
+  background: url(assets/nav/muen_line.gif) no-repeat left 3px;
+  width: 174px;
+  height: 34px;
+}
+
+nav li a.link {
+  padding-top: 15px;
+  display: block;
+  text-decoration: none;
+  color: black;
+}
+
+main {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+main [class^="container"] {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+.container1 [id*="e"] {
+  width: 270px;
+  height: 444px;
+  margin-bottom: 15px;
+}
+
+.container1 h2 {
+  font-size: 13px;
+  margin: 0;
+  padding-bottom: 3px;
+  line-height: 20px;
+}
+
+.container1 p {
+  margin: 0;
+}
+
+.container1 div {
+  width: 162px;
+  height: 89px;
+  padding: 22px 10px 0 98px;
+}
+
+#accessible .article1 {
+  background: url(assets/main/container1/m_box_bg01.gif) no-repeat left top;
+}
+
+#accessible .article2 {
+  background: url(assets/main/container1/m_box_bg02.gif) no-repeat left top;
+}
+
+#accessible .article3 {
+  background: url(assets/main/container1/m_box_bg03.gif) no-repeat left top;
+}
+
+#accessible .article4 {
+  background: url(assets/main/container1/m_box_bg04.gif) no-repeat left top;
+}
+
+#imagenotice {
+  width: 432px;
+  margin: 0 15px 15px 15px;
+}
+
+#mobile-accessible .article5 {
+  background: url(assets/main/container1/m_box_bg05_1.gif) no-repeat left top;
+}
+
+#mobile-accessible .article6 {
+  padding-top: 5px;
+  background: url(assets/main/container1/m_box_bg06.gif) no-repeat left top;
+}
+
+#mobile-accessible .article7 {
+  width: 270px;
+  height: 200px;
+  padding: 10px 0 20px 0;
+  background: url(assets/main/container1/m_box_bg07.gif) no-repeat;
+  text-align: center;
+}
+
+#mobile-accessible .mobileos {
+  padding: 0;
+  padding-top: 10px;
+  margin: 0px auto;
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  justify-content: space-between;
+  width: 200px;
+}
+
+#mobile-accessible .mobileos div {
+  padding: 0;
+  width: 86px;
+  height: 109px;
+}
+
+.container2 [id*="e"] {
+  width: 493px;
+  height: 222px;
+}
+
+#notice {
+  margin-right: 15px;
+}
+
+main [id*="e"] {
+  border: 5px solid black;
+}
+
+footer {
+  display: flex;
+  flex-flow: row nowrap;
+  border: 1px solid gray;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+#nialogo {
+  margin-right: 10px;
+}
+
+#walogo {
+  margin: 0 10px;
+}
+
+#centerlogo {
+  margin-left: 10px;
+}
+
+.copyright {
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: 12px;
+  margin: 0 10px;
+}
+
+.copyright ul {
+  padding: 0;
+}
+
+.copyright li {
+  position: relative;
+}
+
+.copyright p {
+  color: gray;
+  margin: 0;
+}
