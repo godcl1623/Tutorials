@@ -1,0 +1,45 @@
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.upper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+.upper > li {
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid black;
+  width: 120px;
+  position: relative;
+}
+
+.down {
+  position: absolute;
+  display: none;
+  border: 1px solid black;
+  width: 120px;
+  height: 100px;
+  left: -1px;
+}
+
+.upper > li:hover .down {
+  display: block;
+}
+
+.down > li {
+  display: list-item;
+  list-style-type: disc;
+  list-style-position: inside;
+  font-size: 12px;
+  position: relative;
+  text-align: left;
+  left: 10px;
+  top: 10px;
+  padding-left: 10px;
+}
