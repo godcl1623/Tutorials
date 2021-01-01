@@ -1,0 +1,123 @@
+/*@media {
+
+}*/
+
+/*<------------전체 문서 공통 내용------------>*/
+
+body,
+h2 {
+  padding: 0;
+  margin: 0;
+}
+
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/*<------------nav 설정 내용------------>*/
+
+nav {
+  background: black;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  height: 46px;
+}
+
+nav li {
+  padding: 12px 24px;
+}
+
+nav .menu-item:hover {
+  background: lightgray;
+  color: black;
+}
+
+nav .menu {
+  display: flex;
+  flex-flow: row nowrap;
+  color: white;
+}
+
+nav .menu > li {
+  position: relative;
+}
+
+nav .down {
+  display: none;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 0 30px 1px rgba(0, 0, 0, 0.2);
+  top: 46px;
+  left: 0px;
+  height: 113px;
+  width: 160px;
+}
+
+nav .dropdown:hover .down {
+  display: block;
+}
+
+.submenu {
+  color: black;
+  padding: 8px 16px;
+  position: relative;
+}
+
+.submenu:hover {
+  background: lightgray;
+}
+
+#search_form {
+  border: 3px solid red;
+  width: 50px;
+}
+
+/*<------------main 설정 내용------------>*/
+/*<------------article1 설정 내용------------>*/
+.article1 {
+  background: url(images/la.jpg) no-repeat center;
+  background-size: cover;
+  height: 760px;
+}
+
+.article1 .comment,
+h2 {
+  text-align: center;
+  color: white;
+  font-weight: 500;
+  position: relative;
+  top: 83%;
+}
+
+/*<------------article2 설정 내용------------>*/
+
+.article2 {
+  height: 760px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.article2 .about {
+  text-align: center;
+}
+
+.article2 .about p {
+  width: 768px;
+  text-align: justify;
+}
+
+.article2 .member {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  width: 768px;
+}
+
+/*<------------article3 설정 내용------------>*/
+/*<------------article4 설정 내용------------>*/
+/*<------------footer 설정 내용------------>*/
