@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>테이블 연습</title>
+  <link rel="stylesheet" href="테이블 연습.css">
+</head>
+<body>
+<!--1. 기본 문법-->
+  <table>
+    <tr>
+      <td>이름</td><td>성별</td><td>주소</td>
+    </tr>
+    <tr>
+      <td>이치행</td><td>남</td><td>경기도 고양시</td>
+    </tr>
+    <tr>
+      <td>김승규</td><td>남</td><td>인천광역시</td>
+    </tr>
+    <tr>
+      <td>박지영</td><td>여</td><td>인천광역시</td>
+    </tr>
+  </table>
+<!--2. table 구조 세분화-->
+  <table>
+    <thead>
+      <tr>
+        <th>이름</th><th>성별</th><th>주소</th><th>미납회비</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>이치행</td>
+        <td>남</td>
+        <td>고양시</td>
+        <td>2,000원</td>
+      </tr>
+      <tr>
+        <td>김승규</td><td>남</td><td>인천광역시</td><td>1,000원</td>
+      </tr>
+      <tr>
+        <td>박지영</td><td>여</td><td>인천광역시</td><td>4,000원</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">합계</td>
+        <td>7,000원</td>
+      </tr>
+    </tfoot>
+  </table>
+</body>
+</html>
