@@ -1,0 +1,594 @@
+/*<------------전체 문서 공통 내용------------>*/
+
+body,
+h2 {
+  padding: 0;
+  margin: 0;
+}
+
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.article2,
+.article3,
+.article4 {
+  height: auto;
+  display: flex;
+}
+
+.title {
+  text-align: center;
+}
+
+.title h4 {
+  color: gray;
+  font-style: italic;
+  font-weight: 300;
+}
+
+a {
+  color: white;
+  font-style: normal;
+  text-decoration: none;
+}
+
+nav .down a {
+  color: black;
+}
+
+/*<------------nav 설정 내용------------>*/
+
+nav {
+  background: black;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  height: 46px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+nav li {
+  padding: 12px 24px;
+}
+
+nav .menu-item:hover {
+  background: lightgray;
+  color: black;
+}
+
+nav .menu {
+  display: flex;
+  flex-flow: row nowrap;
+  color: white;
+}
+
+nav .menu > li {
+  position: relative;
+}
+
+nav .down {
+  display: none;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 0 30px 1px rgba(0, 0, 0, 0.2);
+  top: 46px;
+  left: 0px;
+  height: 113px;
+  width: 160px;
+}
+
+nav .dropdown:hover .down {
+  display: block;
+}
+
+.submenu {
+  color: black;
+  padding: 8px 16px;
+  position: relative;
+}
+
+.submenu:hover {
+  background: lightgray;
+}
+
+#search_form {
+  width: 15px;
+  height: 15px;
+  background: url(images/magnifier.png) no-repeat center;
+  background-size: cover;
+  background-color: white;
+  position: relative;
+  right: 25px;
+  top: 15px;
+}
+
+#search_form:hover {
+  background-color: red;
+}
+
+/*<------------nav 반응형 메뉴 내용------------>*/
+
+nav .menu_sum {
+  display: none;
+}
+
+/*<------------main 설정 내용------------>*/
+/*<------------article1 설정 내용------------>*/
+
+.article1 {
+  /*background: url(images/la.jpg) no-repeat center;
+  background-size: cover;*/
+  /*max-height: auto;
+  max-width: 100%;*/
+  position: relative;
+}
+
+.article1 .img_container {
+  width: 100%;
+  height: 100%;
+}
+
+.article1 .img_container img {
+  width: 100%;
+  height: 100%;
+}
+
+.article1 .comment {
+  display: inline;
+  text-align: center;
+  color: white;
+  font-weight: 500;
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*<------------article2 설정 내용------------>*/
+
+.article2 {
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 60px 20px 30px 20px;
+}
+/*편집 끝나면 지울 것
+.article2 * {
+  border: 3px solid black;
+}*/
+
+.article2 .title,
+h1 {
+  margin-top: 0;
+}
+
+.article2 .title {
+  max-width: 768px;
+  margin: 0 20px;
+}
+
+.article2 p {
+  width: 100%;
+  text-align: justify;
+}
+
+.article2 .member {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  max-width: 100%;
+  height: auto;
+  margin: 50px 0;
+}
+
+.article2 .member_s {
+  width: 154px;
+  height: 200px;
+  margin: 0 50px;
+}
+
+.article2 .member_s p {
+  margin-top: 0px;
+  text-align: center;
+}
+
+.article2 .member_s img {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+}
+
+/*<------------article3 설정 내용------------>*/
+
+.article3 {
+  flex-flow: column nowrap;
+  align-items: center;
+  background: black;
+  color: white;
+  height: 850px;
+}
+
+.container {
+  padding: 20px;
+}
+
+.article3 .title,
+.time_table,
+.location {
+  position: relative;
+  top: 70px;
+}
+
+.article3 .time_table {
+  width: 100%;
+  background: white;
+  margin: 40px 0 30px 0;
+}
+
+.article3 .time_table li {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  border: 1px solid lightgray;
+  color: gray;
+  height: 40px;
+}
+
+.article3 .time_table .sold {
+  background: red;
+  color: white;
+  width: 80px;
+  height: 20px;
+  text-align: center;
+  position: relative;
+  left: 25px;
+}
+
+.article3 .time_table .left {
+  background: black;
+  color: white;
+  width: 20px;
+  text-align: center;
+  border-radius: 20px;
+  margin-left: auto;
+  position: relative;
+  right: 30px;
+}
+
+/*.article3 table {
+  background: white;
+  color: gray;
+  text-align: left;
+  width: 100%;
+  border-collapse: collapse;
+  position: relative;
+  margin: 20px 0 32px 0;
+}
+
+.article3 table td {
+  border: 1px solid lightgray;
+  padding: 10px 15px 10px 15px;
+  display: flex;
+  flex-flow: row nowrap;
+  max-width: 100%;
+}
+
+.article3 table td > .sold {
+  background: red;
+  color: white;
+  padding: 1px 7px 1px 7px;
+  position: relative;
+  left: 20px;
+}
+
+.article3 table td > .left {
+  background: black;
+  color: white;
+  border-radius: 20px;
+  text-align: center;
+  width: 20px;
+  margin-left: auto;
+  position: relative;
+  right: 30px;
+}*/
+
+.article3 .location {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.article3 .location > .sites {
+  max-width: 245px;
+  margin: 0 8px;
+  background: white;
+  color: black;
+}
+
+.article3 .location > .sites > img {
+  width: 100%;
+  height: auto;
+}
+
+.article3 .location > .sites > img:hover {
+  filter: brightness(60%);
+}
+
+.article3 .location > .sites > h4,
+.dates,
+.desc {
+  margin: 15px 0;
+  padding: 0 15px;
+}
+
+.article3 .location > .sites > button {
+  position: relative;
+  left: 15px;
+  width: 108px;
+  height: 38px;
+  background: black;
+  color: white;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  margin-bottom: 15px;
+}
+
+.article3 .location > .sites > button:hover {
+  background-color: lightgray;
+  color: black;
+}
+
+/*<------------article4 설정 내용------------>*/
+
+.article4 {
+  flex-flow: column nowrap;
+  align-items: center;
+  height: 420px;
+}
+
+.article4 .title,
+.contact {
+  position: relative;
+  top: 50px;
+}
+
+/*편집 끝나면 지울 것*/
+/*.article4 * {
+  border: 3px solid black;
+}*/
+
+.article4 > .contact {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 770px;
+  margin-top: 32px;
+}
+
+.article4 > .contact > .contact_in li {
+  display: list-item;
+  list-style-type: disc;
+  position: relative;
+  left: 20px;
+  font-size: 20px;
+}
+
+.article4 > .contact > .contact_in span {
+  position: relative;
+  /*left: -5px;*/
+}
+
+.article4 form {
+  height: 150px;
+  width: 400px;
+}
+
+.article4 form input[value="Name"],
+input[value="Email"] {
+  height: 30px;
+  color: gray;
+}
+
+.article4 form input[value="Email"] {
+  margin-left: 10px;
+}
+
+.article4 form input[value="Message"] {
+  width: 339px;
+  height: 30px;
+  color: gray;
+  margin-top: 10px;
+}
+
+.article4 form input[value="SEND"] {
+  width: 71px;
+  height: 38px;
+  background: black;
+  color: white;
+  outline: none;
+  box-shadow: none;
+  font-weight: 500;
+  margin-top: 16px;
+  position: relative;
+  left: 278px;
+}
+
+/*<------------footer 설정 내용------------>*/
+
+footer {
+  height: auto;
+}
+
+footer .footer_bg {
+  height: 100%;
+  width: 100%;
+}
+
+footer .footer_bg > img {
+  width: 100%;
+}
+
+footer .copyright {
+  height: auto;
+  margin: 100px 0;
+}
+
+footer p {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  color: gray;
+}
+
+@media (max-width: 600px) {
+  /*<------------nav 설정------------>*/
+  nav .menu-item:not(.default_menu),
+  #search_form {
+    display: none;
+  }
+
+  nav .menu_sum {
+    display: block;
+    color: white;
+    padding-top: 10px;
+    width: 75px;
+  }
+
+  nav .menu_sum > li {
+    padding: 0;
+    text-align: center;
+    position: relative;
+  }
+
+  nav .menu_little {
+    display: none;
+    position: absolute;
+    width: 100vw;
+    top: 46px;
+    right: -1vw;
+  }
+
+  nav .menu_sum:hover {
+    background: lightgray;
+    color: black;
+  }
+
+  nav .menu_sum:hover .menu_little {
+    display: block;
+    background: black;
+    color: white;
+  }
+
+  nav .menu-item-sum {
+    display: list-item;
+    padding-left: 24px;
+    position: relative;
+    left: 12px;
+  }
+
+  /*<------------article1 설정------------>*/
+
+  .article1 .comment {
+    display: none;
+  }
+
+  /*<------------article2 설정------------>*/
+
+  .article2 .member {
+    flex-flow: column wrap;
+    align-items: center;
+    width: 100%;
+  }
+
+  .article2 .member_s {
+    width: 55%;
+    height: 55%;
+  }
+
+  .article2 .member_s > img {
+    width: 100%;
+  }
+
+  /*<------------article3 설정------------>*/
+
+  .article3 {
+    height: 1970px;
+  }
+
+  .article3 .container {
+    width: 100%;
+    padding: 0;
+  }
+
+  .article3 .time_table {
+    width: 95%;
+    margin: 30px auto;
+  }
+
+  .article3 .location {
+    flex-flow: column nowrap;
+    align-items: center;
+    width: 100%;
+  }
+
+  .article3 .location .sites {
+    max-width: 100%;
+    margin: 10px;
+  }
+
+  .article3 .sites > img {
+    width: 100%;
+  }
+  /*<------------article4 설정------------>*/
+
+  .article4 {
+    height: 500px;
+    padding: 20px;
+    margin: 10px 0;
+  }
+
+  .article4 .contact {
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .article4 .contact_in {
+    position: relative;
+    left: -70px;
+    margin-bottom: 15px;
+  }
+
+  .article4 form {
+    width: 100%;
+  }
+
+  .article4 form input[value="Name"] {
+    width: 100%;
+  }
+
+  .article4 form input[value="Email"] {
+    width: 100%;
+    position: relative;
+    left: -10px;
+    top: 5px;
+  }
+
+  .article4 form input[value="Message"] {
+    width: 100%;
+  }
+
+  .article4 form input[value="SEND"] {
+    position: relative;
+    left: 440px;
+  }
+}
