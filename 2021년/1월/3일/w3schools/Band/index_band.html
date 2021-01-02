@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to ZAKURO</title>
+  <link rel="stylesheet" href="style_band.css">
+</head>
+<body>
+  <nav>
+    <ul class="menu">
+      <li class="menu-item default_menu"><a href="#home">HOME</a></li>
+      <li class="menu-item"><a href="#band">BAND</a></li>
+      <li class="menu-item"><a href="#tour">TOUR</a></li>
+      <li class="menu-item"><a href="#contact">CONTACT</a></li>
+      <li class="dropdown menu-item"><a href=""></a>MORE▼
+        <ul class="down">
+          <li class="submenu"><span><a href="">Merchandise</span></a></li>
+          <li class="submenu"><span><a href="">Extras</span></a></li>
+          <li class="submenu"><span><a href="">Media</span></a></li>
+        </ul>
+      </li>
+    </ul>
+    <div id="search_form"></div>
+    <!--<div class="menu_little">MENU</div>-->
+      <ul class="menu_sum">
+        <li class="menu-item-sum-first">MENU</li>
+          <ul class="menu_little">
+            <li class="menu-item-sum"><a href="#band">BAND</a></li>
+            <li class="menu-item-sum"><a href="#tour">TOUR</a></li>
+            <li class="menu-item-sum"><a href="#contact">CONTACT</a></li>
+            <li class="menu-item-sum"><a href="">MERCH</a></li>
+          </ul>
+      </ul>
+  </nav>
+  <main>
+    <article class="article1" id="home">
+      <div class="img_container"><img src="images/la.jpg"></div>
+      <div class="comment">
+        <h2>
+          Los Angeles
+        </h2>
+        <p>
+          We had the best time playing at Venice Beach!
+        </p>
+      </div>
+    </article>
+    <article class="article2" id="band">
+      <div class="title">
+        <h1>THE BAND</h1>
+        <h4>We love music</h4>
+        <p>We have created a fictional band website. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div>
+      <div class="member">
+        <div class="member_s">
+          <p>Name</p>
+          <img src="images/bandmember.jpg" alt="Photo" title="Member's Photo">
+        </div>
+        <div class="member_s">
+          <p>Name</p>
+          <img src="images/bandmember.jpg" alt="Photo" title="Member's Photo">
+        </div>
+        <div class="member_s">
+          <p>Name</p>
+          <img src="images/bandmember.jpg" alt="Photo" title="Member's Photo">
+        </div>
+      </div>
+    </article>
+    <article class="article3" id="tour">
+      <div class="container">
+        <div class="title">
+          <h1>TOUR DATES</h1>
+          <h4>Remember to book your tickets!</h4>
+        </div>
+        <div class="time_table">
+          <ul>
+            <li>September<div class="sold">Sold Out</div></li>
+            <li>October<div class="sold">Sold Out</div></li>
+            <li>November<div class="left">3</div></li>
+          </ul>
+<!--          <table>
+            <tr>
+              <td>September<div class="sold">Sold Out</div></td>
+            </tr>
+            <tr>
+              <td>October<div class="sold">Sold Out</div></td>
+            </tr>
+            <tr>
+              <td>November<div class="left">3</div></td>
+            </tr>
+          </table>-->
+        </div>
+        <div class="location">
+          <div class="sites">
+            <img src="images/newyork.jpg" alt="Tour Sites">
+            <h4>New York</h4>
+            <p class="dates">Fri 27 Nov 2016</p>
+            <p class="desc">Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
+            <button>Buy Tickets</button>
+          </div>
+          <div class="sites">
+            <img src="images/paris.jpg" alt="Tour Sites">
+            <h4>Paris</h4>
+            <p class="dates">Sat 28 Nov 2016</p>
+            <p class="desc">Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
+            <button>Buy Tickets</button>
+          </div>
+          <div class="sites">
+            <img src="images/sanfran.jpg" alt="Tour Sites">
+            <h4>San Francisco</h4>
+            <p class="dates">Sun 29 Nov 2016</p>
+            <p class="desc">Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
+            <button>Buy Tickets</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="article4" id="contact">
+      <div class="title">
+        <h1>CONTACT</h1>
+        <h4>Fan? Drop a note!</h4>
+      </div>
+      <div class="contact">
+        <div class="contact_in">
+          <ul>
+            <li><span>Chicago, US</span></li>
+            <li><span>Phone: +00 151515</span></li>
+            <li><span>Email: mail@mail.com</span></li>
+          </ul>
+        </div>
+        <div class="form">
+          <form action="http://localhost/submit.php">
+            <input type="text" name="name" value="Name">
+            <input type="text" name="email" value="Email">
+            <input type="text" name="message" value="Message">
+            <input type="submit" name="submit" value="SEND">
+          </form>
+        </div>
+      </div>
+    </article>
+  </main>
+  <footer>
+    <div class="footer_bg"><img src="images/map.jpg"></div>
+      <div class="copyright">
+      <p>Powered by LCH</p>
+    </div>
+  </footer>
+</body>
+</html>
