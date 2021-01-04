@@ -1,0 +1,132 @@
+/************************universal area************************/
+:root {
+}
+
+body,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  list-style: none;
+}
+/************************nav area************************/
+nav {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 2.65em;
+  position: sticky;
+}
+
+nav .navbar {
+  height: 100%;
+}
+
+nav ul {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+}
+
+nav ul li {
+  padding: 0.625em;
+}
+
+#search-form {
+  margin-left: auto;
+  width: 2.65em;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#search-form:hover {
+  background-color: red;
+  color: white;
+}
+
+nav .upper-list {
+  display: none;
+  /*width: 2.65em;*/
+}
+
+/************************header area************************/
+
+header > div {
+  height: 28.125em;
+  background: url(images-pf/header/parallax1.jpg) no-repeat;
+  background-position: center;
+  background-size: cover;
+  filter: opacity(75%);
+}
+
+header p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  background-color: black;
+}
+/************************main area************************/
+/************************article1 area************************/
+/************************article2 area************************/
+/************************article3 area************************/
+/************************article4 area************************/
+/************************footer area************************/
+/************************media query area************************/
+@media (max-width: 600px) {
+  /************************nav area************************/
+  nav .list-item,
+  #search-form {
+    display: none;
+  }
+
+  nav .upper-list {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-left: auto;
+  }
+
+  nav .upper-list .bars {
+    position: relative;
+  }
+
+  nav .upper-list .bars:hover .submenu-list-ul {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 97vw;
+  }
+
+  nav .upper-list .submenu-list-ul {
+    display: none;
+    position: absolute;
+    right: 1.9vw;
+  }
+
+  nav .upper-list .submenu-list-ul > li {
+    border: 1px solid black;
+    width: 100%;
+    position: relative;
+    top: 0.75em;
+  }
+
+  nav .upper-list .submenu-list-ul span {
+    position: relative;
+    left: 0.5em;
+  }
+
+  /************************header area************************/
+  /************************main area************************/
+  /************************article1 area************************/
+  /************************article2 area************************/
+  /************************article3 area************************/
+  /************************article4 area************************/
+  /************************footer area************************/
+  /************************media query area************************/
+}
