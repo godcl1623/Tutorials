@@ -380,6 +380,7 @@ p {
   align-items: center;
   margin: 1.25rem 0;
   padding: 1.25rem 0.938rem;
+  height: 520px;
 }
 /*<---제목 파트(where i work) 작업--->*/
 .contact > .container-contact > .about {
@@ -457,7 +458,52 @@ input[name="email"] {
   left: 56%;
 }
 /************************footer area************************/
+footer {
+  height: 200px;
+  background-color: var(--black-color);
+  padding: 50px 0;
+  filter: opacity(75%);
+}
 
+footer:hover {
+  filter: none;
+}
+
+footer a {
+  text-decoration: none;
+  color: var(--black-color);
+}
+
+footer > .footer-container {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+footer > .footer-container > button {
+  padding: 10px 15px;
+  font-size: 18px;
+  outline: none;
+  box-shadow: none;
+}
+
+footer > .footer-container > .footer-icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 150px;
+  font-size: 24px;
+  color: var(--background-color-w);
+}
+
+footer > .footer-container > p {
+  margin: 0;
+  color: var(--background-color-w);
+}
 /************************media query area************************/
 @media (max-width: 600px) {
   /************************nav area************************/
