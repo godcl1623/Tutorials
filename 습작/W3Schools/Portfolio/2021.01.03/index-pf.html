@@ -136,9 +136,7 @@
           </div>
         </div>
         <!--load more button for watch more works-->
-        <button>
-          LOAD MORE
-        </button>
+        <button>LOAD MORE</button>
       </div>
     </article>
 <!--***********************article3***********************-->
@@ -153,47 +151,53 @@
           <h4>I'd love your feedback!</h4>
         </div>
         <!--container for map, address, phone, email + short message for users-->
-        <div class="contact-info">
+        <div class="container-contact-contents">
           <div class="contact-info-map">
             <img src="images-pf/main/contact/map.jpg" alt="map">
           </div>
-          <div class="contact-info-spec">
-            <ul class="icons">
-              <li><i class="fas fa-map-marker-alt"></i></li>
-              <li><i class="fas fa-phone-alt"></i></li>
-              <li><i class="fas fa-envelope"></i></li>
-            </ul>
-            <ul class="specific-info">
-              <li>Chicago, US</li>
-              <li>Phone: +00 151515</li>
-              <li>Email: mail@mail.com</li>
-            </ul>
-            <p>Swing by for a cup of <i class="fas fa-coffee"></i>, or leave me a note:</p>
+          <div class="contact-info">
+            <div class="contact-info-spec">
+              <ul class="icons">
+                <li><i class="fas fa-map-marker-alt"></i></li>
+                <li><i class="fas fa-phone-alt"></i></li>
+                <li><i class="fas fa-envelope"></i></li>
+              </ul>
+              <ul class="specific-info">
+                <li>Chicago, US</li>
+                <li>Phone: +00 151515</li>
+                <li>Email: mail@mail.com</li>
+              </ul>
+              <p>Swing by for a cup of <i class="fas fa-coffee"></i>, or leave me a note:</p>
+            </div>
+            <!--sending message form-->
+            <form action="http://localhost/message.php">
+              <div class="row-padding">
+                <div class="half-width"><input type="text" name="name" value="Name"></div>
+                <div class="half-width"><input type="text" name="email" value="Email"></div>
+              </div>
+              <input type="text" name="message" value="Message">
+              <button type="submit">
+                <i class="fas fa-paper-plane"></i>SEND MESSAGE
+              </button>
+            </form>
           </div>
         </div>
-        <!--sending message form-->
-        <form action="http://localhost/message.php">
-          <input type="text" name="name" value="Name">
-          <input type="text" name="email" value="Email">
-          <input type="text" name="message" value="Message">
-          <button type="submit">
-            <i class="fas fa-paper-plane"></i>SEND MESSAGE
-          </button>
-        </form>
       </div>
     </article>
   </main>
 <!--***********************footer***********************-->
   <footer>
-    <button>
-      <i class="fas fa-arrow-up"></i> To the top
-    </button>
-    <div class="footer-icons">
-      <i class="fab fa-facebook-square"></i><i class="fab fa-instagram"></i><i class="fab fa-snapchat"></i><i class="fab fa-pinterest-p"></i><i class="fab fa-twitter"></i><i class="fab fa-linkedin-in"></i>
+    <div class="footer-container">
+      <button>
+        <a href="#"><i class="fas fa-arrow-up"></i> To the top</a>
+      </button>
+      <div class="footer-icons">
+        <i class="fab fa-facebook-square"></i><i class="fab fa-instagram"></i><i class="fab fa-snapchat"></i><i class="fab fa-pinterest-p"></i><i class="fab fa-twitter"></i><i class="fab fa-linkedin-in"></i>
+      </div>
+      <p class="copyrights">
+        Powered by LCH
+      </p>
     </div>
-    <p class="copyrights">
-      Powered by LCH
-    </p>
   </footer>
 </body>
 </html>
