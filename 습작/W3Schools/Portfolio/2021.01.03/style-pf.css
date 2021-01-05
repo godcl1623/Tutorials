@@ -1,12 +1,13 @@
 /************************universal area************************/
 :root {
   --font-color: #898a8b;
-  --background-color: #fafafa;
+  --background-color-w: #fafafa;
+  --background-color-b: #616161;
   --black-color: #212121;
 }
 html {
   color: var(--font-color);
-  background-color: var(--background-color);
+  background-color: var(--background-color-w);
 }
 
 body,
@@ -38,8 +39,8 @@ nav {
   position: sticky;
   top: 0;
   background: white;
-  border-bottom: 1px solid var(--font-color);
-  box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.2);
+  border-bottom: 0.063rem solid var(--font-color);
+  box-shadow: 0 0.063rem 0.126rem 0.126rem rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 /*nav bar*/
@@ -70,7 +71,7 @@ nav ul li {
 
 #search-form:hover {
   background-color: #d50000;
-  color: var(--background-color);
+  color: var(--background-color-w);
 }
 /*for media query*/
 nav .upper-list {
@@ -85,6 +86,7 @@ header > .header-image {
   background-position: center;
   background-size: cover;
   filter: opacity(75%);
+  background-attachment: fixed;
 }
 /*logo box*/
 header p {
@@ -92,7 +94,7 @@ header p {
   top: 15.625rem;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--background-color);
+  color: var(--background-color-w);
   background-color: var(--black-color);
   font-size: 1.5em;
   letter-spacing: 0.625rem;
@@ -216,8 +218,8 @@ p {
   width: 90%;
   height: 100%;
   text-align: center;
-  background-color: #616161;
-  color: var(--background-color);
+  background-color: var(--background-color-b);
+  color: var(--background-color-w);
 }
 
 .profile
@@ -229,8 +231,8 @@ p {
   width: 85%;
   height: 100%;
   text-align: center;
-  background-color: #616161;
-  color: var(--background-color);
+  background-color: var(--background-color-b);
+  color: var(--background-color-w);
 }
 
 .profile
@@ -242,8 +244,8 @@ p {
   width: 75%;
   height: 100%;
   text-align: center;
-  background-color: #616161;
-  color: var(--background-color);
+  background-color: var(--background-color-b);
+  color: var(--background-color-w);
 }
 
 .profile
@@ -256,6 +258,100 @@ p {
   top: 0.188rem;
 }
 /************************article2 area************************/
+/*<---area for top of article2's statistics-->*/
+.portfolio > .statistics {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 8.375rem;
+  padding: 1rem 0;
+  background-color: var(--background-color-b);
+}
+
+.portfolio > .statistics > .statistics-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.portfolio > .statistics > .statistics-container > h2 {
+  margin: 0.625rem 0;
+  width: 12.5rem;
+  font-weight: 500;
+}
+
+/*<---portfolio main image--->*/
+.portfolio > .portfolio-image {
+  height: 25em;
+  width: 100%;
+  background: url(images-pf/main/portfolio/parallax2.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  filter: opacity(75%);
+}
+
+.portfolio > p {
+  color: var(--background-color-w);
+  font-size: 2.188em;
+  letter-spacing: 0.625rem;
+  padding: 0.625rem 1.563rem;
+  filter: opacity(75%);
+  position: absolute;
+  top: 420%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*<---area for container of works--->*/
+
+.portfolio > .container-portfolio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  padding: 20px 15px;
+}
+
+.portfolio > .container-portfolio > .about {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.portfolio > .container-portfolio > .container-works {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.portfolio
+  > .container-portfolio
+  > .container-works
+  > .container-works-1st-line,
+.container-works-2nd-line {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  max-width: 1000px;
+  max-height: 200px;
+}
+
+.portfolio > .container-portfolio > .container-works img {
+  width: 20%;
+  margin: 10px;
+}
+
+/*<---load more button--->*/
+.portfolio button {
+  margin: 30px 0;
+  padding: 20px 30px;
+  border: none;
+}
+
 /************************article3 area************************/
 /************************footer area************************/
 /************************media query area************************/
@@ -297,7 +393,7 @@ p {
   }
 
   nav .upper-list .bars li {
-    background-color: var(--background-color);
+    background-color: var(--background-color-w);
     border-color: var(--font-color);
   }
 
