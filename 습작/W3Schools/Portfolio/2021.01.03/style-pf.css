@@ -301,7 +301,7 @@ p {
   padding: 0.625rem 1.563rem;
   filter: opacity(75%);
   position: absolute;
-  top: 420%;
+  top: 118.75rem;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -312,20 +312,20 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px 0;
-  padding: 20px 15px;
+  margin: 1.25rem 0;
+  padding: 1.25rem 0.938rem;
 }
 
 .portfolio > .container-portfolio > .about {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 
 .portfolio > .container-portfolio > .container-works {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px 0;
+  margin: 1.875rem 0;
 }
 
 .portfolio
@@ -336,24 +336,128 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  max-width: 1000px;
-  max-height: 200px;
+  max-width: 62.5rem;
+  max-height: 12.5rem;
 }
 
 .portfolio > .container-portfolio > .container-works img {
   width: 20%;
-  margin: 10px;
+  margin: 0.625rem;
 }
 
 /*<---load more button--->*/
 .portfolio button {
-  margin: 30px 0;
-  padding: 20px 30px;
+  margin: 1.875rem 0;
+  padding: 1.25rem 1.875rem;
   border: none;
 }
 
 /************************article3 area************************/
+/*<---contact 헤더 이미지 및 그림 위 문구--->*/
+.contact > .contact-image {
+  height: 25em;
+  background: url(images-pf/main/contact/parallax3.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  filter: opacity(75%);
+  background-attachment: fixed;
+}
+
+.contact > p {
+  font-size: 30px;
+  letter-spacing: 10px;
+  font-weight: 600;
+  color: var(--background-color-w);
+  position: absolute;
+  top: 190.625rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/*<---contact info 컨테이너 작업--->*/
+.contact > .container-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.25rem 0;
+  padding: 1.25rem 0.938rem;
+}
+/*<---제목 파트(where i work) 작업--->*/
+.contact > .container-contact > .about {
+  margin: 1.25rem 0;
+}
+/*<---지도 및 연락처 - 지도 -> 연락처 순으로 작업--->*/
+.contact > .container-contact > .contact-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+/*<---지도--->*/
+.contact > .container-contact > .contact-info > .contact-info-map {
+  width: 300px;
+  margin: 1.875rem;
+}
+
+.contact > .container-contact > .contact-info > .contact-info-map > img {
+  width: 100%;
+}
+/*<---연락처--->*/
+.contact > .container-contact > .contact-info > .contact-info-spec {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 600px;
+  height: 180px;
+}
+
+.contact
+  > .container-contact
+  > .contact-info
+  > .contact-info-spec
+  > .specific-info {
+  height: 80px;
+  font-size: 18px;
+  position: relative;
+  left: 35px;
+  bottom: 10px;
+}
+
+.contact > .container-contact > .contact-info > .contact-info-spec > .icons {
+  font-size: 18px;
+  position: relative;
+  top: 60px;
+}
+/*<---메세지 전송 폼 작업: 전체, 이름, 메일, 메시지, 버튼 순으로 작업--->*/
+.contact > .container-contact > form {
+  position: absolute;
+  top: 3670px;
+  left: 40%;
+  width: 50%;
+  height: 80px;
+}
+
+.contact > .container-contact > form > input[name="name"],
+input[name="email"] {
+  width: 40%;
+  height: 30px;
+  margin: 5px;
+}
+
+.contact > .container-contact > form > input[name="message"] {
+  width: 84.5%;
+  height: 30px;
+  margin: 5px;
+}
+
+.contact > .container-contact > form > button {
+  margin: 5px;
+  background-color: var(--black-color);
+  color: var(--background-color-w);
+  border: none;
+  padding: 20px;
+  position: relative;
+  left: 56%;
+}
 /************************footer area************************/
+
 /************************media query area************************/
 @media (max-width: 600px) {
   /************************nav area************************/
