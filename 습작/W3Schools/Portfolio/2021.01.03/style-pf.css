@@ -379,7 +379,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 580px;
+  min-height: 580px;
   margin: 0 auto;
   width: 67%;
 }
@@ -401,7 +401,7 @@ p {
   > .container-contact-contents
   > .contact-info-map {
   width: 33%;
-  height: 177px;
+  min-height: 177px;
   padding: 0 1.875rem;
   display: table;
 }
@@ -431,7 +431,6 @@ p {
   display: flex;
   flex-flow: column nowrap;
   max-width: 100%;
-  height: 180px;
 }
 
 .contact
@@ -693,6 +692,69 @@ footer > .footer-container > p {
     margin: 0;
   }
   /************************article3 area************************/
+  /*<---.container-contact 폭 변경, padding 추가--->*/
+  .contact > .container-contact {
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+    margin-bottom: 128px;
+  }
+  /*<---.container-contact-contents 세로 정렬--->*/
+  .contact > .container-contact > .container-contact-contents {
+    flex-direction: column;
+  }
+  /*<---.contact-info-map 확대--->*/
+  .contact
+    > .container-contact
+    > .container-contact-contents
+    > .contact-info-map {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+  }
+  /*<---.contact-info 너비 수정--->*/
+  .contact > .container-contact > .container-contact-contents > .contact-info {
+    width: 100%;
+  }
+  /*<---.contact-info-spec 여백 수정--->*/
+  .contact
+    > .container-contact
+    > .container-contact-contents
+    > .contact-info
+    > .contact-info-spec {
+    justify-content: flex-end;
+    height: 130px;
+  }
+  /*<---폼 너비 및 간격 수정--->*/
+  .contact
+    > .container-contact
+    > .container-contact-contents
+    > .contact-info
+    > form {
+    margin: 16px 0;
+  }
+
+  .contact
+    > .container-contact
+    > .container-contact-contents
+    > .contact-info
+    > form
+    > .row-padding {
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 0;
+  }
+
+  .contact
+    > .container-contact
+    > .container-contact-contents
+    > .contact-info
+    > form
+    > .row-padding
+    > .half-width {
+    width: 100%;
+    margin: 0;
+  }
+
   /************************footer area************************/
-  /************************media query area************************/
 }
