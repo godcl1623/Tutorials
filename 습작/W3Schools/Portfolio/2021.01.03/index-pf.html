@@ -16,10 +16,10 @@
     <div class="navbar">
       <!--nav-bar lists-->
       <ul>
-        <li>HOME</li>
-        <li class="list-item"><i class="fas fa-user"></i> ABOUT</li>
-        <li class="list-item"><i class="fas fa-th"></i> PORTFOLIO</li>
-        <li class="list-item"><i class="fas fa-envelope"></i> CONTACT</li>
+        <li><a href="#home">HOME</a></li>
+        <li class="list-item"><a href="#profile"><i class="fas fa-user"></i> ABOUT</a></li>
+        <li class="list-item"><a href="#portfolio"><i class="fas fa-th"></i> PORTFOLIO</a></li>
+        <li class="list-item"><a href="#contact"><i class="fas fa-envelope"></i> CONTACT</a></li>
       </ul>
     </div>
     <!--search button-->
@@ -28,15 +28,15 @@
       <ul class="upper-list">
         <li class="bars"><i class="fas fa-bars"></i>
             <ul class="submenu-list-ul">
-              <li class="submenu-list-item"><span>ABOUT</span></li>
-              <li class="submenu-list-item"><span>PORTFOLIO</span></li>
-              <li class="submenu-list-item"><span>CONTACT</span></li>
+              <li class="submenu-list-item"><a href="#profile"><span>ABOUT</span></a></li>
+              <li class="submenu-list-item"><a href="#portfolio"><span>PORTFOLIO</span></a></li>
+              <li class="submenu-list-item"><a href="#contact"><span>CONTACT</span></a></li>
             </ul>
         </li>
       </ul>
   </nav>
 <!--***********************header***********************-->
-  <header>
+  <header id="home">
     <div class="header-image"></div>
     <p>
       MY <span>WEBSITE</span> LOGO
@@ -45,7 +45,7 @@
 <!--***********************main***********************-->
   <main>
 <!--***********************article1***********************-->
-    <article class="profile">
+    <article class="profile" id="profile">
       <!--container for profile article's contents-->
       <div class="container-profile">
         <!--container for about, short description of each articles-->
@@ -84,7 +84,7 @@
       </div>
     </article>
 <!--***********************article2***********************-->
-    <article class="portfolio">
+    <article class="portfolio" id="portfolio">
       <!--container for specific statistics-->
       <div class="statistics">
         <!--first statistics-->
@@ -121,14 +121,14 @@
         <!--image containers for works-->
         <div class="container-works">
           <!--first line of works-->
-          <div class="container-works-1st-line">
+          <div class="container-works-contents">
             <img src="images-pf/main/works/p1.jpg" alt="works 1">
             <img src="images-pf/main/works/p2.jpg" alt="works 2">
             <img src="images-pf/main/works/p3.jpg" alt="works 3">
             <img src="images-pf/main/works/p4.jpg" alt="works 4">
           </div>
           <!--second line of works-->
-          <div class="container-works-2nd-line">
+          <div class="container-works-contents">
             <img src="images-pf/main/works/p5.jpg" alt="works 5">
             <img src="images-pf/main/works/p6.jpg" alt="works 6">
             <img src="images-pf/main/works/p7.jpg" alt="works 7">
@@ -140,7 +140,7 @@
       </div>
     </article>
 <!--***********************article3***********************-->
-    <article class="contact">
+    <article class="contact" id="contact">
       <!--image section for contact-->
       <div class="contact-image"></div>
       <p>CONTACT</p>
@@ -189,7 +189,7 @@
   <footer>
     <div class="footer-container">
       <button>
-        <a href="#"><i class="fas fa-arrow-up"></i> To the top</a>
+        <a href="#home"><i class="fas fa-arrow-up"></i> To the top</a>
       </button>
       <div class="footer-icons">
         <i class="fab fa-facebook-square"></i><i class="fab fa-instagram"></i><i class="fab fa-snapchat"></i><i class="fab fa-pinterest-p"></i><i class="fab fa-twitter"></i><i class="fab fa-linkedin-in"></i>
