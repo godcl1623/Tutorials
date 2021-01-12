@@ -50,6 +50,27 @@ nav .menu-main .menu-sub {
   position: absolute;
   display: none;
 }
+
+nav .utility > div {
+  display: flex;
+}
+
+nav .utility .language > span {
+  margin: 0 10px;
+}
+
+nav .utility .language p {
+  margin: 10px 0;
+}
+
+nav .utility .utility-icons {
+  display: flex;
+  justify-content: space-around;
+}
+
+nav .utility .utility-icons > div {
+  font-size: 20px;
+}
 /*<--------------------header 정리 사항-------------------->*/
 /*<--------------------article 1 정리 사항-------------------->*/
 /*<--------------------article 2 정리 사항-------------------->*/
