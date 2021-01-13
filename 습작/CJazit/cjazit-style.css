@@ -281,6 +281,96 @@ header .welcom-box button {
 }
 
 /*<--------------------article 2 정리 사항-------------------->*/
+.article2-musical-play .sidebar {
+  /*사이드바 숨기기*/
+  display: none;
+} /*추후 사이드바 완성시 삭제*/
+
+.article2-musical-play .article-2-contents-wrapper {
+  /*article2 컨텐츠 컨테이너*/
+  padding: 12.5rem 0 0 12.5rem;
+}
+
+.article2-musical-play .article-2-contents-wrapper h1 {
+  /*article2 제목 스타일 - 추후 공통사항으로 변경*/
+  font-size: 3.75rem;
+  color: gray;
+  margin: 0 10px;
+}
+
+.article2-musical-play .article-2-contents-wrapper .article-2-images-wrapper {
+  /*게시물 목록 스타일*/
+  margin-top: 20px;
+  display: flex;
+  height: 350px;
+}
+
+.article2-musical-play
+  .article-2-contents-wrapper
+  .article-2-images-wrapper
+  .article-2-image-contents {
+  /*게시물 내용 양식*/
+  height: 100%;
+  width: 280px;
+  margin: 10px;
+  border: 1px solid var(--black-color);
+}
+
+.article2-musical-play
+  .article-2-contents-wrapper
+  .article-2-images-wrapper
+  .article-2-image-contents
+  .article-2-image-commentary,
+.article-2-image-commentary > * {
+  /*게시물 설명내용 공통 양식*/
+  text-align: center;
+  margin: 10px;
+  position: relative;
+  top: 15px;
+}
+
+.article2-musical-play
+  .article-2-contents-wrapper
+  .article-2-images-wrapper
+  .article-2-image-contents
+  .article-2-image-commentary.comment-3 {
+  /*3번째 게시물 전용 양식*/
+  top: 200px;
+}
+
+.article2-musical-play
+  .article-2-contents-wrapper
+  .article-2-images-wrapper
+  .article-2-image-contents
+  .article-2-image-commentary.comment-4 {
+  /*4번째 게시물 전용 양식*/
+  top: 100px;
+}
+
+.article2-musical-play
+  .article-2-contents-wrapper
+  .article-2-images-wrapper
+  .article-2-image-contents
+  .article-2-image-commentary
+  p.commentary-header {
+  /*테두리 있는 요소만 테두리 효과 부여*/
+  display: inline-block;
+  border: 1px solid var(--black-color);
+}
+
+.article2-musical-play
+  .article-2-contents-wrapper
+  .article-2-images-wrapper
+  .article-2-image-contents
+  .article-2-image-commentary
+  .text-logo {
+  /*로고형식 공통 양식*/
+  border: none;
+  font-weight: bolder;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
 /*<--------------------article 3 정리 사항--------------------*/
 /*<--------------------article 4 정리 사항--------------------*/
 /*<--------------------article 5 정리 사항--------------------*/
