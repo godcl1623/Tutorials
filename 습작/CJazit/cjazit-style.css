@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+:root {
+  --black-color: #424242;
+  --white-color: #f5f5f5;
+}
+
 body,
 nav,
 main,
@@ -24,11 +29,13 @@ nav {
   padding: 20px 40px 0 40px;
   display: flex;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
 }
 
 nav:hover {
-  background-color: black;
-  color: white;
+  background-color: var(--black-color);
+  color: var(--white-color);
 }
 
 nav .logo-place {
@@ -56,12 +63,12 @@ nav .menu-main > li span {
 
 nav .menu-main > li:hover .menu-sub {
   display: block;
-  border: 1px solid black;
+  border: 1px solid var(--black-color);
   width: 200px;
   position: absolute;
   top: 44px;
-  background-color: black;
-  color: white;
+  background-color: var(--black-color);
+  color: var(--white-color);
   padding: 0 0 10px 0;
 }
 
@@ -97,7 +104,7 @@ nav .utility .language p {
 }
 
 nav .utility .language .lang-eng {
-  border-left: 1px solid black;
+  border-left: 1px solid var(--black-color);
 }
 
 nav .utility .utility-icons {
@@ -113,6 +120,42 @@ nav .utility .utility-icons > div {
   font-size: 20px;
 }
 /*<--------------------header 정리 사항-------------------->*/
+header .sidebar {
+  display: none;
+}
+
+header .main-image {
+  background-color: var(--black-color);
+  height: 600px;
+  margin: 0 50px;
+}
+
+header .welcom-box {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  color: var(--white-color);
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+header .welcom-box * {
+  margin: 15px 0;
+  text-align: center;
+}
+
+header .welcom-box p {
+  width: 397px;
+}
+
+header .welcom-box button {
+  width: 155px;
+  height: 45px;
+  border-radius: 20px;
+  background-color: var(--white-color);
+}
 /*<--------------------article 1 정리 사항-------------------->*/
 /*<--------------------article 2 정리 사항-------------------->*/
 /*<--------------------article 3 정리 사항--------------------*/
