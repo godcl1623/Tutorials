@@ -19,6 +19,10 @@ footer {
   height: 100%;
 }
 
+article {
+  height: 50rem;
+}
+
 ul,
 ol,
 li {
@@ -91,10 +95,6 @@ nav .utility > div {
   display: flex;
 }
 
-nav .utility .language > span {
-  /*margin: 0.625rem 0;*/
-}
-
 nav .utility .language p {
   padding: 0 1.063rem;
   font-size: 0.875rem;
@@ -118,7 +118,7 @@ nav .utility .utility-icons {
 
 nav .utility .utility-icons > div {
   font-size: 1.25rem;
-2.5rem}
+}
 /*<--------------------header 정리 사항-------------------->*/
 header .sidebar {
   display: none;
@@ -154,7 +154,7 @@ header .welcom-box button {
   width: 9.688rem;
   height: 2.813rem;
   border-radius: 1.25rem;
-2.5rem  background-color: var(--white-color);
+  background-color: var(--white-color);
 }
 /*<--------------------article 1 정리 사항-------------------->*/
 .article1-music .sidebar {
@@ -167,6 +167,84 @@ header .welcom-box button {
 
 .article1-music .article-1-contents-wrapper h1 {
   font-size: 3.75rem;
+  color: gray;
+  margin: 0 10px;
+}
+
+.article1-music .article-1-contents-wrapper .article-1-images-wrapper {
+  margin-top: 20px;
+  display: flex;
+  height: 350px;
+}
+
+.article1-music
+  .article-1-contents-wrapper
+  .article-1-images-wrapper
+  .article-1-image-contents {
+  height: 100%;
+  width: 280px;
+  margin: 10px;
+  border: 1px solid var(--black-color);
+}
+
+.article1-music
+  .article-1-contents-wrapper
+  .article-1-images-wrapper
+  .article-1-image-contents
+  .article-1-image-commentary,
+.article-1-image-commentary > * {
+  text-align: center;
+  margin: 10px;
+  position: relative;
+  top: 15px;
+}
+
+.article1-music
+  .article-1-contents-wrapper
+  .article-1-images-wrapper
+  .article-1-image-contents
+  .article-1-image-commentary.comment-2 {
+  top: 120px;
+}
+
+.article1-music
+  .article-1-contents-wrapper
+  .article-1-images-wrapper
+  .article-1-image-contents
+  .article-1-image-commentary.comment-4 {
+  top: 100px;
+}
+
+.article1-music
+  .article-1-contents-wrapper
+  .article-1-images-wrapper
+  .article-1-image-contents
+  .article-1-image-commentary
+  p {
+  display: inline-block;
+  border: 1px solid var(--black-color);
+}
+
+.article1-music
+  .article-1-contents-wrapper
+  .article-1-images-wrapper
+  .article-1-image-contents
+  .article-1-image-commentary
+  .text-logo {
+  border: none;
+  font-weight: bolder;
+  font-size: 24px;
+}
+
+.article1-music
+  .article-1-contents-wrapper
+  .article-1-images-wrapper
+  .article-1-image-contents
+  .article-1-image-commentary
+  .text-logo.tune-up {
+  line-height: 20px;
+  position: relative;
+  top: -30px;
 }
 
 /*<--------------------article 2 정리 사항-------------------->*/
