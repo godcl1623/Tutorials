@@ -30,6 +30,7 @@ li {
 }
 /*<--------------------nav 정리 사항-------------------->*/
 nav {
+  /*nav 공통사항*/
   padding: 1.25rem 2.5rem 0 2.5rem;
   display: flex;
   justify-content: space-between;
@@ -38,11 +39,13 @@ nav {
 }
 
 nav:hover {
+  /*navbar 색상 변경 효과*/
   background-color: var(--black-color);
   color: var(--white-color);
 }
 
 nav .logo-place {
+  /*navbar 로고*/
   background: url(assets/image/CJazit_logo.png) no-repeat;
   width: 7.625rem;
   height: 3.125rem;
@@ -50,22 +53,26 @@ nav .logo-place {
   left: 0.375rem;
   bottom: 0.313rem;
 }
-
+/*여기부터 navbar 메뉴 관련 내용*/
 nav .menu-main {
+  /*메인메뉴 정렬*/
   display: flex;
 }
 
 nav .menu-main > li {
+  /*메인메뉴 리스트 상세*/
   position: relative;
   margin: 0.625rem 1.5rem;
   font-size: 0.875rem;
 }
 
 nav .menu-main > li span {
+  /*메뉴명 세로정렬용*/
   vertical-align: middle;
 }
 
 nav .menu-main > li:hover .menu-sub {
+  /*hover시 서브메뉴 표시*/
   display: block;
   border: 0.063rem solid var(--black-color);
   width: 12.5rem;
@@ -77,25 +84,30 @@ nav .menu-main > li:hover .menu-sub {
 }
 
 nav .menu-main .menu-sub {
+  /*서브메뉴 표시 옵션*/
   position: absolute;
   display: none;
 }
 
 nav .menu-main .menu-sub li {
+  /*서브메뉴 표시 항목 스타일*/
   text-align: center;
   font-size: 0.875rem;
   margin: 0.625rem 1.5rem;
 }
 
 nav .menu-main .menu-sub .list-long {
+  /*특별히 긴 항목 전용 스타일*/
   margin: 0.625rem 12px;
 }
-
+/*여기까지 navbar*/
 nav .utility > div {
+  /*유틸리티 메뉴 표시 옵션*/
   display: flex;
 }
 
 nav .utility .language p {
+  /*언어 옵션 스타일*/
   padding: 0 1.063rem;
   font-size: 0.875rem;
   position: relative;
@@ -104,10 +116,12 @@ nav .utility .language p {
 }
 
 nav .utility .language .lang-eng {
+  /*언어 옵션 구분선*/
   border-left: 0.063rem solid var(--black-color);
 }
 
 nav .utility .utility-icons {
+  /*아이콘 메뉴 스타일*/
   display: flex;
   justify-content: space-around;
   margin: 0.625rem 0 0 0;
@@ -117,20 +131,24 @@ nav .utility .utility-icons {
 }
 
 nav .utility .utility-icons > div {
+  /*아이콘 크기 조절*/
   font-size: 1.25rem;
 }
 /*<--------------------header 정리 사항-------------------->*/
 header .sidebar {
+  /*사이드바 숨기기*/
   display: none;
 }
 
 header .main-image {
+  /*헤더 배경 이미지*/
   background-color: var(--black-color);
   height: 37.5rem;
   margin: 0 3.125rem;
 }
 
 header .welcom-box {
+  /*헤더 배경 이미지 텍스트박스 스타일*/
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -139,18 +157,22 @@ header .welcom-box {
   top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
+  user-select: none;
 }
 
 header .welcom-box * {
+  /*헤더 배경 이미지 텍스트박스 내 요소 스타일*/
   margin: 0.938rem 0;
   text-align: center;
 }
 
 header .welcom-box p {
+  /*텍스트박스 p 고정폭*/
   width: 24.813rem;
 }
 
 header .welcom-box button {
+  /*텍스트박스 내 버튼 스타일*/
   width: 9.688rem;
   height: 2.813rem;
   border-radius: 1.25rem;
@@ -158,20 +180,24 @@ header .welcom-box button {
 }
 /*<--------------------article 1 정리 사항-------------------->*/
 .article1-music .sidebar {
+  /*사이드바 숨기기*/
   display: none;
 } /*추후 사이드바 완성시 삭제*/
 
 .article1-music .article-1-contents-wrapper {
+  /*article1 컨텐츠 컨테이너*/
   padding: 12.5rem 0 0 12.5rem;
 }
 
 .article1-music .article-1-contents-wrapper h1 {
+  /*article1 제목 스타일 - 추후 공통사항으로 변경*/
   font-size: 3.75rem;
   color: gray;
   margin: 0 10px;
 }
 
 .article1-music .article-1-contents-wrapper .article-1-images-wrapper {
+  /*게시물 목록 스타일*/
   margin-top: 20px;
   display: flex;
   height: 350px;
@@ -181,6 +207,7 @@ header .welcom-box button {
   .article-1-contents-wrapper
   .article-1-images-wrapper
   .article-1-image-contents {
+  /*게시물 내용 양식*/
   height: 100%;
   width: 280px;
   margin: 10px;
@@ -193,6 +220,7 @@ header .welcom-box button {
   .article-1-image-contents
   .article-1-image-commentary,
 .article-1-image-commentary > * {
+  /*게시물 설명내용 공통 양식*/
   text-align: center;
   margin: 10px;
   position: relative;
@@ -204,6 +232,7 @@ header .welcom-box button {
   .article-1-images-wrapper
   .article-1-image-contents
   .article-1-image-commentary.comment-2 {
+  /*2번째 게시물 전용 양식*/
   top: 120px;
 }
 
@@ -212,6 +241,7 @@ header .welcom-box button {
   .article-1-images-wrapper
   .article-1-image-contents
   .article-1-image-commentary.comment-4 {
+  /*4번째 게시물 전용 양식*/
   top: 100px;
 }
 
@@ -220,7 +250,8 @@ header .welcom-box button {
   .article-1-images-wrapper
   .article-1-image-contents
   .article-1-image-commentary
-  p {
+  p.commentary-header {
+  /*테두리 있는 요소만 테두리 효과 부여*/
   display: inline-block;
   border: 1px solid var(--black-color);
 }
@@ -231,6 +262,7 @@ header .welcom-box button {
   .article-1-image-contents
   .article-1-image-commentary
   .text-logo {
+  /*로고형식 공통 양식*/
   border: none;
   font-weight: bolder;
   font-size: 24px;
@@ -242,6 +274,7 @@ header .welcom-box button {
   .article-1-image-contents
   .article-1-image-commentary
   .text-logo.tune-up {
+  /*로고형식 중 특정 요소 전용 양식*/
   line-height: 20px;
   position: relative;
   top: -30px;
