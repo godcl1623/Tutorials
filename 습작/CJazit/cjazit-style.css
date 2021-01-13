@@ -157,6 +157,18 @@ header .welcom-box button {
   background-color: var(--white-color);
 }
 /*<--------------------article 1 정리 사항-------------------->*/
+.article1-music .sidebar {
+  display: none;
+} /*추후 사이드바 완성시 삭제*/
+
+.article1-music .article-1-contents-wrapper {
+  padding: 200px 0 0 200px;
+}
+
+.article1-music .article-1-contents-wrapper h1 {
+  font-size: 60px;
+}
+
 /*<--------------------article 2 정리 사항-------------------->*/
 /*<--------------------article 3 정리 사항--------------------*/
 /*<--------------------article 4 정리 사항--------------------*/
