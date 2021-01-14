@@ -372,6 +372,108 @@ header .welcom-box button {
 }
 
 /*<--------------------article 3 정리 사항--------------------*/
+.article3-movie .sidebar {
+  /*사이드바 숨기기*/
+  display: none;
+} /*추후 사이드바 완성시 삭제*/
+
+.article3-movie .article-3-contents-wrapper {
+  /*article3 컨텐츠 컨테이너*/
+  padding: 12.5rem 0 0 12.5rem;
+}
+
+.article3-movie .article-3-contents-wrapper h1 {
+  /*article3 제목 스타일 - 추후 공통사항으로 변경*/
+  font-size: 3.75rem;
+  color: gray;
+  margin: 0 10px;
+}
+
+.article3-movie .article-3-contents-wrapper .article-3-images-wrapper {
+  /*게시물 목록 스타일*/
+  margin-top: 20px;
+  display: flex;
+  height: 350px;
+}
+
+.article3-movie
+  .article-3-contents-wrapper
+  .article-3-images-wrapper
+  .article-3-image-contents {
+  /*게시물 내용 양식*/
+  height: 100%;
+  width: 280px;
+  margin: 10px;
+  border: 1px solid var(--black-color);
+}
+
+.article3-movie
+  .article-3-contents-wrapper
+  .article-3-images-wrapper
+  .article-3-image-contents
+  .article-3-image-commentary,
+.article-3-image-commentary > * {
+  /*게시물 설명내용 공통 양식*/
+  text-align: center;
+  margin: 10px;
+  position: relative;
+  top: 15px;
+}
+
+.article3-movie
+  .article-3-contents-wrapper
+  .article-3-images-wrapper
+  .article-3-image-contents
+  .article-3-image-commentary.comment-3 {
+  /*3번째 게시물 전용 양식*/
+  top: 150px;
+}
+
+.article3-movie
+  .article-3-contents-wrapper
+  .article-3-images-wrapper
+  .article-3-image-contents
+  .article-3-image-commentary.comment-4 {
+  /*4번째 게시물 전용 양식*/
+  top: 100px;
+}
+
+.article3-movie
+  .article-3-contents-wrapper
+  .article-3-images-wrapper
+  .article-3-image-contents
+  .article-3-image-commentary
+  p.commentary-header {
+  /*테두리 있는 요소만 테두리 효과 부여*/
+  display: inline-block;
+  border: 1px solid var(--black-color);
+}
+
+.article3-movie
+  .article-3-contents-wrapper
+  .article-3-images-wrapper
+  .article-3-image-contents
+  .article-3-image-commentary
+  .text-logo {
+  /*로고형식 공통 양식*/
+  border: none;
+  font-weight: bolder;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.article3-movie
+  .article-3-contents-wrapper
+  .article-3-images-wrapper
+  .article-3-image-contents
+  .article-3-image-commentary
+  .text-logo.story-up {
+  /*로고형식 중 특정 요소 전용 양식*/
+  line-height: 20px;
+  position: relative;
+  top: -30px;
+}
+
 /*<--------------------article 4 정리 사항--------------------*/
 /*<--------------------article 5 정리 사항--------------------*/
 /*<--------------------footer 정리 사항--------------------*/
