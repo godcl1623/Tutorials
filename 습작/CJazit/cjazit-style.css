@@ -589,6 +589,107 @@ header .welcom-box button {
   font-size: 18px;
 }
 /*<--------------------article 5 정리 사항--------------------*/
+.article5-membership .sidebar {
+  /*사이드바 숨기기*/
+  display: none;
+} /*추후 사이드바 완성시 삭제*/
+
+.article5-membership .article-5-contents-wrapper {
+  /*article5 컨텐츠 컨테이너*/
+  padding: 6.125rem 0 0 12.5rem;
+}
+
+.article5-membership .article-5-contents-wrapper h1 {
+  /*article5 제목 스타일 - 추후 공통사항으로 변경*/
+  font-size: 3.75rem;
+  color: var(--black-color);
+}
+
+.article5-membership .article-5-contents-wrapper .article-5-images-wrapper {
+  /*게시물 목록 스타일*/
+  margin-top: 60px;
+  display: flex;
+  height: 350px;
+}
+
+.article5-membership
+  .article-5-contents-wrapper
+  .article-5-images-wrapper
+  .article-5-image-contents {
+  /*게시물 내용 양식*/
+  height: 100%;
+  width: 280px;
+  border: 1px solid var(--black-color);
+}
+
+.article5-membership
+  .article-5-contents-wrapper
+  .article-5-images-wrapper
+  .article-5-image-contents
+  .article-5-image-commentary,
+.article-5-image-commentary > * {
+  /*게시물 설명내용 공통 양식*/
+  text-align: center;
+  margin: 10px;
+  position: relative;
+  top: 120px;
+  font-size: 18px;
+}
+
+.article5-membership
+  .article-5-contents-wrapper
+  .article-5-images-wrapper
+  .article-5-image-contents
+  .article-5-image-commentary.comment-4 {
+  /*4번째 게시물 전용 양식*/
+  top: 100px;
+}
+
+.article5-membership
+  .article-5-contents-wrapper
+  .article-5-images-wrapper
+  .article-5-image-contents
+  .article-5-image-commentary.comment-4
+  > p:not(.text-logo) {
+  font-size: 14px;
+}
+
+.article5-membership
+  .article-5-contents-wrapper
+  .article-5-images-wrapper
+  .article-5-image-contents
+  .article-5-image-commentary
+  p.commentary-header {
+  /*테두리 있는 요소만 테두리 효과 부여*/
+  display: inline-block;
+  border: 1px solid var(--black-color);
+}
+
+.article5-membership
+  .article-5-contents-wrapper
+  .article-5-images-wrapper
+  .article-5-image-contents
+  .article-5-image-commentary
+  .text-logo {
+  /*로고형식 공통 양식*/
+  border: none;
+  font-weight: bolder;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.article5-membership
+  .article-5-contents-wrapper
+  .article-5-images-wrapper
+  .article-5-image-contents
+  .article-5-image-commentary
+  .text-logo.story-up {
+  /*로고형식 중 특정 요소 전용 양식*/
+  line-height: 20px;
+  position: relative;
+  top: -30px;
+}
+
 /*<--------------------footer 정리 사항--------------------*/
 /*<********************Media Query 정리 사항********************>*/
 /*<--------------------nav 정리 사항-------------------->*/
