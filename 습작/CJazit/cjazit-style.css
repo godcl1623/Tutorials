@@ -519,7 +519,6 @@ header .welcom-box button {
   .article-4-contents-wrapper
   .article-4-contents-specific
   .article-4-text-box {
-  border: 1px solid white;
   margin-top: 25px;
 }
 
@@ -528,9 +527,8 @@ header .welcom-box button {
   .article-4-contents-specific
   .article-4-text-box
   .article-4-text-box-specific {
-  width: 700px;
+  width: 630px;
   display: flex;
-  border: 1px solid white;
 }
 
 .article4-program
@@ -539,9 +537,28 @@ header .welcom-box button {
   .article-4-text-box
   .article-4-text-box-specific
   .article-4-program-icon {
-  width: 200px;
-  height: 200px;
-  border: 1px solid white;
+  width: 150px;
+  height: 150px;
+  background-color: var(--white-color);
+  color: #b8183a;
+  font-size: 40px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 40px;
+  text-align: center;
+  margin: 0 30px 20px 0;
+}
+
+.article4-program
+  .article-4-contents-wrapper
+  .article-4-contents-specific
+  .article-4-text-box
+  .article-4-text-box-specific
+  .article-4-program-icon
+  span {
+  position: relative;
+  top: 20px;
+  right: 20px;
 }
 
 .article4-program
@@ -550,8 +567,26 @@ header .welcom-box button {
   .article-4-text-box
   .article-4-text-box-specific
   .article-4-program-specific {
-  width: 100%;
-  border: 1px solid white;
+  max-width: 450px;
+}
+
+.article4-program
+  .article-4-contents-wrapper
+  .article-4-contents-specific
+  .article-4-text-box
+  .article-4-text-box-specific
+  .article-4-program-specific
+  > p {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.article4-program
+  .article-4-contents-wrapper
+  .article-4-contents-specific
+  .article-4-text-box
+  > p {
+  font-size: 18px;
 }
 /*<--------------------article 5 정리 사항--------------------*/
 /*<--------------------footer 정리 사항--------------------*/
