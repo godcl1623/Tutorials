@@ -475,6 +475,84 @@ header .welcom-box button {
 }
 
 /*<--------------------article 4 정리 사항--------------------*/
+.article4-program .sidebar {
+  display: none;
+}
+
+.article4-program {
+  background: url(assets/image/program-bg-1-tune-up.jpg) no-repeat;
+  background-size: contain;
+  background-position: center center;
+  background-color: #b8183a;
+}
+
+.article4-program .article-4-contents-wrapper {
+  padding: 6.25rem 0 0 12.5rem;
+  color: var(--white-color);
+}
+
+.article4-program .article-4-contents-wrapper .article-4-summary h1 {
+  font-size: 3.125rem;
+  /*margin: 0 10px;*/
+}
+
+.article4-program .article-4-contents-wrapper .article-4-contents-specific {
+  margin-top: 90px;
+}
+
+.article4-program
+  .article-4-contents-wrapper
+  .article-4-contents-specific
+  .button-box
+  button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 35px;
+  background: transparent;
+  color: var(--white-color);
+  border-color: var(--white-color);
+  border-style: solid;
+}
+
+.article4-program
+  .article-4-contents-wrapper
+  .article-4-contents-specific
+  .article-4-text-box {
+  border: 1px solid white;
+  margin-top: 25px;
+}
+
+.article4-program
+  .article-4-contents-wrapper
+  .article-4-contents-specific
+  .article-4-text-box
+  .article-4-text-box-specific {
+  width: 700px;
+  display: flex;
+  border: 1px solid white;
+}
+
+.article4-program
+  .article-4-contents-wrapper
+  .article-4-contents-specific
+  .article-4-text-box
+  .article-4-text-box-specific
+  .article-4-program-icon {
+  width: 200px;
+  height: 200px;
+  border: 1px solid white;
+}
+
+.article4-program
+  .article-4-contents-wrapper
+  .article-4-contents-specific
+  .article-4-text-box
+  .article-4-text-box-specific
+  .article-4-program-specific {
+  width: 100%;
+  border: 1px solid white;
+}
 /*<--------------------article 5 정리 사항--------------------*/
 /*<--------------------footer 정리 사항--------------------*/
 /*<********************Media Query 정리 사항********************>*/
