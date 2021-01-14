@@ -691,6 +691,82 @@ header .welcom-box button {
 }
 
 /*<--------------------footer 정리 사항--------------------*/
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+footer .sitemap {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+footer .sitemap > p {
+  margin: 10px;
+  font-size: 14px;
+}
+
+footer .sitemap span {
+  color: darkblue;
+  font-weight: 700;
+}
+
+footer .company-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+footer .company-info > div {
+  display: flex;
+}
+
+footer .company-info > div > p {
+  margin: 5px 10px;
+  font-size: 14px;
+}
+
+footer .sns-follow {
+  margin: 50px 0;
+}
+
+footer .sns-follow p {
+  text-align: center;
+  color: gray;
+}
+
+footer .sns-follow > div {
+  display: flex;
+  justify-content: center;
+}
+
+footer .sns-follow > div > div {
+  font-size: 32px;
+  margin: 0 5px;
+}
+
+footer .group-shortcut {
+  width: 100%;
+  height: 50px;
+  border-top: 1px solid var(--black-color);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+footer .group-shortcut span {
+  margin-right: 40px;
+}
+
+footer .group-shortcut .help-icon {
+  width: 40px;
+  height: 40px;
+  background: url(assets/image/helpicon.png) no-repeat;
+  background-size: contain;
+  position: fixed;
+  bottom: 0;
+}
 /*<********************Media Query 정리 사항********************>*/
 /*<--------------------nav 정리 사항-------------------->*/
 /*<--------------------header 정리 사항-------------------->*/
