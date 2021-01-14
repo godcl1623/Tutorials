@@ -20,7 +20,7 @@ footer {
 }
 
 article {
-  height: 50rem;
+  height: 40.625rem;
 }
 
 ul,
@@ -41,6 +41,11 @@ nav {
 nav:hover {
   /*navbar 색상 변경 효과*/
   background-color: var(--black-color);
+  color: var(--white-color);
+  z-index: 1;
+}
+
+nav:hover .utility .language .lang-eng:before {
   color: var(--white-color);
 }
 
@@ -83,6 +88,21 @@ nav .menu-main > li:hover .menu-sub {
   padding: 0 0 0.625rem 0;
 }
 
+/******메인메뉴 hover시 밑줄 여기부터******/
+nav .menu-main > li:after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: var(--white-color);
+}
+
+nav .menu-main > li:hover:after {
+  width: 100%;
+  transition: all 0.3s;
+}
+/******메인메뉴 hover시 밑줄 여기까지******/
+
 nav .menu-main .menu-sub {
   /*서브메뉴 표시 옵션*/
   position: absolute;
@@ -100,6 +120,21 @@ nav .menu-main .menu-sub .list-long {
   /*특별히 긴 항목 전용 스타일*/
   margin: 0.625rem 0.75rem;
 }
+
+/******서브메뉴 hover시 밑줄 여기부터******/
+nav .menu-main .menu-sub span:after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 1px;
+  background-color: var(--white-color);
+}
+
+nav .menu-main .menu-sub span:hover:after {
+  width: 100%;
+  transition: all 0.3s;
+}
+/******서브메뉴 hover시 밑줄 여기까지******/
 /*여기까지 navbar*/
 nav .utility > div {
   /*유틸리티 메뉴 표시 옵션*/
@@ -108,16 +143,20 @@ nav .utility > div {
 
 nav .utility .language p {
   /*언어 옵션 스타일*/
-  padding: 0 1.063rem;
   font-size: 0.875rem;
   position: relative;
-  right: 0.188rem;
   bottom: 0.313rem;
+  left: 0.75rem;
 }
 
-nav .utility .language .lang-eng {
+nav .utility .language .lang-eng:before {
   /*언어 옵션 구분선*/
-  border-left: 0.063rem solid var(--black-color);
+  content: "｜";
+  color: gray;
+  margin: 0 0.625rem;
+  font-size: 0.625rem;
+  position: relative;
+  bottom: 0.125rem;
 }
 
 nav .utility .utility-icons {
@@ -133,6 +172,7 @@ nav .utility .utility-icons {
 nav .utility .utility-icons > div {
   /*아이콘 크기 조절*/
   font-size: 1.25rem;
+  margin: 0 0.625rem;
 }
 /*<--------------------header 정리 사항-------------------->*/
 header .sidebar {
@@ -186,7 +226,7 @@ header .welcom-box button {
 
 .article1-music .article-1-contents-wrapper {
   /*article1 컨텐츠 컨테이너*/
-  padding: 12.5rem 0 0 12.5rem;
+  padding: 5.625rem 0 0 12.5rem;
 }
 
 .article1-music .article-1-contents-wrapper h1 {
@@ -233,7 +273,9 @@ header .welcom-box button {
   .article-1-image-contents
   .article-1-image-commentary.comment-2 {
   /*2번째 게시물 전용 양식*/
-  top: 11.25rem
+  top: 11.25rem;
+}
+
 .article1-music
   .article-1-contents-wrapper
   .article-1-images-wrapper
@@ -286,7 +328,7 @@ header .welcom-box button {
 
 .article2-musical-play .article-2-contents-wrapper {
   /*article2 컨텐츠 컨테이너*/
-  padding: 12.5rem 0 0 12.5rem;
+  padding: 5.625rem 0 0 12.5rem;
 }
 
 .article2-musical-play .article-2-contents-wrapper h1 {
@@ -298,7 +340,7 @@ header .welcom-box button {
 
 .article2-musical-play .article-2-contents-wrapper .article-2-images-wrapper {
   /*게시물 목록 스타일*/
-  margin-top: 1.25rem
+  margin-top: 1.25rem;
   display: flex;
   height: 21.875rem;
 }
@@ -377,7 +419,7 @@ header .welcom-box button {
 
 .article3-movie .article-3-contents-wrapper {
   /*article3 컨텐츠 컨테이너*/
-  padding: 12.5rem 0 0 12.5rem;
+  padding: 5.625rem 0 0 12.5rem;
 }
 
 .article3-movie .article-3-contents-wrapper h1 {
@@ -488,7 +530,7 @@ header .welcom-box button {
 
 .article4-program .article-4-contents-wrapper {
   /*article4 기본 화면 구성 양식*/
-  padding: 6.25rem 0 0 12.5rem;
+  padding: 5.625rem 0 0 12.5rem;
   color: var(--white-color);
 }
 
@@ -606,7 +648,7 @@ header .welcom-box button {
 
 .article5-membership .article-5-contents-wrapper {
   /*article5 컨텐츠 컨테이너*/
-  padding: 6.125rem 0 0 12.5rem;
+  padding: 5.625rem 0 0 12.5rem;
 }
 
 .article5-membership .article-5-contents-wrapper h1 {
@@ -706,6 +748,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 6.25rem;
 }
 
 footer .sitemap {
