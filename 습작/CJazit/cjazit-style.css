@@ -784,8 +784,17 @@ footer .sitemap {
 
 footer .sitemap > p {
   /*사이트맵 항목 간 간격*/
-  margin: 0.625rem;
   font-size: 0.875rem;
+}
+
+footer .sitemap p:after {
+  content: "｜";
+  margin: 0 10px;
+  color: lightgray;
+}
+
+footer .sitemap p:last-child:after {
+  display: none;
 }
 
 footer .sitemap span {
@@ -808,8 +817,18 @@ footer .company-info > div {
 
 footer .company-info > div > p {
   /*회사정보 양식*/
-  margin: 0.313rem 0.625rem;
+  margin: 0.313rem 0;
   font-size: 0.875rem;
+}
+
+footer .company-info > div > p:after {
+  content: "｜";
+  margin: 0 10px;
+  color: lightgray;
+}
+
+footer .company-info > div > .list-last:after {
+  display: none;
 }
 
 footer .sns-follow {
