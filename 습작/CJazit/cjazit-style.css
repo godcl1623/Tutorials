@@ -28,6 +28,32 @@ ol,
 li {
   list-style: none;
 }
+
+body .sidebar {
+  border: 1px solid black;
+  /*사이드바 숨기기*/
+  /*display: none;*/
+  display: flex;
+  flex-direction: row-reverse;
+  transform: rotate(270deg);
+  transform-origin: left;
+  /*position: absolute;
+  left: -579px;
+  top: 390px;*/
+  height: 50px;
+  width: 490px;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 90%;
+  left: 25px;
+}
+
+body .sidebar > li {
+  margin: 7px;
+  font-size: 14px;
+}
+
 /*<--------------------nav 정리 사항-------------------->*/
 nav {
   /*nav 공통사항*/
@@ -176,9 +202,28 @@ nav .utility .utility-icons > div {
 }
 /*<--------------------header 정리 사항-------------------->*/
 header .sidebar {
+  /*border: 1px solid black;*/
   /*사이드바 숨기기*/
   display: none;
+  /* display: flex;
+  flex-direction: row-reverse;
+  transform: rotate(270deg);
+  transform-origin: left;
+  /*position: absolute;
+  left: -579px;
+  top: 390px;*/
+  /* height: 50px; */
+  /* width: 40%;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 720px;
+  left: 25px;  */
 }
+
+/* header .sidebar > li {
+  margin: 10px;
+} */
 
 header .main-image {
   /*헤더 배경 이미지*/
