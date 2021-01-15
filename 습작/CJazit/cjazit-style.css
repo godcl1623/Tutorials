@@ -248,8 +248,8 @@ header .welcom-box button {
   /*게시물 목록 스타일*/
   margin-top: 1.25rem;
   display: flex;
-  height: 31.25rem;
-  min-width: 100rem;
+  height: 30vh;
+  min-width: 100vw;
 }
 
 .article1-music
@@ -258,7 +258,7 @@ header .welcom-box button {
   .article-1-image-contents {
   /*게시물 내용 양식*/
   height: 100%;
-  width: 22.688rem;
+  width: 100%;
   margin: 0.625rem;
   border: 0.063rem solid var(--black-color);
 }
@@ -879,6 +879,32 @@ footer .group-shortcut .help-icon {
   bottom: 0;
 }
 /*<********************Media Query 정리 사항********************>*/
+@media (min-width: 100rem/*1600px*/) {
+}
+
+@media (min-width: 80rem/*1280px*/) {
+}
+
+@media (min-width: 75rem/*1200px*/) {
+}
+
+@media (min-width: 60rem/*960px*/) {
+}
+
+@media (min-width: 45rem/*720px*/) {
+}
+
+@media (min-width: 35rem/*560px*/) {
+}
+
+@media (min-width: 480px) {
+}
+
+@media (min-width: 25rem/*400px*/) {
+}
+
+@media (min-width: 22.5rem/*360px*/) {
+}
 /*<--------------------nav 정리 사항-------------------->*/
 /*<--------------------header 정리 사항-------------------->*/
 /*<--------------------article 1 정리 사항-------------------->*/
