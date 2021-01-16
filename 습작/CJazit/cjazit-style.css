@@ -298,8 +298,9 @@ header .welcom-box button {
   /*게시물 목록 스타일*/
   margin-top: 1.25rem;
   display: flex;
-  height: 30vh;
-  min-width: 100vw;
+  height: 56vh;
+  width: 100%;
+  padding-right: 100px;
 }
 
 .article1-music
@@ -308,7 +309,8 @@ header .welcom-box button {
   .article-1-image-contents {
   /*게시물 내용 양식*/
   height: 100%;
-  width: 100%;
+  min-width: 368px;
+  min-height: 491px;
   margin: 0.625rem;
   border: 0.063rem solid var(--black-color);
 }
@@ -402,8 +404,9 @@ header .welcom-box button {
   /*게시물 목록 스타일*/
   margin-top: 1.25rem;
   display: flex;
-  height: 31.25rem;
-  min-width: 100rem;
+  height: 56vh;
+  width: 100%;
+  padding-right: 100px;
 }
 
 .article2-musical-play
@@ -412,7 +415,8 @@ header .welcom-box button {
   .article-2-image-contents {
   /*게시물 내용 양식*/
   height: 100%;
-  width: 22.688rem;
+  min-width: 368px;
+  min-height: 491px;
   margin: 0.625rem;
   border: 0.063rem solid var(--black-color);
 }
@@ -495,8 +499,9 @@ header .welcom-box button {
   /*게시물 목록 스타일*/
   margin-top: 1.25rem;
   display: flex;
-  height: 31.25rem;
-  min-width: 100rem;
+  height: 56vh;
+  width: 100%;
+  padding-right: 100px;
 }
 
 .article3-movie
@@ -505,7 +510,8 @@ header .welcom-box button {
   .article-3-image-contents {
   /*게시물 내용 양식*/
   height: 100%;
-  width: 22.688rem;
+  min-width: 368px;
+  min-height: 491px;
   margin: 0.625rem;
   border: 0.063rem solid var(--black-color);
 }
@@ -733,10 +739,11 @@ header .welcom-box button {
 
 .article5-membership .article-5-contents-wrapper .article-5-images-wrapper {
   /*게시물 목록 스타일*/
-  margin-top: 3.75rem;
+  margin-top: 1.25rem;
   display: flex;
-  height: 31.25rem;
-  min-width: 100rem;
+  height: 56vh;
+  width: 100%;
+  padding-right: 100px;
 }
 
 .article5-membership
@@ -745,7 +752,8 @@ header .welcom-box button {
   .article-5-image-contents {
   /*게시물 내용 양식*/
   height: 100%;
-  width: 22.688rem;
+  min-width: 368px;
+  min-height: 491px;
   border: 0.063rem solid var(--black-color);
 }
 
