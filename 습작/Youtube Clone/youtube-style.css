@@ -1,0 +1,64 @@
+/*====================공통사항====================*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/*====================모바일 화면====================*/
+@media (max-width: 768px) {
+  header {
+    height: 50px;
+    background-color: #301a07;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fafafa;
+  }
+
+  header > .logo {
+    display: flex;
+  }
+
+  header > .logo > * {
+    margin: 5px;
+  }
+
+  header > .logo > .logo-icon {
+    color: #f44336;
+    margin-left: 15px;
+  }
+
+  header > .logo > .logo-text {
+    font-size: 18px;
+    font-weight: 900;
+  }
+
+  header > .utility-icons {
+    display: flex;
+  }
+
+  header > .utility-icons > * {
+    margin: 10px;
+  }
+
+  header > .utility-icons > .utility-icon2 {
+    margin-right: 15px;
+  }
+
+  .video-player {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%;
+  }
+
+  .video-player > iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
