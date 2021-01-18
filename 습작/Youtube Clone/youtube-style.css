@@ -77,4 +77,24 @@
     font-weight: 600;
     margin: 0 5px;
   }
+
+  .video-title {
+    margin-bottom: 7px;
+  }
+
+  .post-info {
+    display: flex;
+    margin-bottom: 10px;
+  }
+
+  .post-info * {
+    color: #757575;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .post-info > .dates:before {
+    content: "·";
+    margin: 0 5px;
+  }
 }
