@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* border: 1px solid black; */
 }
 /*====================모바일 화면====================*/
 @media (max-width: 768px) {
@@ -96,5 +97,32 @@
   .post-info > .dates:before {
     content: "·";
     margin: 0 5px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    color: #757575;
+  }
+
+  .buttons > .buttons-places {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .buttons > .buttons-places > .buttons-icons {
+    font-size: 24px;
+  }
+
+  .buttons > .buttons-places > .button-active {
+    color: #1976d2;
+  }
+
+  .buttons > .buttons-places > .buttons-contents {
+    margin-top: 7px;
+    font-size: 14px;
+    font-weight: bold;
   }
 }
