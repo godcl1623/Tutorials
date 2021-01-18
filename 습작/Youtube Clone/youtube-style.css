@@ -172,4 +172,53 @@
     background-color: var(--color-gray);
     color: var(--color-lightgray);
   }
+
+  .next-video-lists > .up-next-text {
+    padding: 7px 0;
+    font-size: 15px;
+    color: var(--color-gray);
+  }
+
+  .next-video-lists > .next-videos {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+
+  .next-video-lists > .next-videos > .next-video-thumbnail-1 {
+    background: url(assets/thumbnails/hqdefault-1.webp) no-repeat;
+    background-size: contain;
+    width: 32%;
+  }
+
+  .next-video-lists > .next-videos > .next-video-thumbnail-2 {
+    background: url(assets/thumbnails/hqdefault-2.webp) no-repeat;
+    background-size: contain;
+    width: 32%;
+  }
+
+  .next-video-lists > .next-videos > .next-video-thumbnail-3 {
+    background: url(assets/thumbnails/hqdefault-3.webp) no-repeat;
+    background-size: contain;
+    width: 32%;
+  }
+
+  .next-video-lists > .next-videos > .next-video-info {
+    width: 100%;
+  }
+
+  .next-video-lists
+    > .next-videos
+    > .next-video-info
+    > .next-video-publishing-info {
+    font-size: 14px;
+    color: var(--color-gray);
+  }
+
+  .next-video-lists > .next-videos > .next-video-utility-button {
+    color: var(--color-black);
+  }
+}
+
+@media (min-width: 768.000001px) {
 }
