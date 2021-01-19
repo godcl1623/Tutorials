@@ -1,0 +1,26 @@
+/*====================공통사항====================*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+
+:root {
+  /*==========색상==========*/
+  --bg-yellow: FFEB33;
+  --bg-white: F6F6F6;
+  --bg-icon: 423630;
+  --font-black: 4f4b4b;
+  --font-gray: CDD4D9;
+  --font-yellow-darker: EDDA30;
+  /*==========폰트==========*/
+  --heading-big: 1.625rem;
+  --heading-middle: 1.5rem;
+  --heading-small: 1.375rem;
+  --font-medium: 0.875rem;
+  --font-small: 0.75rem;
+  /*==========사이즈==========*/
+  --margin-common: 15px;
+  --padding-common: 15px;
+}
