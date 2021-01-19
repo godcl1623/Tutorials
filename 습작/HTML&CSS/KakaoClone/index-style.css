@@ -8,12 +8,12 @@
 
 :root {
   /*==========색상==========*/
-  --bg-yellow: FFEB33;
-  --bg-white: F6F6F6;
-  --bg-icon: 423630;
-  --font-black: 4f4b4b;
-  --font-gray: CDD4D9;
-  --font-yellow-darker: EDDA30;
+  --bg-yellow: #ffeb33;
+  --bg-white: #f6f6f6;
+  --bg-icon: #423630;
+  --font-black: #4f4b4b;
+  --font-gray: #cdd4d9;
+  --font-yellow-darker: #edda30;
   /*==========폰트==========*/
   --heading-big: 1.625rem;
   --heading-middle: 1.5rem;
@@ -23,4 +23,136 @@
   /*==========사이즈==========*/
   --margin-common: 15px;
   --padding-common: 15px;
+}
+
+span {
+  display: inline-block;
+}
+
+body {
+  background-color: var(--bg-yellow);
+}
+
+main {
+  margin: 0 10%;
+}
+
+footer {
+  margin: 0 10%;
+}
+/*====================header====================*/
+header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px 7px;
+}
+
+header span {
+  /* margin-right: 5px; */
+}
+
+header span:nth-child(2) {
+  margin-right: 12px;
+}
+
+header span:first-child:after {
+  content: "｜";
+  margin: 0 3px;
+}
+/*====================main====================*/
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100vh - 65px);
+}
+
+main .main-logo {
+  font-size: 700%;
+  color: var(--bg-icon);
+}
+
+main form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+main form .login-input {
+  width: 100%;
+  text-align: center;
+  background-color: white;
+  border: 1px solid gray;
+  border-bottom: 1px solid lightgray;
+  padding: 0 5px;
+}
+
+main form .login-input input {
+  width: 98%;
+  height: 100%;
+  border: none;
+  font-size: 24px;
+}
+
+main form .pwd-input {
+  width: 100%;
+  background-color: white;
+  text-align: center;
+  border: 1px solid gray;
+  border-top: none;
+  padding: 0 5px;
+}
+
+main form .pwd-input input {
+  width: 99%;
+  height: 100%;
+  font-size: 24px;
+  border: none;
+}
+
+main form input[type^="sub"] {
+  width: 100%;
+  margin-top: 10px;
+  height: 40px;
+  background-color: var(--bg-white);
+  color: var(--font-gray);
+  border: 1px solid gray;
+  font-size: 16px;
+}
+
+main form .auto-login {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+main form .auto-login input[type^="check"] {
+  width: 20px;
+  height: 20px;
+}
+
+main form .auto-login p {
+  margin: 0 5px;
+}
+
+main form .auto-login button {
+  width: 20px;
+  height: 20px;
+  font-size: 18px;
+  background-color: transparent;
+  color: var(--bg-icon);
+  border: none;
+}
+/*====================footer====================*/
+footer {
+  display: flex;
+  justify-content: center;
+}
+
+footer p:first-child:after {
+  content: "｜";
+  margin: 0 5px;
 }
