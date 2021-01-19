@@ -4,27 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
+  <!-- css 링크 -->
   <link rel="stylesheet" href="index-style.css">
+  <!-- FontAwesome 스크립트 -->
   <script src="https://kit.fontawesome.com/126dba6a94.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <!-- 헤더 - 로그인창 맨 위 아이콘 3개 -->
   <header>
-    <span><i class="fas fa-cog"></i></span>
-    <span><i class="far fa-circle"></i></span>
-    <span><i class="fas fa-times"></i></span>
+    <span><i class="fas fa-cog"></i></span> <!-- 옵션(톱니바퀴) 아이콘 -->
+    <span><i class="far fa-circle"></i></span> <!-- 최소화 대신 원 아이콘 -->
+    <span><i class="fas fa-times"></i></span> <!-- 닫기 아이콘 -->
   </header>
+  <!-- 메인 - 아이콘, 입력폼 -->
   <main>
+    <!-- 카카오톡 로고 -->
     <span class="main-logo">
       <i class="fas fa-sms"></i>
     </span>
+    <!-- 로그인 입력폼 -->
     <form class="login-form" action="kakao-friends.html">
       <div class="login-input">
         <input type="text" name="id"><span><i class="fas fa-caret-down"></i></span>
       </div>
+      <!-- 비밀번호 입력폼 -->
       <div class="pwd-input">
         <input type="password" name="password">
       </div>
+      <!-- 로그인 버튼 -->
       <input type="submit" value="로그인" name="login">
+      <!-- 자동로그인 메뉴 -->
       <div class="auto-login">
         <input type="checkbox" name="auto-login">
         <p>자동로그인</p>
@@ -32,6 +41,7 @@
       </div>
     </form>
   </main>
+  <!-- 푸터 - 아이디 찾기, 비번 재설정 -->
   <footer>
     <p>카카오계정 찾기</p>
     <p>비밀번호 재설정</p>
