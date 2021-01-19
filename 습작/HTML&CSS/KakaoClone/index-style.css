@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 :root {
@@ -47,10 +47,6 @@ header {
   padding: 5px 7px;
 }
 
-header span {
-  /* margin-right: 5px; */
-}
-
 header span:nth-child(2) {
   margin-right: 12px;
 }
@@ -67,13 +63,19 @@ main {
   height: calc(100vh - 65px);
 }
 
+main .main-logo,
+main form {
+  position: relative;
+  top: 100px;
+}
+
 main .main-logo {
   font-size: 700%;
   color: var(--bg-icon);
 }
 
 main form {
-  width: 100%;
+  width: 393px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -90,7 +92,7 @@ main form .login-input {
 }
 
 main form .login-input input {
-  width: 98%;
+  width: 96%;
   height: 100%;
   border: none;
   font-size: 24px;
