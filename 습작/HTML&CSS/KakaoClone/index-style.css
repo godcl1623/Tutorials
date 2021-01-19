@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* border: 1px solid black; */
+  /* border: 0.063rem solid black; */
 }
 
 :root {
@@ -21,18 +21,18 @@
   --font-medium: 0.875rem;
   --font-small: 0.75rem;
   /*==========사이즈==========*/
-  --margin-common: 15px;
-  --padding-common: 15px;
+  --margin-common: 0.938rem;
+  --padding-common: 0.938rem;
 }
-
+/*==========span에 부피 부여==========*/
 span {
   display: inline-block;
 }
-
+/*==========전체 배경화면 색 부여==========*/
 body {
   background-color: var(--bg-yellow);
 }
-
+/*==========공통 마진==========*/
 main {
   margin: 0 10%;
 }
@@ -41,120 +41,123 @@ footer {
   margin: 0 10%;
 }
 /*====================header====================*/
+/*==========헤더 레이아웃==========*/
 header {
   display: flex;
   justify-content: flex-end;
-  padding: 5px 7px;
+  padding: 0.313rem 0.438rem;
 }
-
+/*==========아이콘 간격 조정==========*/
 header span:nth-child(2) {
-  margin-right: 12px;
+  margin-right: 0.75rem;
 }
-
+/*==========아이콘 사이에 구분바 추가==========*/
 header span:first-child:after {
   content: "｜";
-  margin: 0 3px;
+  margin: 0 0.188rem;
 }
 /*====================main====================*/
+/*==========메인 전체 레이아웃==========*/
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(100vh - 65px);
+  height: calc(100vh - 4.063rem);
 }
-
+/*==========메인 요소 위치조정==========*/
 main .main-logo,
 main form {
   position: relative;
-  top: 100px;
+  top: 6.25rem;
 }
-
+/*==========로고 양식==========*/
 main .main-logo {
   font-size: 700%;
   color: var(--bg-icon);
 }
-
+/*==========폼 전체 레이아웃==========*/
 main form {
-  width: 393px;
+  width: 24.563rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 3.125rem;
 }
-
+/*==========폼 - 로그인창==========*/
 main form .login-input {
   width: 100%;
   text-align: center;
   background-color: white;
-  border: 1px solid gray;
-  border-bottom: 1px solid lightgray;
-  padding: 0 5px;
+  border: 0.063rem solid gray;
+  border-bottom: 0.063rem solid lightgray;
+  padding: 0 0.313rem;
 }
 
 main form .login-input input {
   width: 96%;
   height: 100%;
   border: none;
-  font-size: 24px;
+  font-size: var(--heading-middle);
 }
-
+/*==========폼 - 비밀번호 창==========*/
 main form .pwd-input {
   width: 100%;
   background-color: white;
   text-align: center;
-  border: 1px solid gray;
+  border: 0.063rem solid gray;
   border-top: none;
-  padding: 0 5px;
+  padding: 0 0.313rem;
 }
 
 main form .pwd-input input {
   width: 99%;
   height: 100%;
-  font-size: 24px;
+  font-size: var(--heading-middle);
   border: none;
 }
-
+/*==========폼 - 로그인 버튼==========*/
 main form input[type^="sub"] {
   width: 100%;
-  margin-top: 10px;
-  height: 40px;
+  margin-top: 0.625rem;
+  height: 2.5rem;
   background-color: var(--bg-white);
   color: var(--font-gray);
-  border: 1px solid gray;
-  font-size: 16px;
+  border: 0.063rem solid gray;
+  font-size: 1rem;
 }
-
+/*==========폼 - 자동로그인 메뉴==========*/
 main form .auto-login {
   display: flex;
   align-items: center;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 0.625rem;
 }
 
 main form .auto-login input[type^="check"] {
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 main form .auto-login p {
-  margin: 0 5px;
+  margin: 0 0.313rem;
 }
 
 main form .auto-login button {
-  width: 20px;
-  height: 20px;
-  font-size: 18px;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 1.125rem;
   background-color: transparent;
   color: var(--bg-icon);
   border: none;
 }
 /*====================footer====================*/
+/*==========푸터 양식==========*/
 footer {
   display: flex;
   justify-content: center;
 }
-
+/*==========텍스트 사이 구분바 추가==========*/
 footer p:first-child:after {
   content: "｜";
-  margin: 0 5px;
+  margin: 0 0.313rem;
 }
