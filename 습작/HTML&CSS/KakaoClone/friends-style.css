@@ -159,5 +159,21 @@ main .my-friends ul li {
   align-items: center;
 }
 /*====================nav====================*/
+nav .menu-main {
+  display: flex;
+  justify-content: space-around;
+  font-size: 40px;
+}
+
+nav .menu-main * {
+  margin: var(--margin-common) 0;
+}
+
+nav .menu-utility {
+  display: none;
+}
 /*====================aside====================*/
+aside {
+  display: none;
+}
 /*====================미디어 쿼리====================*/
