@@ -37,7 +37,9 @@ li {
 
 body {
   margin: 0 var(--margin-common);
+  color: var(--font-black);
 }
+
 /*====================header====================*/
 header {
   display: flex;
@@ -48,6 +50,38 @@ header span {
   margin: 0 5px;
 }
 /*====================main====================*/
+/*==========main 공통사항==========*/
+main .section-heading,
+main .friends-profile {
+  display: flex;
+  align-items: center;
+}
+
+main .section-heading {
+  justify-content: space-between;
+  color: gray;
+}
+
+main .section-heading span {
+  font-size: var(--font-small);
+}
+
+main .profile-picture {
+  width: 35px;
+  height: 35px;
+  border-radius: 20%;
+  background-color: var(--bg-profile);
+}
+
+main .friends-profile h5 {
+  width: 100%;
+}
+
+main .friends-profile .friends-summary-number {
+  display: flex;
+  font-size: var(--font-small);
+}
+/*==========유저정보==========*/
 main .main-user {
   display: flex;
   align-items: center;
@@ -62,6 +96,14 @@ main .main-user .user-picture {
 
 main .main-user h5 {
   margin-left: var(--margin-common);
+}
+/*==========생일 친구==========*/
+main .friends-birthday {
+  border-top: 1px solid var(--bg-shadedwhite);
+}
+
+main .friends-birthday .profile-picture {
+  background-color: var(--bg-birthday);
 }
 /*====================nav====================*/
 /*====================aside====================*/
