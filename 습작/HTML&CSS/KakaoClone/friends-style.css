@@ -38,6 +38,7 @@ li {
 
 body {
   margin: 0 var(--margin-common);
+  height: 100vh;
   color: var(--font-black);
 }
 
@@ -151,6 +152,11 @@ main .friends-channel .profile-ad .text-box h5 span {
 main .friends-channel .profile-ad .text-box p {
   font-size: var(--font-small);
   color: var(--font-gray);
+}
+/*==========친구목록==========*/
+main .my-friends ul li {
+  display: flex;
+  align-items: center;
 }
 /*====================nav====================*/
 /*====================aside====================*/
