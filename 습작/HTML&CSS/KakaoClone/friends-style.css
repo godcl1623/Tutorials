@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 :root {
@@ -37,8 +37,6 @@ li {
 }
 
 body {
-  margin: 0 var(--margin-common);
-  height: 100vh;
   color: var(--font-black);
 }
 
@@ -46,6 +44,7 @@ body {
 header {
   display: flex;
   justify-content: space-between;
+  padding: 10px;
 }
 
 header span {
@@ -53,6 +52,10 @@ header span {
 }
 /*====================main====================*/
 /*==========main 공통사항==========*/
+main {
+  margin: 0 var(--margin-common);
+}
+
 main .section-heading,
 main .friends-profile {
   display: flex;
@@ -62,6 +65,7 @@ main .friends-profile {
 main .section-heading {
   justify-content: space-between;
   color: gray;
+  margin-bottom: 5px;
 }
 
 main .section-heading span {
@@ -84,6 +88,17 @@ main .friends-profile .friends-summary-number {
   font-size: var(--font-small);
   color: gray;
 }
+
+main .friends-profile .friends-summary-number p {
+  margin-right: 5px;
+}
+
+main .main-user,
+main .friends-birthday,
+main .friends-recommend,
+main .friends-channel {
+  padding: 15px 0;
+}
 /*==========유저정보==========*/
 main .main-user {
   display: flex;
@@ -102,7 +117,7 @@ main h5 {
 }
 /*==========생일 친구==========*/
 main .friends-birthday {
-  border-top: 1px solid var(--bg-shadedwhite);
+  border-top: 1px solid var(--font-gray);
 }
 
 main .friends-birthday .profile-picture {
@@ -110,7 +125,7 @@ main .friends-birthday .profile-picture {
 }
 /*==========추천 친구==========*/
 main .friends-recommend {
-  border-top: 1px solid var(--bg-shadedwhite);
+  border-top: 1px solid var(--font-gray);
 }
 
 main .friends-recommend .profile-picture {
@@ -118,15 +133,20 @@ main .friends-recommend .profile-picture {
 }
 /*==========채널==========*/
 main .friends-channel {
-  border-top: 1px solid var(--bg-shadedwhite);
+  border-top: 1px solid var(--font-gray);
 }
 
 main .friends-channel .channel-icon {
   background-color: var(--bg-channel);
 }
 
+main .friends-channel .profile-ad {
+  margin-top: 10px;
+}
+
 main .friends-channel .profile-ad .ad-picture {
   background-color: white;
+  border: 1px solid lightgray;
 }
 
 main .friends-channel .profile-ad .text-box {
@@ -154,11 +174,26 @@ main .friends-channel .profile-ad .text-box p {
   color: var(--font-gray);
 }
 /*==========친구목록==========*/
+main .my-friends {
+  border-top: 1px solid var(--font-gray);
+  padding-top: var(--padding-common);
+}
+
 main .my-friends ul li {
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
+}
+
+main .my-friends ul li:last-child {
+  margin-bottom: 0;
 }
 /*====================nav====================*/
+nav {
+  background-color: var(--bg-shadedwhite);
+  padding: 5px 0;
+}
+
 nav .menu-main {
   display: flex;
   justify-content: space-around;
