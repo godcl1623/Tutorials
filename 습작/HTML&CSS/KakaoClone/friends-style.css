@@ -8,12 +8,12 @@
 
 :root {
   /*==========색상==========*/
-  --bg-yellow: FFEB33;
-  --bg-white: F6F6F6;
-  --bg-icon: 423630;
-  --font-black: 4f4b4b;
-  --font-gray: CDD4D9;
-  --font-yellow-darker: EDDA30;
+  --bg-profile: #94bfe7;
+  --bg-shadedwhite: #f9f9fa;
+  --bg-birthday: #f56971;
+  --bg-recommend: #8f7ec2;
+  --font-black: #1a1a1a;
+  --font-gray: #b5b5b5;
   /*==========폰트==========*/
   --heading-big: 1.625rem;
   --heading-middle: 1.5rem;
@@ -39,7 +39,30 @@ body {
   margin: 0 var(--margin-common);
 }
 /*====================header====================*/
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+header span {
+  margin: 0 5px;
+}
 /*====================main====================*/
+main .main-user {
+  display: flex;
+  align-items: center;
+}
+
+main .main-user .user-picture {
+  width: 50px;
+  height: 50px;
+  background-color: var(--bg-profile);
+  border-radius: 20%;
+}
+
+main .main-user h5 {
+  margin-left: var(--margin-common);
+}
 /*====================nav====================*/
 /*====================aside====================*/
 /*====================미디어 쿼리====================*/
