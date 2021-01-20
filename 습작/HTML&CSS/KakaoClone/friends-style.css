@@ -12,6 +12,7 @@
   --bg-shadedwhite: #f9f9fa;
   --bg-birthday: #f56971;
   --bg-recommend: #8f7ec2;
+  --bg-channel: #fae100;
   --font-black: #1a1a1a;
   --font-gray: #b5b5b5;
   /*==========폰트==========*/
@@ -80,6 +81,7 @@ main .friends-profile h5 {
 main .friends-profile .friends-summary-number {
   display: flex;
   font-size: var(--font-small);
+  color: gray;
 }
 /*==========유저정보==========*/
 main .main-user {
@@ -94,7 +96,7 @@ main .main-user .user-picture {
   border-radius: 20%;
 }
 
-main .main-user h5 {
+main h5 {
   margin-left: var(--margin-common);
 }
 /*==========생일 친구==========*/
@@ -104,6 +106,51 @@ main .friends-birthday {
 
 main .friends-birthday .profile-picture {
   background-color: var(--bg-birthday);
+}
+/*==========추천 친구==========*/
+main .friends-recommend {
+  border-top: 1px solid var(--bg-shadedwhite);
+}
+
+main .friends-recommend .profile-picture {
+  background-color: var(--bg-recommend);
+}
+/*==========채널==========*/
+main .friends-channel {
+  border-top: 1px solid var(--bg-shadedwhite);
+}
+
+main .friends-channel .channel-icon {
+  background-color: var(--bg-channel);
+}
+
+main .friends-channel .profile-ad .ad-picture {
+  background-color: white;
+}
+
+main .friends-channel .profile-ad .text-box {
+  width: 100%;
+  margin-left: var(--margin-common);
+}
+
+main .friends-channel .profile-ad .text-box h5,
+main .friends-channel .profile-ad .text-box p {
+  margin: 0;
+}
+
+main .friends-channel .profile-ad .text-box h5 span {
+  margin-left: 7px;
+  width: 25px;
+  border: 1px solid var(--font-gray);
+  border-radius: 30%;
+  font-size: 10px;
+  text-align: center;
+  color: var(--font-gray);
+}
+
+main .friends-channel .profile-ad .text-box p {
+  font-size: var(--font-small);
+  color: var(--font-gray);
 }
 /*====================nav====================*/
 /*====================aside====================*/
