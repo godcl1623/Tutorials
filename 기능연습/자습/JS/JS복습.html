@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS복습</title>
+</head>
+<body>
+  <input type="button" value="Click!" onclick="alert('Click!')">
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse magni est inventore nisi quo sunt sapiente totam recusandae, ducimus adipisci cumque? Sed fugit quibusdam nisi atque inventore fuga quo voluptates, quis aliquam neque possimus vitae natus corrupti dicta. Voluptatem reprehenderit consectetur suscipit perferendis magni optio a soluta tenetur accusamus minima!</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, eaque?</p>
+  <h6>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda laudantium nulla accusamus illo cupiditate quam unde cum. Dolor, corrupti quibusdam.</h6>
+  <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis nam perferendis animi! Iure necessitatibus obcaecati autem dignissimos earum omnis sed nam officia ullam. Nobis possimus neque, est ipsam doloremque nam.</h5>
+  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure quas hic qui, ipsa sequi non, voluptatibus dignissimos quibusdam blanditiis provident incidunt sint, error tempora. Corrupti quisquam culpa repellat iste, consequatur error quas quo aliquam incidunt pariatur nihil esse molestias maiores!</p>
+  <script>
+    var lorem = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse magni est inventore nisi quo sunt sapiente totam recusandae, ducimus adipisci cumque? Sed fugit quibusdam nisi atque inventore fuga quo voluptates, quis aliquam neque possimus vitae natus corrupti dicta. Voluptatem reprehenderit consectetur suscipit perferendis magni optio a soluta tenetur accusamus minima!';
+    document.write(lorem.length);
+  </script>
+  <input class="test" type="button" value="Doomsday" onclick="
+    document.querySelector('p').style.color = 'red';
+  ">
+  <input type="button" value="DoomsdayS" onclick="
+    var test = document.querySelectorAll('p');
+    test[1].style.color = 'red';
+  ">
+  <script>
+    if (1 === 2) {
+      document.write('오늘 저녁은 짬뽕');
+    } else {
+      document.write('오늘 저녁은 집밥');
+    }
+  </script>
+  <br>
+  <script>
+    if (2 > 1) {
+      document.write('미녀는 석류를 좋아해');
+    } else {
+      document.write('응 아니야~');
+    }
+  </script>
+  <br>
+  <script>
+    document.querySelector('.test').value;
+  </script>
+  <br>
+  <input class="night" type="button" value="night" onclick="
+    var day_night = document.querySelector('body');
+    if (this.value === 'night') {
+      day_night.style.backgroundColor = 'black';
+      day_night.style.color = 'white';
+      this.value = 'day';
+    } else {
+      day_night.style.backgroundColor = 'white';
+      day_night.style.color = 'black';
+      this.value = 'night';
+    }
+  ">
+  <br>
+
+  <script>
+    var array = ['lorem', 'ipsum', 'dolor', 'sit', 'amet'];
+    document.write(array.length);
+  </script>
+    <input type="button" value="lorem" onclick="
+    array.push('consectetur');
+  ">
+<br>
+<script>
+  var i = 0;
+  while (i < 5) {
+    document.write('오늘은 내가 짜파게티 요리사<br>');
+    i = i + 1;
+  } document.write('이제 배부르다');
+</script>
+<br>
+<script>
+  var array2 = ['lorem', 'ipsum', 'dolor']
+  var i = 0;
+  while (i < 3) {
+    document.write(array2[i]+'<br>');
+    i = i + 1;
+  } document.write('이제 그만');
+</script>
+<br>
+<script>
+  var plist = document.querySelectorAll('p');
+  var i = 0;
+  while (i < plist.length) {
+    plist[i].style.color = 'red';
+    i = i + 1;
+  }
+</script>
+</body>
+</html>
