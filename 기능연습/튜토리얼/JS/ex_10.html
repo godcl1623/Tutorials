@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>객체</title>
+</head>
+<body>
+  <h1>Object</h1>
+  <h2>Create</h2>
+  <script>
+    var thatsme = {
+      "member1":"taraczel",
+      "member2":"papercages"
+    };
+    document.write("member1 : "+thatsme.member1+"<br>");
+    document.write("member2 : "+thatsme.member2+"<br>");
+    thatsme.member3 = "반디체리";
+    document.write("member3 : "+thatsme.member3+"<br>");
+    thatsme["Prime Member"] = "커피좀비";
+    document.write("Prime Member : "+thatsme["Prime Member"]+"<br>");
+  </script>
+  <h2>Iterate</h2>
+  <script>
+    for(var key in thatsme) {
+      document.write(thatsme[key]+"<br>");
+      document.write(key+" : "+thatsme[key]+"<br>");
+    }
+  </script>
+  <h2>Property & Method</h2>
+  <script>
+    thatsme.showAll = function() {
+        for(var key in thatsme) {
+        document.write(key+" : "+thatsme[key]+"<br>");
+      }
+    }
+    thatsme.showAll();
+  </script>
+</body>
+</html>
