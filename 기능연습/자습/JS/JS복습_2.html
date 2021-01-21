@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS복습 2일차</title>
+  <script>
+    var bodyStyle = {
+      setBgColor:function(color) {
+        document.querySelector('body').style.backgroundColor = color;
+      },
+      setFontColor:function(color) {
+        document.querySelector('body').style.color = color;
+      }
+    }
+    var pStyle = {
+      setPColor:function(color) {
+        var p = document.querySelectorAll('p');
+        var i = 0;
+        while (i < p.length) {
+          p[i].style.color = color;
+          i = i + 1;
+        }
+      }
+    }
+    var buttonHandler = function (self) {
+        if (self.value === 'night') {
+          bodyStyle.setBgColor('black');
+          bodyStyle.setFontColor('white');
+          self.value = 'day';
+          pStyle.setPColor('powderblue');
+        } else {
+          bodyStyle.setBgColor('white');
+          bodyStyle.setFontColor('black');
+          self.value = 'night';
+          pStyle.setPColor('blue');
+        }
+    }
+  </script>
+</head>
+<body>
+  <input type="button" value="Click !" onclick="alert('Click !')">
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit maxime vel atque explicabo, voluptatum sit aspernatur ratione nam laborum cupiditate. Facere reprehenderit dolor harum maiores alias. Porro ducimus dolor impedit excepturi voluptates quo amet magni illo aperiam deleniti delectus culpa nam, fugiat maiores commodi pariatur sit sequi neque dolores. Modi!</p>
+  <script>
+    var p = document.querySelector('p');
+    p.style.color = "red";
+  </script>
+  <p id-"test">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique suscipit inventore, omnis sapiente aliquam amet, iste ut quod dolorem tenetur iure, eveniet aspernatur minus enim eligendi neque dolor adipisci magnam.</p>
+  <script>
+    var test = document.querySelector('#test');
+    if ("짜장면" === "짬뽕") {
+      document.write("오늘 저녁은 짜장면");
+    } else {
+      document.write("오늘 저녁은 짬뽕");
+    }
+  </script>
+  <br>
+  <script>
+    var member = ["커피좀비", "taraczel", "papercages", "delphi5281"];
+    document.write(member[0]+"<br>");
+    document.write(member.length+"<br>");
+    var i = 0;
+    while (i < member.length) {
+      document.write(member[i]+"<br>");
+      i = i + 1;
+    }
+  </script>
+  <br>
+  <script>
+    var member2 = {
+      "member1":"taraczel",
+      "member2":"papercages",
+      "member3":"delphi5281"
+    }
+    document.write("member1 : "+member2.member1+"<br>");
+    member2["Prime Member"] = "커피좀비";
+    document.write("Prime Member : "+member2["Prime Member"]);
+  </script>
+  <br>
+  <script>
+    var memberlist = {
+      "Prime Member":"커피좀비",
+      "member1":"taraczel",
+      "member2":"papercages",
+      "member3":"delphi5281"
+    }
+    for (var key in memberlist) {
+      document.write(key+" : "+memberlist[key]+"<br>");
+    }
+  </script>
+  <br>
+  <input type="button" value="night" onclick="
+    buttonHandler(this);
+  ">
+</body>
+</html>
