@@ -10,109 +10,118 @@
 <!-- 다른 메뉴에도 사용할 공통 양식으로 -->
 <body>
   <!-- 헤더 - 메뉴 이름, 아이콘 -->
-  <div class="contents-container">
-    <header>
-      <h3>친구</h3>
-      <div>
+  <div class="contents-wrapper">
+    <div class="contents-container">
+      <header>
+        <h3>친구</h3>
+        <div class="menu-utility">
+          <i class="fas fa-search"></i>
+          <i class="fas fa-user-plus"></i>
+          <i class="fas fa-music"></i>
+          <i class="fas fa-cog"></i>
+        </div>
+      </header>
+      <section class="search-form">
+        <!-- <h2>검색창</h2> -->
         <span><i class="fas fa-search"></i></span>
-        <span><i class="fas fa-user-plus"></i></span>
-        <span><i class="fas fa-music"></i></span>
-        <span><i class="fas fa-cog"></i></span>
-      </div>
-    </header>
-    <main>
-      <section class="main-user">
-        <div class="user-picture"></div>
-        <h5>이치행</h5>
+        <form action="" class="search-form">
+          <input type="text" name="friends-search" value="이름 검색">
+        </form>
       </section>
-      <section class="friends-birthday">
-        <div class="section-heading">
-          <h6>생일인 친구</h6>
-          <span><i class="fas fa-chevron-up"></i></span>
-        </div>
-        <div class="friends-profile">
-          <div class="profile-picture"></div>
-          <h5>친구의 생일을 확인해보세요!</h5>
-          <div class="friends-summary-number">
-            <p>3</p>
-            <span><i class="fas fa-chevron-right"></i></span>
+      <main>
+        <section class="main-user">
+          <div class="user-picture"></div>
+          <h5>이치행</h5>
+        </section>
+        <section class="friends-birthday">
+          <div class="section-heading">
+            <h6>생일인 친구</h6>
+            <span><i class="fas fa-chevron-up"></i></span>
           </div>
-        </div>
-      </section>
-      <section class="friends-recommend">
-        <div class="section-heading">
-          <h6>추천친구</h6>
-          <span><i class="fas fa-chevron-up"></i></span>
-        </div>
-        <div class="friends-profile">
-          <div class="profile-picture"></div>
-          <h5>새로운 친구를 만나보세요!</h5>
-          <div class="friends-summary-number">
-            <p>26</p>
-            <span><i class="fas fa-chevron-right"></i></span>
+          <div class="friends-profile">
+            <div class="profile-picture"></div>
+            <h5>친구의 생일을 확인해보세요!</h5>
+            <div class="friends-summary-number">
+              <p>3</p>
+              <span><i class="fas fa-chevron-right"></i></span>
+            </div>
           </div>
-        </div>
-      </section>
-      <section class="friends-channel">
-        <div class="section-heading">
-          <h6>채널</h6>
-          <span><i class="fas fa-chevron-up"></i></span>
-        </div>
-        <div class="friends-profile">
-          <div class="profile-picture channel-icon"></div>
-          <h5>채널</h5>
-          <div class="friends-summary-number">
-            <p>9</p>
-            <span><i class="fas fa-chevron-right"></i></span>
+        </section>
+        <section class="friends-recommend">
+          <div class="section-heading">
+            <h6>추천친구</h6>
+            <span><i class="fas fa-chevron-up"></i></span>
           </div>
-        </div>
-        <div class="friends-profile profile-ad">
-          <div class="profile-picture ad-picture"></div>
-          <div class="text-box">
-            <h5>은평구성지<span>AD</span></h5>
-            <p>최저가보장 스마트폰</p>
+          <div class="friends-profile">
+            <div class="profile-picture"></div>
+            <h5>새로운 친구를 만나보세요!</h5>
+            <div class="friends-summary-number">
+              <p>26</p>
+              <span><i class="fas fa-chevron-right"></i></span>
+            </div>
           </div>
+        </section>
+        <section class="friends-channel">
+          <div class="section-heading">
+            <h6>채널</h6>
+            <span><i class="fas fa-chevron-up"></i></span>
+          </div>
+          <div class="friends-profile">
+            <div class="profile-picture channel-icon"></div>
+            <h5>채널</h5>
+            <div class="friends-summary-number">
+              <p>9</p>
+              <span><i class="fas fa-chevron-right"></i></span>
+            </div>
+          </div>
+          <div class="friends-profile profile-ad">
+            <div class="profile-picture ad-picture"></div>
+            <div class="text-box">
+              <h5>은평구성지<span>AD</span></h5>
+              <p>최저가보장 스마트폰</p>
+            </div>
+          </div>
+        </section>
+        <section class="my-friends">
+          <div class="section-heading">
+            <h6>친구 <span>82</span></h6>
+            <span><i class="fas fa-chevron-up"></i></span>
+          </div>
+          <ul class="friends-list">
+            <li>
+              <div class="profile-picture"></div>
+              <h5>강인영 12</h5>
+            </li>
+            <li>
+              <div class="profile-picture"></div>
+              <h5>강태웅</h5>
+            </li>
+            <li>
+              <div class="profile-picture"></div>
+              <h5>계영준</h5>
+            </li>
+            <li>
+              <div class="profile-picture"></div>
+              <h5>고병국 13</h5>
+            </li>
+          </ul>
+        </section>
+      </main>
+    </div>
+      <nav>
+        <div class="menu-main">
+          <i class="fas fa-user"></i>
+          <i class="far fa-comment"></i>
+          <i class="fas fa-plus"></i>
+          <i class="fas fa-ellipsis-h"></i>
         </div>
-      </section>
-      <section class="my-friends">
-        <div class="section-heading">
-          <h6>친구 <span>82</span></h6>
-          <span><i class="fas fa-chevron-up"></i></span>
+        <div class="menu-utility">
+          <i class="far fa-smile"></i>
+          <i class="far fa-bell"></i>
+          <i class="fas fa-cog"></i>
         </div>
-        <ul class="friends-list">
-          <li>
-            <div class="profile-picture"></div>
-            <h5>강인영 12</h5>
-          </li>
-          <li>
-            <div class="profile-picture"></div>
-            <h5>강태웅</h5>
-          </li>
-          <li>
-            <div class="profile-picture"></div>
-            <h5>계영준</h5>
-          </li>
-          <li>
-            <div class="profile-picture"></div>
-            <h5>고병국 13</h5>
-          </li>
-        </ul>
-      </section>
-    </main>
+      </nav>
   </div>
-    <nav>
-      <div class="menu-main">
-        <i class="fas fa-user"></i>
-        <i class="far fa-comment"></i>
-        <i class="fas fa-plus"></i>
-        <i class="fas fa-ellipsis-h"></i>
-      </div>
-      <div class="menu-utility">
-        <i class="far fa-smile"></i>
-        <i class="far fa-bell"></i>
-        <i class="fas fa-cog"></i>
-      </div>
-    </nav>
-  <aside></aside>
+    <aside>AD</aside>
 </body>
 </html>
