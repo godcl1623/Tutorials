@@ -67,6 +67,14 @@
   </script>
   <br>
   <script>
+    member.push("ashen1825");
+  </script>
+  <br>
+  <script>
+    document.write(member.length);
+  </script>
+  <br>
+  <script>
     var member2 = {
       "member1":"taraczel",
       "member2":"papercages",
@@ -87,6 +95,15 @@
     for (var key in memberlist) {
       document.write(key+" : "+memberlist[key]+"<br>");
     }
+  </script>
+  <br>
+  <script>
+    memberlist.showAll = function() {
+        for (var key in this) {
+        document.write(key+" : "+this[key]+"<br>");
+      }
+    }
+    memberlist.showAll();
   </script>
   <br>
   <input type="button" value="night" onclick="
