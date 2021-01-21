@@ -197,7 +197,7 @@ nav {
 nav .menu-main {
   display: flex;
   justify-content: space-around;
-  font-size: 40px;
+  font-size: 35px;
 }
 
 nav .menu-main * {
@@ -212,3 +212,71 @@ aside {
   display: none;
 }
 /*====================미디어 쿼리====================*/
+@media (min-width: 768px) {
+  /*==========전체 레이아웃 관련==========*/
+  body {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  body > .contents-container {
+    width: 100%;
+  }
+
+  body > nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+  }
+
+  body > nav > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  header div .fas:not(.fa-user-plus) {
+    display: none;
+  }
+
+  nav > div {
+    margin: 20px;
+  }
+
+  nav > .menu-main {
+    text-align: center;
+    font-size: 25px;
+  }
+
+  nav > .menu-main > i {
+    margin: 20px 0;
+  }
+
+  nav > .menu-main > .fa-plus {
+    display: none;
+  }
+
+  nav > .menu-main > .fa-ellipsis-h:after {
+    content: "N";
+    display: inline-block;
+    border: 1px solid #ff5442;
+    background-color: #ff5442;
+    color: white;
+    border-radius: 50%;
+    font-size: 8px;
+    padding: 4px;
+    position: relative;
+    bottom: 43px;
+    left: 18px;
+  }
+
+  nav > .menu-utility {
+    display: flex;
+    font-size: 25px;
+    text-align: center;
+  }
+
+  nav > .menu-utility > i {
+    margin: 15px 0;
+  }
+}
