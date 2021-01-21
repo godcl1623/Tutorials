@@ -26,6 +26,12 @@
   --padding-common: 15px;
 }
 
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
 span {
   display: inline-block;
 }
@@ -47,8 +53,12 @@ header {
   padding: 10px;
 }
 
-header span {
+header i {
   margin: 0 5px;
+}
+/*====================768px~검색창====================*/
+section.search-form {
+  display: none;
 }
 /*====================main====================*/
 /*==========main 공통사항==========*/
@@ -75,7 +85,7 @@ main .section-heading span {
 main .profile-picture {
   width: 35px;
   height: 35px;
-  border-radius: 20%;
+  border-radius: 15px;
   background-color: var(--bg-profile);
 }
 
@@ -109,7 +119,7 @@ main .main-user .user-picture {
   width: 50px;
   height: 50px;
   background-color: var(--bg-profile);
-  border-radius: 20%;
+  border-radius: 15px;
 }
 
 main h5 {
@@ -214,31 +224,78 @@ aside {
 /*====================미디어 쿼리====================*/
 @media (min-width: 768px) {
   /*==========전체 레이아웃 관련==========*/
-  body {
+  body > .contents-wrapper {
     display: flex;
     flex-direction: row-reverse;
-  }
-
-  body > .contents-container {
-    width: 100%;
-  }
-
-  body > nav {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     height: 100vh;
   }
 
-  body > nav > div {
+  body > .contents-wrapper > .contents-container {
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+  }
+
+  body > .contents-wrapper > nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    overflow-y: scroll;
+  }
+
+  body > .contents-wrapper > .contents-container::-webkit-scrollbar,
+  body > .contents-wrapper > nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .contents-wrapper > nav > div {
     display: flex;
     flex-direction: column;
   }
 
-  header div .fas:not(.fa-user-plus) {
+  aside {
+    display: block;
+    width: 100%;
+    height: 150px;
+    border: 1px solid lightgray;
+    background-color: var(--bg-shadedwhite);
+    text-align: center;
+  }
+  /*==========header 수정사항==========*/
+  header .menu-utility .fas:not(.fa-user-plus) {
     display: none;
   }
 
+  header .menu-utility {
+  }
+
+  section.search-form {
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgray;
+    background-color: lightgray;
+    margin: 0 var(--margin-common);
+    padding: 0 10px;
+    border-radius: 20px;
+    color: var(--font-gray);
+  }
+
+  section.search-form > form {
+    width: 100%;
+    margin: 0 5px;
+  }
+
+  section.search-form input {
+    height: 25px;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    color: var(--font-gray);
+    outline: none;
+    box-shadow: none;
+  }
+  /*==========nav 수정사항==========*/
   nav > div {
     margin: 20px;
   }
@@ -278,5 +335,38 @@ aside {
 
   nav > .menu-utility > i {
     margin: 15px 0;
+  }
+  /*==========main 수정사항==========*/
+  main .profile-picture {
+    width: 45px;
+    height: 45px;
+  }
+
+  main .section-heading {
+    margin-bottom: 10px;
+  }
+
+  main .section-heading h6 {
+    font-size: 12px;
+  }
+
+  main .friends-profile h5 {
+    max-width: 180px;
+  }
+
+  main .friends-profile span {
+    display: none;
+  }
+
+  main .friends-recommend {
+    display: none;
+  }
+
+  main .friends-channel .friends-profile h5 {
+    width: 35px;
+  }
+
+  main .friends-channel .profile-ad {
+    display: none;
   }
 }
