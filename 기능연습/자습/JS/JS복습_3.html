@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS복습 3회차</title>
+  <script>
+    var bodystyle = {
+      bodybg:function(color) {
+        document.querySelector('body').style.backgroundColor = color;
+      },
+      fontColor:function(color) {
+        document.querySelector('body').style.color = color;
+      }
+    }
+    var allpstyle = {
+      pcolor:function(color) {
+        var plist = document.querySelectorAll('p');
+        var i = 0;
+          while (i < plist.length) {
+            plist[i].style.color = color;
+            i = i + 1;
+          }
+      }
+    }
+    function StyleHandler(self) {
+        if (self.value === 'night') {
+          bodystyle.bodybg('black');
+          bodystyle.fontColor('white');
+          self.value = 'day';
+
+          allpstyle.pcolor('red');
+        } else {
+          bodystyle.bodybg('white');
+          bodystyle.fontColor('black');
+          self.value = 'night';
+
+          allpstyle.pcolor('blue');
+        }
+    }
+  </script>
+</head>
+<body>
+  <input type="button" value="Click!" onclick="
+    alert('Hello World!');
+  ">
+  <br>
+  <p style="color:blue;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet iure maiores molestiae et eum, corporis labore. Voluptas error vero quos ab maiores, atque necessitatibus quasi similique iste, porro hic numquam repellendus ut distinctio quisquam voluptatem tempora minima voluptates ducimus veritatis quae illo? Neque et veritatis quidem quibusdam eum iste eaque!</p>
+  <h4 style="color:blue;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore dolorem nisi harum natus, esse officia adipisci ex nihil, qui perferendis corporis soluta doloribus voluptatum voluptatibus. Laudantium aspernatur blanditiis nostrum labore?</h4>
+  <p style="color:blue;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut labore voluptate nam illo eligendi, quasi officia vero iste similique architecto corporis culpa, doloremque, pariatur dicta maiores! Recusandae possimus perferendis amet dolorem quos quaerat culpa totam cupiditate? Incidunt odit ipsam mollitia.</p>
+  <script>
+    var text = document.querySelector('p').innerText;
+    var txtlength = text.trim().length;
+    document.write(txtlength);
+  </script>
+  <br>
+  <script>
+    var lorem = ["lorem", "ipsum", "dolor", "sit", "amet"];
+    document.write(lorem.length);
+  </script>
+  <br>
+  <script>
+    if ("짜장면"==="짜장면") {
+      document.write('오늘 저녁은 짜장면'+'<br>');
+    } else {
+      document.write('오늘 저녁은 짬뽕'+'<br>');
+    }
+    if (1 < 2) {
+      document.write('그것이 나다'+'<br>');
+    } else {
+      document.write('그것은 내가 아니다'+'<br>');
+    }
+    if (1 > 2) {
+      document.write('내 직업은 해외영업사원이다'+'<br>');
+    } else {
+      document.write('나는 프로그래머다');
+    }
+  </script>
+  <br>
+  <script>
+    var memberlist = ["커피좀비", "taraczel", 'delphi5281', 'papercages'];
+    document.write(memberlist[0]);
+    memberlist.push('chihang1623');
+  </script>
+  <br>
+  <script>
+    document.write(memberlist.length);
+    var i = 0;
+    var memberlist2 = ['Prime Member', 'member1', 'member2', 'member3', 'Hidden Member']
+    while (i < memberlist.length) {
+      document.write(memberlist2[i]+' : '+memberlist[i]+'<br>');
+      i = i + 1;
+    }
+  </script>
+  <br>
+  <script>
+    function tkclr(a, b) {
+      return a+b;
+    }
+    document.write(tkclr(3, 4));
+  </script>
+  <br>
+  <script>
+    var memberlist3 = {
+      'Prime Member' : '커피좀비',
+      'Member1' : 'taraczel',
+      'Member2' : 'delphi5281',
+      'Member3' : 'papercages',
+      'Hidden Member' : 'chihang1623',
+    }
+    document.write(memberlist3['Prime Member']);
+  </script>
+  <br>
+  <script>
+    memberlist3.Guest = 'zeropose';
+    memberlist3['popular guest'] = 'Fucking Bitch';
+  </script>
+  <br>
+  <script>
+    document.write(memberlist3.Guest);
+    document.write(memberlist3['popular guest']);
+  </script>
+  <br>
+  <script>
+    for (var i = 0; i < 10; i++) {
+      document.write(i+'<br>');
+    }
+  </script>
+  <input class="handler" type="button" value="night" onclick="
+    StyleHandler(this);
+  ">
+</body>
+</html>
