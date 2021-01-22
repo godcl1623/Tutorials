@@ -53,6 +53,10 @@ header {
   padding: 10px;
 }
 
+header ul {
+  display: flex;
+}
+
 header i {
   margin: 0 5px;
 }
@@ -90,7 +94,7 @@ main .profile-picture {
 }
 /*=====프로필 옆 문구=====*/
 main .friends-profile h5 {
-  width: 100%;
+  width: 90%;
 }
 /*=====프로필 문구 옆 컨텐츠 수=====*/
 main .friends-profile .friends-summary-number {
