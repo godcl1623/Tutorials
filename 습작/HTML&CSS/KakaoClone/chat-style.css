@@ -3,17 +3,18 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 :root {
   /*==========색상==========*/
-  --bg-yellow: FFEB33;
-  --bg-white: F6F6F6;
-  --bg-icon: 423630;
-  --font-black: 4f4b4b;
-  --font-gray: CDD4D9;
-  --font-yellow-darker: EDDA30;
+  --bg-profile: #94bfe7;
+  --bg-shadedwhite: #f9f9fa;
+  --bg-birthday: #f56971;
+  --bg-recommend: #8f7ec2;
+  --bg-channel: #fae100;
+  --font-black: #1a1a1a;
+  --font-gray: #b5b5b5;
   /*==========폰트==========*/
   --heading-big: 1.625rem;
   --heading-middle: 1.5rem;
@@ -24,3 +25,250 @@
   --margin-common: 15px;
   --padding-common: 15px;
 }
+/*==========레이아웃 관련==========*/
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+span {
+  display: inline-block;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+body {
+  color: var(--font-black);
+}
+
+/*====================header====================*/
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+header ul {
+  display: flex;
+}
+
+header i {
+  margin: 0 5px;
+}
+/*====================768px~검색창====================*/
+section.search-form {
+  display: none;
+}
+/*====================main====================*/
+/*==========main 공통사항==========*/
+main {
+  margin: 0 var(--margin-common);
+}
+/*=====메뉴 제목, 친구들 목록 정렬=====*/
+main .section-heading,
+main .friends-profile {
+  display: flex;
+  align-items: center;
+}
+/*=====메뉴 제목 양식 - 요소 정렬, 아이콘 정렬=====*/
+main .section-heading {
+  justify-content: space-between;
+  color: gray;
+  margin-bottom: 5px;
+}
+
+main .section-heading span {
+  font-size: var(--font-small);
+}
+/*=====프로필사진 양식=====*/
+main .profile-picture {
+  width: 35px;
+  height: 35px;
+  border-radius: 15px;
+  background-color: var(--bg-profile);
+}
+/*=====프로필 옆 문구=====*/
+main .friends-profile h5 {
+  width: 90%;
+}
+/*=====프로필 문구 옆 컨텐츠 수=====*/
+main .friends-profile .friends-summary-number {
+  display: flex;
+  font-size: var(--font-small);
+  color: gray;
+}
+
+main .friends-profile .friends-summary-number p {
+  margin-right: 5px;
+}
+/*=====각 컨텐츠 패딩=====*/
+main .main-user,
+main .friends-birthday,
+main .friends-recommend,
+main .friends-channel {
+  padding: 15px 0;
+}
+/*==========친구목록==========*/
+/*=====구분선 추가 및 간격 확보=====*/
+main .my-friends {
+  border-top: 1px solid var(--font-gray);
+  padding-top: var(--padding-common);
+}
+/*=====친구목록 양식=====*/
+main .my-friends ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+/*=====하단 간격 조정=====*/
+main .my-friends ul li:last-child {
+  margin-bottom: 0;
+}
+/*====================nav====================*/
+/*=====nav 양식=====*/
+nav {
+  background-color: var(--bg-shadedwhite);
+  padding: 5px 0;
+}
+/*=====모바일 아이콘 표시사항=====*/
+nav .menu-main {
+  display: flex;
+  justify-content: space-around;
+  font-size: 35px;
+}
+/*=====아이콘 간격 확보=====*/
+nav .menu-main * {
+  margin: var(--margin-common) 0;
+}
+/*=====데스크톱 아이콘 숨김=====*/
+nav .menu-utility {
+  display: none;
+}
+/*====================aside====================*/
+/*=========광고영역 숨김==========*/
+aside {
+  display: none;
+}
+/*====================미디어 쿼리====================*/
+@media (min-width: 768px) {
+  /*==========전체 레이아웃 관련==========*/
+  /*=====container, nav 감싸는 컨테이너 양식=====*/
+  body > .contents-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 100vh;
+  }
+  /*=====container 양식=====*/
+  body > .contents-wrapper > .contents-container {
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+  }
+  /*=====nav 양식=====*/
+  body > .contents-wrapper > nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    overflow-y: scroll;
+  }
+  /*=====overflow 스크롤바 숨김=====*/
+  body > .contents-wrapper > .contents-container::-webkit-scrollbar,
+  body > .contents-wrapper > nav::-webkit-scrollbar {
+    display: none;
+  }
+  /*=====아이콘상자 표시 정리용=====*/
+  .contents-wrapper > nav > div {
+    display: flex;
+    flex-direction: column;
+  }
+  /*=====광고영역=====*/
+  aside {
+    display: block;
+    width: 100%;
+    height: 150px;
+    border: 1px solid lightgray;
+    background-color: var(--bg-shadedwhite);
+    text-align: center;
+  }
+  /*==========header 수정사항==========*/
+  /*=====유틸리티 아이콘 숨김=====*/
+  header .menu-utility .fas:not(.fa-user-plus) {
+    display: none;
+  }
+  /*==========검색창 수정사항==========*/
+  /*=====검색창 양식=====*/
+  section.search-form {
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgray;
+    background-color: lightgray;
+    margin: 0 var(--margin-common);
+    padding: 0 10px;
+    border-radius: 20px;
+    color: var(--font-gray);
+  }
+  /*=====입력폼 너비 확보용=====*/
+  section.search-form > form {
+    width: 100%;
+    margin: 0 5px;
+  }
+  /*=====입력폼 양식=====*/
+  section.search-form input {
+    height: 25px;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    color: var(--font-gray);
+    outline: none;
+    box-shadow: none;
+  }
+  /*==========nav 수정사항==========*/
+  /*=====내부 간격 확보용=====*/
+  nav > div {
+    margin: 20px;
+  }
+  /*=====모바일-데스크탑 공통 아이콘 양식=====*/
+  nav > .menu-main {
+    text-align: center;
+    font-size: 25px;
+  }
+  /*=====모바일-데스크탑 공통 아이콘 간격 조정=====*/
+  nav > .menu-main > i {
+    margin: 20px 0;
+  }
+  /*=====특정 아이콘 숨김=====*/
+  nav > .menu-main > .fa-plus {
+    display: none;
+  }
+  /*=====New 표시 추가=====*/
+  nav > .menu-main > .fa-ellipsis-h:after {
+    content: "N";
+    display: inline-block;
+    border: 1px solid #ff5442;
+    background-color: #ff5442;
+    color: white;
+    border-radius: 50%;
+    font-size: 8px;
+    padding: 4px;
+    position: relative;
+    bottom: 43px;
+    left: 18px;
+  }
+  /*=====데스크탑 전용 아이콘 양식=====*/
+  nav > .menu-utility {
+    display: flex;
+    font-size: 25px;
+    text-align: center;
+  }
+  /*=====데스크탑 전용 아이콘 간격=====*/
+  nav > .menu-utility > i {
+    margin: 15px 0;
+  }
+  /*==========main 수정사항==========*/
+} /*미디어쿼리 끝*/
