@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS복습 4회차</title>
+  <script>
+    var bodyStyle = {
+      setBodyBgColor:function(color) {
+        document.querySelector('body').style.backgroundColor = color;
+      },
+      setFontColor:function(color) {
+        document.querySelector('body').style.color = color;
+      }
+    }
+
+    var pStyle = {
+      setPColor:function(color) {
+        var pList = document.querySelectorAll('p');
+        var i = 0;
+        while (i < pList.length) {
+          pList[i].style.color = color;
+          i = i + 1;
+        }
+      }
+    }
+
+    function styleHandler(self) {
+      if (self.value === 'night') {
+        bodyStyle.setBodyBgColor('black');
+        bodyStyle.setFontColor('white');
+        self.value = 'day';
+        pStyle.setPColor('tomato');
+      } else {
+        bodyStyle.setBodyBgColor('white');
+        bodyStyle.setFontColor('black');
+        self.value = 'night';
+        pStyle.setPColor('blue');
+      }
+    }
+  </script>
+</head>
+<body>
+  <input type="button" value="Click !" onclick="alert('Hello World !')">
+  <br>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ab adipisci accusantium ad a? Repellendus quibusdam, voluptas nesciunt reiciendis architecto numquam magni iste magnam dicta doloribus repudiandae sapiente, perferendis veritatis!</p>
+  <script>
+    var lorem = document.querySelector('p').innerText;
+    document.write(lorem.length);
+  </script>
+  <br>
+  <script>
+      if (1+2 > 3+4) {
+    document.write('수학 공부가 필요하다');
+  } else {
+    document.write('수학 공부 다했다');
+  }    
+  </script>
+  <br>
+  <script>
+    var array = ['lorem', 'ipsum', 'dolor', 'sit', 'amet'];
+    document.write(array[0]);
+  </script>
+  <script>
+    array.push('consectetur');
+  </script>
+  <br>
+  <script>
+    document.write(array.length);
+    var i = 0;
+    while (i < array.length) {
+      document.write(array[i]+'<br>');
+      i = i + 1;
+    }
+  </script>
+  <br>
+  <script>
+    function calculator(a, b) {
+      return a+b;
+    }
+    document.write(calculator(3, 4));
+  </script>
+  <script>
+    var object = {
+      'Prime Member':'커피좀비',
+      'Member1':'taraczel',
+      'Member2':'delphi5281',
+      'Member3':'papercages'
+    };
+    document.write(object['Prime Member']+'<br>');
+    document.write(object.Member1+'<br>');
+  </script>
+  <script>
+    object.Member0 = 'zeropose';
+    object['Hidden Member'] = 'chihang1623';
+    document.write(object.Member0+'<br>');
+    document.write(object['Hidden Member']+'<br>');
+  </script>
+  <script>
+    for (var i = 0; i < array.length; i++) {
+      document.write(array[i]+'<br>');
+    }
+  </script>
+  <script>
+    var noname = {
+      function1:function(a, b) {
+        return a+b;
+      }
+    }
+    var numContainer = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    for (var i = 0; i < numContainer.length; i++) {
+      document.write(noname.function1(i, i+1)+'<br>');
+    }
+  </script>
+  <input type="button" value="night" onclick="
+    styleHandler(this);
+  ">
+</body>
+</html>
