@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* border: 1px solid black; */
+  /* border: 0.063rem solid black; */
 }
 
 :root {
@@ -22,8 +22,8 @@
   --font-medium: 0.875rem;
   --font-small: 0.75rem;
   /*==========사이즈==========*/
-  --margin-common: 15px;
-  --padding-common: 15px;
+  --margin-common: 0.938rem;
+  --padding-common: 0.938rem;
 }
 /*==========레이아웃 관련==========*/
 html,
@@ -50,7 +50,7 @@ body {
 header {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 0.625rem;
 }
 
 header ul {
@@ -58,7 +58,7 @@ header ul {
 }
 
 header i {
-  margin: 0 5px;
+  margin: 0 0.313rem;
 }
 /*====================768px~검색창====================*/
 section.search-form {
@@ -79,7 +79,7 @@ main .friends-profile {
 main .section-heading {
   justify-content: space-between;
   color: gray;
-  margin-bottom: 5px;
+  margin-bottom: 0.313rem;
 }
 
 main .section-heading span {
@@ -87,9 +87,9 @@ main .section-heading span {
 }
 /*=====프로필사진 양식=====*/
 main .profile-picture {
-  width: 35px;
-  height: 35px;
-  border-radius: 15px;
+  width: 2.188rem;
+  height: 2.188rem;
+  border-radius: 0.938rem;
   background-color: var(--bg-profile);
 }
 /*=====프로필 옆 문구=====*/
@@ -104,14 +104,14 @@ main .friends-profile .friends-summary-number {
 }
 
 main .friends-profile .friends-summary-number p {
-  margin-right: 5px;
+  margin-right: 0.313rem;
 }
 /*=====각 컨텐츠 패딩=====*/
 main .main-user,
 main .friends-birthday,
 main .friends-recommend,
 main .friends-channel {
-  padding: 15px 0;
+  padding: 0.938rem 0;
 }
 /*==========유저정보==========*/
 /*=====사용자 정보 정렬=====*/
@@ -121,10 +121,10 @@ main .main-user {
 }
 /*=====사용자 프로필사진 양식=====*/
 main .main-user .user-picture {
-  width: 50px;
-  height: 50px;
+  width: 3.125rem;
+  height: 3.125rem;
   background-color: var(--bg-profile);
-  border-radius: 15px;
+  border-radius: 0.938rem;
 }
 /*=====사용자 이름 간격 확보=====*/
 main h5 {
@@ -133,7 +133,7 @@ main h5 {
 /*==========생일 친구==========*/
 /*=====구분선 추가=====*/
 main .friends-birthday {
-  border-top: 1px solid var(--font-gray);
+  border-top: 0.063rem solid var(--font-gray);
 }
 /*=====프로필사진 색상=====*/
 main .friends-birthday .profile-picture {
@@ -142,7 +142,7 @@ main .friends-birthday .profile-picture {
 /*==========추천 친구==========*/
 /*=====구분선 추가=====*/
 main .friends-recommend {
-  border-top: 1px solid var(--font-gray);
+  border-top: 0.063rem solid var(--font-gray);
 }
 /*=====프로필사진 색상=====*/
 main .friends-recommend .profile-picture {
@@ -151,7 +151,7 @@ main .friends-recommend .profile-picture {
 /*==========채널==========*/
 /*=====구분선 추가=====*/
 main .friends-channel {
-  border-top: 1px solid var(--font-gray);
+  border-top: 0.063rem solid var(--font-gray);
 }
 /*=====프로필사진 색상=====*/
 main .friends-channel .channel-icon {
@@ -160,12 +160,12 @@ main .friends-channel .channel-icon {
 /*=====채널 광고=====*/
 /*===간격 확보===*/
 main .friends-channel .profile-ad {
-  margin-top: 10px;
+  margin-top: 0.625rem;
 }
 /*===프로필사진 양식===*/
 main .friends-channel .profile-ad .ad-picture {
   background-color: white;
-  border: 1px solid lightgray;
+  border: 0.063rem solid lightgray;
 }
 /*===텍스트 간격 확보, 정리===*/
 main .friends-channel .profile-ad .text-box {
@@ -179,11 +179,11 @@ main .friends-channel .profile-ad .text-box p {
 }
 /*===AD 표시===*/
 main .friends-channel .profile-ad .text-box h5 span {
-  margin-left: 7px;
-  width: 25px;
-  border: 1px solid var(--font-gray);
+  margin-left: 0.438rem;
+  width: 1.563rem;
+  border: 0.063rem solid var(--font-gray);
   border-radius: 30%;
-  font-size: 10px;
+  font-size: 0.625rem;
   text-align: center;
   color: var(--font-gray);
 }
@@ -195,14 +195,14 @@ main .friends-channel .profile-ad .text-box p {
 /*==========친구목록==========*/
 /*=====구분선 추가 및 간격 확보=====*/
 main .my-friends {
-  border-top: 1px solid var(--font-gray);
+  border-top: 0.063rem solid var(--font-gray);
   padding-top: var(--padding-common);
 }
 /*=====친구목록 양식=====*/
 main .my-friends ul li {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 }
 /*=====하단 간격 조정=====*/
 main .my-friends ul li:last-child {
@@ -212,13 +212,13 @@ main .my-friends ul li:last-child {
 /*=====nav 양식=====*/
 nav {
   background-color: var(--bg-shadedwhite);
-  padding: 5px 0;
+  padding: 0.313rem 0;
 }
 /*=====모바일 아이콘 표시사항=====*/
 nav .menu-main {
   display: flex;
   justify-content: space-around;
-  font-size: 35px;
+  font-size: 2.188rem;
 }
 /*=====아이콘 간격 확보=====*/
 nav .menu-main * {
@@ -270,8 +270,8 @@ aside {
   aside {
     display: block;
     width: 100%;
-    height: 150px;
-    border: 1px solid lightgray;
+    height: 9.375rem;
+    border: 0.063rem solid lightgray;
     background-color: var(--bg-shadedwhite);
     text-align: center;
   }
@@ -285,21 +285,21 @@ aside {
   section.search-form {
     display: flex;
     align-items: center;
-    border: 1px solid lightgray;
+    border: 0.063rem solid lightgray;
     background-color: lightgray;
     margin: 0 var(--margin-common);
-    padding: 0 10px;
-    border-radius: 20px;
+    padding: 0 0.625rem;
+    border-radius: 1.25rem;
     color: var(--font-gray);
   }
   /*=====입력폼 너비 확보용=====*/
   section.search-form > form {
     width: 100%;
-    margin: 0 5px;
+    margin: 0 0.313rem;
   }
   /*=====입력폼 양식=====*/
   section.search-form input {
-    height: 25px;
+    height: 1.563rem;
     width: 100%;
     border: none;
     background-color: transparent;
@@ -310,16 +310,16 @@ aside {
   /*==========nav 수정사항==========*/
   /*=====내부 간격 확보용=====*/
   nav > div {
-    margin: 20px;
+    margin: 1.25rem;
   }
   /*=====모바일-데스크탑 공통 아이콘 양식=====*/
   nav > .menu-main {
     text-align: center;
-    font-size: 25px;
+    font-size: 1.563rem;
   }
   /*=====모바일-데스크탑 공통 아이콘 간격 조정=====*/
   nav > .menu-main > i {
-    margin: 20px 0;
+    margin: 1.25rem 0;
   }
   /*=====특정 아이콘 숨김=====*/
   nav > .menu-main > .fa-plus {
@@ -329,43 +329,43 @@ aside {
   nav > .menu-main > .fa-ellipsis-h:after {
     content: "N";
     display: inline-block;
-    border: 1px solid #ff5442;
+    border: 0.063rem solid #ff5442;
     background-color: #ff5442;
     color: white;
     border-radius: 50%;
-    font-size: 8px;
-    padding: 4px;
+    font-size: 0.5rem;
+    padding: 0.25rem;
     position: relative;
-    bottom: 43px;
-    left: 18px;
+    bottom: 2.688rem;
+    left: 1.125rem;
   }
   /*=====데스크탑 전용 아이콘 양식=====*/
   nav > .menu-utility {
     display: flex;
-    font-size: 25px;
+    font-size: 1.563rem;
     text-align: center;
   }
   /*=====데스크탑 전용 아이콘 간격=====*/
   nav > .menu-utility > i {
-    margin: 15px 0;
+    margin: 0.938rem 0;
   }
   /*==========main 수정사항==========*/
   /*=====프로필사진 크기 조정=====*/
   main .profile-picture {
-    width: 45px;
-    height: 45px;
+    width: 2.813rem;
+    height: 2.813rem;
   }
   /*=====목록 제목 조정 - 간격, 크기=====*/
   main .section-heading {
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
   }
 
   main .section-heading h6 {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
   /*=====상세현황 숫자 위치조정=====*/
   main .friends-profile h5 {
-    max-width: 180px;
+    max-width: 11.25rem;
   }
 
   main .friends-profile span {
@@ -377,7 +377,7 @@ aside {
   }
   /*=====채널 - 상세현황 숫자 위치 추가 조정, 광고 숨김=====*/
   main .friends-channel .friends-profile h5 {
-    width: 35px;
+    width: 2.188rem;
   }
 
   main .friends-channel .profile-ad {

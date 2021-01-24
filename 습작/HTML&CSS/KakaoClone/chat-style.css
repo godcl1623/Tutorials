@@ -47,7 +47,7 @@ body {
 }
 /*=====contents-container, nav 컨테이너 양식=====*/
 body > .contents-wrapper {
-  height: calc(100vh - 74.4px);
+  height: calc(100vh - 4.65rem);
 }
 /*====헤더, 메인 컨테이너=====*/
 body > .contents-wrapper > .contents-container {
@@ -65,7 +65,7 @@ body > .contents-wrapper > .contents-container::-webkit-scrollbar {
 header {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 0.625rem;
 }
 /*==========제목 옆 아이콘 숨김==========*/
 header > h3 > span {
@@ -77,7 +77,7 @@ header ul {
 }
 /*==========아이콘 간격==========*/
 header i {
-  margin: 0 5px;
+  margin: 0 0.313rem;
 }
 /*==========~768 아이콘 숨김==========*/
 header li.icon-exception {
@@ -85,7 +85,7 @@ header li.icon-exception {
 }
 /*====================광고영역====================*/
 aside.mobile-ad {
-  height: 80px;
+  height: 5rem;
   text-align: center;
   background-color: lightgray;
 }
@@ -99,14 +99,14 @@ main .chat-list-contents {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px 0;
-  padding: 10px 0;
+  margin: 0.625rem 0;
+  padding: 0.625rem 0;
 }
 /*=====프로필사진 양식=====*/
 main .profile-picture {
-  width: 50px;
-  height: 50px;
-  border-radius: 15px;
+  width: 3.125rem;
+  height: 3.125rem;
+  border-radius: 0.938rem;
   background-color: var(--bg-profile);
 }
 /*====특정 프로필사진 양식=====*/
@@ -117,23 +117,23 @@ main .profile-yellow {
 /*===채팅방 정보 양식===*/
 main > .chat-list > .chat-list-menu > .chat-list-contents > .text-box {
   width: 100%;
-  margin: 0 15px;
+  margin: 0 0.938rem;
 }
 /*===마지막 채팅내용 간격 확보===*/
 main > .chat-list > .chat-list-menu > .chat-list-contents > .text-box > p {
-  margin-top: 5px;
+  margin-top: 0.313rem;
 }
 /*===마지막 채팅내용 양식===*/
 main > .chat-list > .chat-list-menu > .chat-list-contents p {
-  font-size: 10px;
+  font-size: 0.625rem;
   color: var(--font-gray);
 }
 /*===마지막 채팅내역 시간===*/
 main > .chat-list > .chat-list-menu > .chat-list-contents > .chat-time {
-  min-width: 50px;
+  min-width: 3.125rem;
   position: relative;
   text-align: right;
-  bottom: 11px;
+  bottom: 0.688rem;
 }
 /*===마지막 채팅내역 시간 중 양식 어긋난 내용===*/
 main
@@ -142,25 +142,25 @@ main
   > .chat-list-contents
   > .chat-time.chat-time-long {
   position: relative;
-  bottom: 17px;
+  bottom: 1.063rem;
 }
 /*===채팅방 제목의 추가정보===*/
 main > .chat-list > .chat-list-menu > .chat-list-contents > .text-box span {
   color: var(--font-gray);
   font-size: var(--font-small);
-  margin: 0 5px;
+  margin: 0 0.313rem;
 }
 /*====================nav====================*/
 /*=====nav 양식=====*/
 nav {
   background-color: var(--bg-shadedwhite);
-  padding: 5px 0;
+  padding: 0.313rem 0;
 }
 /*=====모바일 아이콘 표시사항=====*/
 nav .menu-main {
   display: flex;
   justify-content: space-around;
-  font-size: 35px;
+  font-size: 2.188rem;
 }
 /*=====아이콘 간격 확보=====*/
 nav .menu-main * {
@@ -233,29 +233,29 @@ aside.desktop-ad {
   /*=====유틸리티 아이콘 간격, 폰트크기 재조정=====*/
   header .menu-utility .fa-comments,
   header .menu-utility .fa-comment-medical {
-    margin: 0 10px;
-    font-size: 18px;
+    margin: 0 0.625rem;
+    font-size: 1.125rem;
   }
   /*==========검색창 수정사항==========*/
   /*=====검색창 양식=====*/
   section.search-form {
     display: flex;
     align-items: center;
-    border: 1px solid lightgray;
+    border: 0.063rem solid lightgray;
     background-color: lightgray;
     margin: 0 var(--margin-common);
-    padding: 0 10px;
-    border-radius: 20px;
+    padding: 0 0.625rem;
+    border-radius: 1.25rem;
     color: var(--font-gray);
   }
   /*=====입력폼 너비 확보용=====*/
   section.search-form > form {
     width: 100%;
-    margin: 0 5px;
+    margin: 0 0.313rem;
   }
   /*=====입력폼 양식=====*/
   section.search-form input {
-    height: 25px;
+    height: 1.563rem;
     width: 100%;
     border: none;
     background-color: transparent;
@@ -266,16 +266,16 @@ aside.desktop-ad {
   /*==========nav 수정사항==========*/
   /*=====내부 간격 확보용=====*/
   nav > div {
-    margin: 20px;
+    margin: 1.25rem;
   }
   /*=====모바일-데스크탑 공통 아이콘 양식=====*/
   nav > .menu-main {
     text-align: center;
-    font-size: 25px;
+    font-size: 1.563rem;
   }
   /*=====모바일-데스크탑 공통 아이콘 간격 조정=====*/
   nav > .menu-main > i {
-    margin: 20px 0;
+    margin: 1.25rem 0;
   }
   /*=====특정 아이콘 숨김=====*/
   nav > .menu-main > .fa-plus {
@@ -285,32 +285,32 @@ aside.desktop-ad {
   nav > .menu-main > .fa-ellipsis-h:after {
     content: "N";
     display: inline-block;
-    border: 1px solid #ff5442;
+    border: 0.063rem solid #ff5442;
     background-color: #ff5442;
     color: white;
     border-radius: 50%;
-    font-size: 8px;
-    padding: 4px;
+    font-size: 0.5rem;
+    padding: 0.25rem;
     position: relative;
-    bottom: 43px;
-    left: 18px;
+    bottom: 2.688rem;
+    left: 1.125rem;
   }
   /*=====데스크탑 전용 아이콘 양식=====*/
   nav > .menu-utility {
     display: flex;
-    font-size: 25px;
+    font-size: 1.563rem;
     text-align: center;
   }
   /*=====데스크탑 전용 아이콘 간격=====*/
   nav > .menu-utility > i {
-    margin: 15px 0;
+    margin: 0.938rem 0;
   }
   /*==========하단 aside 수정사항==========*/
   aside.desktop-ad {
     display: block;
     width: 100%;
-    height: 150px;
-    border: 1px solid lightgray;
+    height: 9.375rem;
+    border: 0.063rem solid lightgray;
     background-color: var(--bg-shadedwhite);
     text-align: center;
   }
