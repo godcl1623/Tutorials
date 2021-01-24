@@ -67,6 +67,10 @@ header {
   justify-content: space-between;
   padding: 10px;
 }
+/*==========제목 옆 아이콘 숨김==========*/
+header > h3 > span {
+  display: none;
+}
 /*==========아이콘 컨테이너 정렬==========*/
 header ul {
   display: flex;
@@ -75,8 +79,12 @@ header ul {
 header i {
   margin: 0 5px;
 }
+/*==========~768 아이콘 숨김==========*/
+header li.icon-exception {
+  display: none;
+}
 /*====================광고영역====================*/
-aside {
+aside.mobile-ad {
   height: 80px;
   text-align: center;
   background-color: lightgray;
@@ -108,18 +116,8 @@ main .profile-yellow {
 /*=====채팅목록 상세=====*/
 /*===채팅방 정보 양식===*/
 main > .chat-list > .chat-list-menu > .chat-list-contents > .text-box {
-  width: 82%;
-  position: relative;
-}
-/*===채팅방 중 채팅내용이 긴 채팅방 양식===*/
-main
-  > .chat-list
-  > .chat-list-menu
-  > .chat-list-contents
-  > .text-box-exception {
-  width: 85%;
-  position: relative;
-  right: 3px;
+  width: 100%;
+  margin: 0 15px;
 }
 /*===마지막 채팅내용 간격 확보===*/
 main > .chat-list > .chat-list-menu > .chat-list-contents > .text-box > p {
@@ -132,7 +130,9 @@ main > .chat-list > .chat-list-menu > .chat-list-contents p {
 }
 /*===마지막 채팅내역 시간===*/
 main > .chat-list > .chat-list-menu > .chat-list-contents > .chat-time {
+  min-width: 50px;
   position: relative;
+  text-align: right;
   bottom: 11px;
 }
 /*===마지막 채팅내역 시간 중 양식 어긋난 내용===*/
@@ -170,6 +170,10 @@ nav .menu-main * {
 nav .menu-utility {
   display: none;
 }
+/*====================하단 aside====================*/
+aside.desktop-ad {
+  display: none;
+}
 /*====================미디어 쿼리====================*/
 @media (min-width: 768px) {
   /*==========전체 레이아웃 관련==========*/
@@ -193,6 +197,11 @@ nav .menu-utility {
     height: 100%;
     overflow-y: scroll;
   }
+
+  body > .contents-wrapper > nav > .menu-main > i:not(.fa-comment),
+  body > .contents-wrapper > nav > .menu-utility {
+    color: var(--font-gray);
+  }
   /*=====overflow 스크롤바 숨김=====*/
   body > .contents-wrapper > .contents-container::-webkit-scrollbar,
   body > .contents-wrapper > nav::-webkit-scrollbar {
@@ -204,10 +213,28 @@ nav .menu-utility {
     flex-direction: column;
   }
   /*=====광고영역=====*/
-  /*==========header 수정사항==========*/
-  /*=====유틸리티 아이콘 숨김=====*/
-  header .menu-utility .fas:not(.fa-user-plus) {
+  aside {
     display: none;
+  }
+  /*==========header 수정사항==========*/
+  /*=====제목 옆 아이콘 스타일 조정=====*/
+  header > h3 > span {
+    display: inline-block;
+    font-size: var(--font-medium);
+  }
+  /*=====유틸리티 아이콘 숨김=====*/
+  header .menu-utility .fas:not(.fa-comment-medical) {
+    display: none;
+  }
+  /*=====~768px 숨김 아이콘 표시=====*/
+  header .menu-utility .icon-exception {
+    display: inline-block;
+  }
+  /*=====유틸리티 아이콘 간격, 폰트크기 재조정=====*/
+  header .menu-utility .fa-comments,
+  header .menu-utility .fa-comment-medical {
+    margin: 0 10px;
+    font-size: 18px;
   }
   /*==========검색창 수정사항==========*/
   /*=====검색창 양식=====*/
@@ -278,5 +305,13 @@ nav .menu-utility {
   nav > .menu-utility > i {
     margin: 15px 0;
   }
-  /*==========main 수정사항==========*/
+  /*==========하단 aside 수정사항==========*/
+  aside.desktop-ad {
+    display: block;
+    width: 100%;
+    height: 150px;
+    border: 1px solid lightgray;
+    background-color: var(--bg-shadedwhite);
+    text-align: center;
+  }
 } /*미디어쿼리 끝*/
