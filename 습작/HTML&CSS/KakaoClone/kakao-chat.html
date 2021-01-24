@@ -10,18 +10,20 @@
 <body>
   <!-- 다른 메뉴에도 사용할 공통 양식으로 -->
 <body>
-  <!-- 헤더 - 메뉴 이름, 아이콘 -->
   <div class="contents-wrapper">
     <div class="contents-container">
+    <!-- 헤더 - 메뉴 이름, 아이콘 -->
       <header>
         <h3>채팅</h3>
         <ul class="menu-utility">
           <li><i class="fas fa-search"></i></li>
-          <li>수정요망</li>
+          <li><i class="fas fa-comment-medical"></i></li>
           <li><i class="fas fa-music"></i></li>
           <li><i class="fas fa-cog"></i></li>
         </ul>
       </header>
+      <!-- aside - 모바일 광고 영역 -->
+      <aside>AD</aside>
       <section class="search-form">
         <!-- <h2>검색창</h2> -->
         <span><i class="fas fa-search"></i></span>
@@ -30,46 +32,63 @@
         </form>
       </section>
       <main>
-        <section class="my-friends">
-          <div class="section-heading">
-            <h6>친구 <span>82</span></h6>
-            <span><i class="fas fa-chevron-up"></i></span>
-          </div>
-          <ul class="friends-list">
-            <li>
-              <div class="profile-picture"></div>
-              <h5>강인영 12</h5>
+        <!-- 채팅목록 영역 -->
+        <section class="chat-list">
+          <!-- 채팅 리스트 공통 양식 -->
+          <ul class="chat-list-menu">
+            <li class="chat-list-contents">
+              <div class="profile-picture profile-yellow"></div>
+              <div class="text-box">
+                <h5>카카오톡</h5>
+                <p>[기기 로그인 알림]</p>
+              </div>
+              <p class="chat-time">오전 11:30</p>
             </li>
-            <li>
+            <!-- 채팅 리스트 2 -->
+            <li class="chat-list-contents">
               <div class="profile-picture"></div>
-              <h5>강태웅</h5>
+              <div class="text-box">
+                <h5>가톨릭대학교 은평성모병원</h5>
+                <p>[가톨릭대학교 은평성모병원 진료예약 알림]<br>●성명: 이치행님...</p>
+              </div>
+              <p class="chat-time chat-time-long">오전 10:58</p>
             </li>
-            <li>
-              <div class="profile-picture"></div>
-              <h5>계영준</h5>
+            <!-- 채팅 리스트 3 -->
+            <li class="chat-list-contents">
+              <div class="profile-picture profile-yellow"></div>
+              <div class="text-box text-box-exception">
+                <h5>자쿠로<span>16</span><span><i class="fas fa-bell-slash"></i></span></h5>
+                <p>ㅎ~</p>
+              </div>
+              <p class="chat-time">어제</p>
             </li>
-            <li>
+            <!-- 채팅 리스트 4 -->
+            <li class="chat-list-contents">
               <div class="profile-picture"></div>
-              <h5>고병국 13</h5>
+              <div class="text-box">
+                <h5>양태환</h5>
+                <p>스고이네;</p>
+              </div>
+              <p class="chat-time">1월 21일</p>
             </li>
           </ul>
         </section>
       </main>
     </div>
-      <nav>
-        <div class="menu-main">
-          <i class="fas fa-user"></i>
-          <i class="far fa-comment"></i>
-          <i class="fas fa-plus"></i>
-          <i class="fas fa-ellipsis-h"></i>
-        </div>
-        <div class="menu-utility">
-          <i class="far fa-smile"></i>
-          <i class="far fa-bell"></i>
-          <i class="fas fa-cog"></i>
-        </div>
-      </nav>
+      <!-- nav - 다른 창 메뉴 -->
+    <nav>
+      <div class="menu-main">
+        <i class="far fa-user"></i>
+        <i class="fas fa-comment"></i>
+        <i class="fas fa-plus"></i>
+        <i class="fas fa-ellipsis-h"></i>
+      </div>
+      <div class="menu-utility">
+        <i class="far fa-smile"></i>
+        <i class="far fa-bell"></i>
+        <i class="fas fa-cog"></i>
+      </div>
+    </nav>
   </div>
-    <aside>AD</aside>
 </body>
 </html>

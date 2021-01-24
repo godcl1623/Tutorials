@@ -45,89 +45,110 @@ li {
 body {
   color: var(--font-black);
 }
+/*=====contents-container, nav 컨테이너 양식=====*/
+body > .contents-wrapper {
+  height: calc(100vh - 74.4px);
+}
+/*====헤더, 메인 컨테이너=====*/
+body > .contents-wrapper > .contents-container {
+  height: 100%;
+  padding: 0 var(--padding-common);
+  overflow-y: scroll;
+}
+/*====오버플로우 스크롤바 숨김=====*/
+body > .contents-wrapper > .contents-container::-webkit-scrollbar {
+  display: none;
+}
 
 /*====================header====================*/
+/*==========헤더 전체 양식==========*/
 header {
   display: flex;
   justify-content: space-between;
   padding: 10px;
 }
-
+/*==========아이콘 컨테이너 정렬==========*/
 header ul {
   display: flex;
 }
-
+/*==========아이콘 간격==========*/
 header i {
   margin: 0 5px;
+}
+/*====================광고영역====================*/
+aside {
+  height: 80px;
+  text-align: center;
+  background-color: lightgray;
 }
 /*====================768px~검색창====================*/
 section.search-form {
   display: none;
 }
 /*====================main====================*/
-/*==========main 공통사항==========*/
-main {
-  margin: 0 var(--margin-common);
-}
-/*=====메뉴 제목, 친구들 목록 정렬=====*/
-main .section-heading,
-main .friends-profile {
+/*=====채팅 목록 정렬=====*/
+main .chat-list-contents {
   display: flex;
   align-items: center;
-}
-/*=====메뉴 제목 양식 - 요소 정렬, 아이콘 정렬=====*/
-main .section-heading {
   justify-content: space-between;
-  color: gray;
-  margin-bottom: 5px;
-}
-
-main .section-heading span {
-  font-size: var(--font-small);
+  margin: 10px 0;
+  padding: 10px 0;
 }
 /*=====프로필사진 양식=====*/
 main .profile-picture {
-  width: 35px;
-  height: 35px;
+  width: 50px;
+  height: 50px;
   border-radius: 15px;
   background-color: var(--bg-profile);
 }
-/*=====프로필 옆 문구=====*/
-main .friends-profile h5 {
-  width: 90%;
+/*====특정 프로필사진 양식=====*/
+main .profile-yellow {
+  background-color: var(--bg-channel);
 }
-/*=====프로필 문구 옆 컨텐츠 수=====*/
-main .friends-profile .friends-summary-number {
-  display: flex;
+/*=====채팅목록 상세=====*/
+/*===채팅방 정보 양식===*/
+main > .chat-list > .chat-list-menu > .chat-list-contents > .text-box {
+  width: 82%;
+  position: relative;
+}
+/*===채팅방 중 채팅내용이 긴 채팅방 양식===*/
+main
+  > .chat-list
+  > .chat-list-menu
+  > .chat-list-contents
+  > .text-box-exception {
+  width: 85%;
+  position: relative;
+  right: 3px;
+}
+/*===마지막 채팅내용 간격 확보===*/
+main > .chat-list > .chat-list-menu > .chat-list-contents > .text-box > p {
+  margin-top: 5px;
+}
+/*===마지막 채팅내용 양식===*/
+main > .chat-list > .chat-list-menu > .chat-list-contents p {
+  font-size: 10px;
+  color: var(--font-gray);
+}
+/*===마지막 채팅내역 시간===*/
+main > .chat-list > .chat-list-menu > .chat-list-contents > .chat-time {
+  position: relative;
+  bottom: 11px;
+}
+/*===마지막 채팅내역 시간 중 양식 어긋난 내용===*/
+main
+  > .chat-list
+  > .chat-list-menu
+  > .chat-list-contents
+  > .chat-time.chat-time-long {
+  position: relative;
+  bottom: 17px;
+}
+/*===채팅방 제목의 추가정보===*/
+main > .chat-list > .chat-list-menu > .chat-list-contents > .text-box span {
+  color: var(--font-gray);
   font-size: var(--font-small);
-  color: gray;
-}
-
-main .friends-profile .friends-summary-number p {
-  margin-right: 5px;
-}
-/*=====각 컨텐츠 패딩=====*/
-main .main-user,
-main .friends-birthday,
-main .friends-recommend,
-main .friends-channel {
-  padding: 15px 0;
-}
-/*==========친구목록==========*/
-/*=====구분선 추가 및 간격 확보=====*/
-main .my-friends {
-  border-top: 1px solid var(--font-gray);
-  padding-top: var(--padding-common);
-}
-/*=====친구목록 양식=====*/
-main .my-friends ul li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-/*=====하단 간격 조정=====*/
-main .my-friends ul li:last-child {
-  margin-bottom: 0;
+  margin: 0 5px;
 }
 /*====================nav====================*/
 /*=====nav 양식=====*/
@@ -147,11 +168,6 @@ nav .menu-main * {
 }
 /*=====데스크톱 아이콘 숨김=====*/
 nav .menu-utility {
-  display: none;
-}
-/*====================aside====================*/
-/*=========광고영역 숨김==========*/
-aside {
   display: none;
 }
 /*====================미디어 쿼리====================*/
@@ -188,14 +204,6 @@ aside {
     flex-direction: column;
   }
   /*=====광고영역=====*/
-  aside {
-    display: block;
-    width: 100%;
-    height: 150px;
-    border: 1px solid lightgray;
-    background-color: var(--bg-shadedwhite);
-    text-align: center;
-  }
   /*==========header 수정사항==========*/
   /*=====유틸리티 아이콘 숨김=====*/
   header .menu-utility .fas:not(.fa-user-plus) {
