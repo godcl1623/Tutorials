@@ -131,6 +131,48 @@ main .safety-protection span {
   font-size: 10px;
   text-align: center;
 }
+/*==========뱅킹 메뉴==========*/
+/*=====전체 컨테이너 양식=====*/
+main .banking {
+  padding: 10px;
+  border-bottom: 1px solid var(--font-gray);
+  display: flex;
+  justify-content: space-between;
+}
+/*=====버튼, 뱅킹 메뉴 공통 양식=====*/
+main .banking .kakao-pay,
+main .banking .banking-menu {
+  display: flex;
+  align-items: center;
+}
+/*=====버튼 스타일=====*/
+main .banking .kakao-pay {
+  padding: 5px var(--padding-common);
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  outline: none;
+  box-shadow: none;
+  background-color: white;
+  font-size: var(--font-small);
+}
+/*===버튼 내 아이템 간격 조정===*/
+main .banking .kakao-pay *:nth-child(2) {
+  margin: 0 3px;
+}
+/*=====뱅킹 메뉴=====*/
+main .banking .banking-menu li {
+  font-size: var(--font-medium);
+}
+/*===구분바===*/
+main .banking .banking-menu li:after {
+  margin: 0 3px;
+  content: "｜";
+  color: var(--font-gray);
+}
+
+main .banking .banking-menu li:last-child:after {
+  display: none;
+}
 /*====================nav====================*/
 /*=====nav 양식=====*/
 nav {
