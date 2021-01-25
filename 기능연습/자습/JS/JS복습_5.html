@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS복습 5회차</title>
+  <link rel="stylesheet" href="JS복습_5.css">
+  <script>
+    const bgStyle = {
+      setBgColor:function(color) {
+        document.querySelector('body').style.backgroundColor = color;
+      },
+      setFontColor:function(color) {
+        document.querySelector('body').style.color = color;
+      }
+    }
+    const pStyle = {
+      setPColor:function(color) {
+        const pList = document.querySelectorAll('p');
+        let i = 0;
+        while(i < pList.length) {
+          pList[i].style.color = color;
+          i = i + 1;
+        }
+      }
+    }
+    function styleHandler(self) {
+      if (self.value === 'day') {
+        bgStyle.setBgColor('white');
+        bgStyle.setFontColor('black');
+        pStyle.setPColor('powderblue');
+        self.value = 'night';
+      } else {
+        bgStyle.setBgColor('black');
+        bgStyle.setFontColor('white');
+        pStyle.setPColor('tomato');
+        self.value = 'day';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1 class="title">JS복습 5회차</h1>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nesciunt iste ut. Quisquam, ea. Quam cupiditate, dolor tenetur dolore quae debitis culpa labore voluptate maxime molestiae, officiis reiciendis mollitia repellat eaque nobis quod eligendi pariatur ducimus voluptatem dolorum quas aut numquam tempore sunt. Voluptas doloremque magni esse, aperiam, facilis aliquid similique laboriosam cumque molestias reprehenderit, veniam tenetur placeat? Officiis, velit?</p>
+  <script>
+    const ptext = document.querySelector('p').innerText;
+    document.write(ptext.length);
+  </script>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, nostrum.</p>
+  <h5>Lorem, ipsum dolor.</h5>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod possimus eum est, inventore animi aut reiciendis ratione cupiditate rem aperiam excepturi quo perspiciatis non. Asperiores dolorum quisquam doloribus perspiciatis vitae error delectus quo. Enim reiciendis cumque delectus veritatis, quas at.</p>
+  <br>
+  <script>
+    if (3 >= 3) {
+      document.write('끵끵');
+    } else {
+      document.write('읭읭');
+    }
+  </script>
+  <br>
+  <script>
+    const array = ['lorem', 'ipsum', 'dolor'];
+    document.write(array.length);
+  </script>
+  <br>
+  <script>
+    array.push('sit');
+    document.write(array[3]);
+  </script>
+  <br>
+  <script>
+    function plus(a, b) {
+      return a*b;
+    }
+    document.write(plus(3,4));
+  </script>
+  <br>
+  <script>
+    const memberList = {
+      'Prime Member':'커피좀비',
+      Member1:'taraczel',
+      Member2:'delphi5281'
+    }
+    document.write(memberList.Member1+'<br>');
+    document.write(memberList['Prime Member']);
+  </script>
+  <br>
+  <script>
+    memberList.Member3 = 'papercages';
+    memberList['Hidden Member'] = 'zeropose';
+    document.write(memberList.Member3+'<br>');
+    document.write(memberList['Hidden Member']);
+  </script>
+  <br>
+  <script>
+    for (let i = 0; i < array.length; i++) {
+      document.write(array[i]+'<br>');
+    }
+  </script>
+  <script>
+    const nums = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
+    for (let i = 0; i < nums.length; i++) {
+      document.write(plus(i, i+1)+'<br>');
+    }
+  </script>
+  <input type="button" value="day" onclick="
+    styleHandler(this);
+  ">
+  <script src="JS복습_5.js"></script>
+</body>
+</html>
