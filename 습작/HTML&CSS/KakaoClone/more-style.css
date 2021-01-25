@@ -292,7 +292,10 @@ aside.mobile-ad {
     flex-direction: column;
   }
   /*=====광고영역=====*/
-  aside {
+  aside.mobile-ad {
+    display: none;
+  }
+  aside.desktop-ad {
     display: block;
     width: 100%;
     height: 150px;
@@ -302,7 +305,7 @@ aside.mobile-ad {
   }
   /*==========header 수정사항==========*/
   /*=====유틸리티 아이콘 숨김=====*/
-  header .menu-utility .fas:not(.fa-user-plus) {
+  header .menu-utility .fas {
     display: none;
   }
   /*==========nav 수정사항==========*/
@@ -314,6 +317,10 @@ aside.mobile-ad {
   nav > .menu-main {
     text-align: center;
     font-size: 25px;
+  }
+  /*===비활성화 아이콘 색상 변경===*/
+  nav > .menu-main i:not(.fa-ellipsis-h) {
+    color: var(--font-gray);
   }
   /*=====모바일-데스크탑 공통 아이콘 간격 조정=====*/
   nav > .menu-main > i {
@@ -343,9 +350,10 @@ aside.mobile-ad {
     font-size: 25px;
     text-align: center;
   }
-  /*=====데스크탑 전용 아이콘 간격=====*/
+  /*=====데스크탑 전용 아이콘 스타일=====*/
   nav > .menu-utility > i {
     margin: 15px 0;
+    color: var(--font-gray);
   }
   /*==========main 수정사항==========*/
 } /*미디어쿼리 끝*/
