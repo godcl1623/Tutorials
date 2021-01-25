@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* border: 1px solid black; */
+  border: 1px solid black;
 }
 
 :root {
@@ -50,7 +50,7 @@ body {
 header {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 10px 15px;
 }
 
 header ul {
@@ -58,72 +58,78 @@ header ul {
 }
 
 header i {
-  margin: 0 5px;
+  margin: 0 10px;
+  font-size: 18px;
 }
 /*====================main====================*/
 /*==========main 공통사항==========*/
 main {
   margin: 0 var(--margin-common);
 }
-/*=====메뉴 제목, 친구들 목록 정렬=====*/
-main .section-heading,
-main .friends-profile {
+/*==========사용자 정보 메뉴==========*/
+main .main-user {
+  padding: 10px 0;
+}
+/*==========유저 정보 컨테이너==========*/
+main .main-user .main-user-info-container {
+  padding: 10px 0;
   display: flex;
   align-items: center;
 }
-/*=====메뉴 제목 양식 - 요소 정렬, 아이콘 정렬=====*/
-main .section-heading {
-  justify-content: space-between;
-  color: gray;
-  margin-bottom: 5px;
-}
-
-main .section-heading span {
-  font-size: var(--font-small);
-}
-/*=====프로필사진 양식=====*/
-main .profile-picture {
-  width: 35px;
-  height: 35px;
-  border-radius: 15px;
+/*=====유저 프로필 사진 양식=====*/
+/*===사진 배경===*/
+main .main-user .main-user-info-container .user-picture {
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid var(--bg-profile);
+  border-radius: 12px;
+  width: 50px;
+  height: 50px;
   background-color: var(--bg-profile);
+  text-align: center;
 }
-/*=====프로필 옆 문구=====*/
-main .friends-profile h5 {
-  width: 90%;
+/*===유저 아이콘===*/
+main .main-user .main-user-info-container .user-picture i {
+  font-size: 25px;
+  color: lightblue;
 }
-/*=====프로필 문구 옆 컨텐츠 수=====*/
-main .friends-profile .friends-summary-number {
-  display: flex;
+/*=====유저 정보 양식=====*/
+/*===유저 정보 컨테이너===*/
+main .main-user .main-user-info-container .text-box {
+  width: 100%;
+}
+/*===유저 이메일 양식===*/
+main .main-user .main-user-info-container .text-box p {
   font-size: var(--font-small);
-  color: gray;
+  color: var(--font-gray);
+}
+/*===768~ 보안 아이콘 숨김===*/
+main .main-user .main-user-info-container span {
+  display: none;
+}
+/*=====카카오 지갑 양식=====*/
+/*===컨테이너 스타일===*/
+main .safety-protection {
+  padding: var(--padding-common);
+  border: 1px dashed gray;
+  background-color: var(--bg-shadedwhite);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*===내부 텍스트 스타일===*/
+main .safety-protection h5 {
+  margin: 0 10px;
+  font-weight: 500;
 }
 
-main .friends-profile .friends-summary-number p {
-  margin-right: 5px;
-}
-/*=====각 컨텐츠 패딩=====*/
-main .main-user,
-main .friends-birthday,
-main .friends-recommend,
-main .friends-channel {
-  padding: 15px 0;
-}
-/*==========친구목록==========*/
-/*=====구분선 추가 및 간격 확보=====*/
-main .my-friends {
-  border-top: 1px solid var(--font-gray);
-  padding-top: var(--padding-common);
-}
-/*=====친구목록 양식=====*/
-main .my-friends ul li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-/*=====하단 간격 조정=====*/
-main .my-friends ul li:last-child {
-  margin-bottom: 0;
+main .safety-protection span {
+  padding: 5px;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 7px;
+  font-size: 10px;
+  text-align: center;
 }
 /*====================nav====================*/
 /*=====nav 양식=====*/
