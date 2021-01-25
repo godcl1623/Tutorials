@@ -173,6 +173,51 @@ main .banking .banking-menu li:after {
 main .banking .banking-menu li:last-child:after {
   display: none;
 }
+/*==========메뉴 아이콘==========*/
+/*=====메뉴 아이콘 공통 양식=====*/
+main .more-menu-container {
+  padding: var(--padding-common);
+}
+/*===아이콘 메뉴 배열===*/
+main .more-menu-container .more-menu-contents li {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+main .more-menu-container .more-menu-contents li:last-child {
+  margin-bottom: 10px;
+}
+/*===아이콘 공통 스타일===*/
+main .more-menu-container .more-menu-contents li span {
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/*===업데이트 표시===*/
+main .more-menu-container .more-menu-contents li span.update-new:after {
+  content: "";
+  position: relative;
+  bottom: 55px;
+  left: 25px;
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border: 1px solid tomato;
+  border-radius: 50%;
+  background-color: tomato;
+  font-size: 1px;
+}
+/*===아이콘 사이즈, 스타일 조절===*/
+main .more-menu-container .more-menu-contents li i {
+  margin: 7px;
+  font-size: 26px;
+}
+/*===메뉴명 스타일 조절===*/
+main .more-menu-container .more-menu-contents li h6 {
+  font-weight: 500;
+}
 /*====================nav====================*/
 /*=====nav 양식=====*/
 nav {
