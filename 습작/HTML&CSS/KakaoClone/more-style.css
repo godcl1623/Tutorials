@@ -46,11 +46,18 @@ body {
   color: var(--font-black);
 }
 
+body .contents-wrapper {
+  height: calc(100vh - 74.4px);
+}
+
+body .contents-wrapper .contents-container {
+  height: 100%;
+}
 /*====================header====================*/
 header {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 10px 15px;
 }
 
 header ul {
@@ -58,72 +65,165 @@ header ul {
 }
 
 header i {
-  margin: 0 5px;
+  margin: 0 10px;
+  font-size: 18px;
 }
 /*====================main====================*/
 /*==========main 공통사항==========*/
 main {
   margin: 0 var(--margin-common);
 }
-/*=====메뉴 제목, 친구들 목록 정렬=====*/
-main .section-heading,
-main .friends-profile {
+/*==========사용자 정보 메뉴==========*/
+main .main-user {
+  padding: 10px 0;
+}
+/*==========유저 정보 컨테이너==========*/
+main .main-user .main-user-info-container {
+  padding: 10px 0;
   display: flex;
   align-items: center;
 }
-/*=====메뉴 제목 양식 - 요소 정렬, 아이콘 정렬=====*/
-main .section-heading {
-  justify-content: space-between;
-  color: gray;
-  margin-bottom: 5px;
-}
-
-main .section-heading span {
-  font-size: var(--font-small);
-}
-/*=====프로필사진 양식=====*/
-main .profile-picture {
-  width: 35px;
-  height: 35px;
-  border-radius: 15px;
+/*=====유저 프로필 사진 양식=====*/
+/*===사진 배경===*/
+main .main-user .main-user-info-container .user-picture {
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid var(--bg-profile);
+  border-radius: 12px;
+  width: 50px;
+  height: 50px;
   background-color: var(--bg-profile);
+  text-align: center;
 }
-/*=====프로필 옆 문구=====*/
-main .friends-profile h5 {
-  width: 90%;
+/*===유저 아이콘===*/
+main .main-user .main-user-info-container .user-picture i {
+  font-size: 25px;
+  color: lightblue;
 }
-/*=====프로필 문구 옆 컨텐츠 수=====*/
-main .friends-profile .friends-summary-number {
-  display: flex;
+/*=====유저 정보 양식=====*/
+/*===유저 정보 컨테이너===*/
+main .main-user .main-user-info-container .text-box {
+  width: 100%;
+}
+/*===유저 이메일 양식===*/
+main .main-user .main-user-info-container .text-box p {
   font-size: var(--font-small);
-  color: gray;
+  color: var(--font-gray);
+}
+/*===768~ 보안 아이콘 숨김===*/
+main .main-user .main-user-info-container span {
+  display: none;
+}
+/*=====카카오 지갑 양식=====*/
+/*===컨테이너 스타일===*/
+main .safety-protection {
+  padding: var(--padding-common);
+  border: 1px dashed gray;
+  background-color: var(--bg-shadedwhite);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*===내부 텍스트 스타일===*/
+main .safety-protection h5 {
+  margin: 0 10px;
+  font-weight: 500;
 }
 
-main .friends-profile .friends-summary-number p {
-  margin-right: 5px;
+main .safety-protection span {
+  padding: 5px;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 7px;
+  font-size: 10px;
+  text-align: center;
 }
-/*=====각 컨텐츠 패딩=====*/
-main .main-user,
-main .friends-birthday,
-main .friends-recommend,
-main .friends-channel {
-  padding: 15px 0;
+/*==========뱅킹 메뉴==========*/
+/*=====전체 컨테이너 양식=====*/
+main .banking {
+  padding: 10px;
+  border-bottom: 1px solid var(--font-gray);
+  display: flex;
+  justify-content: space-between;
 }
-/*==========친구목록==========*/
-/*=====구분선 추가 및 간격 확보=====*/
-main .my-friends {
-  border-top: 1px solid var(--font-gray);
-  padding-top: var(--padding-common);
-}
-/*=====친구목록 양식=====*/
-main .my-friends ul li {
+/*=====버튼, 뱅킹 메뉴 공통 양식=====*/
+main .banking .kakao-pay,
+main .banking .banking-menu {
   display: flex;
   align-items: center;
+}
+/*=====버튼 스타일=====*/
+main .banking .kakao-pay {
+  padding: 5px var(--padding-common);
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  outline: none;
+  box-shadow: none;
+  background-color: white;
+  font-size: var(--font-small);
+}
+/*===버튼 내 아이템 간격 조정===*/
+main .banking .kakao-pay *:nth-child(2) {
+  margin: 0 3px;
+}
+/*=====뱅킹 메뉴=====*/
+main .banking .banking-menu li {
+  font-size: var(--font-medium);
+}
+/*===구분바===*/
+main .banking .banking-menu li:after {
+  margin: 0 3px;
+  content: "｜";
+  color: var(--font-gray);
+}
+
+main .banking .banking-menu li:last-child:after {
+  display: none;
+}
+/*==========메뉴 아이콘==========*/
+/*=====메뉴 아이콘 공통 양식=====*/
+main .more-menu-container {
+  padding: var(--padding-common);
+}
+/*===아이콘 메뉴 배열===*/
+main .more-menu-container .more-menu-contents li {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+main .more-menu-container .more-menu-contents li:last-child {
   margin-bottom: 10px;
 }
-/*=====하단 간격 조정=====*/
-main .my-friends ul li:last-child {
-  margin-bottom: 0;
+/*===아이콘 공통 스타일===*/
+main .more-menu-container .more-menu-contents li span {
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/*===업데이트 표시===*/
+main .more-menu-container .more-menu-contents li span.update-new:after {
+  content: "";
+  position: relative;
+  bottom: 55px;
+  left: 25px;
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border: 1px solid tomato;
+  border-radius: 50%;
+  background-color: tomato;
+  font-size: 1px;
+}
+/*===아이콘 사이즈, 스타일 조절===*/
+main .more-menu-container .more-menu-contents li i {
+  margin: 7px;
+  font-size: 26px;
+}
+/*===메뉴명 스타일 조절===*/
+main .more-menu-container .more-menu-contents li h6 {
+  font-weight: 500;
 }
 /*====================nav====================*/
 /*=====nav 양식=====*/
@@ -149,6 +249,14 @@ nav .menu-utility {
 /*=========광고영역 숨김==========*/
 aside {
   display: none;
+}
+/*=========모바일 광고 표시==========*/
+aside.mobile-ad {
+  display: block;
+  width: 100%;
+  height: 65px;
+  background-color: var(--bg-shadedwhite);
+  text-align: center;
 }
 /*====================미디어 쿼리====================*/
 @media (min-width: 768px) {
@@ -184,7 +292,10 @@ aside {
     flex-direction: column;
   }
   /*=====광고영역=====*/
-  aside {
+  aside.mobile-ad {
+    display: none;
+  }
+  aside.desktop-ad {
     display: block;
     width: 100%;
     height: 150px;
@@ -194,7 +305,7 @@ aside {
   }
   /*==========header 수정사항==========*/
   /*=====유틸리티 아이콘 숨김=====*/
-  header .menu-utility .fas:not(.fa-user-plus) {
+  header .menu-utility .fas {
     display: none;
   }
   /*==========nav 수정사항==========*/
@@ -206,6 +317,10 @@ aside {
   nav > .menu-main {
     text-align: center;
     font-size: 25px;
+  }
+  /*===비활성화 아이콘 색상 변경===*/
+  nav > .menu-main i:not(.fa-ellipsis-h) {
+    color: var(--font-gray);
   }
   /*=====모바일-데스크탑 공통 아이콘 간격 조정=====*/
   nav > .menu-main > i {
@@ -235,9 +350,10 @@ aside {
     font-size: 25px;
     text-align: center;
   }
-  /*=====데스크탑 전용 아이콘 간격=====*/
+  /*=====데스크탑 전용 아이콘 스타일=====*/
   nav > .menu-utility > i {
     margin: 15px 0;
+    color: var(--font-gray);
   }
   /*==========main 수정사항==========*/
 } /*미디어쿼리 끝*/
