@@ -225,6 +225,13 @@ main .more-menu-container .more-menu-contents li i {
 main .more-menu-container .more-menu-contents li h6 {
   font-weight: 500;
 }
+/*=====데스크톱 아이콘 숨김=====*/
+main .more-menu-container .more-menu-contents li.list-desktop {
+  margin: 0;
+}
+main .more-menu-container .more-menu-contents li span.menu-desktop {
+  display: none;
+}
 /*====================nav====================*/
 /*=====nav 양식=====*/
 nav {
@@ -356,4 +363,19 @@ aside.mobile-ad {
     color: var(--font-gray);
   }
   /*==========main 수정사항==========*/
+  /*=====메뉴 아이콘=====*/
+  /*===모바일 아이콘 숨김===*/
+  main .more-menu-container .more-menu-contents li.list-mobile {
+    margin: 0;
+  }
+  main .more-menu-container .more-menu-contents li span.menu-mobile {
+    display: none;
+  }
+  /*===데스크톱 아이콘 표시===*/
+  main .more-menu-container .more-menu-contents li.list-desktop {
+    margin-bottom: 20px;
+  }
+  main .more-menu-container .more-menu-contents li span.menu-desktop {
+    display: flex;
+  }
 } /*미디어쿼리 끝*/
