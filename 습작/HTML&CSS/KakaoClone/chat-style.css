@@ -42,12 +42,16 @@ li {
   list-style: none;
 }
 
+a {
+  color: black;
+}
+
 body {
   color: var(--font-black);
 }
 /*=====contents-container, nav 컨테이너 양식=====*/
 body > .contents-wrapper {
-  height: calc(100vh - 4.65rem);
+  height: calc(100vh - 74.4px);
 }
 /*====헤더, 메인 컨테이너=====*/
 body > .contents-wrapper > .contents-container {
@@ -94,6 +98,10 @@ section.search-form {
   display: none;
 }
 /*====================main====================*/
+/*==========main 공통사항==========*/
+main {
+  margin: 0 var(--margin-common);
+}
 /*=====채팅 목록 정렬=====*/
 main .chat-list-contents {
   display: flex;
@@ -104,7 +112,7 @@ main .chat-list-contents {
 }
 /*=====프로필사진 양식=====*/
 main .profile-picture {
-  width: 3.125rem;
+  min-width: 3.125rem;
   height: 3.125rem;
   border-radius: 0.938rem;
   background-color: var(--bg-profile);
@@ -160,10 +168,11 @@ nav {
 nav .menu-main {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   font-size: 2.188rem;
 }
 /*=====아이콘 간격 확보=====*/
-nav .menu-main * {
+nav .menu-main *:not(a) {
   margin: var(--margin-common) 0;
 }
 /*=====데스크톱 아이콘 숨김=====*/
@@ -273,16 +282,24 @@ aside.desktop-ad {
     text-align: center;
     font-size: 1.563rem;
   }
+  /*===비활성화 아이콘 색상 변경===*/
+  nav > .menu-main i:not(.fa-comment) {
+    color: var(--font-gray);
+  }
   /*=====모바일-데스크탑 공통 아이콘 간격 조정=====*/
-  nav > .menu-main > i {
-    margin: 1.25rem 0;
+  nav > .menu-main a {
+    margin: 0;
+  }
+
+  nav > .menu-main i {
+    margin: 20px 0;
   }
   /*=====특정 아이콘 숨김=====*/
   nav > .menu-main > .fa-plus {
     display: none;
   }
   /*=====New 표시 추가=====*/
-  nav > .menu-main > .fa-ellipsis-h:after {
+  nav > .menu-main .fa-ellipsis-h:after {
     content: "N";
     display: inline-block;
     border: 0.063rem solid #ff5442;

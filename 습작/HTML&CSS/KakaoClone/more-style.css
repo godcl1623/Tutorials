@@ -42,6 +42,10 @@ li {
   list-style: none;
 }
 
+a {
+  color: black;
+}
+
 body {
   color: var(--font-black);
 }
@@ -52,6 +56,7 @@ body .contents-wrapper {
 
 body .contents-wrapper .contents-container {
   height: 100%;
+  padding: 0 var(--padding-common);
 }
 /*====================header====================*/
 header {
@@ -246,10 +251,11 @@ nav {
 nav .menu-main {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   font-size: 35px;
 }
 /*=====아이콘 간격 확보=====*/
-nav .menu-main * {
+nav .menu-main *:not(a) {
   margin: var(--margin-common) 0;
 }
 /*=====데스크톱 아이콘 숨김=====*/
@@ -334,7 +340,11 @@ aside.mobile-ad {
     color: var(--font-gray);
   }
   /*=====모바일-데스크탑 공통 아이콘 간격 조정=====*/
-  nav > .menu-main > i {
+  nav > .menu-main a {
+    margin: 0;
+  }
+
+  nav > .menu-main i {
     margin: 20px 0;
   }
   /*=====특정 아이콘 숨김=====*/
@@ -342,7 +352,7 @@ aside.mobile-ad {
     display: none;
   }
   /*=====New 표시 추가=====*/
-  nav > .menu-main > .fa-ellipsis-h:after {
+  nav > .menu-main .fa-ellipsis-h:after {
     content: "N";
     display: inline-block;
     border: 1px solid #ff5442;

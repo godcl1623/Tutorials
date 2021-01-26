@@ -42,10 +42,28 @@ li {
   list-style: none;
 }
 
+a {
+  color: black;
+}
+
 body {
   color: var(--font-black);
 }
 
+body .contents-wrapper {
+  height: calc(100vh - 74.4px);
+}
+
+body .contents-wrapper .contents-container {
+  height: 100%;
+  padding: 0 var(--padding-common);
+  overflow-y: scroll;
+}
+
+body > .contents-wrapper > .contents-container::-webkit-scrollbar,
+body > .contents-wrapper > nav::-webkit-scrollbar {
+  display: none;
+}
 /*====================header====================*/
 header {
   display: flex;
@@ -218,10 +236,11 @@ nav {
 nav .menu-main {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   font-size: 2.188rem;
 }
 /*=====아이콘 간격 확보=====*/
-nav .menu-main * {
+nav .menu-main *:not(a) {
   margin: var(--margin-common) 0;
 }
 /*=====데스크톱 아이콘 숨김=====*/
@@ -318,7 +337,11 @@ aside {
     font-size: 1.563rem;
   }
   /*=====모바일-데스크탑 공통 아이콘 간격 조정=====*/
-  nav > .menu-main > i {
+  nav > .menu-main a {
+    margin: 0;
+  }
+
+  nav > .menu-main i {
     margin: 1.25rem 0;
   }
   /*=====특정 아이콘 숨김=====*/
@@ -326,7 +349,7 @@ aside {
     display: none;
   }
   /*=====New 표시 추가=====*/
-  nav > .menu-main > .fa-ellipsis-h:after {
+  nav > .menu-main .fa-ellipsis-h:after {
     content: "N";
     display: inline-block;
     border: 0.063rem solid #ff5442;
@@ -338,6 +361,14 @@ aside {
     position: relative;
     bottom: 2.688rem;
     left: 1.125rem;
+  }
+  /*===비활성화 아이콘 색상 변경===*/
+  nav > .menu-main i:not(.fa-user) {
+    color: var(--font-gray);
+  }
+
+  nav > .menu-utility > i {
+    color: var(--font-gray);
   }
   /*=====데스크탑 전용 아이콘 양식=====*/
   nav > .menu-utility {
