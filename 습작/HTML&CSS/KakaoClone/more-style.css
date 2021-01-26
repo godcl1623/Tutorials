@@ -363,6 +363,47 @@ aside.mobile-ad {
     color: var(--font-gray);
   }
   /*==========main 수정사항==========*/
+  /*=====사용자 정보 메뉴=====*/
+  /*===사용자 정보 영역 양식 변경===*/
+  main .main-user {
+    margin: 20px 0;
+    border: 1px solid var(--font-gray);
+    border-radius: 5px;
+    padding: 10px 0 0 0;
+    background-color: var(--bg-shadedwhite);
+  }
+  /*===사용자 정보 컨테이너 마진 조정===*/
+  main .main-user .main-user-info-container {
+    margin: 0 15px;
+  }
+  /*===프로필사진 숨김===*/
+  main .main-user .main-user-info-container .user-picture {
+    display: none;
+  }
+  /*===h5, p 크기 조정===*/
+  main .main-user .main-user-info-container .text-box h5 {
+    font-size: 18px;
+  }
+
+  main .main-user .main-user-info-container .text-box p {
+    font-size: 16px;
+  }
+  /*===방패 아이콘 표시===*/
+  main .main-user .main-user-info-container > span {
+    display: inline-block;
+    font-size: 26px;
+    color: var(--font-gray);
+  }
+  /*===보안 메뉴===*/
+  main .main-user .safety-protection {
+    border: none;
+    border-top: 1px solid var(--font-gray);
+    padding: 10px 0;
+  }
+  /*=====뱅킹 메뉴 숨김=====*/
+  main .banking {
+    display: none;
+  }
   /*=====메뉴 아이콘=====*/
   /*===모바일 아이콘 숨김===*/
   main .more-menu-container .more-menu-contents li.list-mobile {
