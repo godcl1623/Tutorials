@@ -21,6 +21,7 @@
   --highlight-blue: #64b5f6;
   /*=====간격=====*/
   --space-small: 10px;
+  --space-medium: 15px;
   --space-big: 20px;
   /*=====사이즈=====*/
   --font-big: 20px;
@@ -75,4 +76,116 @@ main .image-size-5 {
 
 main .image-size-6 {
   height: 130px;
+}
+
+/*====================헤더====================*/
+/*==========헤더 스타일 조정==========*/
+header {
+  margin: var(--space-medium) 0;
+  display: flex;
+  align-items: center;
+}
+/*==========헤더 공통 양식==========*/
+header > button,
+header > form,
+header > ul {
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/*==========로고==========*/
+header .logo {
+  width: 45px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background-color: var(--bg-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: var(--font-red);
+}
+
+header .logo:hover {
+  background-color: rgba(200, 200, 200, 0.5);
+  cursor: pointer;
+}
+/*==========홈, 팔로잉 버튼==========*/
+/*=====버튼 공통 양식=====*/
+header .sort {
+  width: 75px;
+  border: 1px solid var(--bg-black);
+  border-radius: 25px;
+  background-color: var(--bg-black);
+  color: var(--font-white);
+  font-weight: 600;
+}
+
+header .sort:hover {
+  cursor: pointer;
+}
+/*=====버튼 개별 양식=====*/
+header .sort-home {
+  width: 45px;
+}
+/*==========폼==========*/
+/*=====폼 전체 양식=====*/
+header form {
+  width: 78%;
+  border: 1px solid var(--bg-lightgray);
+  border-radius: 25px;
+  background-color: var(--bg-lightgray);
+}
+
+header form .search-form {
+  width: 100%;
+  padding: 0 var(--space-small);
+  font-size: 22px;
+  color: var(--font-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/*=====입력창 양식=====*/
+header form .search-form input {
+  width: 96%;
+  margin: 0 var(--space-small);
+  background-color: transparent;
+  border: none;
+}
+
+header form .search-form input:focus {
+  outline: 5px solid var(--highlight-blue);
+}
+/*==========메뉴==========*/
+header .menu-container {
+  margin: 0 auto;
+  font-size: 24px;
+  color: var(--bg-black);
+}
+/*=====메뉴 버튼 공통양식=====*/
+header .menu-container li button {
+  width: 45px;
+  height: 45px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*=====메뉴 버튼 개별양식=====*/
+header .menu-container li button.menu-more {
+  width: 25px;
+  height: 25px;
+}
+
+header .menu-container li button:hover {
+  background-color: rgba(200, 200, 200, 0.5);
+  cursor: pointer;
+}
+
+header .menu-container li button.user-bg,
+header .menu-container li button.menu-more {
+  font-size: 16px;
 }
