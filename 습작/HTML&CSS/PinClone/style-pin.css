@@ -5,7 +5,7 @@
   margin: 0;
   box-sizing: border-box;
   /* 디버깅 도구 */
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 /*==========전체 공통 양식==========*/
 :root {
@@ -28,6 +28,15 @@
   --font-small: 12px;
 }
 /*==========스타일 초기화==========*/
+html {
+  min-width: 504px;
+}
+
+header,
+main {
+  padding: 0 13px;
+}
+
 button,
 ul,
 ol,
@@ -188,4 +197,35 @@ header .menu-container li button:hover {
 header .menu-container li button.user-bg,
 header .menu-container li button.menu-more {
   font-size: 16px;
+}
+/*====================메인====================*/
+/*==========본문 멀티컬럼 구성==========*/
+main {
+  column-width: 235px;
+  column-gap: 15px;
+}
+
+main .image-container {
+  display: inline-block;
+}
+
+main .image-container > div {
+  border-radius: 25px;
+}
+
+main .image-container > .image-comments {
+  margin-bottom: 5px;
+}
+
+main .image-container .uploader-info {
+  display: flex;
+  align-items: center;
+}
+
+main .image-container .user-profile {
+  width: 32px;
+  height: 32px;
+  margin-right: 7px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
 }
