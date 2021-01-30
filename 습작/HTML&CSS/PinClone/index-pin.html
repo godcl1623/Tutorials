@@ -10,11 +10,13 @@
 <body>
   <!--====================헤더 - 검색폼, 메뉴 영역====================-->
   <header>
-    <!--==========핀터레스트 로고==========-->
-    <button class="logo"><i class="fab fa-pinterest"></i></button>
-    <!--==========홈, 팔로우 버튼==========-->
-    <button class="sort sort-home">홈</button>
-    <button class="sort sort-follow">팔로잉</button>
+    <div class="logo-sort-container">
+      <!--==========핀터레스트 로고==========-->
+      <button class="logo"><i class="fab fa-pinterest"></i></button>
+      <!--==========홈, 팔로우 버튼==========-->
+      <button class="sort sort-home">홈<i class="fas fa-chevron-down"></i></button>
+      <button class="sort sort-follow">팔로잉</button>
+    </div>
     <!--==========검색폼==========-->
     <form action="">
       <!--=====검색창 양식=====-->
@@ -27,6 +29,8 @@
     </form>
     <!--==========메뉴 아이콘 모음==========-->
     <ul class="menu-container">
+      <!--=====검색 메뉴=====-->
+      <li><button class="search-menu"><i class="fas fa-search"></i></button></li>
       <!--=====알림 아이콘=====-->
       <li><button><i class="fas fa-bell"></i></button></li>
       <!--=====받은 편지함=====-->
