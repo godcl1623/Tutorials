@@ -95,7 +95,7 @@ header {
   align-items: center;
 }
 /*==========헤더 공통 양식==========*/
-header > button,
+header > .logo-sort-container > button,
 header > form,
 header > ul {
   height: 45px;
@@ -103,12 +103,16 @@ header > ul {
   align-items: center;
   justify-content: center;
 }
+
+header > .logo-sort-container {
+  display: flex;
+}
 /*==========로고==========*/
-header .logo {
+header > .logo-sort-container .logo {
   width: 45px;
   border: 1px solid transparent;
   border-radius: 50%;
-  background-color: var(--bg-white);
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,27 +120,43 @@ header .logo {
   color: var(--font-red);
 }
 
-header .logo:hover {
+header > .logo-sort-container .logo:hover {
   background-color: rgba(200, 200, 200, 0.5);
   cursor: pointer;
 }
 /*==========홈, 팔로잉 버튼==========*/
 /*=====버튼 공통 양식=====*/
-header .sort {
-  width: 75px;
+header > .logo-sort-container .sort:hover {
+  cursor: pointer;
+}
+/*=====홈버튼 양식=====*/
+header > .logo-sort-container .sort-home {
+  width: 55px;
   border: 1px solid var(--bg-black);
   border-radius: 25px;
   background-color: var(--bg-black);
   color: var(--font-white);
   font-weight: 600;
 }
-
-header .sort:hover {
-  cursor: pointer;
+/*=====팔로잉버튼 양식=====*/
+header > .logo-sort-container .sort-follow {
+  width: 75px;
+  border: 1px solid transparent;
+  border-radius: 25px;
+  font-weight: 600;
 }
-/*=====버튼 개별 양식=====*/
-header .sort-home {
-  width: 45px;
+
+header > .logo-sort-container .sort-follow:hover {
+  background-color: var(--bg-lightgray);
+}
+
+header > .logo-sort-container .sort-follow:active {
+  background-color: var(--bg-black);
+  color: var(--font-white);
+}
+/*=====아이콘 숨김=====*/
+header > .logo-sort-container .sort-home i.fas {
+  display: none;
 }
 /*==========폼==========*/
 /*=====폼 전체 양식=====*/
@@ -198,6 +218,10 @@ header .menu-container li button.user-bg,
 header .menu-container li button.menu-more {
   font-size: 16px;
 }
+/*=====아이콘 숨김=====*/
+header .menu-container .search-menu {
+  display: none;
+}
 /*====================메인====================*/
 /*==========본문 멀티컬럼 구성==========*/
 main {
@@ -228,4 +252,47 @@ main .image-container .user-profile {
   margin-right: 7px;
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 50%;
+}
+/*====================미디어쿼리====================*/
+/*==========~849px: 팔로잉 버튼 숨김==========*/
+@media (max-width: 849px) {
+  header > .logo-sort-container .sort-home {
+    width: 75px;
+    margin: 0 var(--space-small);
+    border: none;
+    background-color: white;
+    color: var(--font-black);
+  }
+
+  header > .logo-sort-container .sort-home:hover {
+    background-color: var(--bg-lightgray);
+  }
+
+  header > .logo-sort-container .sort-home i.fas {
+    display: inline-block;
+    font-size: 14px;
+    margin-left: 8px;
+  }
+
+  header > .logo-sort-container .sort-follow {
+    display: none;
+  }
+}
+/*==========~620px: 검색창 숨김==========*/
+@media (max-width: 620px) {
+  header {
+    justify-content: space-between;
+  }
+
+  header form {
+    display: none;
+  }
+
+  header .menu-container .search-menu {
+    display: inline-flex;
+  }
+
+  header ul.menu-container {
+    margin: 0;
+  }
 }
