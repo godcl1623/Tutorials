@@ -71,24 +71,24 @@
   </style>
 
   <script>
-    const secondsHand = document.querySelector('.second-hand');
-    const minsHand = document.querySelector('.min-hand');
     const hoursHand = document.querySelector('.hour-hand');
+    const minsHand = document.querySelector('.min-hand');
+    const secondsHand = document.querySelector('.second-hand');
 
-    function setDate() {
-      const getDate = new Date();
-      const currentSeconds = getDate.getSeconds();
-      const currentMins = getDate.getMinutes();
-      const currentHours = getDate.getHours();
-      const secondsDegrees = (currentSeconds / 60) * 360 + 90;
-      const minsDegrees = (currentMins / 60) * 360 + 90;
-      const hoursDegrees = (currentHours / 12) * 360 + 90;
-      secondsHand.style.transform = `rotate(${secondsDegrees}deg)`;
-      minsHand.style.transform = `rotate(${minsDegrees}deg)`;
-      hoursHand.style.transform = `rotate(${hoursDegrees}deg)`;
+    function clockHandler() {
+      const dateInfo = new Date();
+      const hours = dateInfo.getHours();
+      const mins = dateInfo.getMinutes();
+      const seconds = dateInfo.getSeconds();
+      const hoursDegree = (hours / 12) * 360 + 90;
+      const minsDegree = (mins / 60) * 360 + 90;
+      const secondsDegree = (seconds / 60) * 360 + 90;
+      hoursHand.style.transform = `rotate(${hoursDegree}deg)`;
+      minsHand.style.transform = `rotate(${minsDegree}deg)`;
+      secondsHand.style.transform = `rotate(${secondsDegree}deg)`;
     }
 
-    setInterval(setDate, 1000);
+    setInterval(clockHandler, 1000);
   </script>
 </body>
 </html>
