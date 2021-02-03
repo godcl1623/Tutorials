@@ -40,18 +40,18 @@
       :root {
         --base: #ffc600;
         --spacing: 10px;
-        --blur: 5px;
+        --blur: 10px;
       }
 
       img {
         padding: var(--spacing);
-        background: var(--base);
         filter: blur(var(--blur));
+        background: var(--base);
       }
 
       .hl {
-        color: var(--base);
         filter: blur(var(--blur));
+        color: var(--base);
       }
       /*
       misc styles, nothing to do with CSS variables
@@ -78,16 +78,13 @@
     <script>
       const inputs = document.querySelectorAll('.controls input');
 
-      function imageHandler() {
-        const units = this.dataset.sizing || ``;
-        document.documentElement.style.setProperty(
-          `--${this.name}`,
-          this.value + units
-        );
+      function effector() {
+        const unit = this.dataset.sizing || ``;
+        document.documentElement.style.setProperty(`--${this.name}`, this.value + unit);
       }
 
-      inputs.forEach(input => input.addEventListener('change', imageHandler));
-      inputs.forEach(input => input.addEventListener('mousemove', imageHandler));
+      inputs.forEach(input => input.addEventListener('change', effector));
+      inputs.forEach(input => input.addEventListener('mousemove', effector));
     </script>
   </body>
 </html>
