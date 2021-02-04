@@ -44,14 +44,14 @@
       }
 
       img {
+        background: var(--base);
         padding: var(--spacing);
         filter: blur(var(--blur));
-        background: var(--base);
       }
 
       .hl {
-        filter: blur(var(--blur));
         color: var(--base);
+        filter: blur(var(--blur));
       }
       /*
       misc styles, nothing to do with CSS variables
@@ -78,13 +78,13 @@
     <script>
       const inputs = document.querySelectorAll('.controls input');
 
-      function effector() {
+      function effectEnabler() {
         const unit = this.dataset.sizing || ``;
         document.documentElement.style.setProperty(`--${this.name}`, this.value + unit);
       }
 
-      inputs.forEach(input => input.addEventListener('change', effector));
-      inputs.forEach(input => input.addEventListener('mousemove', effector));
+      inputs.forEach(input => input.addEventListener('change', effectEnabler));
+      inputs.forEach(input => input.addEventListener('mousemove', effectEnabler));
     </script>
   </body>
 </html>
