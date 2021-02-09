@@ -44,7 +44,7 @@
       }
 
       img {
-        background-color: var(--base);
+        background: var(--base);
         padding: var(--spacing);
         filter: blur(var(--blur));
       }
@@ -78,13 +78,13 @@
     <script>
       const inputs = document.querySelectorAll('.controls input');
 
-      function effectHandler() {
+      function handleEffect() {
         const units = this.dataset.sizing || ``;
         document.documentElement.style.setProperty(`--${this.name}`, this.value + units);
       }
 
-      inputs.forEach(input => input.addEventListener('change', effectHandler));
-      inputs.forEach(input => input.addEventListener('mousemove', effectHandler));
+      inputs.forEach(input => input.addEventListener('change', handleEffect));
+      inputs.forEach(input => input.addEventListener('mousemove', handleEffect));
     </script>
   </body>
 </html>
