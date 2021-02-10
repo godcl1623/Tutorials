@@ -7,7 +7,19 @@
 </head>
 <body>
 <script>
+  const keyInputs = [];
+  const konami = 'ArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightbaEnter';
+  const secretCode = 'loremipsum';
 
+  window.addEventListener('keydown', (e) => {
+    console.log(e.key);
+    keyInputs.push(e.key);
+    console.log(keyInputs);
+    keyInputs.splice(-secretCode.length - 1, keyInputs.length - secretCode.length);
+    if (keyInputs.join('').includes(konami)) {
+      console.log('우왕ㅋ굳ㅋ');
+    }
+  });
 </script>
 </body>
 </html>
