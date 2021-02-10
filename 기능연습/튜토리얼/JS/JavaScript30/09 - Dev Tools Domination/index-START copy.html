@@ -18,7 +18,7 @@
     }
 
     // Regular
-
+const ppap = 'pineapple';
     // Interpolated
 
     // Styled
@@ -28,7 +28,7 @@
     // Error :|
 
     // Info
-    console.info('벌써 2월이란다. 정신차리고 자바스크립트 공부 더 열심히 하렴');
+
     // Testing
 
     // clearing
@@ -36,11 +36,23 @@
     // Viewing DOM Elements
 
     // Grouping together
-
+dogs.forEach(dog => {
+  console.groupCollapsed(`${dog.name}`);
+    console.log(`This is ${dog.name}`);
+    console.log(`${dog.name} is ${dog.age} years old`);
+    console.log(`Which means, ${dog.name} is ${dog.age * 7} dog years old`);
+  console.groupEnd(`${dog.name}`);
+});
     // counting
 
     // timing
-
+console.time('fetching data');
+fetch('https://github.com/taraczel/Tutorials.git')
+  .then(data => data.json())
+  .then(data => {
+    console.timeEnd('fetching data!');
+    console.log(data);
+  });
   </script>
 </body>
 </html>
