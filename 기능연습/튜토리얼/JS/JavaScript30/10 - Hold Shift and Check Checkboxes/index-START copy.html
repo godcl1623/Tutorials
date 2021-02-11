@@ -96,11 +96,11 @@
   </div>
 
 <script>
-  const checkboxes = document.querySelectorAll('.inbox input[type=checkbox]');
+  const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
 
   let lastChecked;
 
-  function checkHandler(e) {
+  function shiftChecker(e) {
     let inBetween = false;
     if (e.shiftKey && this.checked) {
       checkboxes.forEach(checkbox => {
@@ -115,7 +115,7 @@
     lastChecked = this;
   }
 
-  checkboxes.forEach(checkbox => checkbox.addEventListener('click', checkHandler));
+  checkboxes.forEach(box => box.addEventListener('click', shiftChecker));
 </script>
 </body>
 </html>

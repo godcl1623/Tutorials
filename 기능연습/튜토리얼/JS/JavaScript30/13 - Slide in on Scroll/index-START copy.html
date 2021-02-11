@@ -58,26 +58,24 @@
       };
     }
 
-    const slideImages = document.querySelectorAll('.slide-in');
+    const imgs = document.querySelectorAll('.slide-in');
 
-    function checkSlide() {
-      slideImages.forEach(slideImage => {
-        // 이미지 절반 지점
+    function imageSlider(e) {
+      imgs.forEach(slideImage => {
         const slideInAt = (window.scrollY + window.innerHeight) - slideImage.height / 2;
-        // 이미지 끝 지점
-        const imageBottom = slideImage.offsetTop + slideImage.height;
+        const imgBase = slideImage.offsetTop + slideImage.height;
         const isHalfShown = slideInAt > slideImage.offsetTop;
-        const isNotScrolledPast = window.scrollY < imageBottom;
-        if (isHalfShown && isNotScrolledPast) {
+        const isNotScrollPast = window.scrollY < imgBase;
+        if (isHalfShown && isNotScrollPast) {
           slideImage.classList.add('active');
         } else {
           slideImage.classList.remove('active');
         }
       });
+      console.count(e);
     }
 
-    window.addEventListener('scroll', debounce(checkSlide));
-
+    window.addEventListener('scroll', debounce(imageSlider));
   </script>
 
   <style>
