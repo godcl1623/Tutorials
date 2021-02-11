@@ -75,19 +75,19 @@
       /*==========삭제 필요한 내용 끝==========*/
     }
     /*==========삭제 필요한 내용==========*/
-    .panel > *:first-child {
+    .panel p:first-child {
       transform: translateY(-100%);
     }
 
-    .panel.open-active > *:first-child {
+    .panel.open-active p:first-child {
       transform: translateY(0);
     }
 
-    .panel > *:last-child {
+    .panel p:last-child {
       transform: translateY(100%);
     }
 
-    .panel.open-active > *:last-child {
+    .panel.open-active p:last-child {
       transform: translateY(0);
     }
     /*==========삭제 필요한 내용 끝==========*/
@@ -141,20 +141,20 @@
   </div>
 
   <script>
-    const images = document.querySelectorAll('.panels .panel');
+    const panels = document.querySelectorAll('.panels .panel');
 
-    function effectHandler() {
+    function panelView() {
       this.classList.toggle('open');
     }
 
-    function textHandler(e) {
+    function textView(e) {
       if (e.propertyName.includes('flex')) {
         this.classList.toggle('open-active');
       }
     }
 
-    images.forEach(image => image.addEventListener('click', effectHandler));
-    images.forEach(image => image.addEventListener('transitionend', textHandler));
+    panels.forEach(panel => panel.addEventListener('click', panelView));
+    panels.forEach(panel => panel.addEventListener('transitionend', textView));
   </script>
 
 
