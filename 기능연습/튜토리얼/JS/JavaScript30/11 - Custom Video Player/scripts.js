@@ -1,18 +1,18 @@
-// 1. 요소 받기
-  const player = document.querySelector('.player');
-  const video = document.querySelector('video');
-  const progress = document.querySelector('.progress');
-  const progressBar = document.querySelector('.progress__filled');
-  const playButton = document.querySelector('.toggle');
-  const ranges = document.querySelectorAll('input');
-  const skips = document.querySelectorAll('[data-skip]');
-// 2. 함수 만들기
-function handlePlay() {
-  const playHandler = video.paused ? 'play' : 'pause';
-  video[playHandler]();
+// 1. 요소 받아옴
+const player = document.querySelector('.player');
+const video = document.querySelector('video');
+const progressBar = document.querySelector('.progress');
+const progressFill = document.querySelector('.progress__filled');
+const playButton = document.querySelector('.toggle');
+const inputRange = document.querySelectorAll('.player__slider');
+const skips = document.querySelectorAll('[data-skip]');
+// 2. 함수 작성
+function playVideo() {
+  const method = video.paused ? 'play' : 'pause';
+  video[method]();
 }
 
-function updateButton() {
+function buttonUpdate() {
   playButton.textContent = this.paused ? '►' : '❚❚';
 }
 
@@ -20,35 +20,35 @@ function videoSkip() {
   video.currentTime += parseFloat(this.dataset.skip);
 }
 
-function handleRange() {
+function rangeInput() {
   video[this.name] = this.value;
 }
 
-function handleProgress() {
+function progressHandle() {
   const percent = (video.currentTime / video.duration) * 100;
-  progressBar.style.flexBasis = `${percent}%`;
+  progressFill.style.flexBasis = `${percent}%`;
 }
 
 function scrub(e) {
-  const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+  const scrubTime = (e.offsetX / progressBar.offsetWidth) * video.duration;
   video.currentTime = scrubTime;
 }
-// 3. 이벤트 리스너
-video.addEventListener('click', handlePlay);
-playButton.addEventListener('click', handlePlay);
+// 3. 이벤트 리스너 작성
+video.addEventListener('click', playVideo);
+playButton.addEventListener('click', playVideo);
 
-video.addEventListener('play', updateButton);
-video.addEventListener('pause', updateButton);
+video.addEventListener('play', buttonUpdate);
+video.addEventListener('pause', buttonUpdate);
 
-skips.forEach(skip => skip.addEventListener('click', videoSkip));
+skips.forEach(skipButton => skipButton.addEventListener('click', videoSkip));
 
-ranges.forEach(input => input.addEventListener('change', handleRange));
-ranges.forEach(input => input.addEventListener('mousemove', handleRange));
+inputRange.forEach(range => range.addEventListener('change', rangeInput));
+inputRange.forEach(range => range.addEventListener('mousemove', rangeInput));
 
-video.addEventListener('timeupdate', handleProgress);
+video.addEventListener('timeupdate', progressHandle);
 
 let mousedown = false;
-progress.addEventListener('click', scrub);
-progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
-progress.addEventListener('mousedown', () => mousedown = true);
-progress.addEventListener('mouseup', () => mousedown = false);
+progressBar.addEventListener('click', scrub);
+progressBar.addEventListener('mousemove', (e) => mousedown && scrub(e));
+progressBar.addEventListener('mousedown', () => mousedown = true);
+progressBar.addEventListener('mouseup', () => mousedown = false);
