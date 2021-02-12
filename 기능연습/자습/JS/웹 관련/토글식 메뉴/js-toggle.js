@@ -1,11 +1,19 @@
-const menuButton = document.querySelector('.represent');
+const menuButton = document.querySelector('button');
 
-function showRestMenu() {
-  const restMenu = document.querySelectorAll('.hide');
-  if (menuButton.clicked) {
-    menuButton.style.display = 'none';
-    restMenu.style.display = 'block';
-  }
+function showRestMenu(e) {
+  const ul = document.querySelector('ul');
+  menuButton.classList.toggle('move');
+  ul.classList.toggle('active');
+  console.log(e);
 }
 
 menuButton.addEventListener('click', showRestMenu);
+
+const litest = document.querySelectorAll('ul.test li');
+
+function testfunction(e) {
+  this.classList.add('active');
+  console.log(e);
+}
+
+litest.forEach(li => li.addEventListener('click', testfunction));
