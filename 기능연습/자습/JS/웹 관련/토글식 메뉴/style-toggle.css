@@ -2,10 +2,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  border: 1px solid black;
 }
 
-body * {
-  border: 1px solid black;
+body > * {
+  all: none;
+}
+
+.hidden {
+  display: none;
 }
 
 ul,
@@ -14,83 +19,34 @@ li {
   list-style: none;
 }
 
-button {
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 1s;
-  cursor: pointer;
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  position: relative;
 }
 
-button.move {
-  transform: translate(300px, -25px);
+ul,
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 ul {
-  display: none;
-  width: 0;
-  height: 0;
+  margin: 0 auto;
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -moz-transition: all 1s;
-}
-
-ul.active {
-  display: flex;
-  width: 600px;
-  height: 50px;
+  top: 37px;
+  left: 25%;
 }
 
 ul > li {
-  display: none;
+  width: 200px;
+  height: 100%;
+  text-align: center;
 }
 
-/* ul > li {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 10px;
-}
-
-ul > li:first-child {
-  margin-left: 0;
-}
-
-ul > li:last-child {
-  margin-right: 0;
-}
-
-ul > li:not(li.represent) {
-  display: none;
-}
-
-ul > li.represent {
-  cursor: pointer;
-} */
-
-ul.test {
-  display: flex;
-  width: 400px;
-  height: 100px;
-  position: absolute;
-  left: 300px;
-  top: 100px;
-  transition: none;
-}
-
-ul.test > li {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-}
-
-ul.test > li.active {
-  display: none;
+div {
+  font-size: 32px;
 }

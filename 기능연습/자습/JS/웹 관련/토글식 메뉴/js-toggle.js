@@ -1,19 +1,12 @@
-const menuButton = document.querySelector('button');
+const trigger = document.querySelector('.mobile-menu');
 
-function showRestMenu(e) {
-  const ul = document.querySelector('ul');
-  menuButton.classList.toggle('move');
-  ul.classList.toggle('active');
-  console.log(e);
+function toggleMenu(e) {
+  const hiddenOne = document.querySelector('.nav-menu');
+  if (hiddenOne.classList.contains('hidden')) {
+    hiddenOne.classList.remove('hidden');
+  } else {
+    hiddenOne.classList.add('hidden');
+  }
 }
 
-menuButton.addEventListener('click', showRestMenu);
-
-const litest = document.querySelectorAll('ul.test li');
-
-function testfunction(e) {
-  this.classList.add('active');
-  console.log(e);
-}
-
-litest.forEach(li => li.addEventListener('click', testfunction));
+trigger.addEventListener('click', toggleMenu);
