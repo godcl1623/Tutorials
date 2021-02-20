@@ -16,5 +16,12 @@ div {
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
   z-index: 1;
-  position: relative;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+iframe {
+  display: none;
+  z-index: 2;
 }
