@@ -5,10 +5,47 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>iframe popup</title>
-  <link rel="stylesheet" href="iframe.css">
+  <!-- <link rel="stylesheet" href="iframe.css"> -->
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+  html {
+    border: 1px solid black;
+    background: white;
+  }
+
+    nav {
+      border: 1px solid black;
+      display: flex;
+      justify-content: flex-end;
+      background: blue;
+    }
+
+    p {
+      border: 1px solid black;
+      background: white;
+      cursor: pointer;
+    }
+
+    h2 {
+      text-align: center;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
 </head>
 <body>
   <nav><p id="close">X</p></nav>
   <h2>iframe 팝업</h2>
+  <script>
+    const closer = document.querySelector('#close');
+    closer.addEventListener('click', parent.modalCloser);
+  </script>
 </body>
 </html>
