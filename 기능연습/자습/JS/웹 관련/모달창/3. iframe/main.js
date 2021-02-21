@@ -6,9 +6,10 @@ document.querySelector('button').addEventListener('click', () => {
   iframe.style.display = 'block';
 });
 
-const modalCloser = function () {
+window.modalCloser = function (e) {
   modalLayer.style.display = 'none';
   iframe.style.display = 'none';
-}
+  console.log(e);
+};
 
 modalLayer.addEventListener('click', modalCloser);

@@ -28,6 +28,7 @@
     p {
       border: 1px solid black;
       background: white;
+      cursor: pointer;
     }
 
     h2 {
@@ -42,5 +43,9 @@
 <body>
   <nav><p id="close">X</p></nav>
   <h2>iframe 팝업</h2>
+  <script>
+    const closer = document.querySelector('#close');
+    closer.addEventListener('click', parent.modalCloser);
+  </script>
 </body>
 </html>
