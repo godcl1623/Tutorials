@@ -1,15 +1,14 @@
-const button = document.querySelector('button');
+const modalLayer = document.querySelector('div');
+const iframe = document.querySelector('iframe');
 
-button.addEventListener('click', () => {
-  // document.querySelector('div').style.display = 'block';
-  document.querySelector('iframe').style.display = 'block';
+document.querySelector('button').addEventListener('click', () => {
+  modalLayer.style.display = 'block';
+  iframe.style.display = 'block';
 });
 
-const iframeEle = document.querySelector('iframe');
-const iframeDocument = iframeEle.contentWindow.document;
-const iframeP = iframeDocument.querySelector('p');
+const modalCloser = function () {
+  modalLayer.style.display = 'none';
+  iframe.style.display = 'none';
+}
 
-/*iframeP.addEventListener('click', (e) => {
-  console.log(e);
-});
-*/
+modalLayer.addEventListener('click', modalCloser);
