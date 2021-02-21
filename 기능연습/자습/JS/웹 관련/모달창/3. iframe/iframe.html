@@ -45,7 +45,11 @@
   <h2>iframe 팝업</h2>
   <script>
     const closer = document.querySelector('#close');
-    closer.addEventListener('click', parent.modalCloser);
+    const parentCloser = function () {
+      parent.modalCloser();
+    };
+    closer.addEventListener('click', parentCloser);
+    // closer.addEventListener('click', parent.modalCloser);
   </script>
 </body>
 </html>
