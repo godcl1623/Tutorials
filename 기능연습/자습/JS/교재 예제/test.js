@@ -1,4 +1,5 @@
-function add(a, b) {
+function myFunction() {
   console.dir(arguments);
-  return a + b;
+  let args = Array.prototype.slice.apply(arguments);
+  console.dir(args);
 }
