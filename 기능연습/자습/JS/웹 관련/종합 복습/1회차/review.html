@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>토글, 모달 복습</title>
+  <link rel="stylesheet" href="review.css">
+  <script defer src="review.js"></script>
+</head>
+<body>
+  <nav>
+    <div class="logo"></div>
+    <ul class="upper-menu">
+      <li class="menu-contents menu1">
+        menu1
+        <ul class="sub-menu sub1">
+          <li class="sub-contents">
+            <button id="modal-opener">modal</button>
+          </li>
+        </ul>
+      </li>
+      <li class="menu-contents menu2">
+        menu2
+        <ul class="sub-menu sub2">
+          <li class="sub-contents">
+            <button id="popup-opener">popup</button>
+          </li>
+        </ul>
+      </li>
+      <li class="menu-contents menu3">
+        menu3
+        <ul class="sub-menu sub3">
+          <li class="sub-contents">
+            <button id="iframe-opener">iframe</button>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <button>menu</button>
+  </nav>
+  <div class="modal-layer">
+    <div class="modal-contents">
+      <button id="modal-close">X</button>
+      <p>Modal</p>
+    </div>
+    <iframe src="iframe-review.html" class="modal-iframe"></iframe>
+  </div>
+</body>
+</html>
