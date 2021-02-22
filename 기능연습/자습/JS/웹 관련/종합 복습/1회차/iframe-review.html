@@ -43,5 +43,10 @@
 <body>
   <nav><p>X</p></nav>
   <h1>Pop Up!</h1>
+  <script>
+    document.querySelector('nav p').addEventListener('click', () => {
+      parent.modalCloser();
+    });
+  </script>
 </body>
 </html>
