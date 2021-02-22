@@ -37,7 +37,7 @@ window.modalCloser = function () {
 };
 
 const popupOpener = function () {
-  window.open(popup, 'popup', 'width=300, height=400');
+  window.open(popup, 'popup', 'width=300, height=400, left=2000');
 };
 
 const iframeOpener = function () {
