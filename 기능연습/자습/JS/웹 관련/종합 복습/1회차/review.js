@@ -1,14 +1,17 @@
 const list1 = document.querySelector('.menu1');
 const list2 = document.querySelector('.menu2');
 const list3 = document.querySelector('.menu3');
+
 const sub1 = document.querySelector('.sub1');
 const sub2 = document.querySelector('.sub2');
 const sub3 = document.querySelector('.sub3');
+
 const modalOpen = document.getElementById('modal-opener');
 const modalLayer = document.querySelector('.modal-layer');
 const modalContents = document.querySelector('.modal-contents');
 const modalIframe = document.querySelector('.modal-iframe');
 const modalClose = document.getElementById('modal-close');
+
 const popup = 'iframe-review.html';
 const popupOpen = document.getElementById('popup-opener');
 const iframeOpen = document.getElementById('iframe-opener');
