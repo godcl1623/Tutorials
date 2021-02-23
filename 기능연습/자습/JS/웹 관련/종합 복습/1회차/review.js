@@ -23,7 +23,7 @@ const modalActive = function () {
 };
   // =====팝업 열기=====
 const popupOpener = function () {
-  window.open(popup, 'popup', 'width=300, height=400, left=2000');
+  window.open(popup, 'popup', 'width=300, height=400');
 };
   // =====iframe 열기=====
 const iframeOpener = function () {
