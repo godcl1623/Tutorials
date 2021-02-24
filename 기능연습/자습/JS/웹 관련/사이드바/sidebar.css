@@ -49,9 +49,10 @@ aside > ul {
 }
 
 aside {
-  position: sticky;
+  position: absolute;
   top: 20%;
   left: 30px;
+  /* height: 1500px; */
 }
 
 aside li {

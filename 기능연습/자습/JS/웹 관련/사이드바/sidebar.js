@@ -5,15 +5,16 @@ const jscript = document.getElementById('js');
 const sidebar = document.querySelector('aside');
 
 cssStatic.addEventListener('click', () => {
-  sidebar.style.position = 'static';
+  sidebar.style.position = 'absolute';
 });
 
 cssSticky.addEventListener('click', () => {
   sidebar.style.position = 'sticky';
 });
 
-jscript.addEventListener('click', () => {
-  if(sidebar.style.position === 'static' || sidebar.style.position === 'sticky') {
-    sidebar.style.position = 'static';
-  }
-});
+window.onscroll = function () {
+  console.log(window.offsetTop);
+};
+
+jscript.addEventListener('click', onscroll);
+sidebar.addEventListener('scroll', onscroll);
