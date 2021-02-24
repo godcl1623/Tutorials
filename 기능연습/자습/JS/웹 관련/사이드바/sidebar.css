@@ -49,9 +49,10 @@ aside > ul {
 }
 
 aside {
-  position: fixed;
+  position: absolute;
   top: 20%;
   left: 30px;
+  /* height: 1500px; */
 }
 
 aside li {
@@ -67,4 +68,5 @@ aside li {
   align-items: center;
   position: absolute;
   left: 93%;
+  top: 50px;
 }
