@@ -1,6 +1,5 @@
 const cssStatic = document.getElementById('static');
 const cssSticky = document.getElementById('sticky');
-const jscript = document.getElementById('js');
 
 const sidebar = document.querySelector('aside');
 
@@ -13,8 +12,21 @@ cssSticky.addEventListener('click', () => {
 });
 
 window.onscroll = function () {
-  console.log(window.offsetTop);
+  function sidebarMove() {
+    if (window.pageYOffset < 189) {
+      sidebar.style.top = '189px';
+    } else if (window.pageYOffset >= 189 && window.pageYOffset < sidebar.offsetTop) {
+      sidebar.style.top = window.pageYOffset + 'px';
+    } else if ((window.pageYOffset + window.innerHeight) > (sidebar.offsetTop + sidebar.scrollHeight)) {
+      const top = window.pageYOffset + window.innerHeight - sidebar.scrollHeight - 2;
+      sidebar.style.top = top + 'px';
+    }
+  }
+  sidebarMove();
+  window.scroll(() => {
+    sidebarMove();
+  });
 };
 
-jscript.addEventListener('click', onscroll);
+// jscript.addEventListener('click', onscroll);
 sidebar.addEventListener('scroll', onscroll);
