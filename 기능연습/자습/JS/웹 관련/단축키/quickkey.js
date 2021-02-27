@@ -16,14 +16,14 @@ window.onscroll = function () {
   sidebarMove();
 };
 
-const KeyInput = function (e, x) {
-  const keyData = document.querySelector(`#menu[data-key='${e.keyCode}']`);
-  const li = document.querySelector(`nav ul li:nth-child(${x})`);
-  if (!keyData) return;
-  if (e.keyCode.toString() === li.dataset.key) {
-    alert(`alert ${x}`);
-  };
-}
+const keyInput = e => {
+  const menuList = document.querySelector('.menu-list');
+  const keyList = Array.from(menuList.children).map(item => item.dataset.key);
+  const keyCode = String(e.keyCode);
+  if (!keyList.includes(keyCode)) return;
+  console.log(keyCode);
+  alert(`alert ${keyList.indexOf(keyCode)+1}`);
+};
 
 /* const keyInput1 = function (e) {
   const keyData = document.querySelector(`#menu[data-key='${e.keyCode}']`);
@@ -43,8 +43,8 @@ const keyInput2 = function (e) {
   };
 }; */
 
-const keyInput1 = new KeyInput(e, 1);
+// const keyInput1 = new KeyInput(e, 1);
 
 sidebar.addEventListener('scroll', onscroll);
-window.addEventListener('keydown', keyInput1);
-window.addEventListener('keydown', keyInput2);
+// window.addEventListener('keydown', () => keyInput1(e, 1));
+window.addEventListener('keydown', keyInput);
