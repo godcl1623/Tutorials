@@ -81,3 +81,7 @@ aside li {
   background: tomato;
   padding: 15px 5px 5px 5px;
 }
+
+.sub-menu.active {
+  display: block;
+}

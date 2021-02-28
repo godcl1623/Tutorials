@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
+
+'use strict';
+
 const sidebar = document.querySelector('aside');
-const menu1 = document.getElementById('menu1');
 
 window.onscroll = function () {
   function sidebarMove() {
@@ -18,10 +20,15 @@ window.onscroll = function () {
 
 const keyInput = function (e) {
   const menuList = document.querySelector('.menu-list');
+  const listItem = Array.from(document.querySelectorAll('.menu'));
   const keyList = Array.from(menuList.children).map(item => item.dataset.key);
   const keyData = String(e.keyCode);
-  if(!keyList.includes(keyData)) return;
-    alert(`alert ${keyList.indexOf(keyData)+1}`);
+  const selectedItem = listItem.find(item => item.dataset.key === keyData);
+  const selectedSub = selectedItem.firstElementChild;
+  if (!keyList.includes(keyData)) return;
+  if (keyData === selectedItem.dataset.key) {
+    selectedSub.classList.toggle('active');
+  }
 };
 
 sidebar.addEventListener('scroll', onscroll);
