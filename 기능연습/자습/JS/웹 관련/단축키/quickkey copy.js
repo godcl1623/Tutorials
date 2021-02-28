@@ -18,17 +18,17 @@ window.onscroll = function () {
   sidebarMove();
 };
 
-const keyInput = e => {
+const keyInput = function (e) {
   const menuList = document.querySelector('.menu-list');
+  const listItem = Array.from(document.querySelectorAll('.menu'));
   const keyList = Array.from(menuList.children).map(item => item.dataset.key);
-  const keyCode = String(e.keyCode);
-  const matchingMenu = Array.from(document.querySelectorAll('.menu')).find(item => item.dataset.key === keyCode);
-  if (!keyList.includes(keyCode)) return;
-  if (keyCode === matchingMenu.dataset.key) {
-    matchingMenu.firstElementChild.classList.toggle('active');
+  const keyData = String(e.keyCode);
+  const selectedItem = listItem.find(item => item.dataset.key === keyData);
+  const selectedSub = selectedItem.firstElementChild;
+  if (!keyList.includes(keyData)) return;
+  if (keyData === selectedItem.dataset.key) {
+    selectedSub.classList.toggle('active');
   }
-  // console.log(keyCode);
-  // alert(`alert ${keyList.indexOf(keyCode)+1}`);
 };
 
 sidebar.addEventListener('scroll', onscroll);

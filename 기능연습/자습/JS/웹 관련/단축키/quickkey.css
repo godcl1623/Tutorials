@@ -34,6 +34,7 @@ nav li {
   margin: 0 5px;
   border: 1px solid black;
   padding: 10px 20px;
+  position: relative;
 }
 
 aside,
@@ -69,4 +70,18 @@ aside li {
   position: absolute;
   left: 93%;
   top: 50px;
+}
+
+.sub-menu {
+  display: none;
+  position: absolute;
+  top: 41px;
+  left: -5px;
+  border: 1px solid transparent;
+  background: tomato;
+  padding: 15px 5px 5px 5px;
+}
+
+.sub-menu.active {
+  display: block;
 }
