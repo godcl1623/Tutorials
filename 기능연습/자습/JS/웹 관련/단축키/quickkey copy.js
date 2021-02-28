@@ -16,5 +16,13 @@ window.onscroll = function () {
   sidebarMove();
 };
 
+const keyInput = function (e) {
+  const menuList = document.querySelector('.menu-list');
+  const keyList = Array.from(menuList.children).map(item => item.dataset.key);
+  const keyData = String(e.keyCode);
+  if(!keyList.includes(keyData)) return;
+    alert(`alert ${keyList.indexOf(keyData)+1}`);
+};
+
 sidebar.addEventListener('scroll', onscroll);
 window.addEventListener('keydown', keyInput);
