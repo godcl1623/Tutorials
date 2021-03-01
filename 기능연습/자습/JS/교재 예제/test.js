@@ -1,9 +1,11 @@
-function execute(param1, param2) {
-	const a = 1, b = 2;
-	function func() {
-		return a + b;
-	}
-	return param1 + param2 + func();
+'use strict';
+
+sum (2, 3);
+
+function sum(x, y) {
+	return x + y;
 }
 
-execute(3, 4);
+/* let sum = function (x, y) {
+	return x + y;
+} */
