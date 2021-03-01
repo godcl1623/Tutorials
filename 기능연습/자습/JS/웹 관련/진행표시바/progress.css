@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  height: 10000px;
+}
+
+section {
+  text-align: center;
+  height: 100%;
+}
+
+.progressive-bar {
+  width: 100%;
+  height: 15px;
+  position: sticky;
+  top: 0;
+}
+
+.progressive-filled {
+  background: aqua;
+  height: 100%;
+  margin-right: 100%;
+}
+
+button {
+  position: absolute;
+  left: 50%;
+  top: 9950px;
+  padding: 10px;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+a {
+  all: none;
+}
