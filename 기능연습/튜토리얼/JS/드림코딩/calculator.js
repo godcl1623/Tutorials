@@ -1,7 +1,9 @@
 'use strict';
 
 const calculate = (command, a, b) => {
-  if (command !== '+' && command !== '-' && command !== '*' && command !== '/' && command !== '%') {
+  const operators = ['+', '-', '*', '/', '%'];
+  const matchingOne = operators.find(input => input.includes(command));
+  if (!matchingOne.includes(command)) {
     return 'Try Again !';
   } else if (command === '+') {
     return a + b;
@@ -14,5 +16,4 @@ const calculate = (command, a, b) => {
   } else if (command === '%') {
     return a % b;
   }
-  console.log(operators[0]);
 };
