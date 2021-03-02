@@ -1,11 +1,18 @@
 'use strict';
 
-sum (2, 3);
-
-function sum(x, y) {
-	return x + y;
-}
-
-/* let sum = function (x, y) {
-	return x + y;
-} */
+const calculator = function (operator, a, b) {
+	switch (operator) {
+		case '+' :
+			return a + b;
+		case '-' :
+			return a - b;
+		case '*' :
+			return a * b;
+		case '/' :
+			return a / b;
+		case '%' :
+			return a % b;
+		default:
+			throw Error('Invalid operator. Try with different One !');
+	}
+};
