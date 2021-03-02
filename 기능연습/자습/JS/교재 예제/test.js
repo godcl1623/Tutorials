@@ -13,6 +13,6 @@ const calculator = function (operator, a, b) {
 		case '%' :
 			return a % b;
 		default:
-			throw Error('Invalid operator. Try with different One !');
+			throw alert('Invalid operator. Try with different One !');
 	}
 };
