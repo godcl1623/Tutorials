@@ -13,18 +13,8 @@
 const menuList = document.querySelectorAll('.menu-list');
 
 // 함수
-const openSubMenu = e => {
-  const menuList = document.querySelectorAll('.menu-list');
-  const menuArray = Array.from(menuList);
-  const keyData = Array.from(menuList).map(item => item.dataset.key);
-  const keyCode = String(e.keyCode);
-  // const matchingKey = keyData.find(item => item === keyCode);
-  const matchingKey = menuArray.find(item => item.dataset.key === keyCode);
-  if (!keyData.includes(keyCode)) return;
-  if (keyCode === matchingKey.dataset.key) {
-    matchingKey.firstElementChild.classList.toggle('active');
-  }
-  // console.log(matchingKey);
+const openSubMenu = () => {
+
 };
 
 // 이벤트 리스너
