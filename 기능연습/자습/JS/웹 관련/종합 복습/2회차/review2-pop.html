@@ -30,6 +30,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      cursor: pointer;
     }
 
     h2 {
@@ -46,5 +47,9 @@
     <p class="close">X</p>
   </nav>
   <h2>팝업창</h2>
+  <script>
+    const closeButton = document.querySelector('p');
+    closeButton.addEventListener('click', parent.closeModal);
+  </script>
 </body>
 </html>
