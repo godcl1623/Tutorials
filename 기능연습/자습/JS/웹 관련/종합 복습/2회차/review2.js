@@ -1,9 +1,9 @@
 /* eslint-disable strict */
 /* 구현 순서
-1. 토글 메뉴바
-2. 모달창
-3. 팝업창
-4. iframe 모달
+1. 토글 메뉴바 V
+2. 모달창 V
+3. 팝업창 V
+4. iframe 모달 V
 5. 사이드바 스크롤
 6. 진행바 */
 
@@ -33,14 +33,19 @@ const openSubMenu2 = e => {
 
 const openPopup = e => {
   modalLayer.classList.add('active');
-  console.log(e.target);
-  if (e.target.classList.contains('modal-toggle')) {
-    modalWindow.classList.add('active');
-  } else if (e.target.classList.contains('popup-toggle')) {
-    modalLayer.classList.remove('active');
-    window.open('review2-pop.html', 'popup window', 'width=300, height=400');
-  } else if (e.target.classList.contains('iframe-toggle')) {
-    iframeModal.classList.add('active');
+  const buttonValue = Array.of(...e.target.classList)[0];
+
+  switch (buttonValue) {
+    case 'modal-toggle':
+      modalWindow.classList.add('active');
+      break;
+    case 'popup-toggle':
+      modalLayer.classList.remove('active');
+      window.open('review2-pop.html', 'popup window', 'width=300, height=400');
+      break;
+    case 'iframe-toggle':
+      iframeModal.classList.add('active');
+      break;
   }
 };
 
