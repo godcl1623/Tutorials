@@ -59,13 +59,18 @@ window.closeModal = () => {
 const stickySidebar = () => {
   const sidebarBottom = sidebar.offsetTop + sidebar.scrollHeight;
   const windowBottom = window.pageYOffset + window.innerHeight;
-  if (window.pageYOffset <= 500) {
-    sidebar.style.top = `${500}px`;
-  } else if (sidebarBottom <= windowBottom) {
-    const top = sidebar.offsetTop + (windowBottom - sidebarBottom);
-    sidebar.style.top = `${top}px`;
-  } else if (sidebar.offsetTop >= window.pageYOffset) {
-    sidebar.style.top = `${window.pageYOffset}px`;
+  const top = sidebar.offsetTop + (windowBottom - sidebarBottom);
+
+  switch(true) {
+    case window.pageYOffset <= 500:
+      sidebar.style.top = `${500}px`;
+      break;
+    case sidebarBottom <= windowBottom:
+      sidebar.style.top = `${top}px`;
+      break;
+    case sidebar.offsetTop >= window.pageYOffset:
+      sidebar.style.top = `${window.pageYOffset}px`;
+      break;
   }
 };
 
