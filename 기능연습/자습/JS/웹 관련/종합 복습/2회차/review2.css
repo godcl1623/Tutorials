@@ -87,10 +87,6 @@ iframe.active {
 
 .progressbar-field {
   display: none;
-}
-
-.progressbar-field.active {
-  display: block;
   width: 100%;
   position: sticky;
   top: 0;
@@ -100,7 +96,7 @@ iframe.active {
 .progressive {
   width: 100%;
   height: 15px;
-  background: gray;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 /* nav */
@@ -122,6 +118,10 @@ li {
   justify-content: center;
   align-items: center;
   position: relative;
+}
+
+li.menu-list {
+  cursor: pointer;
 }
 
 li:nth-child(2) {
@@ -146,6 +146,9 @@ ul.sub-menu > li {
   border: none;
 }
 
+ul.sub-menu button {
+  cursor: pointer;
+}
 /* aside */
 
 aside {
@@ -172,7 +175,8 @@ button.top {
   border-radius: 50%;
   position: sticky;
   left: 50%;
-  top: 90vh;
+  top: 95vh;
+  cursor: pointer;
 }
 
 button.top > a {
