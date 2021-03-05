@@ -16,6 +16,7 @@ const keyData = Array.from(menuList).map(attribute => attribute.dataset.key);
 const modalLayer = document.querySelector('.modal-layer');
 const modalWindow = document.querySelector('.modal-window');
 const iframeModal = document.querySelector('iframe');
+const sidebar = document.querySelector('.sidebar');
 
 // 함수
 const openSubMenu = e => {
@@ -55,9 +56,26 @@ window.closeModal = () => {
   iframeModal.classList.remove('active');
 };
 
+const stickySidebar = () => {
+  const sidebarBottom = sidebar.offsetTop + sidebar.scrollHeight;
+  const windowBottom = window.pageYOffset + window.innerHeight;
+  if (window.pageYOffset <= 500) {
+    sidebar.style.top = `${500}px`;
+  } else if (sidebarBottom <= windowBottom) {
+    const top = sidebar.offsetTop + (windowBottom - sidebarBottom);
+    sidebar.style.top = `${top}px`;
+  } else if (sidebar.offsetTop >= window.pageYOffset) {
+    sidebar.style.top = `${window.pageYOffset}px`;
+  }
+};
+
 // 이벤트 리스너
+  // 토글 메뉴
 window.addEventListener('keydown', openSubMenu);
 menuList.forEach(menu => menu.addEventListener('click', openSubMenu2));
+  // 팝업, 모달 등
 toggleButton.forEach(button => button.addEventListener('click', openPopup));
 modalLayer.addEventListener('click', closeModal);
 modalWindow.querySelector('p').addEventListener('click', window.closeModal);
+  // 사이드바
+window.addEventListener('scroll', stickySidebar);
