@@ -56,6 +56,7 @@ const openPopup = e => {
   switch (buttonValue) {
     case 'modal-toggle':
       modalWindow.classList.add('active');
+      document.body.classList.add('hide-scroll');
       break;
     case 'popup-toggle':
       modalLayer.classList.remove('active');
@@ -63,6 +64,7 @@ const openPopup = e => {
       break;
     case 'iframe-toggle':
       iframeModal.classList.add('active');
+      document.body.classList.add('hide-scroll');
       break;
   }
 };
@@ -71,6 +73,7 @@ window.closeModal = () => {
   modalLayer.classList.remove('active');
   modalWindow.classList.remove('active');
   iframeModal.classList.remove('active');
+  document.body.classList.remove('hide-scroll');
 };
 
 const popupKey = e => {
