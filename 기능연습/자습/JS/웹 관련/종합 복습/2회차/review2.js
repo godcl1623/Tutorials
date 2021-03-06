@@ -56,6 +56,7 @@ const openPopup = e => {
   switch (buttonValue) {
     case 'modal-toggle':
       modalWindow.classList.add('active');
+      document.body.classList.add('hide-scroll');
       break;
     case 'popup-toggle':
       modalLayer.classList.remove('active');
@@ -63,6 +64,7 @@ const openPopup = e => {
       break;
     case 'iframe-toggle':
       iframeModal.classList.add('active');
+      document.body.classList.add('hide-scroll');
       break;
   }
 };
@@ -71,35 +73,35 @@ window.closeModal = () => {
   modalLayer.classList.remove('active');
   modalWindow.classList.remove('active');
   iframeModal.classList.remove('active');
+  document.body.classList.remove('hide-scroll');
 };
 
 const popupKey = e => {
-  const keyCode = String(e.keyCode);
+  const keyInput = String(e.keyCode);
   const buttons = document.querySelectorAll('button');
-  const keyData = Array.from(buttons).map(button => button.dataset.key);
-  const matchingKey = Array.from(buttons).find(button => button.dataset.key === keyCode);
-  const matchingButton = document.querySelector(`button[data-key='${e.keyCode}']`);
-  if (!keyData.includes(keyCode)) return;
-  if (matchingKey.dataset.key === keyCode) {
+  const keyDataSet = Array.from(buttons).map(attribute => attribute.dataset.key);
+  const matchingKeyData = Array.from(buttons).find(button => button.dataset.key === keyInput);
+  const matchingButton = document.querySelector(`button[data-key='${keyInput}']`);
+  if (!keyDataSet.includes(keyInput)) return;
+  if (keyInput === matchingKeyData.dataset.key) {
     matchingButton.click();
   }
 };
 
   // 사이드바
 
-const stickySidebar = () => {
+const sidebarMove = () => {
   const sidebarBottom = sidebar.offsetTop + sidebar.scrollHeight;
   const windowBottom = window.pageYOffset + window.innerHeight;
   const top = sidebar.offsetTop + (windowBottom - sidebarBottom);
-
-  switch(true) {
+  switch (true) {
     case window.pageYOffset <= 500:
       sidebar.style.top = `${500}px`;
       break;
-    case sidebarBottom <= windowBottom:
+    case windowBottom >= sidebarBottom:
       sidebar.style.top = `${top}px`;
       break;
-    case sidebar.offsetTop >= window.pageYOffset:
+    case window.pageYOffset <= sidebar.offsetTop:
       sidebar.style.top = `${window.pageYOffset}px`;
       break;
   }
@@ -135,7 +137,7 @@ window.addEventListener('keydown', popupKey);
 
   // 사이드바
 
-window.addEventListener('scroll', stickySidebar);
+window.addEventListener('scroll', sidebarMove);
 
   // 진행바
 

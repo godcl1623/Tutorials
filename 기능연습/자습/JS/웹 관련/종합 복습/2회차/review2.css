@@ -13,6 +13,10 @@ body {
   height: 100%;
 }
 
+.hide-scroll {
+  overflow: hidden;
+}
+
 html {
   height: 10000px;
 }
@@ -32,15 +36,20 @@ div.modal-layer {
 div.modal-layer.active {
   display: block;
   width: 100%;
-  height: 10000px;
+  height: 100%;
   background: rgba(0, 0, 0, 0.3);
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
   z-index: 2;
 }
 
 div.modal-window,
 iframe {
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 400px;
   transform: translate(-50%, -50%);
@@ -51,12 +60,15 @@ div.modal-window {
 }
 
 div.modal-window.active {
+  margin: 80px 0;
   width: 400px;
-  height: 500px;
+  height: 900px;
   background: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  top: 50%;
   z-index: 99;
 }
 
