@@ -24,7 +24,7 @@ const iframeModal = document.querySelector('iframe');
 
   // 사이드바
 
-const sidebar = document.querySelector('.sidebar');
+
 
   // 진행바
 
@@ -73,37 +73,11 @@ window.closeModal = () => {
   iframeModal.classList.remove('active');
 };
 
-const popupKey = e => {
-  const keyCode = String(e.keyCode);
-  const buttons = document.querySelectorAll('button');
-  const keyData = Array.from(buttons).map(button => button.dataset.key);
-  const matchingKey = Array.from(buttons).find(button => button.dataset.key === keyCode);
-  const matchingButton = document.querySelector(`button[data-key='${e.keyCode}']`);
-  if (!keyData.includes(keyCode)) return;
-  if (matchingKey.dataset.key === keyCode) {
-    matchingButton.click();
-  }
-};
+
 
   // 사이드바
 
-const stickySidebar = () => {
-  const sidebarBottom = sidebar.offsetTop + sidebar.scrollHeight;
-  const windowBottom = window.pageYOffset + window.innerHeight;
-  const top = sidebar.offsetTop + (windowBottom - sidebarBottom);
 
-  switch(true) {
-    case window.pageYOffset <= 500:
-      sidebar.style.top = `${500}px`;
-      break;
-    case sidebarBottom <= windowBottom:
-      sidebar.style.top = `${top}px`;
-      break;
-    case sidebar.offsetTop >= window.pageYOffset:
-      sidebar.style.top = `${window.pageYOffset}px`;
-      break;
-  }
-};
 
   // 진행바
 
@@ -131,11 +105,11 @@ menuList.forEach(menu => menu.addEventListener('click', openSubMenu2));
 toggleButton.forEach(button => button.addEventListener('click', openPopup));
 modalLayer.addEventListener('click', closeModal);
 modalWindow.querySelector('p').addEventListener('click', window.closeModal);
-window.addEventListener('keydown', popupKey);
+
 
   // 사이드바
 
-window.addEventListener('scroll', stickySidebar);
+
 
   // 진행바
 
