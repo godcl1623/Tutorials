@@ -14,7 +14,14 @@
   <section class="calculator-body">
     <h6>계산기</h6>
     <!-- 숫자 표시 영역 -->
-    <p class="number-window">위치</p>
+    <div class="number-window">
+      <p class="number-output">
+        표시창 위치
+      </p>
+      <p class="number-input">
+        입력창 위치
+      </p>
+    </div>
     <!-- 버튼 전체 컨테이너 -->
     <article class="button-container">
       <h6 class="heading">버튼영역</h6>
@@ -32,17 +39,25 @@
         <!-- 숫자버튼모음 -->
         <article class="number-set">
           <h6>숫자버튼모음</h6>
-          <button class="number-button">9</button>
-          <button class="number-button">8</button>
-          <button class="number-button">7</button>
-          <button class="number-button">6</button>
-          <button class="number-button">5</button>
-          <button class="number-button">4</button>
-          <button class="number-button">3</button>
-          <button class="number-button">2</button>
-          <button class="number-button">1</button>
-          <button class="number-button">0</button>
-          <button class="number-button">.</button>
+          <div class="number-sub-set">
+            <button class="number-button">9</button>
+            <button class="number-button">8</button>
+            <button class="number-button">7</button>
+          </div>
+          <div class="number-sub-set">
+            <button class="number-button">6</button>
+            <button class="number-button">5</button>
+            <button class="number-button">4</button>
+          </div>
+          <div class="number-sub-set">
+            <button class="number-button">3</button>
+            <button class="number-button">2</button>
+            <button class="number-button">1</button>
+          </div>
+          <div class="number-sub-set set-bottom">
+            <button id="zero" class="number-button">0</button>
+            <button id="dot" class="number-button">.</button>
+          </div>
         </article>
       </article>
       <!-- 계산 연산자 모음 -->
@@ -52,7 +67,7 @@
         <button class="minus">-</button>
         <button class="multiply">×</button>
         <button class="divide">÷</button>
-        <button class="result">＝</button>
+        <button id="result" class="result">＝</button>
       </article>
     </article>
   </section>
