@@ -1,0 +1,8 @@
+/* 공통 스타일 정의 */
+
+* {
+  margin: 0;
+  border: 1px solid black;
+  padding: 0;
+  box-sizing: border-box;
+}

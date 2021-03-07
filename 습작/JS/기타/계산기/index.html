@@ -9,13 +9,19 @@
   <script defer src="calc.js"></script>
 </head>
 <body>
+  <!-- 계산기 본체 -->
+  <!-- h6은 html 표준 준수를 위해 삽입한 것이므로, 모두 숨김처리 -->
   <section class="calculator-body">
     <h6>계산기</h6>
+    <!-- 숫자 표시 영역 -->
     <p class="number-window">위치</p>
+    <!-- 버튼 전체 컨테이너 -->
     <article class="button-container">
       <h6 class="heading">버튼영역</h6>
+      <!-- 버튼모음 1 - 연산자 버튼과 flex 배치를 위해 나눔 -->
       <article class="sub-container">
         <h6>버튼모음-좌측</h6>
+        <!-- 초기화 등 특수연산자 모음 -->
         <article class="special-operators">
           <h6>특수연산자모음</h6>
           <button class="initialize">AC</button>
@@ -23,6 +29,7 @@
           <button class="sign">+/-</button>
           <button class="percent">%</button>
         </article>
+        <!-- 숫자버튼모음 -->
         <article class="number-set">
           <h6>숫자버튼모음</h6>
           <button class="number-button">9</button>
@@ -38,6 +45,7 @@
           <button class="number-button">.</button>
         </article>
       </article>
+      <!-- 계산 연산자 모음 -->
       <article class="operators">
         <h6>연산자모음</h6>
         <button class="plus">+</button>
