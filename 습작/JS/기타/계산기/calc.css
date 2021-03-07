@@ -1,0 +1,169 @@
+/*************** 공통 스타일 정의 ***************/
+
+* {
+  margin: 0;
+  /* border: 1px solid black; */
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* 색상 */
+  --background-black: #1F1E1F;
+  --button-dark: #2F2E2F;
+  --button-light: #4B4A4B;
+  --button-orange: #FD8D0E;
+  --font-color: #E4E4E4;
+  --font-color-dark: #FFEDD1;
+  /*** 수치 ***/
+  --margin: 5px;
+  --padding: 10px;
+  --border-radius: 15px;
+  /* 폰트 */
+  --font-big: 20px;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+h6 {
+  display: none;
+}
+
+button {
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  font-size: var(--font-big);
+  color: var(--font-color);
+}
+
+/********** flex 공통사항 **********/
+
+.calculator-body, .number-window, .sub-container, .operators, .number-set {
+  display: flex;
+  flex-direction: column;
+}
+
+/*************** 계산기 본체 ***************/
+
+.calculator-body {
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
+  padding: calc(var(--padding) + 5px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 600px;
+  background: var(--background-black);
+}
+
+/********** 숫자창 **********/
+
+.number-window {
+  margin-bottom: 15px;
+  border: 1px solid white;
+  border-radius: var(--border-radius);
+  /* box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3); */
+  padding: var(--padding);
+  flex: 2;
+  justify-content: flex-end;
+  text-align: end;
+  color: var(--font-color);
+}
+
+.number-window > .number-output {
+  border: 1px solid white;
+  display: inline;
+  text-align: end;
+  flex: 2;
+}
+
+.number-window > .number-input {
+  border: 1px solid white;
+  display: inline;
+  vertical-align: bottom;
+  flex: 1;
+}
+
+/********** 버튼 영역 **********/
+
+.button-container {
+  /* border: 1px solid black; */
+  border-radius: var(--border-radius);
+  /* padding: var(--padding); */
+  flex: 8;
+  display: flex;
+}
+
+/******* 버튼모음-좌측 *******/
+.sub-container {
+  flex: 8;
+}
+
+/***** 특수연산자 *****/
+
+.sub-container > .special-operators {
+  padding: 0 var(--padding);
+  flex: 1.5;
+  display: flex;
+}
+
+.sub-container > .special-operators > button {
+  margin: var(--margin);
+  flex: 1;
+  background: var(--button-dark);
+}
+
+/***** 숫자버튼모음 *****/
+
+.sub-container > .number-set {
+  flex: 8.5;
+}
+
+.sub-container > .number-set > .number-sub-set {
+  margin: var(--margin) 0;
+  padding: 0 var(--padding);
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  height: 100%;
+}
+
+.sub-container > .number-set > .number-sub-set.set-bottom {
+  flex-direction: row;
+}
+
+.sub-container > .number-set > .number-sub-set > button {
+  margin: var(--margin);
+  flex: 1;
+  background: var(--button-light);
+}
+
+#zero {
+  flex: 2.2;
+}
+
+/******* 버튼모음-우측 = 연산자 모음 *******/
+
+.operators {
+  padding: calc(var(--padding)/2) var(--padding);
+  flex: 2;
+}
+
+.operators > button {
+  margin: var(--margin) 0;
+  flex: 1;
+  background: var(--button-orange);
+  color: var(--font-color-dark);
+}
+
+#result {
+  flex: 2.5;
+}
