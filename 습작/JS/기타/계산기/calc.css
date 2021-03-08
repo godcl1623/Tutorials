@@ -36,9 +36,20 @@ button {
   border: 1px solid transparent;
   border-radius: var(--border-radius);
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.3);
+  transition: all 0.07s ease;
   cursor: pointer;
   font-size: var(--font-big);
   color: var(--font-color);
+}
+/* 복습을 위해 삭제 */
+button.active {
+  filter: brightness(1.25);
+  transform: scale(1.1);
+}
+
+button:active {
+  filter: brightness(1.25);
+  transform: scale(1.1);
 }
 
 /********** flex 공통사항 **********/
