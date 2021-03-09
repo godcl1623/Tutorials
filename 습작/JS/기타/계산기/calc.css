@@ -91,16 +91,26 @@ button:active {
 
 .number-window > .number-output {
   border: 1px solid white;
-  display: inline;
+  display: none;
   text-align: end;
   flex: 2;
+  background: var(--background-black);
+  color: var(--font-color);
+  font-size: var(--font-big);
+  text-align: end;
+  /* pointer-events: none; */
 }
 
 .number-window > .number-input {
   border: 1px solid white;
+  padding: 0 10px;
   display: inline;
-  vertical-align: bottom;
   flex: 1;
+  background: var(--background-black);
+  color: var(--font-color);
+  font-size: var(--font-big);
+  text-align: end;
+  pointer-events: none;
 }
 
 /********** 버튼 영역 **********/
