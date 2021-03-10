@@ -89,8 +89,5 @@ const buttonEvents = e => {
 window.addEventListener('keydown', keyInput);
 window.addEventListener('keydown', printInput);
 numButton.forEach(clicked => clicked.addEventListener('click', clickedInput));
-// numBox.addEventListener('valuechange', () => {
-//   memBox.value = numBox.value;
-// });
 inputReset();
 window.addEventListener('keydown', buttonEvents);
