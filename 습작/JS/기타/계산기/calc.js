@@ -41,25 +41,33 @@ const printInput = e => {
     );
   if (!keySet1.includes(keyDown) && !keySet2.includes(keyDown)) return;
   if (matchingKey.dataset.key1 === keyDown || matchingKey.dataset.key2) {
-    if (numBox.value.length >= 15) {
-      // return;
-    } else {
-      numBox.value += e.key;
-    }
-    if (numBox.value[0] === '0' && numBox.value[1] === '0') {
-      numBox.value = null;
+    switch (true) {
+      default: numBox.value += e.key;
+      case numBox.value.length >= 15:
+        break;
+      case numBox.value.includes('.') && numBox.value.length !== null && e.key === '.':
+        break;
+      case numBox.value[0] === '0' && numBox.value[1] === '.':
+        numBox.value += e.key;
+        break;
+      case numBox.value[0] === '0' && e.key !== '.':
+        break;
     }
   }
 };
 
 const clickedInput = e => {
-  if (numBox.value.length >= 15) {
-    // return;
-  } else {
-    numBox.value += e.target.innerText;
-  }
-  if (numBox.value[0] === '0' && numBox.value[1] === '0') {
-    numBox.value = null;
+  switch (true) {
+    default: numBox.value += e.target.innerText;
+    case numBox.value.length >= 15:
+      break;
+    case numBox.value.includes('.') && numBox.value.length !== null && e.target.innerText === '.':
+      break;
+    case numBox.value[0] === '0' && numBox.value[1] === '.':
+      numBox.value += e.target.innerText;
+      break;
+    case numBox.value[0] === '0' && e.target.innerText !== '.':
+      break;
   }
 };
 
