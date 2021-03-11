@@ -73,14 +73,22 @@ const clickedInput = e => {
 
 const inputReset = () => {
   const init = document.querySelector('.initialize');
+  const memory = document.querySelector('.calculator-body');
   init.addEventListener('click', () => {
     numBox.value = '';
+    memory.removeAttribute('data-first-value');
+    memory.removeAttribute('data-second-value');
+    memory.removeAttribute('data-operator');
   });
 };
 
 const buttonEvents = e => {
+  const memory = document.querySelector('.calculator-body');
   if (e.keyCode === 27) {
     numBox.value = '';
+    memory.removeAttribute('data-first-value');
+    memory.removeAttribute('data-second-value');
+    memory.removeAttribute('data-operator');
   }
 };
 
