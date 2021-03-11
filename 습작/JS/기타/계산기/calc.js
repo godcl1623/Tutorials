@@ -32,10 +32,10 @@ const keyInput = e => {
 };
 
 const printInput = e => {
-  const keySet1 = Array.from(buttons).map(attribute => attribute.dataset.key1);
-  const keySet2 = Array.from(buttons).map(attribute => attribute.dataset.key2);
+  const keySet1 = Array.from(numButton).map(attribute => attribute.dataset.key1);
+  const keySet2 = Array.from(numButton).map(attribute => attribute.dataset.key2);
   const keyDown = String(e.keyCode);
-  const matchingKey = Array.from(buttons) //
+  const matchingKey = Array.from(numButton) //
     .find(attribute =>
         attribute.dataset.key1 === keyDown || attribute.dataset.key2 === keyDown
     );
@@ -86,7 +86,7 @@ const buttonEvents = e => {
 
 const calculate = (operator, firstVal, secondVal) => {
   switch (operator) {
-    default: return;
+    default: break;
     case '+':
       return parseFloat(firstVal) + parseFloat(secondVal);
     case '-':
@@ -100,8 +100,8 @@ const calculate = (operator, firstVal, secondVal) => {
 
 const calculator = e => {
   const operator = document.querySelectorAll('.operator');
+  const memory = document.querySelector('.calculator-body');
   operator.forEach(clicked => clicked.addEventListener('click', e => {
-    const memory = document.querySelector('.calculator-body');
     switch (true) {
       default: break;
       case numBox.value !== '' && !e.target.classList.contains('result'):
@@ -116,8 +116,27 @@ const calculator = e => {
         const firstVal = memory.dataset.firstValue;
         const secondVal = memory.dataset.secondValue;
         numBox.value = calculate(operator, firstVal, secondVal);
+        break;
     }
   }));
+  window.addEventListener('keydown', e => {
+    switch (true) {
+      default: break;
+      case numBox.value !== '' && e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/':
+        memory.dataset.firstValue = numBox.value;
+        memory.dataset.operator = e.key;
+        numBox.value = '';
+        console.log(memory.dataset.firstValue, memory.dataset.operator);
+        break;
+      case e.keyCode === 13:
+        memory.dataset.secondValue = numBox.value;
+        const firstVal = memory.dataset.firstValue;
+        const operator = memory.dataset.operator;
+        const secondVal = memory.dataset.secondValue;
+        numBox.value = calculate(operator, firstVal, secondVal);
+        break;
+    }
+  });
 };
 
 // 이벤트 리스너 모음
