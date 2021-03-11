@@ -45,7 +45,7 @@ const printInput = e => {
       default: numBox.value += e.key;
       case numBox.value.length >= 15:
         break;
-      case numBox.value.includes('.') && numBox.value.length !== null && e.key === '.':
+      case numBox.value.includes('.') && numBox.value.length !== '' && e.key === '.':
         break;
       case numBox.value[0] === '0' && numBox.value[1] === '.':
         numBox.value += e.key;
@@ -61,7 +61,7 @@ const clickedInput = e => {
     default: numBox.value += e.target.innerText;
     case numBox.value.length >= 15:
       break;
-    case numBox.value.includes('.') && numBox.value.length !== null && e.target.innerText === '.':
+    case numBox.value.includes('.') && numBox.value.length !== '' && e.target.innerText === '.':
       break;
     case numBox.value[0] === '0' && numBox.value[1] === '.':
       numBox.value += e.target.innerText;
@@ -74,14 +74,50 @@ const clickedInput = e => {
 const inputReset = () => {
   const init = document.querySelector('.initialize');
   init.addEventListener('click', () => {
-    numBox.value = null;
+    numBox.value = '';
   });
 };
 
 const buttonEvents = e => {
   if (e.keyCode === 27) {
-    numBox.value = null;
+    numBox.value = '';
   }
+};
+
+const calculate = (operator, firstVal, secondVal) => {
+  switch (operator) {
+    default: return;
+    case '+':
+      return parseFloat(firstVal) + parseFloat(secondVal);
+    case '-':
+      return parseFloat(firstVal) - parseFloat(secondVal);
+    case '×':
+      return parseFloat(firstVal) * parseFloat(secondVal);
+    case '÷':
+      return parseFloat(firstVal) / parseFloat(secondVal);
+  }
+};
+
+const calculator = e => {
+  const operator = document.querySelectorAll('.operator');
+  operator.forEach(clicked => clicked.addEventListener('click', e => {
+    const memory = document.querySelector('.calculator-body');
+    switch (true) {
+      default: break;
+      case numBox.value !== '' && !e.target.classList.contains('result'):
+        memory.dataset.firstValue = numBox.value;
+        memory.dataset.operator = e.target.innerText;
+        numBox.value = '';
+        console.log(memory.dataset.firstValue, memory.dataset.operator);
+        break;
+      case e.target.classList.contains('result'):
+        memory.dataset.secondValue = numBox.value;
+        const operator = memory.dataset.operator;
+        const firstVal = memory.dataset.firstValue;
+        const secondVal = memory.dataset.secondValue;
+        numBox.value = calculate(operator, firstVal, secondVal);
+    }
+  }));
 };
 
 // 이벤트 리스너 모음
@@ -91,3 +127,4 @@ window.addEventListener('keydown', printInput);
 numButton.forEach(clicked => clicked.addEventListener('click', clickedInput));
 inputReset();
 window.addEventListener('keydown', buttonEvents);
+calculator();
