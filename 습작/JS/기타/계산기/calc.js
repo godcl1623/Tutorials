@@ -23,11 +23,31 @@ const keyInput = e => {
 
   if (!keySet1.includes(keyDown) && !keySet2.includes(keyDown)) return;
   // 여기 조건문만 복습
-  if (matchingKey.dataset.key1 === keyDown || matchingKey.dataset.key2) {
-    matchingButton.classList.add('active');
-    matchingButton.addEventListener('transitionend', () =>
-      matchingButton.classList.remove('active')
-    );
+  switch (true) {
+    default: break;
+    case e.key === '%':
+      const percent = document.querySelector('button[data-key2="%"]');
+      percent.classList.add('active');
+      percent.addEventListener('transitionend', () => {
+        percent.classList.remove('active');
+      });
+      break;
+      case e.key === '*':
+        const multiply = document.querySelector('button[data-key3="*"]');
+        multiply.classList.add('active');
+        multiply.addEventListener('transitionend', () => {
+          multiply.classList.remove('active');
+        });
+        break;
+    case (matchingKey.dataset.key1 === keyDown || matchingKey.dataset.key2 === keyDown):
+      matchingButton.classList.add('active');
+      matchingButton.addEventListener('transitionend', () =>
+        matchingButton.classList.remove('active')
+      );
+      break;
+    case e.key === '*':
+      console.log('test');
+      break;
   }
 };
 
@@ -43,6 +63,8 @@ const printInput = e => {
   if (matchingKey.dataset.key1 === keyDown || matchingKey.dataset.key2) {
     switch (true) {
       default: numBox.value += e.key;
+      case (e.key === '*' || e.key === '%'):
+        break;
       case numBox.value.length >= 15:
         break;
       case numBox.value.includes('.') && numBox.value.length !== '' && e.key === '.':
@@ -71,24 +93,25 @@ const clickedInput = e => {
   }
 };
 
+const eraser = () => {
+  const memory = document.querySelector('.calculator-body');
+  memory.removeAttribute('data-first-value');
+  memory.removeAttribute('data-second-value');
+  memory.removeAttribute('data-operator');
+};
+
 const inputReset = () => {
   const init = document.querySelector('.initialize');
-  const memory = document.querySelector('.calculator-body');
   init.addEventListener('click', () => {
     numBox.value = '';
-    memory.removeAttribute('data-first-value');
-    memory.removeAttribute('data-second-value');
-    memory.removeAttribute('data-operator');
+    eraser();
   });
 };
 
 const buttonEvents = e => {
-  const memory = document.querySelector('.calculator-body');
   if (e.keyCode === 27) {
     numBox.value = '';
-    memory.removeAttribute('data-first-value');
-    memory.removeAttribute('data-second-value');
-    memory.removeAttribute('data-operator');
+    eraser();
   }
 };
 
@@ -100,8 +123,10 @@ const calculate = (operator, firstVal, secondVal) => {
     case '-':
       return parseFloat(firstVal) - parseFloat(secondVal);
     case '×':
+    case '*':
       return parseFloat(firstVal) * parseFloat(secondVal);
     case '÷':
+    case '/':
       return parseFloat(firstVal) / parseFloat(secondVal);
   }
 };
@@ -116,7 +141,6 @@ const calculator = e => {
         memory.dataset.firstValue = numBox.value;
         memory.dataset.operator = e.target.innerText;
         numBox.value = '';
-        console.log(memory.dataset.firstValue, memory.dataset.operator);
         break;
       case e.target.classList.contains('result'):
         memory.dataset.secondValue = numBox.value;
@@ -124,6 +148,7 @@ const calculator = e => {
         const firstVal = memory.dataset.firstValue;
         const secondVal = memory.dataset.secondValue;
         numBox.value = calculate(operator, firstVal, secondVal);
+        eraser();
         break;
     }
   }));
@@ -134,7 +159,6 @@ const calculator = e => {
         memory.dataset.firstValue = numBox.value;
         memory.dataset.operator = e.key;
         numBox.value = '';
-        console.log(memory.dataset.firstValue, memory.dataset.operator);
         break;
       case e.keyCode === 13:
         memory.dataset.secondValue = numBox.value;
@@ -142,6 +166,7 @@ const calculator = e => {
         const operator = memory.dataset.operator;
         const secondVal = memory.dataset.secondValue;
         numBox.value = calculate(operator, firstVal, secondVal);
+        eraser();
         break;
     }
   });
