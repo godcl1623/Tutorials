@@ -102,7 +102,12 @@ const clickedInput = e => {
       break;
     case numBox.value.includes('.') && numBox.value.length !== '' && e.target.innerText === '.':
       break;
-    case numBox.value[0] === '0' && numBox.value[1] === '.':
+    case memory.dataset.completed === undefined && numBox.value[0] === '0' && numBox.value[1] === '.':
+      numBox.value += e.target.innerText;
+      break;
+    case memory.dataset.completed === 'completed' && numBox.value[0] === '0' && numBox.value[1] === '.':
+      eraser();
+      numBox.value = '';
       numBox.value += e.target.innerText;
       break;
     case numBox.value[0] === '0' && e.target.innerText !== '.':
