@@ -97,7 +97,9 @@ const printInput = e => {
 const clickedInput = e => {
   const memory = document.querySelector('.calculator-body');
   switch (true) {
-    default: numBox.value += e.target.innerText;
+    default:
+      numBox.value += e.target.innerText;
+      break;
     case numBox.value.length >= 15:
       break;
     case numBox.value.includes('.') && numBox.value.length !== '' && e.target.innerText === '.':
@@ -150,6 +152,7 @@ const calculate = (operator, firstVal, secondVal) => {
       return parseFloat(firstVal) / parseFloat(secondVal);
   }
 };
+
   // 연산결과 출력
 const calculator = e => {
   const operator = document.querySelectorAll('.operator');
