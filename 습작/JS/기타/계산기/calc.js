@@ -138,29 +138,36 @@ const calculate = (operator, firstVal, secondVal) => {
 const calculator = e => {
   const operator = document.querySelectorAll('.operator');
   const memory = document.querySelector('.calculator-body');
+  let calOperator;
+  let firstVal;
+  let secondVal;
     // 연산결과 출력 - 버튼입력의 경우
   operator.forEach(clicked => clicked.addEventListener('click', e => {
     switch (true) {
       default: break;
-      case e.target.innerText === '%':
-        numBox.value = parseFloat(numBox.value) / 100;
-        eraser();
-        break;
       case e.target.innerText === '+/-':
         numBox.value = parseFloat(numBox.value) * -1;
-        eraser();
         break;
-      case numBox.value !== '' && !e.target.classList.contains('result'):
+      case numBox.value !== '' && !e.target.classList.contains('result') && !e.target.classList.contains('percent'):
         memory.dataset.firstValue = numBox.value;
         memory.dataset.operator = e.target.innerText;
         numBox.value = '';
         break;
       case e.target.classList.contains('result'):
         memory.dataset.secondValue = numBox.value;
-        const operator = memory.dataset.operator;
-        const firstVal = memory.dataset.firstValue;
-        const secondVal = memory.dataset.secondValue;
-        numBox.value = calculate(operator, firstVal, secondVal);
+        calOperator = memory.dataset.operator;
+        firstVal = memory.dataset.firstValue;
+        secondVal = memory.dataset.secondValue;
+        numBox.value = calculate(calOperator, firstVal, secondVal);
+        eraser();
+        break;
+      case e.target.classList.contains('percent'):
+        memory.dataset.secondValue = numBox.value;
+        calOperator = memory.dataset.operator;
+        firstVal = memory.dataset.firstValue;
+        secondVal = memory.dataset.secondValue;
+        numBox.value = calculate(calOperator, firstVal, secondVal) / 100;
+        console.log(calOperator);
         eraser();
         break;
     }
