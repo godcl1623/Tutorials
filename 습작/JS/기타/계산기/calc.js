@@ -163,6 +163,14 @@ const calculator = e => {
       default: break;
       case numBox.value === '' && e.target.classList.contains('result'):
         break;
+      case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined && !e.target.classList.contains('result'):
+        memory.dataset.operator = e.target.innerText;
+        break;
+      case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined && e.target.innerText === '+/-':
+        memory.dataset.firstValue = parseFloat(memory.dataset.firstValue) * -1;
+        break;
+      case memory.dataset.completed === 'completed' && e.target.innerText === '+/-':
+        break;
       case e.target.innerText === '+/-':
         numBox.value = parseFloat(numBox.value) * -1;
         break;
@@ -189,7 +197,7 @@ const calculator = e => {
         calOperator = memory.dataset.operator;
         firstVal = memory.dataset.firstValue;
         secondVal = memory.dataset.secondValue;
-        numBox.value = calculate(calOperator, firstVal, secondVal);
+        numBox.value = Math.round(calculate(calOperator, firstVal, secondVal) * 10 ** 13) / 10 ** 13;
         eraser();
         memory.dataset.completed = 'completed';
         break;
