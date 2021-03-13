@@ -27,7 +27,7 @@ const keyInput = e => {
   // 여기 조건문만 복습
   switch (true) {
     case e.key === '%': {
-      const percent = document.querySelector('button[data-key2="%"]');
+      const percent = document.querySelector('button[data-key3="%"]');
       percent.classList.add('active');
       percent.addEventListener('transitionend', () => {
         percent.classList.remove('active');
@@ -262,67 +262,84 @@ const keyCalculator = () => {
   let secondVal;
   // 연산결과 출력 - 키입력의 경우
   window.addEventListener('keydown', e => {
-    // const opButton = document.querySelectorAll('.operators .operator');
-    // const matchingKey = Array.from(opButton).find(operator => operator.innerText === e.key);
-    switch (true) {
-      case numBox.value === '' && e.key === "Enter":
-        break;
-      case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined && e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/':
-        memory.dataset.operator = e.key;
-        break;
-      case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined && e.key === '_':
-        memory.dataset.firstValue = parseFloat(memory.dataset.firstValue) * -1;
-        break;
-      case memory.dataset.completed === 'completed' && e.key === '_':
-        break;
-      case e.key === '_':
-        numBox.value = parseFloat(numBox.value) * -1;
-        break;
-      case memory.dataset.firstValue !== undefined && e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/':
-        memory.dataset.secondValue = numBox.value;
-        calOperator = memory.dataset.operator;
-        firstVal = memory.dataset.firstValue;
-        secondVal = memory.dataset.secondValue;
-        numBox.value = calculate(calOperator, firstVal, secondVal);
-        eraser();
-        memory.dataset.firstValue = numBox.value;
-        memory.dataset.operator = e.key;
-        numBox.value = '';
-        break;
-      case numBox.value !== '' && e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/':
-        memory.dataset.firstValue = numBox.value;
-        memory.dataset.operator = e.key;
-        numBox.value = '';
-        break;
-      case memory.dataset.firstValue === undefined && numBox.value !== '' && e.key === 'enter':
-        break;
-      case e.key === 'Enter':
-        memory.dataset.secondValue = numBox.value;
-        calOperator = memory.dataset.operator;
-        firstVal = memory.dataset.firstValue;
-        secondVal = memory.dataset.secondValue;
-        numBox.value = Math.round(calculate(calOperator, firstVal, secondVal) * 10 ** 13) / 10 ** 13;
-        eraser();
-        memory.dataset.completed = 'completed';
-        break;
-      case e.key === '%' && memory.dataset.firstValue === undefined:
-        numBox.value = parseFloat(numBox.value) / 100;
-        eraser();
-        memory.dataset.completed = 'completed';
-        break;
-      case e.key === '%':
-        memory.dataset.secondValue = numBox.value;
-        calOperator = memory.dataset.operator;
-        firstVal = memory.dataset.firstValue;
-        secondVal = memory.dataset.secondValue;
-        numBox.value = calculate(calOperator, firstVal, secondVal) / 100;
-        eraser();
-        memory.dataset.completed = 'completed';
-        break;
-      default: break;
+    const opButton = ['+', '-', '*', '/', '_', '%', 'Enter'];
+    const matchingKey = Array.from(opButton).find(operator => operator === e.key);
+    if (matchingKey) {
+      switch (true) {
+        case e.key === '_':
+          switch (true) {
+            case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined:
+              numBox.value = parseFloat(numBox.value) * -1;
+              break;
+            case memory.dataset.completed === 'completed':
+              break;
+            default: numBox.value = parseFloat(numBox.value) * -1;
+          }
+          break;
+        case e.key === '%':
+          switch(true) {
+            case memory.dataset.firstValue === undefined:
+              numBox.value = parseFloat(numBox.value) / 100;
+              eraser();
+              memory.dataset.completed = 'completed';
+              break;
+            case memory.dataset.firstValue !== undefined:
+              memory.dataset.secondValue = numBox.value;
+              calOperator = memory.dataset.operator;
+              firstVal = memory.dataset.firstValue;
+              secondVal = memory.dataset.secondValue;
+              numBox.value = calculate(calOperator, firstVal, secondVal) / 100;
+              eraser();
+              memory.dataset.completed = 'completed';
+              break;
+            default: break;
+          }
+          break;
+        case e.key !== 'Enter' && e.key !== '%':
+          switch (true) {
+            case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined && numBox.value === '':
+              memory.dataset.operator = e.key;
+              break;
+            case memory.dataset.firstValue !== undefined:
+              memory.dataset.secondValue = numBox.value;
+              calOperator = memory.dataset.operator;
+              firstVal = memory.dataset.firstValue;
+              secondVal = memory.dataset.secondValue;
+              numBox.value = calculate(calOperator, firstVal, secondVal);
+              eraser();
+              memory.dataset.firstValue = numBox.value;
+              memory.dataset.operator = e.key;
+              numBox.value = '';
+              break;
+            case numBox.value !== '':
+              memory.dataset.firstValue = numBox.value;
+              memory.dataset.operator = e.key;
+              numBox.value = '';
+              break;
+            default: break;
+          }
+          break;
+        // 연산 결과 출력
+        case e.key === 'Enter':
+          switch (true) {
+            case numBox.value === '':
+              break;
+            case memory.dataset.firstValue === undefined && numBox.value !== '':
+              break;
+            default:
+              memory.dataset.secondValue = numBox.value;
+              calOperator = memory.dataset.operator;
+              firstVal = memory.dataset.firstValue;
+              secondVal = memory.dataset.secondValue;
+              numBox.value = Math.round(calculate(calOperator, firstVal, secondVal) * 10 ** 13) / 10 ** 13;
+              eraser();
+              memory.dataset.completed = 'completed';
+              break;
+          }
+          break;
+        default: break;
+      }
     }
-    // console.log(matchingKey.dataset.key3);
-    // console.log(e.key);
   });
 };
 
