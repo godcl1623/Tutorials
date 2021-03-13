@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 // 변수, 상수 모음 => 상수 - 변수 순
 
 const buttons = document.querySelectorAll('button');
@@ -7,11 +8,11 @@ const numButton = document.querySelectorAll('.number-button');
 
 // 함수 모음
 
-  // 키 선택 효과
+// 키 선택 효과
 const keyInput = e => {
   const keySet1 = Array.from(buttons).map(attribute => attribute.dataset.key1);
-  const keySet2 = Array.from(buttons).map(attribute => attribute.dataset.key2);
   const keyDown = String(e.keyCode);
+  const keySet2 = Array.from(buttons).map(attribute => attribute.dataset.key2);
   const matchingKey = Array.from(buttons) //
     .find(
       attribute =>
@@ -25,38 +26,42 @@ const keyInput = e => {
   if (!keySet1.includes(keyDown) && !keySet2.includes(keyDown)) return;
   // 여기 조건문만 복습
   switch (true) {
-    default: break;
-    case e.key === '%':
-      const percent = document.querySelector('button[data-key2="%"]');
+    case e.key === '%': {
+      const percent = document.querySelector('button[data-key3="%"]');
       percent.classList.add('active');
       percent.addEventListener('transitionend', () => {
         percent.classList.remove('active');
       });
       break;
-    case e.key === '*':
+    }
+    case e.key === '*': {
       const multiply = document.querySelector('button[data-key3="*"]');
       multiply.classList.add('active');
       multiply.addEventListener('transitionend', () => {
         multiply.classList.remove('active');
       });
       break;
-    case e.key === '-':
+    }
+    case e.key === '-': {
       const minus = document.querySelector('button[data-key3="-"]');
       minus.classList.add('active');
       minus.addEventListener('transitionend', () => {
         minus.classList.remove('active');
       });
-    break;
-    case (matchingKey.dataset.key1 === keyDown || matchingKey.dataset.key2 === keyDown):
+      break;
+    }
+    case matchingKey.dataset.key1 === keyDown ||
+      matchingKey.dataset.key2 === keyDown:
       matchingButton.classList.add('active');
       matchingButton.addEventListener('transitionend', () =>
         matchingButton.classList.remove('active')
       );
       break;
+    default: break;
   }
 };
 
-  // 연산 초기화 - 대상 모음
+// 연산 초기화 - 대상 모음
 const eraser = () => {
   const memory = document.querySelector('.calculator-body');
   memory.removeAttribute('data-first-value');
@@ -65,30 +70,42 @@ const eraser = () => {
   memory.removeAttribute('data-completed');
 };
 
-  // 숫자창에 숫자 띄우기 - 키입력
+// 숫자창에 숫자 띄우기 - 키입력
 const printInput = e => {
   const keySet1 = Array.from(numButton).map(attribute => attribute.dataset.key1);
   const keySet2 = Array.from(numButton).map(attribute => attribute.dataset.key2);
   const keyDown = String(e.keyCode);
   const matchingKey = Array.from(numButton) //
-    .find(attribute =>
-        attribute.dataset.key1 === keyDown || attribute.dataset.key2 === keyDown
-    );
+    .find(attribute => attribute.dataset.key1 === keyDown || attribute.dataset.key2 === keyDown);
+  const memory = document.querySelector('.calculator-body');
   if (!keySet1.includes(keyDown) && !keySet2.includes(keyDown)) return;
-  if (matchingKey.dataset.key1 === keyDown || matchingKey.dataset.key2) {
+  if (matchingKey.dataset.key1 === keyDown || matchingKey.dataset.key2 === keyDown) {
     switch (true) {
-      default: numBox.value += e.key;
-      case (e.key === '*' || e.key === '%'):
-        break;
       case numBox.value.length >= 15:
         break;
       case numBox.value.includes('.') && numBox.value.length !== '' && e.key === '.':
         break;
-      case numBox.value[0] === '0' && numBox.value[1] === '.':
+      case memory.dataset.completed === undefined && numBox.value[0] === '0' && numBox.value[1] === '.':
+        numBox.value += e.key;
+        break;
+      case memory.dataset.completed === 'completed' && numBox.value[0] === '0' && numBox.value[1] === '.':
+        eraser();
+        numBox.value = '';
         numBox.value += e.key;
         break;
       case numBox.value[0] === '0' && e.key !== '.':
         break;
+      case memory.dataset.completed === 'completed' && e.key !== /\d/:
+        eraser();
+        numBox.value = '';
+        numBox.value += e.key;
+        break;
+      default: {
+        const numKey = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        if (numKey.find(key => key === parseFloat(e.key))) {
+          numBox.value += e.key;
+        }
+      }
     }
   }
 };
@@ -97,9 +114,6 @@ const printInput = e => {
 const clickedInput = e => {
   const memory = document.querySelector('.calculator-body');
   switch (true) {
-    default:
-      numBox.value += e.target.innerText;
-      break;
     case numBox.value.length >= 15:
       break;
     case numBox.value.includes('.') && numBox.value.length !== '' && e.target.innerText === '.':
@@ -119,6 +133,7 @@ const clickedInput = e => {
       numBox.value = '';
       numBox.value += e.target.innerText;
       break;
+    default: numBox.value += e.target.innerText;
   }
 };
   // 연산 초기화 - 버튼
@@ -139,7 +154,6 @@ const buttonEvents = e => {
   // 연산 함수
 const calculate = (operator, firstVal, secondVal) => {
   switch (operator) {
-    default: break;
     case '+':
       return parseFloat(firstVal) + parseFloat(secondVal);
     case '-':
@@ -150,11 +164,12 @@ const calculate = (operator, firstVal, secondVal) => {
     case '÷':
     case '/':
       return parseFloat(firstVal) / parseFloat(secondVal);
+    default: break;
   }
 };
 
   // 연산결과 출력
-const calculator = e => {
+const buttonCalculator = () => {
   const operator = document.querySelectorAll('.operator');
   const memory = document.querySelector('.calculator-body');
   let calOperator;
@@ -163,81 +178,167 @@ const calculator = e => {
     // 연산결과 출력 - 버튼입력의 경우
   operator.forEach(clicked => clicked.addEventListener('click', e => {
     switch (true) {
-      default: break;
-      case numBox.value === '' && e.target.classList.contains('result'):
-        break;
-      case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined && !e.target.classList.contains('result'):
-        memory.dataset.operator = e.target.innerText;
-        break;
-      case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined && e.target.innerText === '+/-':
-        memory.dataset.firstValue = parseFloat(memory.dataset.firstValue) * -1;
-        break;
-      case memory.dataset.completed === 'completed' && e.target.innerText === '+/-':
-        break;
       case e.target.innerText === '+/-':
-        numBox.value = parseFloat(numBox.value) * -1;
-        break;
-      case memory.dataset.firstValue !== undefined && !e.target.classList.contains('result') && !e.target.classList.contains('percent'):
-        memory.dataset.secondValue = numBox.value;
-        calOperator = memory.dataset.operator;
-        firstVal = memory.dataset.firstValue;
-        secondVal = memory.dataset.secondValue;
-        numBox.value = calculate(calOperator, firstVal, secondVal);
-        eraser();
-        memory.dataset.firstValue = numBox.value;
-        memory.dataset.operator = e.target.innerText;
-        numBox.value = '';
-        break;
-      case numBox.value !== '' && !e.target.classList.contains('result') && !e.target.classList.contains('percent'):
-        memory.dataset.firstValue = numBox.value;
-        memory.dataset.operator = e.target.innerText;
-        numBox.value = '';
-        break;
-      case memory.dataset.firstValue === undefined && numBox.value !== '' && e.target.classList.contains('result'):
-        break;
-      case e.target.classList.contains('result'):
-        memory.dataset.secondValue = numBox.value;
-        calOperator = memory.dataset.operator;
-        firstVal = memory.dataset.firstValue;
-        secondVal = memory.dataset.secondValue;
-        numBox.value = Math.round(calculate(calOperator, firstVal, secondVal) * 10 ** 13) / 10 ** 13;
-        eraser();
-        memory.dataset.completed = 'completed';
-        break;
-      case e.target.classList.contains('percent') && memory.dataset.firstValue === undefined:
-        numBox.value = parseFloat(numBox.value) / 100;
-        eraser();
-        memory.dataset.completed = 'completed';
+        switch (true) {
+          case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined:
+            numBox.value = parseFloat(numBox.value) * -1;
+            break;
+          case memory.dataset.completed === 'completed':
+            break;
+          default: numBox.value = parseFloat(numBox.value) * -1;
+        }
         break;
       case e.target.classList.contains('percent'):
-        memory.dataset.secondValue = numBox.value;
-        calOperator = memory.dataset.operator;
-        firstVal = memory.dataset.firstValue;
-        secondVal = memory.dataset.secondValue;
-        numBox.value = calculate(calOperator, firstVal, secondVal) / 100;
-        console.log(calOperator);
-        eraser();
-        memory.dataset.completed = 'completed';
+        switch(true) {
+          case memory.dataset.firstValue === undefined:
+            numBox.value = parseFloat(numBox.value) / 100;
+            eraser();
+            memory.dataset.completed = 'completed';
+            break;
+          case memory.dataset.firstValue !== undefined:
+            memory.dataset.secondValue = numBox.value;
+            calOperator = memory.dataset.operator;
+            firstVal = memory.dataset.firstValue;
+            secondVal = memory.dataset.secondValue;
+            numBox.value = calculate(calOperator, firstVal, secondVal) / 100;
+            eraser();
+            memory.dataset.completed = 'completed';
+            break;
+          default: break;
+        }
         break;
+      case !e.target.classList.contains('result') && !e.target.classList.contains('percent'):
+        switch (true) {
+          case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined && numBox.value === '':
+            memory.dataset.operator = e.target.innerText;
+            break;
+          case memory.dataset.firstValue !== undefined:
+            memory.dataset.secondValue = numBox.value;
+            calOperator = memory.dataset.operator;
+            firstVal = memory.dataset.firstValue;
+            secondVal = memory.dataset.secondValue;
+            numBox.value = calculate(calOperator, firstVal, secondVal);
+            eraser();
+            memory.dataset.firstValue = numBox.value;
+            memory.dataset.operator = e.target.innerText;
+            numBox.value = '';
+            break;
+          case numBox.value !== '':
+            memory.dataset.firstValue = numBox.value;
+            memory.dataset.operator = e.target.innerText;
+            numBox.value = '';
+            break;
+          default: break;
+        }
+        break;
+      // 연산 결과 출력
+      case e.target.classList.contains('result'):
+        switch (true) {
+          case numBox.value === '':
+            break;
+          case memory.dataset.firstValue === undefined && numBox.value !== '':
+            break;
+          default:
+            memory.dataset.secondValue = numBox.value;
+            calOperator = memory.dataset.operator;
+            firstVal = memory.dataset.firstValue;
+            secondVal = memory.dataset.secondValue;
+            numBox.value = Math.round(calculate(calOperator, firstVal, secondVal) * 10 ** 13) / 10 ** 13;
+            eraser();
+            memory.dataset.completed = 'completed';
+            break;
+        }
+        break;
+      default: break;
     }
   }));
-    // 연산결과 출력 - 키입력의 경우
+
+};
+
+const keyCalculator = () => {
+  const memory = document.querySelector('.calculator-body');
+  let calOperator;
+  let firstVal;
+  let secondVal;
+  // 연산결과 출력 - 키입력의 경우
   window.addEventListener('keydown', e => {
-    switch (true) {
-      default: break;
-      case numBox.value !== '' && e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/':
-        memory.dataset.firstValue = numBox.value;
-        memory.dataset.operator = e.key;
-        numBox.value = '';
-        break;
-      case e.keyCode === 13:
-        memory.dataset.secondValue = numBox.value;
-        const firstVal = memory.dataset.firstValue;
-        const operator = memory.dataset.operator;
-        const secondVal = memory.dataset.secondValue;
-        numBox.value = calculate(operator, firstVal, secondVal);
-        eraser();
-        break;
+    const opButton = ['+', '-', '*', '/', '_', '%', 'Enter'];
+    const matchingKey = Array.from(opButton).find(operator => operator === e.key);
+    if (matchingKey) {
+      switch (true) {
+        case e.key === '_':
+          switch (true) {
+            case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined:
+              numBox.value = parseFloat(numBox.value) * -1;
+              break;
+            case memory.dataset.completed === 'completed':
+              break;
+            default: numBox.value = parseFloat(numBox.value) * -1;
+          }
+          break;
+        case e.key === '%':
+          switch(true) {
+            case memory.dataset.firstValue === undefined:
+              numBox.value = parseFloat(numBox.value) / 100;
+              eraser();
+              memory.dataset.completed = 'completed';
+              break;
+            case memory.dataset.firstValue !== undefined:
+              memory.dataset.secondValue = numBox.value;
+              calOperator = memory.dataset.operator;
+              firstVal = memory.dataset.firstValue;
+              secondVal = memory.dataset.secondValue;
+              numBox.value = calculate(calOperator, firstVal, secondVal) / 100;
+              eraser();
+              memory.dataset.completed = 'completed';
+              break;
+            default: break;
+          }
+          break;
+        case e.key !== 'Enter' && e.key !== '%':
+          switch (true) {
+            case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined && numBox.value === '':
+              memory.dataset.operator = e.key;
+              break;
+            case memory.dataset.firstValue !== undefined:
+              memory.dataset.secondValue = numBox.value;
+              calOperator = memory.dataset.operator;
+              firstVal = memory.dataset.firstValue;
+              secondVal = memory.dataset.secondValue;
+              numBox.value = calculate(calOperator, firstVal, secondVal);
+              eraser();
+              memory.dataset.firstValue = numBox.value;
+              memory.dataset.operator = e.key;
+              numBox.value = '';
+              break;
+            case numBox.value !== '':
+              memory.dataset.firstValue = numBox.value;
+              memory.dataset.operator = e.key;
+              numBox.value = '';
+              break;
+            default: break;
+          }
+          break;
+        // 연산 결과 출력
+        case e.key === 'Enter':
+          switch (true) {
+            case numBox.value === '':
+              break;
+            case memory.dataset.firstValue === undefined && numBox.value !== '':
+              break;
+            default:
+              memory.dataset.secondValue = numBox.value;
+              calOperator = memory.dataset.operator;
+              firstVal = memory.dataset.firstValue;
+              secondVal = memory.dataset.secondValue;
+              numBox.value = Math.round(calculate(calOperator, firstVal, secondVal) * 10 ** 13) / 10 ** 13;
+              eraser();
+              memory.dataset.completed = 'completed';
+              break;
+          }
+          break;
+        default: break;
+      }
     }
   });
 };
@@ -249,4 +350,5 @@ window.addEventListener('keydown', printInput);
 numButton.forEach(clicked => clicked.addEventListener('click', clickedInput));
 inputReset();
 window.addEventListener('keydown', buttonEvents);
-calculator();
+buttonCalculator();
+keyCalculator();
