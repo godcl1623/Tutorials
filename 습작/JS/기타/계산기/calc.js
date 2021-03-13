@@ -188,51 +188,66 @@ const buttonCalculator = () => {
           default: numBox.value = parseFloat(numBox.value) * -1;
         }
         break;
-      case memory.dataset.firstValue !== undefined && !e.target.classList.contains('result') && !e.target.classList.contains('percent'):
-        memory.dataset.secondValue = numBox.value;
-        calOperator = memory.dataset.operator;
-        firstVal = memory.dataset.firstValue;
-        secondVal = memory.dataset.secondValue;
-        numBox.value = calculate(calOperator, firstVal, secondVal);
-        eraser();
-        memory.dataset.firstValue = numBox.value;
-        memory.dataset.operator = e.target.innerText;
-        numBox.value = '';
-        break;
-      case numBox.value === '' && e.target.classList.contains('result'):
-        break;
-      case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined && !e.target.classList.contains('result'):
-        memory.dataset.operator = e.target.innerText;
-        break;
-      case numBox.value !== '' && !e.target.classList.contains('result') && !e.target.classList.contains('percent'):
-        memory.dataset.firstValue = numBox.value;
-        memory.dataset.operator = e.target.innerText;
-        numBox.value = '';
-        break;
-      case memory.dataset.firstValue === undefined && numBox.value !== '' && e.target.classList.contains('result'):
-        break;
-      case e.target.classList.contains('result'):
-        memory.dataset.secondValue = numBox.value;
-        calOperator = memory.dataset.operator;
-        firstVal = memory.dataset.firstValue;
-        secondVal = memory.dataset.secondValue;
-        numBox.value = Math.round(calculate(calOperator, firstVal, secondVal) * 10 ** 13) / 10 ** 13;
-        eraser();
-        memory.dataset.completed = 'completed';
-        break;
-      case e.target.classList.contains('percent') && memory.dataset.firstValue === undefined:
-        numBox.value = parseFloat(numBox.value) / 100;
-        eraser();
-        memory.dataset.completed = 'completed';
-        break;
       case e.target.classList.contains('percent'):
-        memory.dataset.secondValue = numBox.value;
-        calOperator = memory.dataset.operator;
-        firstVal = memory.dataset.firstValue;
-        secondVal = memory.dataset.secondValue;
-        numBox.value = calculate(calOperator, firstVal, secondVal) / 100;
-        eraser();
-        memory.dataset.completed = 'completed';
+        switch(true) {
+          case memory.dataset.firstValue === undefined:
+            numBox.value = parseFloat(numBox.value) / 100;
+            eraser();
+            memory.dataset.completed = 'completed';
+            break;
+          case memory.dataset.firstValue !== undefined:
+            memory.dataset.secondValue = numBox.value;
+            calOperator = memory.dataset.operator;
+            firstVal = memory.dataset.firstValue;
+            secondVal = memory.dataset.secondValue;
+            numBox.value = calculate(calOperator, firstVal, secondVal) / 100;
+            eraser();
+            memory.dataset.completed = 'completed';
+            break;
+          default: break;
+        }
+        break;
+      case !e.target.classList.contains('result') && !e.target.classList.contains('percent'):
+        switch (true) {
+          case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined && numBox.value === '':
+            memory.dataset.operator = e.target.innerText;
+            break;
+          case memory.dataset.firstValue !== undefined:
+            memory.dataset.secondValue = numBox.value;
+            calOperator = memory.dataset.operator;
+            firstVal = memory.dataset.firstValue;
+            secondVal = memory.dataset.secondValue;
+            numBox.value = calculate(calOperator, firstVal, secondVal);
+            eraser();
+            memory.dataset.firstValue = numBox.value;
+            memory.dataset.operator = e.target.innerText;
+            numBox.value = '';
+            break;
+          case numBox.value !== '':
+            memory.dataset.firstValue = numBox.value;
+            memory.dataset.operator = e.target.innerText;
+            numBox.value = '';
+            break;
+          default: break;
+        }
+        break;
+      // 연산 결과 출력
+      case e.target.classList.contains('result'):
+        switch (true) {
+          case numBox.value === '':
+            break;
+          case memory.dataset.firstValue === undefined && numBox.value !== '':
+            break;
+          default:
+            memory.dataset.secondValue = numBox.value;
+            calOperator = memory.dataset.operator;
+            firstVal = memory.dataset.firstValue;
+            secondVal = memory.dataset.secondValue;
+            numBox.value = Math.round(calculate(calOperator, firstVal, secondVal) * 10 ** 13) / 10 ** 13;
+            eraser();
+            memory.dataset.completed = 'completed';
+            break;
+        }
         break;
       default: break;
     }
