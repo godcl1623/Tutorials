@@ -178,18 +178,15 @@ const buttonCalculator = () => {
     // 연산결과 출력 - 버튼입력의 경우
   operator.forEach(clicked => clicked.addEventListener('click', e => {
     switch (true) {
-      case numBox.value === '' && e.target.classList.contains('result'):
-        break;
-      case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined && !e.target.classList.contains('result'):
-        memory.dataset.operator = e.target.innerText;
-        break;
-      case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined && e.target.innerText === '+/-':
-        numBox.value = parseFloat(numBox.value) * -1;
-        break;
-      case memory.dataset.completed === 'completed' && e.target.innerText === '+/-':
-        break;
       case e.target.innerText === '+/-':
-        numBox.value = parseFloat(numBox.value) * -1;
+        switch (true) {
+          case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined:
+            numBox.value = parseFloat(numBox.value) * -1;
+            break;
+          case memory.dataset.completed === 'completed':
+            break;
+          default: numBox.value = parseFloat(numBox.value) * -1;
+        }
         break;
       case memory.dataset.firstValue !== undefined && !e.target.classList.contains('result') && !e.target.classList.contains('percent'):
         memory.dataset.secondValue = numBox.value;
@@ -201,6 +198,11 @@ const buttonCalculator = () => {
         memory.dataset.firstValue = numBox.value;
         memory.dataset.operator = e.target.innerText;
         numBox.value = '';
+        break;
+      case numBox.value === '' && e.target.classList.contains('result'):
+        break;
+      case memory.dataset.firstValue !== undefined && memory.dataset.operator !== undefined && !e.target.classList.contains('result'):
+        memory.dataset.operator = e.target.innerText;
         break;
       case numBox.value !== '' && !e.target.classList.contains('result') && !e.target.classList.contains('percent'):
         memory.dataset.firstValue = numBox.value;
