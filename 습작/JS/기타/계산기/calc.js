@@ -6,6 +6,21 @@ const numBox = document.querySelector('.number-input');
 // const memBox = document.querySelector('.number-output');
 const numButton = document.querySelectorAll('.number-button');
 
+// 클래스 모음
+
+class AddActive {
+  constructor(id) {
+    this.id = id;
+  }
+
+  animator() {
+    this.id.classList.add('active');
+    this.id.addEventListener('transitionend', () => {
+      this.id.classList.remove('active');
+    });
+  }
+}
+
 // 함수 모음
 
 // 키 선택 효과
@@ -13,51 +28,36 @@ const keyInput = e => {
   const keySet1 = Array.from(buttons).map(attribute => attribute.dataset.key1);
   const keyDown = String(e.keyCode);
   const keySet2 = Array.from(buttons).map(attribute => attribute.dataset.key2);
-  const matchingKey = Array.from(buttons) //
-    .find(
-      attribute =>
-        attribute.dataset.key1 === keyDown || //
-        attribute.dataset.key2 === keyDown
-    );
   const matchingButton =
     document.querySelector(`button[data-key1='${e.keyCode}']`) ||
     document.querySelector(`button[data-key2='${e.keyCode}']`);
 
   if (!keySet1.includes(keyDown) && !keySet2.includes(keyDown)) return;
-  // 여기 조건문만 복습
+
   switch (true) {
     case e.key === '5': {
       const five = document.querySelector('button[data-key2="101"]');
-      five.classList.add('active');
-      five.addEventListener('transitionend', () => {
-        five.classList.remove('active');
-      });
+      const activeForFive = new AddActive(five);
+      activeForFive.animator();
       break;
     }
     case e.key === '*': {
       const multiply = document.querySelector('button[data-key3="*"]');
-      multiply.classList.add('active');
-      multiply.addEventListener('transitionend', () => {
-        multiply.classList.remove('active');
-      });
+      const activeForStar = new AddActive(multiply);
+      activeForStar.animator();
       break;
     }
     case e.key === '-': {
       const minus = document.querySelector('button[data-key3="-"]');
-      minus.classList.add('active');
-      minus.addEventListener('transitionend', () => {
-        minus.classList.remove('active');
-      });
+      const activeForMinus = new AddActive(minus);
+      activeForMinus.animator();
       break;
     }
-    case matchingKey.dataset.key1 === keyDown ||
-      matchingKey.dataset.key2 === keyDown:
-      matchingButton.classList.add('active');
-      matchingButton.addEventListener('transitionend', () =>
-        matchingButton.classList.remove('active')
-      );
+    default:  {
+      const activeForOther = new AddActive(matchingButton);
+      activeForOther.animator(matchingButton);
       break;
-    default: break;
+    }
   }
 };
 
@@ -124,13 +124,18 @@ const clickedInput = e => {
       break;
     case numBox.value.includes('.') && numBox.value.length !== '' && e.target.innerText === '.':
       break;
-    case memory.dataset.completed === undefined && numBox.value[0] === '0' && numBox.value[1] === '.':
-      numBox.value += e.target.innerText;
-      break;
-    case memory.dataset.completed === 'completed' && numBox.value[0] === '0' && numBox.value[1] === '.':
-      eraser();
-      numBox.value = '';
-      numBox.value += e.target.innerText;
+    case numBox.value[0] === '0' && numBox.value[1] === '.':
+      switch (true) {
+        case memory.dataset.completed === undefined:
+          numBox.value += e.target.innerText;
+          break;
+        case memory.dataset.completed === 'completed':
+          eraser();
+          numBox.value = '';
+          numBox.value += e.target.innerText;
+          break;
+        default: break;
+      }
       break;
     case numBox.value[0] === '0' && e.target.innerText !== '.':
       break;
