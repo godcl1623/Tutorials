@@ -3,7 +3,6 @@
 
 const buttons = document.querySelectorAll('button');
 const numBox = document.querySelector('.number-input');
-// const memBox = document.querySelector('.number-output');
 const numButton = document.querySelectorAll('.number-button');
 
 // 클래스 모음
