@@ -101,8 +101,9 @@ const printInput = e => {
         numBox.value += e.key;
         break;
       default: {
-        const numKey = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-        if (numKey.find(key => key === parseFloat(e.key))) {
+        const numKey = Array.from(numButton);
+        const newKeyArray = numKey.map(key => key.innerText);
+        if (newKeyArray.find(key => key === e.key)) {
           numBox.value += e.key;
         }
       }
