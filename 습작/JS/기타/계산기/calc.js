@@ -26,11 +26,11 @@ const keyInput = e => {
   if (!keySet1.includes(keyDown) && !keySet2.includes(keyDown)) return;
   // 여기 조건문만 복습
   switch (true) {
-    case e.key === '%': {
-      const percent = document.querySelector('button[data-key3="%"]');
-      percent.classList.add('active');
-      percent.addEventListener('transitionend', () => {
-        percent.classList.remove('active');
+    case e.key === '5': {
+      const five = document.querySelector('button[data-key2="101"]');
+      five.classList.add('active');
+      five.addEventListener('transitionend', () => {
+        five.classList.remove('active');
       });
       break;
     }
@@ -85,13 +85,18 @@ const printInput = e => {
         break;
       case numBox.value.includes('.') && numBox.value.length !== '' && e.key === '.':
         break;
-      case memory.dataset.completed === undefined && numBox.value[0] === '0' && numBox.value[1] === '.':
-        numBox.value += e.key;
-        break;
-      case memory.dataset.completed === 'completed' && numBox.value[0] === '0' && numBox.value[1] === '.':
-        eraser();
-        numBox.value = '';
-        numBox.value += e.key;
+      case numBox.value[0] === '0' && numBox.value[1] === '.':
+        switch (true) {
+          case memory.dataset.completed === undefined:
+            numBox.value += e.key;
+            break;
+          case memory.dataset.completed === 'completed':
+            eraser();
+            numBox.value = '';
+            numBox.value += e.key;
+            break;
+          default: break;
+        }
         break;
       case numBox.value[0] === '0' && e.key !== '.':
         break;
@@ -253,7 +258,6 @@ const buttonCalculator = () => {
       default: break;
     }
   }));
-
 };
 
 const keyCalculator = () => {
