@@ -58,6 +58,13 @@ figure.logo {
 button {
   width: var(--size-icon);
   height: var(--size-icon);
+  cursor: pointer;
+  transition: all 0.01s ease-in-out;
+}
+
+button:active {
+  filter: brightness(1.1);
+  transform: scale(1.1);
 }
 
 section.contents-wrapper {
@@ -65,20 +72,39 @@ section.contents-wrapper {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: scroll;
 }
 
 div.buttons-container {
+  margin: 20px 0;
   width: 70%;
-  min-width: 305px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
-li.clothes {
-  display: flex;
+ul.lists-container {
+  width: 70%;
+  overflow: scroll;
 }
 
-ul.lists-container {
-  width: 100%;
+li.clothes {
+  margin: 10px 0;
+  padding: 10px;
+  display: flex;
+  overflow: scroll;
+}
+
+.clothes figure.icon {
+  width: var(--size-icon);
+  height: var(--size-icon);
+}
+
+h3 {
+  margin-left: 10px;
+  width: 90%;
+  padding-left: 10px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
