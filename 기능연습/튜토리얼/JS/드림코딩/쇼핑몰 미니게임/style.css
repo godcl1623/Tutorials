@@ -2,7 +2,7 @@
 
 * {
   margin: 0;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 0;
   box-sizing: border-box;
 }
@@ -68,11 +68,12 @@ button:active {
 }
 
 section.contents-wrapper {
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: scroll;
+  /* overflow: auto; */
 }
 
 div.buttons-container {
@@ -85,14 +86,14 @@ div.buttons-container {
 
 ul.lists-container {
   width: 70%;
-  overflow: scroll;
+  height: 100%;
+  overflow: auto;
 }
 
 li.clothes {
   margin: 10px 0;
   padding: 10px;
   display: flex;
-  overflow: scroll;
 }
 
 .clothes figure.icon {
