@@ -2,7 +2,7 @@
 
 * {
   margin: 0;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 0;
   box-sizing: border-box;
 }
@@ -46,20 +46,36 @@ ul, li, ol {
   list-style: none;
 }
 
-figure, li {
-  background: var(--color-li);
-}
-
-figure.logo {
-  width: var(--size-logo);
-  height: var(--size-logo);
+img {
+  width: 100%;
+  height: 100%;
 }
 
 button {
-  width: var(--size-icon);
-  height: var(--size-icon);
+  width: 75px;
+  height: 75px;
+  background: none;
+  border: none;
   cursor: pointer;
   transition: all 0.01s ease-in-out;
+}
+
+.blue, .yellow, .pink {
+  height: 50px;
+  border: 1px solid black;
+  font-size: 16px;
+}
+
+button.blue {
+  background: var(--color-blue);
+}
+
+button.yellow {
+  background: var(--color-yellow);
+}
+
+button.pink {
+  background: var(--color-pink);
 }
 
 button:active {
@@ -68,11 +84,12 @@ button:active {
 }
 
 section.contents-wrapper {
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: scroll;
+  /* overflow: auto; */
 }
 
 div.buttons-container {
@@ -85,14 +102,16 @@ div.buttons-container {
 
 ul.lists-container {
   width: 70%;
-  overflow: scroll;
+  height: 100%;
+  overflow: auto;
 }
 
 li.clothes {
   margin: 10px 0;
+  height: 70px;
   padding: 10px;
   display: flex;
-  overflow: scroll;
+  background: var(--color-li);
 }
 
 .clothes figure.icon {
@@ -107,4 +126,8 @@ h3 {
   display: flex;
   justify-content: start;
   align-items: center;
+}
+
+.hide {
+  display: none;
 }
