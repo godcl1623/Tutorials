@@ -3,68 +3,49 @@
 
 'use strict';
 
-// 상수 모음
+function loadItems() {
+  return fetch('data/data.json')
+    .then(response => response.json())
+    .then(json => json.items);
+}
 
-const buttons = document.querySelectorAll('button');
+function createHTMLStrings(items) {
+  return `
+    <li class="clothes">
+      <figure class="icon"><img src="${items.image}" alt="${items.type}" class="lists__thunbnail"></figure>
+      <h3 class="lists__description">${items.gender}, ${items.size}</h3>
+    </li>
+  `;
+}
 
-// 클래스 모음
+function displayItems(items) {
+  const container = document.querySelector('.lists-container');
+  // const html = items.map(item => createHTMLStrings(item)).join('');
+  // console.log(html);
+  container.innerHTML = items.map(item => createHTMLStrings(item)).join('');
+}
 
-// 함수 모음
-
-const sortFunction = e => {
-  const clothes = document.querySelectorAll('.clothes');
-  const clothesArr = Array.from(clothes);
-  //
-  switch (true) {
-    case e.target.className === 'tshirts': {
-      const tshirts = clothesArr.filter(lists => lists.classList.contains('tshirts'));
-      const notTshirts = clothesArr.filter(lists => !lists.classList.contains('tshirts'));
-      tshirts.forEach(lists => {lists.style.display = 'flex'});
-      notTshirts.forEach(lists => {lists.style.display = 'none'});
-      break;
-    }
-    case e.target.className === 'pants': {
-      const pants = clothesArr.filter(lists => lists.classList.contains('pants'));
-      const notPants = clothesArr.filter(lists => !lists.classList.contains('pants'));
-      pants.forEach(lists => {lists.style.display = 'flex'});
-      notPants.forEach(lists => {lists.style.display = 'none'});
-      break;
-    }
-    case e.target.className === 'skirts': {
-      const skirts = clothesArr.filter(lists => lists.classList.contains('skirts'));
-      const notSkirts = clothesArr.filter(lists => !lists.classList.contains('skirts'));
-      skirts.forEach(lists => {lists.style.display = 'flex'});
-      notSkirts.forEach(lists => {lists.style.display = 'none'});
-      break;
-    }
-    case e.target.className === 'blue': {
-      const blue = clothesArr.filter(lists => lists.classList.contains('blue'));
-      const notBlue = clothesArr.filter(lists => !lists.classList.contains('blue'));
-      blue.forEach(lists => {lists.style.display = 'flex'});
-      notBlue.forEach(lists => {lists.style.display = 'none'});
-      break;
-    }
-    case e.target.className === 'yellow': {
-      const yellow = clothesArr.filter(lists => lists.classList.contains('yellow'));
-      const notYellow = clothesArr.filter(lists => !lists.classList.contains('yellow'));
-      yellow.forEach(lists => {lists.style.display = 'flex'});
-      notYellow.forEach(lists => {lists.style.display = 'none'});
-      break;
-    }
-    case e.target.className === 'pink': {
-      const pink = clothesArr.filter(lists => lists.classList.contains('pink'));
-      const notPink = clothesArr.filter(lists => !lists.classList.contains('pink'));
-      pink.forEach(lists => {lists.style.display = 'flex'});
-      notPink.forEach(lists => {lists.style.display = 'none'});
-      break;
-    }
-    case e.target.classList.contains('init'):
-      clothes.forEach(lists => {lists.style.display = 'flex'});
-      break;
-    default: break;
+function onButtonClick(event, items) {
+  const dataset = event.target.dataset;
+  const key = dataset.key;
+  const value = dataset.value;
+  if (key === undefined || value === undefined) {
+    return;
   }
-};
+    const filtered = items.filter(item => item[key] === value);
+    displayItems(filtered);
+}
 
-// 이벤트 리스너 모음
+function setEventListeners(items) {
+  const logo = document.querySelector('.logo');
+  const buttons = document.querySelector('.buttons-container');
+  logo.addEventListener('click', () => displayItems(items));
+  buttons.addEventListener('click', event => onButtonClick(event, items));
+}
 
-buttons.forEach(button => button.addEventListener('click', sortFunction));
+loadItems()
+  .then(items => {
+    displayItems(items);
+    setEventListeners(items);
+  })
+  .catch(console.log);
