@@ -58,25 +58,34 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-  function effectPlayer(e) {
-    const audioSource = document.querySelector(`audio[data-key='${e.keyCode}']`);
-    if (!audioSource) return;
-    audioSource.currentTime = 0;
-    audioSource.play();
+  const playSound = event => {
+    const audio = document.querySelector(`audio[data-key='${event.keyCode}']`);
+    if (!audio) return;
+    audio.currentTime = 0;
+    audio.play();
+  };
 
-    const emphasis = document.querySelector(`.key[data-key='${e.keyCode}']`);
-    emphasis.classList.add('playing');
-  }
+  const stopTransition = event => {
+    const key = document.querySelector(`div[data-key='${event.keyCode}']`);
+    const removeEffect = () => {
+      key.classList.remove('playing');
+    };
+    key.addEventListener('transitionend', removeEffect);
+  };
 
-  function effectRemover(e) {
-    if (e.propertyName !== 'transform') return;
-    this.classList.remove('playing');
-  }
+  const playTransition = event => {
+    const key = document.querySelector(`div[data-key='${event.keyCode}']`);
+    if (!key) return;
+    key.classList.add('playing');
+  };
 
-  const keys = document.querySelectorAll('.key');
-  keys.forEach(key => key.addEventListener('transitionend', effectRemover));
+  const playEffect = event => {
+    playSound(event);
+    playTransition(event);
+    stopTransition(event);
+  };
 
-  window.addEventListener('keydown', effectPlayer);
+  window.addEventListener('keydown', playEffect);
 </script>
 
 

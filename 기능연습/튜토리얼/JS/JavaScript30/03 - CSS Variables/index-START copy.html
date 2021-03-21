@@ -76,15 +76,26 @@
     </style>
 
     <script>
-      const inputs = document.querySelectorAll('.controls input');
+      const controls = document.querySelectorAll('.controls input');
 
-      function handleEffect() {
-        const units = this.dataset.sizing || ``;
-        document.documentElement.style.setProperty(`--${this.name}`, this.value + units);
+    //   function handleUpdate() {
+    //   const suffix = this.dataset.sizing || '';
+    //   document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    //   console.log(this.name);
+    // }
+
+      // const handleUpdate = event => {
+      //   const suffix = event.target.dataset.sizing || '';
+      //   document.documentElement.style.setProperty(`--${event.target.name}`, event.target.value + suffix);
+      // };
+
+      const handleUpdate = function () {
+        const suffix = this.dataset.sizing || '';
+        document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
       }
 
-      inputs.forEach(input => input.addEventListener('change', handleEffect));
-      inputs.forEach(input => input.addEventListener('mousemove', handleEffect));
+      controls.forEach(input => input.addEventListener('change', handleUpdate));
+      controls.forEach(input => input.addEventListener('mousemove', handleUpdate));
     </script>
   </body>
 </html>
