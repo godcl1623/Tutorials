@@ -1,9 +1,9 @@
 var currentTitle = document.getElementById('current-year-month');
 var calendarBody = document.getElementById('calendar-body');
 var today = new Date();
-var first = new Date(today.getFullYear(), today.getMonth(),1);
-var dayList = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-var monthList = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+var first = new Date(today.getFullYear(), today.getMonth(), 1);
+// var dayList = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+// var monthList = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 var leapYear=[31,29,31,30,31,30,31,31,30,31,30,31];
 var notLeapYear=[31,28,31,30,31,30,31,31,30,31,30,31];
 var pageFirst = first;
