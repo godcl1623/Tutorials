@@ -58,34 +58,37 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-  const playSound = event => {
-    const audio = document.querySelector(`audio[data-key='${event.keyCode}']`);
-    if (!audio) return;
-    audio.currentTime = 0;
-    audio.play();
-  };
+'use strict';
 
-  const stopTransition = event => {
-    const key = document.querySelector(`div[data-key='${event.keyCode}']`);
-    const removeEffect = () => {
-      key.classList.remove('playing');
-    };
-    key.addEventListener('transitionend', removeEffect);
-  };
+const playSound = event => {
+  const audios = document.querySelector(`audio[data-key='${event.keyCode}']`);
+  if (!audios) return;
+  audios.currentTime = 0;
+  audios.play();
+};
 
-  const playTransition = event => {
-    const key = document.querySelector(`div[data-key='${event.keyCode}']`);
-    if (!key) return;
-    key.classList.add('playing');
-  };
+const playEffect = event => {
+  const key = document.querySelector(`.key[data-key='${event.keyCode}']`);
+  if (!key) return;
+  key.classList.add('playing');
+};
 
-  const playEffect = event => {
-    playSound(event);
-    playTransition(event);
-    stopTransition(event);
-  };
+const stopEffect = event => {
+  const key = document.querySelector(`.key[data-key='${event.keyCode}']`);
+  if (!key) return;
+  key.addEventListener('transitionend', event => {
+    if (event.propertyName !== 'transform') return;
+    this.classList.remove('playing');
+  });
+};
 
-  window.addEventListener('keydown', playEffect);
+const effectsHandler = event => {
+  playSound(event);
+  playEffect(event);
+  stopEffect(event);
+};
+
+window.addEventListener('keydown', effectsHandler);
 </script>
 
 
