@@ -76,26 +76,7 @@
     </style>
 
     <script>
-      const controls = document.querySelectorAll('.controls input');
 
-    //   function handleUpdate() {
-    //   const suffix = this.dataset.sizing || '';
-    //   document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
-    //   console.log(this.name);
-    // }
-
-      // const handleUpdate = event => {
-      //   const suffix = event.target.dataset.sizing || '';
-      //   document.documentElement.style.setProperty(`--${event.target.name}`, event.target.value + suffix);
-      // };
-
-      const handleUpdate = function () {
-        const suffix = this.dataset.sizing || '';
-        document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
-      }
-
-      controls.forEach(input => input.addEventListener('change', handleUpdate));
-      controls.forEach(input => input.addEventListener('mousemove', handleUpdate));
     </script>
   </body>
 </html>
