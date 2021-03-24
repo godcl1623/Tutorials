@@ -1,28 +1,47 @@
-const calBody = document.querySelector('.calendar__weeks');
-const span = calBody.querySelectorAll('span');
-const currentDate = new Date();
-const dateStandard = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-const leapYear = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-const notLeapYear = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-let pageFirst = dateStandard;
-let pageYear;
-if (dateStandard.getFullYear() % 4 === 0) {
-  pageYear = leapYear;
-} else {
-  pageYear = notLeapYear;
-}
-const test = () => {
-  span.forEach(html => {html.innerText = '1'});
+/* eslint-disable strict */
+
+'use strict';
+
+const dateStandard = new Date();
+const currentYear = dateStandard.getFullYear();
+const currentMonth = dateStandard.getMonth();
+const isLeapYear = year => {
+  return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 === 0);
+};
+const febLastDay = year => {
+  return isLeapYear(year) ? 29 : 28;
 };
 
-const displayCalendar = () => {
+const calendarGenerator = (year = currentYear, month = currentMonth) => {
+  const lastDays = [31, febLastDay(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  const calendarDates = document.querySelector('.calendar__dates');
+  calendarDates.innerHTML = '';
   let cnt = 1;
-  for (let i = 0; i < 31; i++) {
-    for (let j = 0; j < 31; j++) {
-      span.forEach(html => {html.innerText = j});
-      j++;
+  const firstDay = new Date(year, month, 1);
+  for (let i = 0; i < 6; i++) {
+    const weeks = document.createElement('div');
+    weeks.classList.add('calendar-weeks');
+    calendarDates.appendChild(weeks);
+    for (let j = 0; j < 7; j++) {
+      const day = document.createElement('div');
+      if ((i === 0 && j < firstDay.getDay()) || cnt > lastDays[month]) {
+        weeks.appendChild(day);
+        day.classList.add('empty');
+      } else {
+        day.innerHTML = cnt;
+        weeks.appendChild(day);
+        day.classList.add('filled');
+        cnt++;
+      }
     }
   }
+  // for (let i = 0; i <= lastDays[month] + firstDay.getDay() - 1; i++) {
+  //   const day = document.createElement('div');
+  //   if (i >= firstDay.getDay()) {
+  //     day.classList.add('calendar-day');
+  //     day.innerHTML = i - firstDay.getDay() + 1;
+  //   }
+  //   calendarDates.appendChild(day);
+  // }
 };
-
-displayCalendar();
+calendarGenerator(2021, 2);
