@@ -53,5 +53,6 @@ const calendarGenerator = (year = currentYear, month = currentMonth) => {
   const dayArr = Array.from(daySections);
   const test = dayArr.find(ele => ele.classList.contains(firstDay.getDay()));
   if (firstDate === test) {console.log('test')};
+  // test
 };
 calendarGenerator(2021, 2);
