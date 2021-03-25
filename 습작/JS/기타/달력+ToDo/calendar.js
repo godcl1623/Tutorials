@@ -14,40 +14,15 @@ const febLastDay = year => {
 
 const calendarGenerator = (year = currentYear, month = currentMonth) => {
   const lastDays = [31, febLastDay(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  // const calendarDates = document.querySelector('.calendar__dates');
   const daySections = document.querySelectorAll('.day');
-  // calendarDates.innerHTML = '';
   daySections.forEach(dayBox => {dayBox.innerHTML = '';});
-  let cnt = 1;
   const firstDay = new Date(year, month, 1);
-  // for (let i = 0; i < 6; i++) {
-  //   const weeks = document.createElement('div');
-  //   weeks.classList.add('calendar-weeks');
-  //   calendarDates.appendChild(weeks);
-  //   for (let j = 0; j < 7; j++) {
-  //     const day = document.createElement('div');
-  //     if ((i === 0 && j < firstDay.getDay()) || cnt > lastDays[month]) {
-  //       weeks.appendChild(day);
-  //       day.classList.add('empty');
-  //     } else {
-  //       day.innerHTML = cnt;
-  //       weeks.appendChild(day);
-  //       day.classList.add('filled');
-  //       cnt++;
-  //     }
-  //   }
-  // }
   for (let i = 0; i <= lastDays[month] + firstDay.getDay() - 1; i++) {
     const n = lastDays[month] + firstDay.getDay();
     const testArr = [...Array(n).keys()];
-    // console.log(testArr[i]);
     if (i >= firstDay.getDay()) {
-      // daySections.forEach(ele => {
-      //   ele.innerHTML = testArr[i] - firstDay.getDay() + 1;
-      // });
-      // console.log(i);
       daySections[i].innerHTML = testArr[i] - firstDay.getDay() + 1;
     }
   }
 };
-calendarGenerator(2021, 1);
+calendarGenerator(2021, 4);
