@@ -37,22 +37,17 @@ const calendarGenerator = (year = currentYear, month = currentMonth) => {
   //     }
   //   }
   // }
-  // for (let i = 0; i < 6; i++) {
-  //   for (let j = 0; j < 7; j++) {
-  //     // if ((i === 0 && j < firstDay.getDay()) || cnt > lastDays[month]) {
-  //     //   console.log(j);
-  //     // } else {
-  //     //   daySections.forEach(dayBox => {
-  //     //     dayBox.innerHTML = cnt;
-  //     //     cnt++;
-  //     //   });
-  //     // }
-  //   }
-  // }
-  const firstDate = document.querySelector('.1');
-  const dayArr = Array.from(daySections);
-  const test = dayArr.find(ele => ele.classList.contains(firstDay.getDay()));
-  if (firstDate === test) {console.log('test')};
-  // test
+  for (let i = 0; i <= lastDays[month] + firstDay.getDay() - 1; i++) {
+    const n = lastDays[month] + firstDay.getDay();
+    const testArr = [...Array(n).keys()];
+    // console.log(testArr[i]);
+    if (i >= firstDay.getDay()) {
+      // daySections.forEach(ele => {
+      //   ele.innerHTML = testArr[i] - firstDay.getDay() + 1;
+      // });
+      // console.log(i);
+      daySections[i].innerHTML = testArr[i] - firstDay.getDay() + 1;
+    }
+  }
 };
-calendarGenerator(2021, 2);
+calendarGenerator(2021, 1);
