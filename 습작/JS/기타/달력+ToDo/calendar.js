@@ -35,13 +35,5 @@ const calendarGenerator = (year = currentYear, month = currentMonth) => {
       }
     }
   }
-  // for (let i = 0; i <= lastDays[month] + firstDay.getDay() - 1; i++) {
-  //   const day = document.createElement('div');
-  //   if (i >= firstDay.getDay()) {
-  //     day.classList.add('calendar-day');
-  //     day.innerHTML = i - firstDay.getDay() + 1;
-  //   }
-  //   calendarDates.appendChild(day);
-  // }
 };
 calendarGenerator(2021, 2);
