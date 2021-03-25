@@ -2,7 +2,7 @@
 
 * {
   margin: 0;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 0;
   box-sizing: border-box;
 }
@@ -25,7 +25,7 @@ h6 {
 .app__body {
   width: 80%;
   height: 80%;
-  position: relative;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -37,10 +37,14 @@ h6 {
 .app__body > * {
   width: 100%;
   height: 100%;
-  flex: 1;
 }
 
 /* 달력, 투두 날짜 표시 영역 */
+
+.calendar__body {
+  display: flex;
+  flex-direction: column;
+}
 
 .calendar__date, .todo__date {
   display: flex;
@@ -65,22 +69,36 @@ h6 {
 
 .calendar__days > * {
   width: 100%;
-  height: 65px;;
+  height: 65px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 24px;
 }
 
-.calendar__weeks > .cal__body {
+.calendar__dates {
   width: 100%;
-  height: 50px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-weeks {
+  height: 100%;
   display: flex;
 }
 
-.calendar__weeks > .cal__body > *{
+.calendar-weeks > * {
   width: 100%;
-  height: 100%;
-  display: block;
-  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty {
+  border: none;
+}
+
+.filled {
+  border: 1px solid black;
 }
