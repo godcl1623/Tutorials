@@ -14,15 +14,27 @@ const febLastDay = year => {
 
 const calendarGenerator = (year = currentYear, month = currentMonth) => {
   const lastDays = [31, febLastDay(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  const daySections = document.querySelectorAll('.day');
-  daySections.forEach(dayBox => {dayBox.innerHTML = '';});
+  const calendarBody = document.querySelector('#calendar-area');
   const firstDay = new Date(year, month, 1);
-  for (let i = 0; i <= lastDays[month] + firstDay.getDay() - 1; i++) {
-    const n = lastDays[month] + firstDay.getDay();
-    const testArr = [...Array(n).keys()];
-    if (i >= firstDay.getDay()) {
-      daySections[i].innerHTML = testArr[i] - firstDay.getDay() + 1;
+  let cnt = 1;
+  let monthCnt = 100;
+  for (let i = 0; i < 6; i++) {
+    const $tr = document.createElement('tr');
+    $tr.setAttribute('class', monthCnt);
+    for (let j = 0; j < 7; j++) {
+      if ((i === 0 && j < firstDay.getDay()) || cnt > lastDays[month]) {
+        let $td = document.createElement('td');
+        $tr.appendChild($td);
+      } else {
+        let $td = document.createElement('td');
+        $td.textContent = cnt;
+        $td.setAttribute('class', cnt);
+        $tr.appendChild($td);
+        cnt++;
+      }
     }
+    monthCnt++;
+    calendarBody.appendChild($tr);
   }
 };
-calendarGenerator(2021, 4);
+calendarGenerator();
