@@ -2,9 +2,23 @@
 
 'use strict';
 
-const arr = [1, 2, 3, 4, 5];
-/* for (let value of arr) {
-	console.log(value);
-} */
+const getHen = () =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => resolve('hen'), 1000);
+	});
+const getEgg = hen =>
+	new Promise((resolve, reject) => {
+		// setTimeout(() => resolve(`${hen} => egg`), 1000);
+		setTimeout(() => reject(new Error(`errpr! ${hen} => egg`)), 1000);
+	});
+const cook = egg =>
+	new Promise((resolve, reject) => {
+		setTimeout(() => resolve(`${egg} => fried egg`), 1000);
+	});
 
-arr.forEach((value, index) => console.log(value, index));
+getHen()
+	.then(getEgg)
+	.catch(error => {return 'bread';})
+	.then(cook)
+	.then(console.log)
+	.catch(console.log);
