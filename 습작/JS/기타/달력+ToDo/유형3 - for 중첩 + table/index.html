@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>달력 & ToDo</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="calendar.js"></script>
+</head>
+<body>
+  <section class="app__body">
+    <h6>달력 몸체</h6>
+    <section class="calendar__body">
+      <h6>달력 영역</h6>
+      <nav class="calendar__date">
+        <div class="prev__month">＜</div>
+        <div class="this__date">
+          <span class="year">2021</span>
+          <span class="month">03</span>
+        </div>
+        <div class="next__month">＞</div>
+      </nav>
+      <div class="calendar__days">
+        <span class="days__sunday">S</span>
+        <span class="days__monday">M</span>
+        <span class="days__tuesday">T</span>
+        <span class="days__wednesday">W</span>
+        <span class="days__thursday">T</span>
+        <span class="days__friday">F</span>
+        <span class="days__saturday">S</span>
+      </div>
+      <div class="calendar__dates">
+        <table id="calendar-area" align="center">
+        </table>
+      </div>
+    </section>
+    <section class="todo__body">
+      <h6>ToDo 영역</h6>
+      <nav class="todo__date">
+        <div class="prev__date">＜</div>
+        <div class="this__date">
+          <span>2021.03.20 (토)</span>
+        </div>
+        <div class="next__date">＞</div>
+      </nav>
+      <div class="todo__list__body">
+        <ul class="todo__list__container">
+          <li class="todo__list__contents">
+            <input type="checkbox">
+            <span class="list__item">리스트 1</span>
+          </li>
+        </ul>
+        <div class="todo__input">
+          <input type="text">
+          <button type="submit">입력</button>
+        </div>
+      </div>
+    </section>
+  </section>
+</body>
+</html>
