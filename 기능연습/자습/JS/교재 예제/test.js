@@ -2,23 +2,38 @@
 
 'use strict';
 
-const getHen = () =>
-  new Promise((resolve, reject) => {
-    setTimeout(() => resolve('hen'), 1000);
-	});
-const getEgg = hen =>
-	new Promise((resolve, reject) => {
-		// setTimeout(() => resolve(`${hen} => egg`), 1000);
-		setTimeout(() => reject(new Error(`errpr! ${hen} => egg`)), 1000);
-	});
-const cook = egg =>
-	new Promise((resolve, reject) => {
-		setTimeout(() => resolve(`${egg} => fried egg`), 1000);
-	});
+function delay(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-getHen()
-	.then(getEgg)
-	.catch(error => {return 'bread';})
-	.then(cook)
-	.then(console.log)
-	.catch(console.log);
+async function getApple() {
+	await delay(2000);
+	// throw 'error';
+	return 'apple';
+}
+
+async function getBanana() {
+	await delay(1000);
+	return 'banana';
+}
+
+/*function pickFruits() {
+	return getApple().then(apple => {
+		return getBanana().then(banana => `${apple} + ${banana}`);
+	});
+}*/
+
+async function pickFruits() {
+	try {
+		const applePromise = getApple();
+		const bananaPromise = getBanana();
+		const apple = await applePromise;
+		const banana = await bananaPromise;
+		return Promise.race([getApple(), getBanana()]);
+			// .then(fruits => fruits.join('+'));
+	} catch(error) {
+		console.log('error');
+	}
+}
+
+pickFruits().then(console.log);
