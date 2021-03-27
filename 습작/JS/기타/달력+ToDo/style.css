@@ -20,6 +20,17 @@ h6 {
   display: none;
 }
 
+button {
+  padding: 10px 20px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+button:active {
+  transform:scale(1.1);
+  filter: brightness(0.75);
+}
+
 /* 전체 컨테이너 */
 
 .app__body {
@@ -52,13 +63,30 @@ h6 {
   align-items: center;
 }
 
-.calendar__date > .this__date, .todo__date > .this__date {
+.calendar__date {
+  justify-content: space-between;
+}
+
+.calendar__date .month-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar__date .this__date, .todo__date > .this__date {
   margin: 0 20px;
   padding: 5px 20px;
   display: flex;
   flex-direction: column;
   font-size: 2rem;
   text-align: center;
+}
+
+.prev__month, .next__month {
+  padding: 5px 10px;
+  background: none;
+  border: 1px solid gray;
+  /* border: none; */
 }
 
 .calendar__days {
