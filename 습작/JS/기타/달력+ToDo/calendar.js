@@ -14,16 +14,15 @@ const febLastDay = year => {
 
 const calendarGenerator = (year = currentYear, month = currentMonth) => {
   const lastDays = [31, febLastDay(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  const daySections = document.querySelectorAll('.day');
-  daySections.forEach(dayBox => {dayBox.innerHTML = '';});
-  daySections.forEach(dayBox => dayBox.classList.add('test'));
+  const calendarDates = document.querySelector('.calendar__dates');
+  calendarDates.innerHTML = '';
   const firstDay = new Date(year, month, 1);
   for (let i = 0; i <= lastDays[month] + firstDay.getDay() - 1; i++) {
-    const maxLoop = lastDays[month] + firstDay.getDay();
-    const valueArr = [...Array(maxLoop).keys()];
+    const day = document.createElement('div');
     if (i >= firstDay.getDay()) {
-      daySections[i].innerText = valueArr[i] - firstDay.getDay() + 1;
+      day.innerText = i - firstDay.getDay() + 1;
     }
+    calendarDates.appendChild(day);
   }
 };
 calendarGenerator();
