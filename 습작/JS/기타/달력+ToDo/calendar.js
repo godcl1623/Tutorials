@@ -3,8 +3,12 @@
 'use strict';
 
 const dateStandard = new Date();
-const currentYear = dateStandard.getFullYear();
-const currentMonth = dateStandard.getMonth();
+const yearButton = document.querySelector('.year');
+const monthButton = document.querySelector('.month');
+let currentYear = dateStandard.getFullYear();
+let currentMonth = dateStandard.getMonth();
+yearButton.innerText = currentYear;
+monthButton.innerText = currentMonth + 1;
 const isLeapYear = year => {
   return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 === 0);
 };
@@ -26,3 +30,36 @@ const calendarGenerator = (year = currentYear, month = currentMonth) => {
   }
 };
 calendarGenerator();
+
+const monthToPrev = () => {
+  if (currentMonth > 0) {
+    monthButton.innerText = `${parseFloat(monthButton.innerText) - 1}`;
+    --currentMonth;
+    calendarGenerator(currentYear, currentMonth);
+  } else {
+    yearButton.innerText = parseFloat(yearButton.innerText) - 1;
+    monthButton.innerText = 12;
+    currentMonth = 11;
+    currentYear -= 1;
+    calendarGenerator(currentYear, currentMonth);
+  }
+};
+
+const monthToNext = () => {
+  if (currentMonth < 11) {
+    monthButton.innerText = parseFloat(monthButton.innerText) + 1;
+    ++currentMonth;
+    calendarGenerator(currentYear, currentMonth);
+  } else {
+    yearButton.innerText = parseFloat(yearButton.innerText) + 1;
+    monthButton.innerText = 1;
+    currentMonth = 0;
+    currentYear += 1;
+    calendarGenerator(currentYear, currentMonth);
+  }
+};
+
+const prevMonth = document.querySelector('.prev__month');
+const nextMonth = document.querySelector('.next__month');
+prevMonth.addEventListener('click', monthToPrev);
+nextMonth.addEventListener('click', monthToNext);
