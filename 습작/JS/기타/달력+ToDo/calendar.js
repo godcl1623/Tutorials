@@ -5,6 +5,11 @@
 const dateStandard = new Date();
 const yearButton = document.querySelector('.year');
 const monthButton = document.querySelector('.month');
+const prevMonth = document.querySelector('.prev__month');
+const nextMonth = document.querySelector('.next__month');
+const closeButton = document.querySelectorAll('.close');
+const yearContainer = document.querySelector('.year-container');
+const monthContainer = document.querySelector('.month-selection');
 let currentYear = dateStandard.getFullYear();
 let currentMonth = dateStandard.getMonth();
 yearButton.textContent = currentYear;
@@ -21,15 +26,41 @@ const calendarGenerator = (year = currentYear, month = currentMonth) => {
   const calendarDates = document.querySelector('.calendar__dates');
   calendarDates.textContent = '';
   const firstDay = new Date(year, month, 1);
-  for (let i = 0; i <= lastDays[month] + firstDay.getDay() - 1; i++) {
+  let i;
+  for (i = 0; i <= lastDays[month] + firstDay.getDay() - 1; i++) {
     const day = document.createElement('div');
     if (i >= firstDay.getDay()) {
       day.textContent = i - firstDay.getDay() + 1;
+      day.classList.add('day');
+      if ((i - firstDay.getDay() + 1 === dateStandard.getDate()) && firstDay.getFullYear() === currentYear && firstDay.getMonth() === currentMonth) {
+        day.classList.add('today');
+      }
     }
     calendarDates.appendChild(day);
   }
 };
-calendarGenerator();
+
+const selectYear = () => {
+  const selectors = yearContainer.querySelectorAll('.selector');
+  function yearChanger(event) {
+    currentYear = event.target.textContent;
+    yearButton.textContent = event.target.textContent;
+    calendarGenerator(currentYear, currentMonth);
+    yearContainer.classList.remove('active');
+  }
+  selectors.forEach(button => button.addEventListener('click', yearChanger));
+};
+
+const selectMonth = () => {
+  const selectors = monthContainer.querySelectorAll('.selector');
+  function monthChanger(event) {
+    currentMonth = parseFloat(event.target.textContent) - 1;
+    calendarGenerator(currentYear, currentMonth);
+    monthButton.textContent = event.target.textContent;
+    monthContainer.classList.remove('active');
+  }
+  selectors.forEach(button => button.addEventListener('click', monthChanger));
+};
 
 function monthToPrev() {
   if (currentMonth > 0) {
@@ -43,7 +74,7 @@ function monthToPrev() {
     currentYear -= 1;
     calendarGenerator(currentYear, currentMonth);
   }
-};
+}
 
 function monthToNext() {
   if (currentMonth < 11) {
@@ -57,14 +88,27 @@ function monthToNext() {
     currentYear += 1;
     calendarGenerator(currentYear, currentMonth);
   }
-};
-
-function yearSelector() {
-
 }
 
-const prevMonth = document.querySelector('.prev__month');
-const nextMonth = document.querySelector('.next__month');
+function openYearSelector() {
+  yearContainer.classList.add('active');
+}
+
+function openMonthSelector() {
+  monthContainer.classList.add('active');
+}
+
+function closeContainer() {
+  yearContainer.classList.remove('active');
+  monthContainer.classList.remove('active');
+}
+
+calendarGenerator();
+selectYear();
+selectMonth();
+closeContainer();
 prevMonth.addEventListener('click', monthToPrev);
 nextMonth.addEventListener('click', monthToNext);
-yearButton.addEventListener('click', yearSelector);
+yearButton.addEventListener('click', openYearSelector);
+monthButton.addEventListener('click', openMonthSelector);
+closeButton.forEach(button => button.addEventListener('click', closeContainer));
