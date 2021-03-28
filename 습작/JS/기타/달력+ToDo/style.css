@@ -116,3 +116,19 @@ button:active {
   justify-content: center;
   align-items: center;
 }
+
+.year-selection {
+  border: 1px solid black;
+  padding: 50px;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  background: white;
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+}
+
+.year-selection.active {
+  display: grid;
+}
