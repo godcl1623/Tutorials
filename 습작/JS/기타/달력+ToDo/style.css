@@ -208,6 +208,7 @@ button:active {
 }
 
 .todo__list__container {
+  padding: 20px 10px;
   width: 100%;
   height: 100%;
 }
@@ -228,4 +229,8 @@ button:active {
 
 button[type=submit] {
   padding: 5px 10px;
+}
+
+.calendar__dates ul {
+  display: none;
 }

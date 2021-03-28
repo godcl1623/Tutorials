@@ -51,6 +51,11 @@ const selectYear = () => {
   selectors.forEach(button => button.addEventListener('click', yearChanger));
 };
 
+// const showListContainer = (e) => {
+//   const toDoListBody = document.querySelector('.todo__list__body');
+//   toDoListBody.innerHTML = e.target;
+// }
+
 const selectMonth = () => {
   const selectors = monthContainer.querySelectorAll('.selector');
   function monthChanger(event) {
@@ -103,6 +108,16 @@ function closeContainer() {
   monthContainer.classList.remove('active');
 }
 
+function showToDoList(e) {
+  if (e.target.childNodes.includes('ul')) {
+    console.log('test');
+  }
+  const $ul = document.createElement('ul');
+  $ul.classList.add('todo__list__container');
+  e.target.appendChild($ul);
+  console.log(e);
+}
+
 calendarGenerator();
 selectYear();
 selectMonth();
@@ -112,3 +127,5 @@ nextMonth.addEventListener('click', monthToNext);
 yearButton.addEventListener('click', openYearSelector);
 monthButton.addEventListener('click', openMonthSelector);
 closeButton.forEach(button => button.addEventListener('click', closeContainer));
+const days = document.querySelectorAll('.day');
+days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
