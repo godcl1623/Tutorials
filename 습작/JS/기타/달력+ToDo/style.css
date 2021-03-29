@@ -234,3 +234,7 @@ button[type=submit] {
 .calendar__dates ul {
   display: none;
 }
+
+.todo__date > .this__date {
+  flex-direction: row;
+}
