@@ -10,6 +10,7 @@ const nextMonth = document.querySelector('.next__month');
 const closeButton = document.querySelectorAll('.close');
 const yearContainer = document.querySelector('.year-container');
 const monthContainer = document.querySelector('.month-selection');
+const textSubmit = document.querySelector('.text_submit');
 let currentYear = dateStandard.getFullYear();
 let currentMonth = dateStandard.getMonth();
 yearButton.textContent = currentYear;
@@ -32,7 +33,8 @@ const calendarGenerator = (year = currentYear, month = currentMonth) => {
     if (i >= firstDay.getDay()) {
       day.textContent = i - firstDay.getDay() + 1;
       day.classList.add('day');
-      if ((i - firstDay.getDay() + 1 === dateStandard.getDate()) && firstDay.getFullYear() === currentYear && firstDay.getMonth() === currentMonth) {
+      if (i - firstDay.getDay() + 1 === dateStandard.getDate() &&
+        year === dateStandard.getFullYear() && month === dateStandard.getMonth()) {
         day.classList.add('today');
       }
     }
@@ -43,18 +45,13 @@ const calendarGenerator = (year = currentYear, month = currentMonth) => {
 const selectYear = () => {
   const selectors = yearContainer.querySelectorAll('.selector');
   function yearChanger(event) {
-    currentYear = event.target.textContent;
-    yearButton.textContent = event.target.textContent;
+    currentYear = parseFloat(event.target.textContent);
     calendarGenerator(currentYear, currentMonth);
+    yearButton.textContent = event.target.textContent;
     yearContainer.classList.remove('active');
   }
   selectors.forEach(button => button.addEventListener('click', yearChanger));
 };
-
-// const showListContainer = (e) => {
-//   const toDoListBody = document.querySelector('.todo__list__body');
-//   toDoListBody.innerHTML = e.target;
-// }
 
 const selectMonth = () => {
   const selectors = monthContainer.querySelectorAll('.selector');
@@ -67,6 +64,51 @@ const selectMonth = () => {
   selectors.forEach(button => button.addEventListener('click', monthChanger));
 };
 
+const showListContainer = e => {
+  const toDoContainer = document.querySelector('.todo__container');
+  toDoContainer.innerHTML = e.target.childNodes[1].innerHTML;
+};
+
+const showDefaultContainer = () => {
+  const toDoContainer = document.querySelector('.todo__container');
+  const today = document.querySelector('.today');
+  toDoContainer.innerHTML = today.childNodes[1].innerHTML;
+};
+
+const showDefaultDate = () => {
+  const thisDate = document.querySelector('.todo__date .this__date');
+  const thisYear = thisDate.querySelector('.this__date__year');
+  const thisMonth = thisDate.querySelector('.this__date__month');
+  const thisDay = thisDate.querySelector('.this__date__day');
+  thisYear.innerText = `${currentYear}.`;
+  thisMonth.innerText = `${currentMonth + 1}.`;
+  thisDay.innerText = dateStandard.getDate();
+};
+
+const currentDate = () => {
+  const thisDate = document.querySelector('.todo__date .this__date');
+  const thisYear = thisDate.querySelector('.this__date__year');
+  const thisMonth = thisDate.querySelector('.this__date__month');
+  const thisDay = thisDate.querySelector('.this__date__day');
+  const calendarDates = document.querySelector('.calendar__dates');
+  function textChanger(e) {
+    if (e.target.classList.contains('calendar__dates')) return;
+    thisYear.innerText = `${currentYear}.`;
+    thisMonth.innerText = `${currentMonth + 1}.`;
+    thisDay.innerText = e.target.innerText;
+  }
+  calendarDates.addEventListener('click', textChanger);
+};
+
+const makeToDoList = e => {
+  if (e.target.childNodes.length > 1) {
+    return;
+  }
+  const $ul = document.createElement('ul');
+  $ul.classList.add('todo__list__container');
+  e.target.appendChild($ul);
+};
+
 function monthToPrev() {
   if (currentMonth > 0) {
     monthButton.textContent = parseFloat(monthButton.textContent) - 1;
@@ -76,7 +118,7 @@ function monthToPrev() {
     yearButton.textContent = parseFloat(yearButton.textContent) - 1;
     monthButton.textContent = 12;
     currentMonth = 11;
-    currentYear -= 1;
+    currentYear = parseFloat(currentYear) - 1;
     calendarGenerator(currentYear, currentMonth);
   }
 }
@@ -90,7 +132,7 @@ function monthToNext() {
     yearButton.textContent = parseFloat(yearButton.textContent) + 1;
     monthButton.textContent = 1;
     currentMonth = 0;
-    currentYear += 1;
+    currentYear = parseFloat(currentYear) + 1;
     calendarGenerator(currentYear, currentMonth);
   }
 }
@@ -109,19 +151,34 @@ function closeContainer() {
 }
 
 function showToDoList(e) {
-  if (e.target.childNodes.includes('ul')) {
-    console.log('test');
-  }
-  const $ul = document.createElement('ul');
-  $ul.classList.add('todo__list__container');
-  e.target.appendChild($ul);
-  console.log(e);
+  makeToDoList(e);
+  currentDate();
+  showListContainer(e);
+  console.log(e.target.children[0]);
+}
+
+function addList(e) {
+  const days = document.querySelectorAll('.day');
+  const thisDay = document.querySelector('.this__date__day');
+  const toDoContainer = document.querySelector('.todo__container');
+  let thisNumber = parseFloat(thisDay.innerText) - 1;
+  const textInput = document.querySelector('.text_input');
+  if (!textInput.value) return;
+  const $li = document.createElement('li');
+  $li.innerHTML = `
+      <input type="checkbox" class="checkbox">
+      <p class="list__item">${textInput.value}</p>
+  `;
+  $li.classList.add('todo__list__contents');
+  days[thisNumber].childNodes[1].appendChild($li);
+  toDoContainer.innerHTML = days[thisNumber].childNodes[1].innerHTML;
 }
 
 calendarGenerator();
 selectYear();
 selectMonth();
 closeContainer();
+currentDate();
 prevMonth.addEventListener('click', monthToPrev);
 nextMonth.addEventListener('click', monthToNext);
 yearButton.addEventListener('click', openYearSelector);
@@ -129,3 +186,14 @@ monthButton.addEventListener('click', openMonthSelector);
 closeButton.forEach(button => button.addEventListener('click', closeContainer));
 const days = document.querySelectorAll('.day');
 days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
+window.onload = () => {
+  const today = document.querySelector('.today');
+  if (today.childNodes.length === 1) {
+    const $ul = document.createElement('ul');
+    $ul.classList.add('todo__list__container');
+    today.appendChild($ul);
+  }
+  showDefaultContainer();
+  showDefaultDate();
+};
+textSubmit.addEventListener('click', addList);

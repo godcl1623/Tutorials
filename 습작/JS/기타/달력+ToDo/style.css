@@ -207,7 +207,7 @@ button:active {
   flex-direction: column;
 }
 
-.todo__list__container {
+.todo__container {
   padding: 20px 10px;
   width: 100%;
   height: 100%;
@@ -233,4 +233,18 @@ button[type=submit] {
 
 .calendar__dates ul {
   display: none;
+}
+
+.todo__date > .this__date {
+  flex-direction: row;
+}
+
+.todo__list__contents {
+  padding: 0 5px;
+  display: flex;
+  font-size: 24px;
+}
+
+.checkbox {
+  margin-right: 10px;
 }
