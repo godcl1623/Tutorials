@@ -32,7 +32,8 @@ const calendarGenerator = (year = currentYear, month = currentMonth) => {
     if (i >= firstDay.getDay()) {
       day.textContent = i - firstDay.getDay() + 1;
       day.classList.add('day');
-      if ((i - firstDay.getDay() + 1 === dateStandard.getDate()) && firstDay.getFullYear() === currentYear && firstDay.getMonth() === currentMonth) {
+      if (i - firstDay.getDay() + 1 === dateStandard.getDate() &&
+        year === dateStandard.getFullYear() && month === dateStandard.getMonth()) {
         day.classList.add('today');
       }
     }
@@ -43,18 +44,13 @@ const calendarGenerator = (year = currentYear, month = currentMonth) => {
 const selectYear = () => {
   const selectors = yearContainer.querySelectorAll('.selector');
   function yearChanger(event) {
-    currentYear = event.target.textContent;
-    yearButton.textContent = event.target.textContent;
+    currentYear = parseFloat(event.target.textContent);
     calendarGenerator(currentYear, currentMonth);
+    yearButton.textContent = event.target.textContent;
     yearContainer.classList.remove('active');
   }
   selectors.forEach(button => button.addEventListener('click', yearChanger));
 };
-
-// const showListContainer = (e) => {
-//   const toDoListBody = document.querySelector('.todo__list__body');
-//   toDoListBody.innerHTML = e.target;
-// }
 
 const selectMonth = () => {
   const selectors = monthContainer.querySelectorAll('.selector');
@@ -67,6 +63,21 @@ const selectMonth = () => {
   selectors.forEach(button => button.addEventListener('click', monthChanger));
 };
 
+const showListContainer = e => {
+  const toDoContainer = document.querySelector('.todo__container');
+  toDoContainer.innerHTML = e.target.childNodes[1].innerHTML;
+};
+
+const currentDate = () => {
+  const thisDate = document.querySelector('.todo__date .this__date');
+  const calendarDates = document.querySelector('.calendar__dates');
+  thisDate.textContent = `${currentYear}.${currentMonth + 1}.${dateStandard.getDate()}`;
+  function textChanger(e) {
+    thisDate.textContent = `${currentYear}.${currentMonth + 1}.${e.target.textContent}`;
+  }
+  calendarDates.addEventListener('click', textChanger);
+};
+
 function monthToPrev() {
   if (currentMonth > 0) {
     monthButton.textContent = parseFloat(monthButton.textContent) - 1;
@@ -76,7 +87,7 @@ function monthToPrev() {
     yearButton.textContent = parseFloat(yearButton.textContent) - 1;
     monthButton.textContent = 12;
     currentMonth = 11;
-    currentYear -= 1;
+    currentYear = parseFloat(currentYear) - 1;
     calendarGenerator(currentYear, currentMonth);
   }
 }
@@ -90,7 +101,7 @@ function monthToNext() {
     yearButton.textContent = parseFloat(yearButton.textContent) + 1;
     monthButton.textContent = 1;
     currentMonth = 0;
-    currentYear += 1;
+    currentYear = parseFloat(currentYear) + 1;
     calendarGenerator(currentYear, currentMonth);
   }
 }
@@ -109,19 +120,26 @@ function closeContainer() {
 }
 
 function showToDoList(e) {
-  if (e.target.childNodes.includes('ul')) {
-    console.log('test');
+  if (e.target.childNodes.length > 1) {
+    return;
   }
   const $ul = document.createElement('ul');
+  // $ul.innerHTML = `
+  //   <li class="todo__list__contents">
+  //     <input type="
+  //   </li>
+  // `;
   $ul.classList.add('todo__list__container');
   e.target.appendChild($ul);
-  console.log(e);
+  currentDate();
+  showListContainer(e);
 }
 
 calendarGenerator();
 selectYear();
 selectMonth();
 closeContainer();
+currentDate();
 prevMonth.addEventListener('click', monthToPrev);
 nextMonth.addEventListener('click', monthToNext);
 yearButton.addEventListener('click', openYearSelector);
