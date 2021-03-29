@@ -238,3 +238,13 @@ button[type=submit] {
 .todo__date > .this__date {
   flex-direction: row;
 }
+
+.todo__list__contents {
+  padding: 0 5px;
+  display: flex;
+  font-size: 24px;
+}
+
+.checkbox {
+  margin-right: 10px;
+}

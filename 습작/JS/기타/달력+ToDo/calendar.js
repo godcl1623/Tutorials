@@ -66,13 +66,13 @@ const selectMonth = () => {
 
 const showListContainer = e => {
   const toDoContainer = document.querySelector('.todo__container');
-  toDoContainer.innerHTML = e.target.children[0].innerHTML;
+  toDoContainer.innerHTML = e.target.childNodes[1].innerHTML;
 };
 
 const showDefaultContainer = () => {
   const toDoContainer = document.querySelector('.todo__container');
   const today = document.querySelector('.today');
-  toDoContainer.innerHTML = today.children[0].innerHTML;
+  toDoContainer.innerHTML = today.childNodes[1].innerHTML;
 };
 
 const showDefaultDate = () => {
@@ -87,10 +87,15 @@ const showDefaultDate = () => {
 
 const currentDate = () => {
   const thisDate = document.querySelector('.todo__date .this__date');
+  const thisYear = thisDate.querySelector('.this__date__year');
+  const thisMonth = thisDate.querySelector('.this__date__month');
+  const thisDay = thisDate.querySelector('.this__date__day');
   const calendarDates = document.querySelector('.calendar__dates');
   function textChanger(e) {
     if (e.target.classList.contains('calendar__dates')) return;
-    thisDate.textContent = `${currentYear}.${currentMonth + 1}.${e.target.innerText}`;
+    thisYear.innerText = `${currentYear}.`;
+    thisMonth.innerText = `${currentMonth + 1}.`;
+    thisDay.innerText = e.target.innerText;
   }
   calendarDates.addEventListener('click', textChanger);
 };
@@ -152,8 +157,11 @@ function showToDoList(e) {
   console.log(e.target.children[0]);
 }
 
-function addList() {
+function addList(e) {
   const days = document.querySelectorAll('.day');
+  const thisDay = document.querySelector('.this__date__day');
+  const toDoContainer = document.querySelector('.todo__container');
+  let thisNumber = parseFloat(thisDay.innerText) - 1;
   const textInput = document.querySelector('.text_input');
   if (!textInput.value) return;
   const $li = document.createElement('li');
@@ -161,8 +169,9 @@ function addList() {
       <input type="checkbox" class="checkbox">
       <p class="list__item">${textInput.value}</p>
   `;
-  days[dateStandard.getDate() - 1].childNodes[1].appendChild($li);
-  // console.log(days[dateStandard.getDate() - 1]);
+  $li.classList.add('todo__list__contents');
+  days[thisNumber].childNodes[1].appendChild($li);
+  toDoContainer.innerHTML = days[thisNumber].childNodes[1].innerHTML;
 }
 
 calendarGenerator();
@@ -181,11 +190,6 @@ window.onload = () => {
   const today = document.querySelector('.today');
   if (today.childNodes.length === 1) {
     const $ul = document.createElement('ul');
-    $ul.innerHTML = `
-      <li>
-        <p>test</p>
-      </li>
-    `;
     $ul.classList.add('todo__list__container');
     today.appendChild($ul);
   }
