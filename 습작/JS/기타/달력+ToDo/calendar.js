@@ -68,6 +68,12 @@ const showListContainer = e => {
   toDoContainer.innerHTML = e.target.childNodes[1].innerHTML;
 };
 
+const showDefaultContainer = () => {
+  const toDoContainer = document.querySelector('.todo__container');
+  const today = document.querySelector('.today');
+  toDoContainer.innerHTML = today.childNodes[1].innerHTML;
+}
+
 const currentDate = () => {
   const thisDate = document.querySelector('.todo__date .this__date');
   const calendarDates = document.querySelector('.calendar__dates');
@@ -147,3 +153,12 @@ monthButton.addEventListener('click', openMonthSelector);
 closeButton.forEach(button => button.addEventListener('click', closeContainer));
 const days = document.querySelectorAll('.day');
 days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
+window.onload = () => {
+  const today = document.querySelector('.today');
+  if (today.childNodes.length === 1) {
+    const $ul = document.createElement('ul');
+    $ul.classList.add('.todo__list__container');
+    today.appendChild($ul);
+  }
+  showDefaultContainer();
+};
