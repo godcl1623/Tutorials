@@ -111,7 +111,11 @@ const makeToDoList = e => {
 
 const toLocalStorage = (input) => {
   const dropHistory = JSON.parse(localStorage.getItem('test')) || [];
-  dropHistory.push(input);
+  const localValue = {
+    'task':input,
+    'completed':false
+  }
+  dropHistory.push(localValue);
   localStorage.setItem('test', JSON.stringify(dropHistory));
 };
 
@@ -196,6 +200,8 @@ closeButton.forEach(button => button.addEventListener('click', closeContainer));
 const days = document.querySelectorAll('.day');
 days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
 window.onload = () => {
+  const test = JSON.parse(localStorage.getItem('test'));
+  console.log(test[0].task);
   const today = document.querySelector('.today');
   if (today.childNodes.length === 1) {
     const $ul = document.createElement('ul');
@@ -205,7 +211,7 @@ window.onload = () => {
       $ul.innerHTML = `
       <li class="todo__list__contents">
       <input type="checkbox" class="checkbox">
-      <p class="list__item">${localStorage.getItem('test')}</p>
+      <p class="list__item">${test[0].task}</p>
       </li>
     `;
     }
