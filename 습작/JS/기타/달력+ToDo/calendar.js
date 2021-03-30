@@ -154,20 +154,20 @@ function showToDoList(e) {
   makeToDoList(e);
   currentDate();
   showListContainer(e);
-  console.log(e.target.children[0]);
 }
 
-function addList(e) {
+function addList() {
   const days = document.querySelectorAll('.day');
   const thisDay = document.querySelector('.this__date__day');
   const toDoContainer = document.querySelector('.todo__container');
   let thisNumber = parseFloat(thisDay.innerText) - 1;
   const textInput = document.querySelector('.text_input');
   if (!textInput.value) return;
+  localStorage.setItem('test', textInput.value);
   const $li = document.createElement('li');
   $li.innerHTML = `
       <input type="checkbox" class="checkbox">
-      <p class="list__item">${textInput.value}</p>
+      <p class="list__item">${localStorage.getItem('test')}</p>
   `;
   $li.classList.add('todo__list__contents');
   days[thisNumber].childNodes[1].appendChild($li);
@@ -192,6 +192,14 @@ window.onload = () => {
     const $ul = document.createElement('ul');
     $ul.classList.add('todo__list__container');
     today.appendChild($ul);
+    if (localStorage.length !== 0) {
+      $ul.innerHTML = `
+      <li class="todo__list__contents">
+      <input type="checkbox" class="checkbox">
+      <p class="list__item">${localStorage.getItem('test')}</p>
+      </li>
+    `;
+    }
   }
   showDefaultContainer();
   showDefaultDate();
