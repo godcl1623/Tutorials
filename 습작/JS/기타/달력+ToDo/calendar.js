@@ -72,6 +72,7 @@ const showListContainer = e => {
 const showDefaultContainer = () => {
   const toDoContainer = document.querySelector('.todo__container');
   const today = document.querySelector('.today');
+  if (today.childNodes.length === 1) return;
   toDoContainer.innerHTML = today.childNodes[1].innerHTML;
 };
 
@@ -109,12 +110,12 @@ const makeToDoList = e => {
   e.target.appendChild($ul);
 };
 
-const toLocalStorage = (input) => {
+const toLocalStorage = input => {
   const dropHistory = JSON.parse(localStorage.getItem('test')) || [];
   const localValue = {
     'task':input,
     'completed':false
-  }
+  };
   dropHistory.push(localValue);
   localStorage.setItem('test', JSON.stringify(dropHistory));
 };
@@ -173,14 +174,11 @@ function addList() {
   let thisNumber = parseFloat(thisDay.innerText) - 1;
   const textInput = document.querySelector('.text_input');
   if (!textInput.value) return;
-  // const dropHistory = JSON.parse(localStorage.getItem('test')) || [];
-  // dropHistory.push(textInput.value);
-  // localStorage.setItem('test', JSON.stringify(dropHistory));
   toLocalStorage(textInput.value);
   const $li = document.createElement('li');
   $li.innerHTML = `
       <input type="checkbox" class="checkbox">
-      <p class="list__item">${localStorage.getItem('test')}</p>
+      <p class="list__item">${textInput.value}</p>
   `;
   $li.classList.add('todo__list__contents');
   days[thisNumber].childNodes[1].appendChild($li);
@@ -201,19 +199,20 @@ const days = document.querySelectorAll('.day');
 days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
 window.onload = () => {
   const test = JSON.parse(localStorage.getItem('test'));
-  console.log(test[0].task);
   const today = document.querySelector('.today');
   if (today.childNodes.length === 1) {
-    const $ul = document.createElement('ul');
-    $ul.classList.add('todo__list__container');
-    today.appendChild($ul);
     if (localStorage.length !== 0) {
-      $ul.innerHTML = `
-      <li class="todo__list__contents">
-      <input type="checkbox" class="checkbox">
-      <p class="list__item">${test[0].task}</p>
-      </li>
-    `;
+      const $ul = document.createElement('ul');
+      test.forEach(ele => {
+        $ul.classList.add('todo__list__container');
+        $ul.innerHTML += `
+          <li class="todo__list__contents">
+            <input type="checkbox" class="checkbox">
+            <p class="list__item">${ele.task}</p>
+          </li>
+        `;
+      });
+      today.appendChild($ul);
     }
   }
   showDefaultContainer();
