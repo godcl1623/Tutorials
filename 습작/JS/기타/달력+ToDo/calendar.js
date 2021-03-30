@@ -109,6 +109,12 @@ const makeToDoList = e => {
   e.target.appendChild($ul);
 };
 
+const toLocalStorage = (input) => {
+  const dropHistory = JSON.parse(localStorage.getItem('test')) || [];
+  dropHistory.push(input);
+  localStorage.setItem('test', JSON.stringify(dropHistory));
+};
+
 function monthToPrev() {
   if (currentMonth > 0) {
     monthButton.textContent = parseFloat(monthButton.textContent) - 1;
@@ -163,7 +169,10 @@ function addList() {
   let thisNumber = parseFloat(thisDay.innerText) - 1;
   const textInput = document.querySelector('.text_input');
   if (!textInput.value) return;
-  localStorage.setItem('test', textInput.value);
+  // const dropHistory = JSON.parse(localStorage.getItem('test')) || [];
+  // dropHistory.push(textInput.value);
+  // localStorage.setItem('test', JSON.stringify(dropHistory));
+  toLocalStorage(textInput.value);
   const $li = document.createElement('li');
   $li.innerHTML = `
       <input type="checkbox" class="checkbox">
