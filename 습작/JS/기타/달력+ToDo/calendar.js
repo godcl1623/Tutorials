@@ -111,13 +111,15 @@ const makeToDoList = e => {
 };
 
 const toLocalStorage = input => {
-  const dropHistory = JSON.parse(localStorage.getItem('test')) || [];
+  const todoThisDate = document.querySelector('.todo__date .this__date');
+  const newKey = todoThisDate.innerText.replace(/\n/g, '');
+  const dropHistory = JSON.parse(localStorage.getItem(newKey)) || [];
   const localValue = {
     'task':input,
     'completed':false
   };
   dropHistory.push(localValue);
-  localStorage.setItem('test', JSON.stringify(dropHistory));
+  localStorage.setItem(newKey, JSON.stringify(dropHistory));
 };
 
 function monthToPrev() {
@@ -198,24 +200,27 @@ closeButton.forEach(button => button.addEventListener('click', closeContainer));
 const days = document.querySelectorAll('.day');
 days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
 window.onload = () => {
+  showDefaultDate();
+  const todoThisDate = document.querySelector('.todo__date .this__date');
+  const newKey = todoThisDate.innerText.replace(/\n/g, '');
+  const newKeyKey = JSON.parse(localStorage.getItem(newKey));
   const test = JSON.parse(localStorage.getItem('test'));
   const today = document.querySelector('.today');
   if (today.childNodes.length === 1) {
     const $ul = document.createElement('ul');
     $ul.classList.add('todo__list__container');
     if (localStorage.length !== 0) {
-      test.forEach(ele => {
+      // test.forEach(ele => {
         $ul.innerHTML += `
           <li class="todo__list__contents">
             <input type="checkbox" class="checkbox">
-            <p class="list__item">${ele.task}</p>
+            <p class="list__item">${newKeyKey[0].task}</p>
           </li>
         `;
-      });
+      // });
     }
     today.appendChild($ul);
   }
   showDefaultContainer();
-  showDefaultDate();
 };
 textSubmit.addEventListener('click', addList);
