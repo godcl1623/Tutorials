@@ -201,10 +201,10 @@ window.onload = () => {
   const test = JSON.parse(localStorage.getItem('test'));
   const today = document.querySelector('.today');
   if (today.childNodes.length === 1) {
+    const $ul = document.createElement('ul');
+    $ul.classList.add('todo__list__container');
     if (localStorage.length !== 0) {
-      const $ul = document.createElement('ul');
       test.forEach(ele => {
-        $ul.classList.add('todo__list__container');
         $ul.innerHTML += `
           <li class="todo__list__contents">
             <input type="checkbox" class="checkbox">
@@ -212,8 +212,8 @@ window.onload = () => {
           </li>
         `;
       });
-      today.appendChild($ul);
     }
+    today.appendChild($ul);
   }
   showDefaultContainer();
   showDefaultDate();
