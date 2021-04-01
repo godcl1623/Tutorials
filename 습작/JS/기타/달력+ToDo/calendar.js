@@ -86,14 +86,9 @@ const getDataSets = () => {
 };
 
 const showDefaultContainer = () => {
+  const today = document.querySelector('.today');
   const toDoContainer = document.querySelector('.todo__container');
-  const days = document.querySelectorAll('.day');
-  const matchingArr = getDataSets().filter(ele => readLocalStorageKeys().includes(ele));
-  days.forEach(ele => {
-    if (matchingArr.includes(ele.dataset.date)) {
-      toDoContainer.innerHTML = ele.childNodes[1].innerHTML;
-    }
-  });
+  toDoContainer.innerHTML = today.childNodes[1].innerHTML;
 };
 
 const showDefaultDate = () => {
@@ -169,10 +164,12 @@ const makeDefaultUl = () => {
   const matchingArr = getDataSets().filter(ele => readLocalStorageKeys().includes(ele));
   const testArr = Array.from(testKeyArr());
   const testArr2 = Array.from(matchingDays());
+  // console.log(matchingArr, testArr, testArr2);
   for (let i = 0; i < matchingArr.length; i++) {
     if (testArr2[i].childNodes.length === 1) {
       const $ul = document.createElement('ul');
       $ul.classList.add('todo__list__container');
+      // console.log(testArr2[i]);
       if (localStorage.length !== 0) {
         for (let j = 0; j < testArr[i].length; j++) {
           $ul.innerHTML += `
@@ -181,6 +178,7 @@ const makeDefaultUl = () => {
               <p class="list__item">${testArr[i][j].task}</p>
             </li>
           `;
+          // console.log(testArr[i][j]);
         }
       }
       testArr2[i].appendChild($ul);
