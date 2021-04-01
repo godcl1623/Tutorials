@@ -191,12 +191,18 @@ function monthToPrev() {
     monthButton.textContent = parseFloat(monthButton.textContent) - 1;
     --currentMonth;
     calendarGenerator(currentYear, currentMonth);
+    makeDefaultUl();
+    const days = document.querySelectorAll('.day');
+days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
   } else {
     yearButton.textContent = parseFloat(yearButton.textContent) - 1;
     monthButton.textContent = 12;
     currentMonth = 11;
     currentYear = parseFloat(currentYear) - 1;
     calendarGenerator(currentYear, currentMonth);
+    makeDefaultUl();
+    const days = document.querySelectorAll('.day');
+days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
   }
 }
 
@@ -205,12 +211,18 @@ function monthToNext() {
     monthButton.textContent = parseFloat(monthButton.textContent) + 1;
     ++currentMonth;
     calendarGenerator(currentYear, currentMonth);
+    makeDefaultUl();
+    const days = document.querySelectorAll('.day');
+days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
   } else {
     yearButton.textContent = parseFloat(yearButton.textContent) + 1;
     monthButton.textContent = 1;
     currentMonth = 0;
     currentYear = parseFloat(currentYear) + 1;
     calendarGenerator(currentYear, currentMonth);
+    makeDefaultUl();
+    const days = document.querySelectorAll('.day');
+days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
   }
 }
 
