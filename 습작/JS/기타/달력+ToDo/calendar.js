@@ -91,7 +91,6 @@ const showDefaultContainer = () => {
   const matchingArr = getDataSets().filter(ele => readLocalStorageKeys().includes(ele));
   days.forEach(ele => {
     if (matchingArr.includes(ele.dataset.date)) {
-      console.log(ele);
       toDoContainer.innerHTML = ele.childNodes[1].innerHTML;
     }
   });
@@ -143,31 +142,50 @@ const toLocalStorage = input => {
   localStorage.setItem(newKey, JSON.stringify(dropHistory));
 };
 
-const makeDefaultUl = () => {
-  const todoThisDate = document.querySelector('.todo__date .this__date');
-  const newKey = todoThisDate.innerText.replace(/\n/g, '');
-  const newKeyKey = JSON.parse(localStorage.getItem(newKey));
+const testKeyArr = () => {
+  const matchingArr = getDataSets().filter(ele => readLocalStorageKeys().includes(ele));
+  const testArr = [];
+  let i = 0;
+  while (i < matchingArr.length) {
+    testArr.push(JSON.parse(localStorage.getItem(matchingArr[i])));
+    i++;
+  }
+  return testArr;
+};
+
+const matchingDays = () => {
   const days = document.querySelectorAll('.day');
   const matchingArr = getDataSets().filter(ele => readLocalStorageKeys().includes(ele));
+  const testArr = [];
   days.forEach(ele => {
     if (matchingArr.includes(ele.dataset.date)) {
-      if (ele.childNodes.length === 1) {
-        const $ul = document.createElement('ul');
-        $ul.classList.add('todo__list__container');
-        if (localStorage.length !== 0) {
-          newKeyKey.forEach(elem => {
-            $ul.innerHTML += `
-              <li class="todo__list__contents">
-                <input type="checkbox" class="checkbox">
-                <p class="list__item">${elem.task}</p>
-              </li>
-            `;
-          });
-        }
-        ele.appendChild($ul);
-      }
+      testArr.push(ele);
     }
   });
+  return testArr;
+};
+
+const makeDefaultUl = () => {
+  const matchingArr = getDataSets().filter(ele => readLocalStorageKeys().includes(ele));
+  const testArr = Array.from(testKeyArr());
+  const testArr2 = Array.from(matchingDays());
+  for (let i = 0; i < matchingArr.length; i++) {
+    if (testArr2[i].childNodes.length === 1) {
+      const $ul = document.createElement('ul');
+      $ul.classList.add('todo__list__container');
+      if (localStorage.length !== 0) {
+        for (let j = 0; j < testArr[i].length; j++) {
+          $ul.innerHTML += `
+            <li class="todo__list__contents">
+              <input type="checkbox" class="checkbox">
+              <p class="list__item">${testArr[i][j].task}</p>
+            </li>
+          `;
+        }
+      }
+      testArr2[i].appendChild($ul);
+    }
+  }
 };
 
 function monthToPrev() {
