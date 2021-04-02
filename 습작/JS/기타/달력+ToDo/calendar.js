@@ -11,6 +11,7 @@ const closeButton = document.querySelectorAll('.close');
 const yearContainer = document.querySelector('.year-container');
 const monthContainer = document.querySelector('.month-selection');
 const textSubmit = document.querySelector('.text_submit');
+const deleteAllBtn = document.querySelector('.delete_all');
 let currentYear = dateStandard.getFullYear();
 let currentMonth = dateStandard.getMonth();
 yearButton.textContent = currentYear;
@@ -149,6 +150,15 @@ const makeDefaultUl = () => {
   const testArr = Array.from(testKeyArr());
   const testArr2 = Array.from(matchingDays());
   // console.log(matchingArr, testArr, testArr2);
+  if (testArr.length === 0) {
+    const todoDate = document.querySelector('.todo__date .this__date');
+    const nowDate = todoDate.innerText.replace(/\n/g, '');
+    const days = document.querySelectorAll('.day');
+    const matchingOne = Array.from(days).find(day => day.dataset.date === nowDate);
+    const $ul = document.createElement('ul');
+    $ul.classList.add('todo__list__container');
+    matchingOne.appendChild($ul);
+  }
   for (let i = 0; i < matchingArr.length; i++) {
     if (testArr2[i].childNodes.length === 1) {
       const $ul = document.createElement('ul');
@@ -269,6 +279,12 @@ function addList() {
   toDoContainer.innerHTML = days[thisNumber].childNodes[1].innerHTML;
 }
 
+function deleteList() {
+  const todoDate = document.querySelector('.todo__date .this__date');
+  const nowDate = todoDate.innerText.replace(/\n/g, '');
+  localStorage.removeItem(nowDate);
+}
+
 calendarGenerator();
 selectYear();
 selectMonth();
@@ -287,3 +303,4 @@ window.onload = () => {
   showDefaultContainer();
 };
 textSubmit.addEventListener('click', addList);
+deleteAllBtn.addEventListener('click', deleteList);

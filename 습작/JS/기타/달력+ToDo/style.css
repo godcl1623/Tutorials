@@ -248,3 +248,9 @@ button[type=submit] {
 .checkbox {
   margin-right: 10px;
 }
+
+.delete_all {
+  padding: 5px;
+  position: absolute;
+  right: 0;
+}
