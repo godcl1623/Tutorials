@@ -162,15 +162,15 @@ const makeDefaultUl = () => {
   const testArr = Array.from(testKeyArr());
   const testArr2 = Array.from(matchingDays());
   // console.log(matchingArr, testArr, testArr2);
-  if (testArr.length === 0) {
-    const todoDate = document.querySelector('.todo__date .this__date');
-    const nowDate = todoDate.innerText.replace(/\n/g, '');
-    const days = document.querySelectorAll('.day');
-    const matchingOne = Array.from(days).find(day => day.dataset.date === nowDate);
-    const $ul = document.createElement('ul');
-    $ul.classList.add('todo__list__container');
-    matchingOne.appendChild($ul);
-  }
+  // if (testArr.length === 0) {
+  //   const todoDate = document.querySelector('.todo__date .this__date');
+  //   const nowDate = todoDate.innerText.replace(/\n/g, '');
+  //   const days = document.querySelectorAll('.day');
+  //   const matchingOne = Array.from(days).find(day => day.dataset.date === nowDate);
+  //   const $ul = document.createElement('ul');
+  //   $ul.classList.add('todo__list__container');
+  //   matchingOne.appendChild($ul);
+  // }
   for (let i = 0; i < matchingArr.length; i++) {
     if (testArr2[i].childNodes.length === 1) {
       const $ul = document.createElement('ul');
