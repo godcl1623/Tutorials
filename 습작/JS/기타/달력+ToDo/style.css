@@ -248,3 +248,23 @@ button[type=submit] {
 .checkbox {
   margin-right: 10px;
 }
+
+.delete_all {
+  padding: 5px;
+  position: absolute;
+  right: 0;
+}
+
+.highlight {
+  background: gray;
+  color: white;
+  border-radius: 50%;
+}
+
+.list__item {
+  width: 100%;
+}
+
+.delete {
+  padding: 5px;
+}

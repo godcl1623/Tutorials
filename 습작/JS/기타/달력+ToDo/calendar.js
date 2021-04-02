@@ -11,6 +11,7 @@ const closeButton = document.querySelectorAll('.close');
 const yearContainer = document.querySelector('.year-container');
 const monthContainer = document.querySelector('.month-selection');
 const textSubmit = document.querySelector('.text_submit');
+const deleteAllBtn = document.querySelector('.delete_all');
 let currentYear = dateStandard.getFullYear();
 let currentMonth = dateStandard.getMonth();
 yearButton.textContent = currentYear;
@@ -43,28 +44,6 @@ const calendarGenerator = (year = currentYear, month = currentMonth) => {
   }
 };
 
-const selectYear = () => {
-  const selectors = yearContainer.querySelectorAll('.selector');
-  function yearChanger(event) {
-    currentYear = parseFloat(event.target.textContent);
-    calendarGenerator(currentYear, currentMonth);
-    yearButton.textContent = event.target.textContent;
-    yearContainer.classList.remove('active');
-  }
-  selectors.forEach(button => button.addEventListener('click', yearChanger));
-};
-
-const selectMonth = () => {
-  const selectors = monthContainer.querySelectorAll('.selector');
-  function monthChanger(event) {
-    currentMonth = parseFloat(event.target.textContent) - 1;
-    calendarGenerator(currentYear, currentMonth);
-    monthButton.textContent = event.target.textContent;
-    monthContainer.classList.remove('active');
-  }
-  selectors.forEach(button => button.addEventListener('click', monthChanger));
-};
-
 const readLocalStorageKeys = () => {
   const testArr = [];
   const storageArr = Object.entries(localStorage);
@@ -72,6 +51,17 @@ const readLocalStorageKeys = () => {
     testArr.push(storageArr[i][0]);
   }
   return testArr;
+};
+
+const highlightCurrent = e => {
+  const days = document.querySelectorAll('.day');
+  if (!e.target.classList.contains('today')) {
+    days.forEach(day => day.classList.remove('highlight'));
+    e.target.classList.add('highlight');
+  } else {
+    days.forEach(day => day.classList.remove('highlight'));
+    return;
+  }
 };
 
 const showListContainer = e => {
@@ -160,11 +150,27 @@ const matchingDays = () => {
   return testArr;
 };
 
+function showToDoList(e) {
+  makeToDoList(e);
+  currentDate();
+  showListContainer(e);
+  highlightCurrent(e);
+}
+
 const makeDefaultUl = () => {
   const matchingArr = getDataSets().filter(ele => readLocalStorageKeys().includes(ele));
   const testArr = Array.from(testKeyArr());
   const testArr2 = Array.from(matchingDays());
   // console.log(matchingArr, testArr, testArr2);
+  if (testArr.length === 0) {
+    const todoDate = document.querySelector('.todo__date .this__date');
+    const nowDate = todoDate.innerText.replace(/\n/g, '');
+    const days = document.querySelectorAll('.day');
+    const matchingOne = Array.from(days).find(day => day.dataset.date === nowDate);
+    const $ul = document.createElement('ul');
+    $ul.classList.add('todo__list__container');
+    matchingOne.appendChild($ul);
+  }
   for (let i = 0; i < matchingArr.length; i++) {
     if (testArr2[i].childNodes.length === 1) {
       const $ul = document.createElement('ul');
@@ -172,12 +178,28 @@ const makeDefaultUl = () => {
       // console.log(testArr2[i]);
       if (localStorage.length !== 0) {
         for (let j = 0; j < testArr[i].length; j++) {
-          $ul.innerHTML += `
-            <li class="todo__list__contents">
-              <input type="checkbox" class="checkbox">
-              <p class="list__item">${testArr[i][j].task}</p>
-            </li>
-          `;
+          const $li = document.createElement('li');
+          $li.classList.add('todo__list__contents');
+          const $input = document.createElement('input');
+          $input.type = 'checkbox';
+          $input.classList.add('checkbox');
+          const $p = document.createElement('p');
+          $p.classList.add('list__item');
+          $p.textContent = testArr[i][j].task;
+          const $button = document.createElement('button');
+          $button.addEventListener('click', () => {console.log('test')});
+          $button.classList.add('delete');
+          $button.textContent = 'delete';
+          $li.appendChild($input);
+          $li.appendChild($p);
+          $li.appendChild($button);
+          $ul.appendChild($li);
+          // $ul.innerHTML += `
+          //   <li class="todo__list__contents">
+          //     <input type="checkbox" class="checkbox">
+          //     <p class="list__item">${testArr[i][j].task}</p>
+          //   </li>
+          // `;
           // console.log(testArr[i][j]);
         }
       }
@@ -193,7 +215,7 @@ function monthToPrev() {
     calendarGenerator(currentYear, currentMonth);
     makeDefaultUl();
     const days = document.querySelectorAll('.day');
-days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
+    days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
   } else {
     yearButton.textContent = parseFloat(yearButton.textContent) - 1;
     monthButton.textContent = 12;
@@ -202,7 +224,7 @@ days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
     calendarGenerator(currentYear, currentMonth);
     makeDefaultUl();
     const days = document.querySelectorAll('.day');
-days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
+    days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
   }
 }
 
@@ -213,7 +235,7 @@ function monthToNext() {
     calendarGenerator(currentYear, currentMonth);
     makeDefaultUl();
     const days = document.querySelectorAll('.day');
-days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
+    days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
   } else {
     yearButton.textContent = parseFloat(yearButton.textContent) + 1;
     monthButton.textContent = 1;
@@ -222,9 +244,37 @@ days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
     calendarGenerator(currentYear, currentMonth);
     makeDefaultUl();
     const days = document.querySelectorAll('.day');
-days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
+    days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
   }
 }
+
+const selectYear = () => {
+  const selectors = yearContainer.querySelectorAll('.selector');
+  function yearChanger(event) {
+    currentYear = parseFloat(event.target.textContent);
+    calendarGenerator(currentYear, currentMonth);
+    yearButton.textContent = event.target.textContent;
+    yearContainer.classList.remove('active');
+    makeDefaultUl();
+    const days = document.querySelectorAll('.day');
+    days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
+  }
+  selectors.forEach(button => button.addEventListener('click', yearChanger));
+};
+
+const selectMonth = () => {
+  const selectors = monthContainer.querySelectorAll('.selector');
+  function monthChanger(event) {
+    currentMonth = parseFloat(event.target.textContent) - 1;
+    calendarGenerator(currentYear, currentMonth);
+    monthButton.textContent = event.target.textContent;
+    monthContainer.classList.remove('active');
+    makeDefaultUl();
+    const days = document.querySelectorAll('.day');
+    days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
+  }
+  selectors.forEach(button => button.addEventListener('click', monthChanger));
+};
 
 function openYearSelector() {
   yearContainer.classList.add('active');
@@ -239,12 +289,6 @@ function closeContainer() {
   monthContainer.classList.remove('active');
 }
 
-function showToDoList(e) {
-  makeToDoList(e);
-  currentDate();
-  showListContainer(e);
-}
-
 function addList() {
   const days = document.querySelectorAll('.day');
   const thisDay = document.querySelector('.this__date__day');
@@ -254,13 +298,39 @@ function addList() {
   if (!textInput.value) return;
   toLocalStorage(textInput.value);
   const $li = document.createElement('li');
-  $li.innerHTML = `
-      <input type="checkbox" class="checkbox">
-      <p class="list__item">${textInput.value}</p>
-  `;
   $li.classList.add('todo__list__contents');
+  const $input = document.createElement('input');
+  $input.type = 'checkbox';
+  $input.classList.add('checkbox');
+  const $p = document.createElement('p');
+  $p.classList.add('list__item');
+  $p.textContent = textInput.value;
+  const $button = document.createElement('button');
+  $button.addEventListener('click', () => {console.log('test')});
+  $button.classList.add('delete');
+  $button.textContent = 'delete';
+  $li.appendChild($input);
+  $li.appendChild($p);
+  $li.appendChild($button);
   days[thisNumber].childNodes[1].appendChild($li);
   toDoContainer.innerHTML = days[thisNumber].childNodes[1].innerHTML;
+  textInput.value = '';
+}
+
+function deleteList() {
+  const todoDate = document.querySelector('.todo__date .this__date');
+  const nowDate = todoDate.innerText.replace(/\n/g, '');
+  const todoContainer = document.querySelector('.todo__container');
+  const day = document.querySelector(`.day[data-date="${nowDate}"]`);
+  localStorage.removeItem(nowDate);
+  todoContainer.innerHTML = '';
+  day.childNodes[1].innerHTML = '';
+}
+
+function enterList(e) {
+  if (e.keyCode === 13) {
+    addList();
+  }
 }
 
 calendarGenerator();
@@ -281,3 +351,5 @@ window.onload = () => {
   showDefaultContainer();
 };
 textSubmit.addEventListener('click', addList);
+deleteAllBtn.addEventListener('click', deleteList);
+window.addEventListener('keydown', enterList);
