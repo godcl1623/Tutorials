@@ -53,6 +53,17 @@ const readLocalStorageKeys = () => {
   return testArr;
 };
 
+const highlightCurrent = e => {
+  const days = document.querySelectorAll('.day');
+  if (!e.target.classList.contains('today')) {
+    days.forEach(day => day.classList.remove('highlight'));
+    e.target.classList.add('highlight');
+  } else {
+    days.forEach(day => day.classList.remove('highlight'));
+    return;
+  }
+};
+
 const showListContainer = e => {
   const toDoContainer = document.querySelector('.todo__container');
   toDoContainer.innerHTML = e.target.childNodes[1].innerHTML;
@@ -143,6 +154,7 @@ function showToDoList(e) {
   makeToDoList(e);
   currentDate();
   showListContainer(e);
+  highlightCurrent(e);
 }
 
 const makeDefaultUl = () => {

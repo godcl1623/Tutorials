@@ -254,3 +254,9 @@ button[type=submit] {
   position: absolute;
   right: 0;
 }
+
+.highlight {
+  background: gray;
+  color: white;
+  border-radius: 50%;
+}
