@@ -43,28 +43,6 @@ const calendarGenerator = (year = currentYear, month = currentMonth) => {
   }
 };
 
-const selectYear = () => {
-  const selectors = yearContainer.querySelectorAll('.selector');
-  function yearChanger(event) {
-    currentYear = parseFloat(event.target.textContent);
-    calendarGenerator(currentYear, currentMonth);
-    yearButton.textContent = event.target.textContent;
-    yearContainer.classList.remove('active');
-  }
-  selectors.forEach(button => button.addEventListener('click', yearChanger));
-};
-
-const selectMonth = () => {
-  const selectors = monthContainer.querySelectorAll('.selector');
-  function monthChanger(event) {
-    currentMonth = parseFloat(event.target.textContent) - 1;
-    calendarGenerator(currentYear, currentMonth);
-    monthButton.textContent = event.target.textContent;
-    monthContainer.classList.remove('active');
-  }
-  selectors.forEach(button => button.addEventListener('click', monthChanger));
-};
-
 const readLocalStorageKeys = () => {
   const testArr = [];
   const storageArr = Object.entries(localStorage);
@@ -160,6 +138,12 @@ const matchingDays = () => {
   return testArr;
 };
 
+function showToDoList(e) {
+  makeToDoList(e);
+  currentDate();
+  showListContainer(e);
+}
+
 const makeDefaultUl = () => {
   const matchingArr = getDataSets().filter(ele => readLocalStorageKeys().includes(ele));
   const testArr = Array.from(testKeyArr());
@@ -193,7 +177,7 @@ function monthToPrev() {
     calendarGenerator(currentYear, currentMonth);
     makeDefaultUl();
     const days = document.querySelectorAll('.day');
-days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
+    days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
   } else {
     yearButton.textContent = parseFloat(yearButton.textContent) - 1;
     monthButton.textContent = 12;
@@ -202,7 +186,7 @@ days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
     calendarGenerator(currentYear, currentMonth);
     makeDefaultUl();
     const days = document.querySelectorAll('.day');
-days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
+    days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
   }
 }
 
@@ -213,7 +197,7 @@ function monthToNext() {
     calendarGenerator(currentYear, currentMonth);
     makeDefaultUl();
     const days = document.querySelectorAll('.day');
-days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
+    days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
   } else {
     yearButton.textContent = parseFloat(yearButton.textContent) + 1;
     monthButton.textContent = 1;
@@ -222,9 +206,37 @@ days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
     calendarGenerator(currentYear, currentMonth);
     makeDefaultUl();
     const days = document.querySelectorAll('.day');
-days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
+    days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
   }
 }
+
+const selectYear = () => {
+  const selectors = yearContainer.querySelectorAll('.selector');
+  function yearChanger(event) {
+    currentYear = parseFloat(event.target.textContent);
+    calendarGenerator(currentYear, currentMonth);
+    yearButton.textContent = event.target.textContent;
+    yearContainer.classList.remove('active');
+    makeDefaultUl();
+    const days = document.querySelectorAll('.day');
+    days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
+  }
+  selectors.forEach(button => button.addEventListener('click', yearChanger));
+};
+
+const selectMonth = () => {
+  const selectors = monthContainer.querySelectorAll('.selector');
+  function monthChanger(event) {
+    currentMonth = parseFloat(event.target.textContent) - 1;
+    calendarGenerator(currentYear, currentMonth);
+    monthButton.textContent = event.target.textContent;
+    monthContainer.classList.remove('active');
+    makeDefaultUl();
+    const days = document.querySelectorAll('.day');
+    days.forEach(dayBox => dayBox.addEventListener('click', showToDoList));
+  }
+  selectors.forEach(button => button.addEventListener('click', monthChanger));
+};
 
 function openYearSelector() {
   yearContainer.classList.add('active');
@@ -237,12 +249,6 @@ function openMonthSelector() {
 function closeContainer() {
   yearContainer.classList.remove('active');
   monthContainer.classList.remove('active');
-}
-
-function showToDoList(e) {
-  makeToDoList(e);
-  currentDate();
-  showListContainer(e);
 }
 
 function addList() {
