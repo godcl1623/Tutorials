@@ -178,12 +178,28 @@ const makeDefaultUl = () => {
       // console.log(testArr2[i]);
       if (localStorage.length !== 0) {
         for (let j = 0; j < testArr[i].length; j++) {
-          $ul.innerHTML += `
-            <li class="todo__list__contents">
-              <input type="checkbox" class="checkbox">
-              <p class="list__item">${testArr[i][j].task}</p>
-            </li>
-          `;
+          const $li = document.createElement('li');
+          $li.classList.add('todo__list__contents');
+          const $input = document.createElement('input');
+          $input.type = 'checkbox';
+          $input.classList.add('checkbox');
+          const $p = document.createElement('p');
+          $p.classList.add('list__item');
+          $p.textContent = testArr[i][j].task;
+          const $button = document.createElement('button');
+          $button.addEventListener('click', () => {console.log('test')});
+          $button.classList.add('delete');
+          $button.textContent = 'delete';
+          $li.appendChild($input);
+          $li.appendChild($p);
+          $li.appendChild($button);
+          $ul.appendChild($li);
+          // $ul.innerHTML += `
+          //   <li class="todo__list__contents">
+          //     <input type="checkbox" class="checkbox">
+          //     <p class="list__item">${testArr[i][j].task}</p>
+          //   </li>
+          // `;
           // console.log(testArr[i][j]);
         }
       }
@@ -282,19 +298,39 @@ function addList() {
   if (!textInput.value) return;
   toLocalStorage(textInput.value);
   const $li = document.createElement('li');
-  $li.innerHTML = `
-      <input type="checkbox" class="checkbox">
-      <p class="list__item">${textInput.value}</p>
-  `;
   $li.classList.add('todo__list__contents');
+  const $input = document.createElement('input');
+  $input.type = 'checkbox';
+  $input.classList.add('checkbox');
+  const $p = document.createElement('p');
+  $p.classList.add('list__item');
+  $p.textContent = textInput.value;
+  const $button = document.createElement('button');
+  $button.addEventListener('click', () => {console.log('test')});
+  $button.classList.add('delete');
+  $button.textContent = 'delete';
+  $li.appendChild($input);
+  $li.appendChild($p);
+  $li.appendChild($button);
   days[thisNumber].childNodes[1].appendChild($li);
   toDoContainer.innerHTML = days[thisNumber].childNodes[1].innerHTML;
+  textInput.value = '';
 }
 
 function deleteList() {
   const todoDate = document.querySelector('.todo__date .this__date');
   const nowDate = todoDate.innerText.replace(/\n/g, '');
+  const todoContainer = document.querySelector('.todo__container');
+  const day = document.querySelector(`.day[data-date="${nowDate}"]`);
   localStorage.removeItem(nowDate);
+  todoContainer.innerHTML = '';
+  day.childNodes[1].innerHTML = '';
+}
+
+function enterList(e) {
+  if (e.keyCode === 13) {
+    addList();
+  }
 }
 
 calendarGenerator();
@@ -316,3 +352,4 @@ window.onload = () => {
 };
 textSubmit.addEventListener('click', addList);
 deleteAllBtn.addEventListener('click', deleteList);
+window.addEventListener('keydown', enterList);

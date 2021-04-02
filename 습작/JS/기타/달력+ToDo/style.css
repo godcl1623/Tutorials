@@ -260,3 +260,11 @@ button[type=submit] {
   color: white;
   border-radius: 50%;
 }
+
+.list__item {
+  width: 100%;
+}
+
+.delete {
+  padding: 5px;
+}
