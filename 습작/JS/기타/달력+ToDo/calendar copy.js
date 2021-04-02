@@ -10,6 +10,7 @@ const nextMonth = document.querySelector('.next__month');
 const closeButton = document.querySelectorAll('.close');
 const yearContainer = document.querySelector('.year-container');
 const monthContainer = document.querySelector('.month-selection');
+const textSubmit = document.querySelector('.text_submit');
 let currentYear = dateStandard.getFullYear();
 let currentMonth = dateStandard.getMonth();
 yearButton.textContent = currentYear;
@@ -20,6 +21,11 @@ const isLeapYear = year => {
 const febLastDay = year => {
   return isLeapYear(year) ? 29 : 28;
 };
+
+function toDoCurrentDate(e) {
+  const todoDate = document.querySelector('.todo__date .this__date');
+  todoDate.textContent = e.target.dataset.date;
+}
 
 const calendarGenerator = (year = currentYear, month = currentMonth) => {
   const lastDays = [31, febLastDay(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -40,6 +46,8 @@ const calendarGenerator = (year = currentYear, month = currentMonth) => {
     }
     calendarDates.appendChild(day);
   }
+  const days = document.querySelectorAll('.day');
+  days.forEach(day => day.addEventListener('click', toDoCurrentDate));
 };
 
 function monthToPrev() {
@@ -92,6 +100,11 @@ const selectMonth = () => {
   selectors.forEach(button => button.addEventListener('click', monthChanger));
 };
 
+const defaultUI = () => {
+  const todoDate = document.querySelector('.todo__date .this__date');
+  todoDate.textContent = `${dateStandard.getFullYear()}.${dateStandard.getMonth() + 1}.${dateStandard.getDate()}`;
+}
+
 function openYearSelector() {
   yearContainer.classList.add('active');
 }
@@ -105,6 +118,50 @@ function closeContainer() {
   monthContainer.classList.remove('active');
 }
 
+function addList() {
+  const todoContainer = document.querySelector('.todo__container');
+  const textInput = document.querySelector('.text_input');
+  const $ul = document.createElement('ul');
+  $ul.classList.add('.todo__list__container');
+  const $input = document.createElement('input');
+  $input.type = 'checkbox';
+  $input.classList.add('checkbox');
+  $input.addEventListener('change', () => {console.log('changed')});
+  const $li = document.createElement('li');
+  $li.classList.add('todo__list__contents');
+  const $p = document.createElement('p');
+  $p.classList.add('list__item');
+  $p.textContent = textInput.value;
+  const $button = document.createElement('button');
+  $button.classList.add('delete');
+  $button.textContent = 'delete';
+  $button.addEventListener('click', () => {console.log('delete')});
+  $li.appendChild($input);
+  $li.appendChild($p);
+  $li.appendChild($button);
+  $ul.appendChild($li);
+  todoContainer.appendChild($ul);
+  textInput.value = '';
+}
+
+function enterList(e) {
+  if (e.keyCode === 13) {
+    addList();
+  }
+}
+
+function addLocalStorage() {
+  const todoDate = document.querySelector('.todo__date .this__date');
+  const key = todoDate.innerText.replace(/\n/g, '');
+  const textInput = document.querySelector('.text_input');
+  localStorage.setItem(key, textInput.value);
+}
+
+function listHandler() {
+  addList();
+  addLocalStorage();
+}
+
 calendarGenerator();
 selectYear();
 selectMonth();
@@ -114,3 +171,8 @@ nextMonth.addEventListener('click', monthToNext);
 yearButton.addEventListener('click', openYearSelector);
 monthButton.addEventListener('click', openMonthSelector);
 closeButton.forEach(button => button.addEventListener('click', closeContainer));
+textSubmit.addEventListener('click', listHandler);
+window.onload = () => {
+  defaultUI();
+}
+window.addEventListener('keydown', enterList);
