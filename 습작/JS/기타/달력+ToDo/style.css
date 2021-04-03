@@ -286,3 +286,8 @@ button[type=submit] {
   position: absolute;
   top: 20px;
 }
+
+.prev__date, .next__date {
+  padding: 5px;
+  cursor: pointer;
+}

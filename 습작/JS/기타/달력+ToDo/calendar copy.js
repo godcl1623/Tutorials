@@ -14,6 +14,8 @@ const yearContainer = document.querySelector('.year-container');
 const monthContainer = document.querySelector('.month-selection');
 const textSubmit = document.querySelector('.text_submit');
 const deleteAllBtn = document.querySelector('.delete_all');
+const todoPrevDate = document.querySelector('.todo__date .prev__date');
+const todoNextDate = document.querySelector('.todo__date .next__date');
 let currentYear = dateStandard.getFullYear();
 let currentMonth = dateStandard.getMonth();
 yearButton.textContent = currentYear;
@@ -144,6 +146,37 @@ function showSelectedList(event) {
     $ul.appendChild($li);
   }
   todoContainer.appendChild($ul);
+}
+
+function showPrevORNextList(dateValue) {
+  const todoContainer = document.querySelector('.todo__container');
+  const selectedDate = dateValue;
+  const selectedList = JSON.parse(localStorage.getItem(selectedDate));
+  todoContainer.innerHTML = '';
+  const $ul = document.createElement('ul');
+  $ul.classList.add('.todo__list__container');
+  if (!Object.keys(localStorage).includes(selectedDate)) return;
+  for (let i = 0; i < selectedList.length; i++) {
+    const $li = document.createElement('li');
+    $li.classList.add('todo__list__contents');
+    const $input = document.createElement('input');
+    $input.type = 'checkbox';
+    $input.classList.add('checkbox');
+    $input.addEventListener('change', checkFinished);
+    const $p = document.createElement('p');
+    $p.classList.add('list__item');
+    $p.textContent = selectedList[i];
+    const $button = document.createElement('button');
+    $button.classList.add('delete');
+    $button.textContent = 'delete';
+    $button.addEventListener('click', deleteItem);
+    $li.appendChild($input);
+    $li.appendChild($p);
+    $li.appendChild($button);
+    $ul.appendChild($li);
+  }
+  todoContainer.appendChild($ul);
+  console.log(dateValue);
 }
 
 const calendarGenerator = (year = currentYear, month = currentMonth) => {
@@ -287,6 +320,34 @@ function enterList(e) {
   }
 }
 
+function toPrevDate() {
+  const days = document.querySelectorAll('.day');
+  const dateSets = Array.from(days).map(attribute => attribute.dataset.date);
+  const todoDate = document.querySelector('.todo__date .this__date');
+  const selectedDate = document.querySelector(`.day[data-date='${dateSets[dateSets.indexOf(todoDate.innerText) - 1]}']`);
+  todoDate.innerText = dateSets[dateSets.indexOf(todoDate.innerText) - 1];
+  showPrevORNextList(selectedDate.dataset.date);
+  days.forEach(dayBox => dayBox.classList.remove('highlight'));
+  selectedDate.classList.add('highlight');
+  if (selectedDate.classList.contains('today')) {
+    days.forEach(dayBox => dayBox.classList.remove('highlight'));
+  }
+}
+
+function toNextDate() {
+  const days = document.querySelectorAll('.day');
+  const dateSets = Array.from(days).map(attribute => attribute.dataset.date);
+  const todoDate = document.querySelector('.todo__date .this__date');
+  const selectedDate = document.querySelector(`.day[data-date='${dateSets[dateSets.indexOf(todoDate.innerText) + 1]}']`);
+  todoDate.innerText = dateSets[dateSets.indexOf(todoDate.innerText) + 1];
+  showPrevORNextList(selectedDate.dataset.date);
+  days.forEach(dayBox => dayBox.classList.remove('highlight'));
+  selectedDate.classList.add('highlight');
+  if (selectedDate.classList.contains('today')) {
+    days.forEach(dayBox => dayBox.classList.remove('highlight'));
+  }
+}
+
 /* 선언 모음 */
 
 calendarGenerator();
@@ -305,3 +366,5 @@ window.onload = () => {
 };
 window.addEventListener('keydown', enterList);
 deleteAllBtn.addEventListener('click', deleteAll);
+todoPrevDate.addEventListener('click', toPrevDate);
+todoNextDate.addEventListener('click', toNextDate);
