@@ -268,3 +268,39 @@ button[type=submit] {
 .delete {
   padding: 5px;
 }
+
+.item_checked {
+  text-decoration: line-through;
+}
+
+.day {
+  position: relative;
+}
+
+.hasList {
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  background: black;
+  position: absolute;
+  top: 20px;
+}
+
+.prev__date, .next__date {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.indicator > div {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.seperator {
+  margin: 0 5px;
+}
+
+.hidden {
+  display: none;
+}

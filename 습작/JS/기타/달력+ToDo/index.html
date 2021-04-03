@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>달력 & ToDo</title>
   <link rel="stylesheet" href="style.css">
-  <script defer src="calendar.js"></script>
+  <script defer src="calendar copy.js"></script>
 </head>
 <body>
   <section class="app__body">
@@ -37,7 +37,9 @@
       <div class="year-container">
         <div class="indicator">
           <button class="prev__decade">＜</button>
-          <h3>2020 ~ 2029</h3>
+          <div class="start_year"></div>
+          <div class="seperator">~</div>
+          <div class="end_year"></div>
           <button class="next__decade">＞</button>
         </div>
         <div class="year-selection">
@@ -51,8 +53,8 @@
           <button class="selector">2027</button>
           <button class="selector">2028</button>
           <button class="selector">2029</button>
-          <button class="decades">상위 10년</button>
-          <button class="centuries">상위 100년</button>
+          <button class="decades">10년 단위</button>
+          <button class="set-today">오늘날짜</button>
         </div>
         <button class="close">X</button>
       </div>
@@ -75,13 +77,9 @@
     <section class="todo__body">
       <h6>ToDo 영역</h6>
       <nav class="todo__date">
-        <div class="prev__date">＜</div>
-        <div class="this__date">
-          <div class="this__date__year"></div>
-          <div class="this__date__month"></div>
-          <div class="this__date__day"></div>
-        </div>
-        <div class="next__date">＞</div>
+        <button class="prev__date">＜</button>
+        <div class="this__date"></div>
+        <button class="next__date">＞</button>
         <button class="delete_all">delete</button>
       </nav>
       <div class="todo__list__body">
