@@ -101,6 +101,19 @@ function selectedDay(event) {
   }
 }
 
+function showHasToDoLists() {
+  const days = document.querySelectorAll('.day');
+  const dateSets = Array.from(days).map(attribute => attribute.dataset.date);
+  const havingLists = dateSets.filter(element => getLocalStorageKey().includes(element));
+  days.forEach(dayBox => {
+    if (havingLists.includes(dayBox.dataset.date)) {
+      const $div = document.createElement('div');
+      $div.classList.add('hasList');
+      dayBox.appendChild($div);
+    }
+  });
+}
+
 /* 주요기능 모음 */
 
 function showSelectedList(event) {
@@ -156,6 +169,7 @@ const calendarGenerator = (year = currentYear, month = currentMonth) => {
   days.forEach(day => day.addEventListener('click', toDoCurrentDate));
   days.forEach(dayBox => dayBox.addEventListener('click', showSelectedList));
   days.forEach(dayBox => dayBox.addEventListener('click', selectedDay));
+  showHasToDoLists();
 };
 
 function monthToPrev() {

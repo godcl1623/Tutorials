@@ -272,3 +272,17 @@ button[type=submit] {
 .item_checked {
   text-decoration: line-through;
 }
+
+.day {
+  position: relative;
+}
+
+.hasList {
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  background: black;
+  position: absolute;
+  top: 20px;
+}
