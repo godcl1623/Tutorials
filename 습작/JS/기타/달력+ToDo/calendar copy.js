@@ -100,10 +100,10 @@ const selectMonth = () => {
   selectors.forEach(button => button.addEventListener('click', monthChanger));
 };
 
-const defaultUI = () => {
+const defaultDate = () => {
   const todoDate = document.querySelector('.todo__date .this__date');
   todoDate.textContent = `${dateStandard.getFullYear()}.${dateStandard.getMonth() + 1}.${dateStandard.getDate()}`;
-}
+};
 
 function openYearSelector() {
   yearContainer.classList.add('active');
@@ -116,6 +116,32 @@ function openMonthSelector() {
 function closeContainer() {
   yearContainer.classList.remove('active');
   monthContainer.classList.remove('active');
+}
+
+function addLocalStorage(input) {
+  const todoDate = document.querySelector('.todo__date .this__date');
+  const key = todoDate.innerText.replace(/\n/g, '');
+  const valueContainer = JSON.parse(localStorage.getItem(key)) || [];
+  valueContainer.push(input);
+  localStorage.setItem(key, JSON.stringify(valueContainer));
+}
+
+function getLocalStorageKey() {
+  const days = document.querySelectorAll('.day');
+  const dateValues = Array.from(days).filter(attribute => attribute.dataset.date);
+  const valueMap = dateValues.map(element => element.dataset.date);
+  const storageKeys = Object.keys(localStorage);
+  const matchingKeys = valueMap.filter(values => storageKeys.includes(values));
+  return matchingKeys;
+}
+
+function deleteList() {
+  const todoDate = document.querySelector('.todo__date .this__date');
+  const key = todoDate.innerText.replace(/\n/g, '');
+  const currentKey = getLocalStorageKey().find(element => element === key);
+  const currentValueSet = localStorage.getItem(currentKey);
+  console.log(currentValueSet);
+  // return test;
 }
 
 function addList() {
@@ -135,31 +161,49 @@ function addList() {
   const $button = document.createElement('button');
   $button.classList.add('delete');
   $button.textContent = 'delete';
-  $button.addEventListener('click', () => {console.log('delete')});
+  $button.addEventListener('click', deleteList);
   $li.appendChild($input);
   $li.appendChild($p);
   $li.appendChild($button);
   $ul.appendChild($li);
   todoContainer.appendChild($ul);
+  addLocalStorage(textInput.value);
   textInput.value = '';
 }
+
+const defaultUI = () => {
+  if (localStorage.length !== 0) {
+    const todoContainer = document.querySelector('.todo__container');
+    const defaultContents = JSON.parse(localStorage.getItem(getLocalStorageKey()));
+    const $ul = document.createElement('ul');
+    $ul.classList.add('.todo__list__container');
+    for (let i = 0; i < defaultContents.length; i++) {
+      const $input = document.createElement('input');
+      $input.type = 'checkbox';
+      $input.classList.add('checkbox');
+      $input.addEventListener('change', () => {console.log('changed')});
+      const $li = document.createElement('li');
+      $li.classList.add('todo__list__contents');
+      const $p = document.createElement('p');
+      $p.classList.add('list__item');
+      $p.textContent = defaultContents[i];
+      const $button = document.createElement('button');
+      $button.classList.add('delete');
+      $button.textContent = 'delete';
+      $button.addEventListener('click', deleteList);
+      $li.appendChild($input);
+      $li.appendChild($p);
+      $li.appendChild($button);
+      $ul.appendChild($li);
+    }
+    todoContainer.appendChild($ul);
+  }
+};
 
 function enterList(e) {
   if (e.keyCode === 13) {
     addList();
   }
-}
-
-function addLocalStorage() {
-  const todoDate = document.querySelector('.todo__date .this__date');
-  const key = todoDate.innerText.replace(/\n/g, '');
-  const textInput = document.querySelector('.text_input');
-  localStorage.setItem(key, textInput.value);
-}
-
-function listHandler() {
-  addList();
-  addLocalStorage();
 }
 
 calendarGenerator();
@@ -171,8 +215,9 @@ nextMonth.addEventListener('click', monthToNext);
 yearButton.addEventListener('click', openYearSelector);
 monthButton.addEventListener('click', openMonthSelector);
 closeButton.forEach(button => button.addEventListener('click', closeContainer));
-textSubmit.addEventListener('click', listHandler);
+textSubmit.addEventListener('click', addList);
 window.onload = () => {
+  defaultDate();
   defaultUI();
-}
+};
 window.addEventListener('keydown', enterList);
