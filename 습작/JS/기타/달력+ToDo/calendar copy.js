@@ -67,13 +67,14 @@ function getLocalStorageKey() {
   return matchingKeys;
 }
 
-function deleteList() {
+function deleteList(event) {
   const todoDate = document.querySelector('.todo__date .this__date');
   const key = todoDate.innerText.replace(/\n/g, '');
-  const currentKey = getLocalStorageKey().find(element => element === key);
-  const currentValueSet = localStorage.getItem(currentKey);
-  console.log(currentValueSet);
-  // return test;
+  const parentElement = event.target.parentNode;
+  const listContainer = parentElement.parentNode;
+  listContainer.removeChild(parentElement);
+  const newLists = Array.from(listContainer.childNodes).map(ele => ele.childNodes[1].innerText);
+  localStorage.setItem(key, JSON.stringify(newLists));
 }
 
 /* 주요기능 모음 */
