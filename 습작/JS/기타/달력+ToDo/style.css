@@ -268,3 +268,7 @@ button[type=submit] {
 .delete {
   padding: 5px;
 }
+
+.item_checked {
+  text-decoration: line-through;
+}

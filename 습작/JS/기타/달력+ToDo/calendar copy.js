@@ -13,6 +13,7 @@ const closeButton = document.querySelectorAll('.close');
 const yearContainer = document.querySelector('.year-container');
 const monthContainer = document.querySelector('.month-selection');
 const textSubmit = document.querySelector('.text_submit');
+const deleteAllBtn = document.querySelector('.delete_all');
 let currentYear = dateStandard.getFullYear();
 let currentMonth = dateStandard.getMonth();
 yearButton.textContent = currentYear;
@@ -67,7 +68,7 @@ function getLocalStorageKey() {
   return matchingKeys;
 }
 
-function deleteList(event) {
+function deleteItem(event) {
   const todoDate = document.querySelector('.todo__date .this__date');
   const key = todoDate.innerText.replace(/\n/g, '');
   const parentElement = event.target.parentNode;
@@ -75,6 +76,29 @@ function deleteList(event) {
   listContainer.removeChild(parentElement);
   const newLists = Array.from(listContainer.childNodes).map(ele => ele.childNodes[1].innerText);
   localStorage.setItem(key, JSON.stringify(newLists));
+}
+
+function deleteAll() {
+  const todoContainer = document.querySelector('.todo__container');
+  const todoDate = document.querySelector('.todo__date .this__date');
+  const key = todoDate.innerText.replace(/\n/g, '');
+  localStorage.removeItem(key);
+  todoContainer.innerHTML = '';
+}
+
+function checkFinished(event) {
+  const parentElement = event.target.parentNode;
+  const writtenText = parentElement.childNodes[1];
+  writtenText.classList.toggle('item_checked');
+}
+
+function selectedDay(event) {
+  const days = document.querySelectorAll('.day');
+  days.forEach(dayBox => dayBox.classList.remove('highlight'));
+  event.target.classList.add('highlight');
+  if (event.target.classList.contains('today')) {
+    days.forEach(dayBox => dayBox.classList.remove('highlight'));
+  }
 }
 
 /* 주요기능 모음 */
@@ -93,14 +117,14 @@ function showSelectedList(event) {
     const $input = document.createElement('input');
     $input.type = 'checkbox';
     $input.classList.add('checkbox');
-    $input.addEventListener('change', () => {console.log('changed')});
+    $input.addEventListener('change', checkFinished);
     const $p = document.createElement('p');
     $p.classList.add('list__item');
     $p.textContent = selectedList[i];
     const $button = document.createElement('button');
     $button.classList.add('delete');
     $button.textContent = 'delete';
-    $button.addEventListener('click', deleteList);
+    $button.addEventListener('click', deleteItem);
     $li.appendChild($input);
     $li.appendChild($p);
     $li.appendChild($button);
@@ -131,6 +155,7 @@ const calendarGenerator = (year = currentYear, month = currentMonth) => {
   const days = document.querySelectorAll('.day');
   days.forEach(day => day.addEventListener('click', toDoCurrentDate));
   days.forEach(dayBox => dayBox.addEventListener('click', showSelectedList));
+  days.forEach(dayBox => dayBox.addEventListener('click', selectedDay));
 };
 
 function monthToPrev() {
@@ -196,7 +221,7 @@ const defaultUI = () => {
       const $input = document.createElement('input');
       $input.type = 'checkbox';
       $input.classList.add('checkbox');
-      $input.addEventListener('change', () => {console.log('changed')});
+      $input.addEventListener('change', checkFinished);
       const $li = document.createElement('li');
       $li.classList.add('todo__list__contents');
       const $p = document.createElement('p');
@@ -205,7 +230,7 @@ const defaultUI = () => {
       const $button = document.createElement('button');
       $button.classList.add('delete');
       $button.textContent = 'delete';
-      $button.addEventListener('click', deleteList);
+      $button.addEventListener('click', deleteItem);
       $li.appendChild($input);
       $li.appendChild($p);
       $li.appendChild($button);
@@ -223,7 +248,7 @@ function addList() {
   const $input = document.createElement('input');
   $input.type = 'checkbox';
   $input.classList.add('checkbox');
-  $input.addEventListener('change', () => {console.log('changed')});
+  $input.addEventListener('change', checkFinished);
   const $li = document.createElement('li');
   $li.classList.add('todo__list__contents');
   const $p = document.createElement('p');
@@ -232,7 +257,7 @@ function addList() {
   const $button = document.createElement('button');
   $button.classList.add('delete');
   $button.textContent = 'delete';
-  $button.addEventListener('click', deleteList);
+  $button.addEventListener('click', deleteItem);
   $li.appendChild($input);
   $li.appendChild($p);
   $li.appendChild($button);
@@ -265,3 +290,4 @@ window.onload = () => {
   defaultUI();
 };
 window.addEventListener('keydown', enterList);
+deleteAllBtn.addEventListener('click', deleteAll);
