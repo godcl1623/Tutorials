@@ -16,6 +16,9 @@ const textSubmit = document.querySelector('.text_submit');
 const deleteAllBtn = document.querySelector('.delete_all');
 const todoPrevDate = document.querySelector('.todo__date .prev__date');
 const todoNextDate = document.querySelector('.todo__date .next__date');
+const startYear = document.querySelector('.start_year');
+const endYear = document.querySelector('.end_year');
+const decades = document.querySelector('.decades');
 let currentYear = dateStandard.getFullYear();
 let currentMonth = dateStandard.getMonth();
 yearButton.textContent = currentYear;
@@ -38,6 +41,14 @@ function toDoCurrentDate(e) {
 const defaultDate = () => {
   const todoDate = document.querySelector('.todo__date .this__date');
   todoDate.textContent = `${dateStandard.getFullYear()}.${dateStandard.getMonth() + 1}.${dateStandard.getDate()}`;
+};
+
+const defaultYearSelection = () => {
+  const yearSelectors = document.querySelectorAll('.year-selection .selector');
+  if (parseFloat(dateStandard.getFullYear()) < parseFloat(yearSelectors[yearSelectors.length - 1].innerText)) {
+    startYear.innerText = yearSelectors[0].innerText;
+    endYear.innerText = yearSelectors[yearSelectors.length - 1].innerText;
+  }
 };
 
 function openYearSelector() {
@@ -116,6 +127,16 @@ function showHasToDoLists() {
   });
 }
 
+function selectDecades() {
+  const decadesArr = ['2000', '2010', '2020', '2030', '2040', '2050', '2060', '2070', '2080', '2090'];
+  const yearSelectors = yearContainer.querySelectorAll('.selector');
+  startYear.innerText = '2000';
+  endYear.innerText = '2099';
+  yearSelectors.forEach((element, i) => {
+    element.innerText = decadesArr[i];
+  });
+}
+
 /* 주요기능 모음 */
 
 function showSelectedList(event) {
@@ -176,7 +197,6 @@ function showPrevORNextList(dateValue) {
     $ul.appendChild($li);
   }
   todoContainer.appendChild($ul);
-  console.log(dateValue);
 }
 
 const calendarGenerator = (year = currentYear, month = currentMonth) => {
@@ -235,13 +255,27 @@ function monthToNext() {
 
 const selectYear = () => {
   const selectors = yearContainer.querySelectorAll('.selector');
+  const decadesArr = ['2000', '2010', '2020', '2030', '2040', '2050', '2060', '2070', '2080', '2090'];
+  function compareArrays(a, b) {
+    return JSON.stringify(a) === JSON.stringify(b);
+  }
   function yearChanger(event) {
+    const selectorsTextArray = Array.from(selectors).map(element => element.innerText);
+    if (compareArrays(selectorsTextArray, decadesArr)) return;
     currentYear = parseFloat(event.target.textContent);
     calendarGenerator(currentYear, currentMonth);
     yearButton.textContent = event.target.textContent;
     yearContainer.classList.remove('active');
   }
+  function decadeSelector(event) {
+    if (decadesArr.includes(event.target.innerText)) {
+      startYear.innerText = event.target.innerText;
+      endYear.innerText = parseFloat(startYear.innerText) + 9;
+      selectors.forEach((element, i) => element.innerText = parseFloat(event.target.innerText) + i);
+    }
+  }
   selectors.forEach(button => button.addEventListener('click', yearChanger));
+  selectors.forEach(button => button.addEventListener('click', decadeSelector));
 };
 
 const selectMonth = () => {
@@ -354,6 +388,7 @@ calendarGenerator();
 selectYear();
 selectMonth();
 closeContainer();
+defaultYearSelection();
 prevMonth.addEventListener('click', monthToPrev);
 nextMonth.addEventListener('click', monthToNext);
 yearButton.addEventListener('click', openYearSelector);
@@ -368,3 +403,4 @@ window.addEventListener('keydown', enterList);
 deleteAllBtn.addEventListener('click', deleteAll);
 todoPrevDate.addEventListener('click', toPrevDate);
 todoNextDate.addEventListener('click', toNextDate);
+decades.addEventListener('click', selectDecades);

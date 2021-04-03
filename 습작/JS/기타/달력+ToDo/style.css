@@ -291,3 +291,16 @@ button[type=submit] {
   padding: 5px;
   cursor: pointer;
 }
+
+.indicator > div {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.seperator {
+  margin: 0 5px;
+}
+
+.hidden {
+  display: none;
+}
