@@ -19,6 +19,9 @@ const todoNextDate = document.querySelector('.todo__date .next__date');
 const startYear = document.querySelector('.start_year');
 const endYear = document.querySelector('.end_year');
 const decades = document.querySelector('.decades');
+const setTodayBtn = document.querySelector('.set-today');
+const prevDecadeBtn = yearContainer.querySelector('.prev__decade');
+const nextDecadeBtn = yearContainer.querySelector('.next__decade');
 let currentYear = dateStandard.getFullYear();
 let currentMonth = dateStandard.getMonth();
 yearButton.textContent = currentYear;
@@ -382,6 +385,39 @@ function toNextDate() {
   }
 }
 
+function setToday() {
+  const todayValue = `${dateStandard.getFullYear()}.${dateStandard.getMonth()}.${dateStandard.getDate()}`;
+  const yearSelectors = yearContainer.querySelectorAll('.selector');
+  currentYear = dateStandard.getFullYear();
+  yearButton.textContent = dateStandard.getFullYear();
+  yearContainer.classList.remove('active');
+  calendarGenerator(currentYear, currentMonth);
+  showPrevORNextList(todayValue);
+  startYear.innerText = '2020';
+  endYear.innerText = '2029';
+  yearSelectors.forEach((selectors, i) => {
+    selectors.innerText = parseFloat(startYear.innerText) + i;
+  });
+}
+
+function toPrevDecade() {
+  const yearSelectors = yearContainer.querySelectorAll('.selector');
+  startYear.innerText = parseFloat(startYear.innerText) - 10;
+  endYear.innerText = parseFloat(endYear.innerText) - 10;
+  yearSelectors.forEach(selectors => {
+    selectors.innerText = parseFloat(selectors.innerText) - 10;
+  });
+}
+
+function toNextDecade() {
+  const yearSelectors = yearContainer.querySelectorAll('.selector');
+  startYear.innerText = parseFloat(startYear.innerText) + 10;
+  endYear.innerText = parseFloat(endYear.innerText) + 10;
+  yearSelectors.forEach(selectors => {
+    selectors.innerText = parseFloat(selectors.innerText) + 10;
+  });
+}
+
 /* 선언 모음 */
 
 calendarGenerator();
@@ -404,3 +440,6 @@ deleteAllBtn.addEventListener('click', deleteAll);
 todoPrevDate.addEventListener('click', toPrevDate);
 todoNextDate.addEventListener('click', toNextDate);
 decades.addEventListener('click', selectDecades);
+setTodayBtn.addEventListener('click', setToday);
+prevDecadeBtn.addEventListener('click', toPrevDecade);
+nextDecadeBtn.addEventListener('click', toNextDecade);
