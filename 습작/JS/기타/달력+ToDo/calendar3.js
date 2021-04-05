@@ -29,26 +29,6 @@ const derivedVarContainer = {
   currentMonth: varContainer.dateStandard.getMonth()
 };
 
-// const dateStandard = new Date();
-// const yearButton = document.querySelector('.year');
-// const monthButton = document.querySelector('.month');
-// const prevMonth = document.querySelector('.prev__month');
-// const nextMonth = document.querySelector('.next__month');
-// const closeButton = document.querySelectorAll('.close');
-// const yearContainer = document.querySelector('.year-container');
-// const monthContainer = document.querySelector('.month-selection');
-// const textSubmit = document.querySelector('.text_submit');
-// const deleteAllBtn = document.querySelector('.delete_all');
-// const todoPrevDate = document.querySelector('.todo__date .prev__date');
-// const todoNextDate = document.querySelector('.todo__date .next__date');
-// const startYear = document.querySelector('.start_year');
-// const endYear = document.querySelector('.end_year');
-// const decades = document.querySelector('.decades');
-// const setTodayBtn = document.querySelector('.set-today');
-// const prevDecadeBtn = yearContainer.querySelector('.prev__decade');
-// const nextDecadeBtn = yearContainer.querySelector('.next__decade');
-// let currentYear = dateStandard.getFullYear();
-// let currentMonth = dateStandard.getMonth();
 varContainer.yearButton.textContent = derivedVarContainer.currentYear;
 varContainer.monthButton.textContent = derivedVarContainer.currentMonth + 1;
 
