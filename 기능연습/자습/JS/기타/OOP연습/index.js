@@ -50,8 +50,8 @@ class Test {
   }
 }
 
-const test = new Test('ul', 'li', 'input', 'p', 'button');
-body.appendChild(test.makeList());
+// const test = new Test('ul', 'li', 'input', 'p', 'button');
+// body.appendChild(test.makeList());
 
 class Test2 {
   constructor(eleType) {
@@ -76,8 +76,9 @@ class Test3 extends Test2 {
   }
 
   putType(target, type) {
-    this.checkbox = type;
-    target.type = this.checkbox;
+    // this.checkbox = type;
+    // target.type = this.checkbox;
+    target.type = type;
     return target.type;
   }
 
