@@ -16,9 +16,6 @@ class Test {
     this.p = p;
     this.button = button;
   }
-  // constructor(ul) {
-  //   this.ul = ul;
-  // }
 
   changed() {
     console.log(`${this.input} state has changed`);
@@ -48,14 +45,13 @@ class Test {
     $li.appendChild($input);
     $li.appendChild($p);
     $li.appendChild($button);
-    const result = $ul.appendChild($li);
-    return result;
-    // return $ul;
+    $ul.appendChild($li);
+    return $ul;
   }
 }
 
-// const test = new Test('ul', 'li', 'input', 'p', 'button');
-// body.appendChild(test.makeList());
+const test = new Test('ul', 'li', 'input', 'p', 'button');
+body.appendChild(test.makeList());
 
 class Test2 {
   constructor(eleType) {
@@ -66,33 +62,61 @@ class Test2 {
     return document.createElement(this.eleType);
   }
 
-  putClass() {
-    const testVar = this.makeElement();
-    testVar.classList.add(`todo__container__${this.eleType}`);
-    return testVar;
-  }
-
-  returnResult() {
-    const testVar2 = this.putClass();
-    return testVar2;
+  putClass(target) {
+    return target.classList.add(`todo__container__${this.eleType}`);
   }
 }
 
 class Test3 extends Test2 {
-  putType() {
-    const testVar = this.makeElement();
-    testVar.type = 'checkbox';
-    return testVar.type;
+  constrtuctor() {
+    this.checkbox = '';
+    this.string = '';
+    this.eventType = '';
+    this.functionVar = '';
   }
 
-  textIs(string) {
-    const testVar = this.makeElement();
-    testVar.textContent = string;
-    return testVar.textContent;
+  putType(target, type) {
+    this.checkbox = type;
+    target.type = this.checkbox;
+    return target.type;
   }
 
-  putEventListener(eventType, functionVar) {
-    const testVar = this.makeElement();
-    return testVar.addEventListener(eventType, functionVar);
+  textIs(target, string) {
+    this.string = string;
+    target.textContent = this.string;
+    return target.textContent;
   }
+
+  putEventListener(target, eventType, functionVar) {
+    this.eventType = eventType;
+    this.functionVar = functionVar;
+    return target.addEventListener(eventType, functionVar);
+  }
+}
+
+const test2 = new Test2('ul');
+const test22 = new Test2('li');
+const test3 = new Test3('input');
+const test31 = new Test3('p');
+const test32 = new Test3('button');
+for (let i = 0; i < 5; i++) {
+  const $ul = test2.makeElement();
+  const $li = test22.makeElement();
+  const $input = test3.makeElement();
+  const $p = test31.makeElement();
+  const $button = test32.makeElement();
+  test2.putClass($ul);
+  test22.putClass($li);
+  test3.putClass($input);
+  test3.putType($input, 'checkbox');
+  test31.putClass($p);
+  test31.textIs($p, `element type: p`);
+  test32.putClass($button);
+  test32.textIs($button, `element type: button`);
+  test32.putEventListener($button, 'click', () => {console.log('test')});
+  $li.appendChild($input);
+  $li.appendChild($p);
+  $li.appendChild($button);
+  $ul.appendChild($li);
+  body.appendChild($ul);
 }
