@@ -96,32 +96,3 @@ class Test3 extends Test2 {
     return testVar.addEventListener(eventType, functionVar);
   }
 }
-const $ul = new Test2('ul');
-const $li = new Test3('li');
-const $input = new Test3('input');
-const $p = new Test3('p');
-const $button = new Test3('button');
-const $ulReturn = $ul.returnResult();
-const $liReturn = $li.returnResult();
-const $inputReturn = $input.returnResult();
-$inputReturn.putType();
-const $pReturn = $p.returnResult();
-const $buttonReturn = $button.returnResult();
-// class TestZero {
-//   constructor(eleType) {
-//     this.eleType = eleType;
-//   }
-
-//   makeElement() {
-//     return document.createElement(this.eleType);
-//   }
-
-//   putClass(target) {
-//     return target.classList.add(this.eleType);
-//   }
-// }
-
-// const testZero = new TestZero('button');
-// const testVar = testZero.makeElement();
-// testZero.putClass(testVar);
-// body.appendChild(testVar);
