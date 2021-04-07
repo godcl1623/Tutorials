@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable prettier/prettier */
 /* eslint-disable strict */
 
 'use strict';
@@ -31,6 +33,60 @@ const derivedVarContainer = {
 
 varContainer.yearButton.textContent = derivedVarContainer.currentYear;
 varContainer.monthButton.textContent = derivedVarContainer.currentMonth + 1;
+
+class MakeBasicForm {
+  constructor(eleType) {
+    this.eleType = eleType;
+  }
+
+  makeElement() {
+    return document.createElement(this.eleType);
+  }
+
+  putClass(target) {
+    return target.classList.add(`todo__container__${this.eleType}`);
+  }
+}
+
+class MakeElementInput extends MakeBasicForm {
+  constructor(eleType) {
+    super(eleType);
+    this.type = '';
+    this.eventType = '';
+    this.functionVar = '';
+  }
+
+  putTypeToTarget(target, type) {
+    this.type = type;
+    target.type = this.type;
+    return target.type;
+  }
+
+  putEventListener(target, eventType, functionVar) {
+    this.eventType = eventType;
+    this.functionVar = functionVar;
+    return target.addEventListener(eventType, functionVar);
+  }
+}
+
+class MakeRestElements extends MakeElementInput {
+  constructor(eleType) {
+    super(eleType);
+    this.string = '';
+  }
+
+  textIs(target, string) {
+    this.string = string;
+    target.textContent = this.string;
+    return target.textContent;
+  }
+}
+
+const makeUl = new MakeBasicForm('ul');
+const makeLi = new MakeBasicForm('li');
+const makeInput = new MakeElementInput('input');
+const makeP = new MakeRestElements('p');
+const makeButton = new MakeRestElements('button');
 
 /* 호출용 함수 모음 - 기본적으로 const - function 순 */
 
@@ -95,8 +151,11 @@ function deleteItem(event) {
   const parentElement = event.target.parentNode;
   const listContainer = parentElement.parentNode;
   listContainer.removeChild(parentElement);
-  const newLists = Array.from(listContainer.childNodes).map(ele => ele.childNodes[1].innerText);
-  localStorage.setItem(key, JSON.stringify(newLists));
+  const todayList = getLocalStorageKey().find(dateValue => dateValue === key);
+  let defaultContents = JSON.parse(localStorage.getItem(todayList));
+  const selectedIndex = parentElement.childNodes[1].innerText;
+  defaultContents.splice(defaultContents.indexOf(selectedIndex), 1);
+  localStorage.setItem(key, JSON.stringify(defaultContents));
 }
 
 function deleteAll() {
@@ -152,23 +211,23 @@ function showSelectedList(event) {
   const selectedDate = event.target.dataset.date;
   const selectedList = JSON.parse(localStorage.getItem(selectedDate));
   todoContainer.innerHTML = '';
-  const $ul = document.createElement('ul');
-  $ul.classList.add('.todo__list__container');
+  const $ul = makeUl.makeElement();
+  makeUl.putClass($ul);
   if (!Object.keys(localStorage).includes(selectedDate)) return;
   for (let i = 0; i < selectedList.length; i++) {
-    const $li = document.createElement('li');
-    $li.classList.add('todo__list__contents');
-    const $input = document.createElement('input');
-    $input.type = 'checkbox';
-    $input.classList.add('checkbox');
-    $input.addEventListener('change', checkFinished);
-    const $p = document.createElement('p');
-    $p.classList.add('list__item');
-    $p.textContent = selectedList[i];
-    const $button = document.createElement('button');
-    $button.classList.add('delete');
-    $button.textContent = 'delete';
-    $button.addEventListener('click', deleteItem);
+    const $li = makeLi.makeElement();
+    makeLi.putClass($li);
+    const $input = makeInput.makeElement();
+    makeInput.putTypeToTarget($input, 'checkbox');
+    makeInput.putClass($input);
+    makeInput.putEventListener($input, 'change', checkFinished);
+    const $p = makeP.makeElement();
+    makeP.putClass($p);
+    makeP.textIs($p, selectedList[i]);
+    const $button = makeButton.makeElement();
+    makeButton.putClass($button);
+    makeButton.textIs($button, 'delete');
+    makeButton.putEventListener($button, 'click', deleteItem);
     $li.appendChild($input);
     $li.appendChild($p);
     $li.appendChild($button);
@@ -182,23 +241,23 @@ function showPrevORNextList(dateValue) {
   const selectedDate = dateValue;
   const selectedList = JSON.parse(localStorage.getItem(selectedDate));
   todoContainer.innerHTML = '';
-  const $ul = document.createElement('ul');
-  $ul.classList.add('.todo__list__container');
+  const $ul = makeUl.makeElement();
+  makeUl.putClass($ul);
   if (!Object.keys(localStorage).includes(selectedDate)) return;
   for (let i = 0; i < selectedList.length; i++) {
-    const $li = document.createElement('li');
-    $li.classList.add('todo__list__contents');
-    const $input = document.createElement('input');
-    $input.type = 'checkbox';
-    $input.classList.add('checkbox');
-    $input.addEventListener('change', checkFinished);
-    const $p = document.createElement('p');
-    $p.classList.add('list__item');
-    $p.textContent = selectedList[i];
-    const $button = document.createElement('button');
-    $button.classList.add('delete');
-    $button.textContent = 'delete';
-    $button.addEventListener('click', deleteItem);
+    const $li = makeLi.makeElement();
+    makeLi.putClass($li);
+    const $input = makeInput.makeElement();
+    makeInput.putTypeToTarget($input, 'checkbox');
+    makeInput.putClass($input);
+    makeInput.putEventListener($input, 'change', checkFinished);
+    const $p = makeP.makeElement();
+    makeP.putClass($p);
+    makeP.textIs($p, selectedList[i]);
+    const $button = makeButton.makeElement();
+    makeButton.putClass($button);
+    makeButton.textIs($button, 'delete');
+    makeButton.putEventListener($button, 'click', deleteItem);
     $li.appendChild($input);
     $li.appendChild($p);
     $li.appendChild($button);
@@ -298,55 +357,62 @@ const selectMonth = () => {
 };
 
 const defaultUI = () => {
-  if (localStorage.length !== 0) {
     const todoDate = document.querySelector('.todo__date .this__date');
     const key = todoDate.innerText.replace(/\n/g, '');
     const todoContainer = document.querySelector('.todo__container');
+    const textInput = document.querySelector('.text_input');
+    textInput.value = '';
     const todayList = getLocalStorageKey().find(dateValue => dateValue === key);
     const defaultContents = JSON.parse(localStorage.getItem(todayList));
-    const $ul = document.createElement('ul');
-    $ul.classList.add('.todo__list__container');
-    for (let i = 0; i < defaultContents.length; i++) {
-      const $input = document.createElement('input');
-      $input.type = 'checkbox';
-      $input.classList.add('checkbox');
-      $input.addEventListener('change', checkFinished);
-      const $li = document.createElement('li');
-      $li.classList.add('todo__list__contents');
-      const $p = document.createElement('p');
-      $p.classList.add('list__item');
-      $p.textContent = defaultContents[i];
-      const $button = document.createElement('button');
-      $button.classList.add('delete');
-      $button.textContent = 'delete';
-      $button.addEventListener('click', deleteItem);
-      $li.appendChild($input);
-      $li.appendChild($p);
-      $li.appendChild($button);
-      $ul.appendChild($li);
+    if (defaultContents === null) {
+      const $ul = makeUl.makeElement();
+      makeUl.putClass($ul);
+      todoContainer.appendChild($ul);
+    } else {
+      const $ul = makeUl.makeElement();
+      makeUl.putClass($ul);
+      for (let i = 0; i < defaultContents.length; i++) {
+        const $li = makeLi.makeElement();
+        makeLi.putClass($li);
+        const $input = makeInput.makeElement();
+        makeInput.putTypeToTarget($input, 'checkbox');
+        makeInput.putClass($input);
+        makeInput.putEventListener($input, 'change', checkFinished);
+        const $p = makeP.makeElement();
+        makeP.putClass($p);
+        makeP.textIs($p, defaultContents[i]);
+        const $button = makeButton.makeElement();
+        makeButton.putClass($button);
+        makeButton.textIs($button, 'delete');
+        makeButton.putEventListener($button, 'click', deleteItem);
+        $li.appendChild($input);
+        $li.appendChild($p);
+        $li.appendChild($button);
+        $ul.appendChild($li);
+      }
+      todoContainer.appendChild($ul);
     }
-    todoContainer.appendChild($ul);
-  }
 };
 
 function addList() {
   const todoContainer = document.querySelector('.todo__container');
   const textInput = document.querySelector('.text_input');
-  const $ul = document.createElement('ul');
-  $ul.classList.add('.todo__list__container');
-  const $input = document.createElement('input');
-  $input.type = 'checkbox';
-  $input.classList.add('checkbox');
-  $input.addEventListener('change', checkFinished);
-  const $li = document.createElement('li');
-  $li.classList.add('todo__list__contents');
-  const $p = document.createElement('p');
-  $p.classList.add('list__item');
-  $p.textContent = textInput.value;
-  const $button = document.createElement('button');
-  $button.classList.add('delete');
-  $button.textContent = 'delete';
-  $button.addEventListener('click', deleteItem);
+  if (textInput.value === '') return;
+  const $ul = makeUl.makeElement();
+  makeUl.putClass($ul);
+  const $li = makeLi.makeElement();
+  makeLi.putClass($li);
+  const $input = makeInput.makeElement();
+  makeInput.putTypeToTarget($input, 'checkbox');
+  makeInput.putClass($input);
+  makeInput.putEventListener($input, 'change', checkFinished);
+  const $p = makeP.makeElement();
+  makeP.putClass($p);
+  makeP.textIs($p, textInput.value);
+  const $button = makeButton.makeElement();
+  makeButton.putClass($button);
+  makeButton.textIs($button, 'delete');
+  makeButton.putEventListener($button, 'click', deleteItem);
   $li.appendChild($input);
   $li.appendChild($p);
   $li.appendChild($button);

@@ -1,0 +1,306 @@
+/* 공통사항 */
+
+* {
+  margin: 0;
+  border: 1px solid black;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+ul, ol, li {
+  list-style: none;
+}
+
+h6 {
+  display: none;
+}
+
+button {
+  padding: 10px 20px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+button:active {
+  transform:scale(1.1);
+  filter: brightness(0.75);
+}
+
+/* 전체 컨테이너 */
+
+.app__body {
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app__body > * {
+  width: 100%;
+  height: 100%;
+}
+
+/* 달력, 투두 날짜 표시 영역 */
+
+.calendar__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar__date, .todo__date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar__date {
+  justify-content: space-between;
+}
+
+.calendar__date .month-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar__date .this__date, .todo__date > .this__date {
+  margin: 0 20px;
+  padding: 5px 20px;
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.prev__month, .next__month {
+  padding: 5px 10px;
+  background: none;
+  border: 1px solid gray;
+  /* border: none; */
+}
+
+.calendar__days {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.calendar__days > * {
+  width: 100%;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+
+.calendar__dates {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar__dates > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.year-container {
+  border: 1px solid black;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  background: white;
+  display: none;
+  /* display: flex; */
+  flex-direction: column;
+  align-items: center;
+}
+
+.year-container > .indicator {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.year-container > .indicator > button {
+  margin: 0 10px;
+  padding: 5px 10px;
+}
+
+.year-selection {
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.year-container.active {
+  display: flex;
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  background: none;
+}
+
+.close:active {
+  transform: none;
+  filter: none;
+}
+
+.month-selection {
+  border: 1px solid black;
+  padding: 50px;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  background: white;
+  display: none;
+  /* display: grid; */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+}
+
+.month-selection.active {
+  display: grid;
+}
+
+.today {
+  background: blue;
+  color: white;
+  border-radius: 50%;
+}
+
+.day {
+  cursor: pointer;
+}
+
+.todo__body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.todo__list__body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.todo__container {
+  padding: 20px 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.todo__input {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text_input {
+  padding: 0 5px;
+  width: 90%;
+  height: 100%;
+  font-size: 20px;
+}
+
+button[type=submit] {
+  padding: 5px 10px;
+}
+
+.calendar__dates ul {
+  display: none;
+}
+
+.todo__date > .this__date {
+  flex-direction: row;
+}
+
+.todo__container__li {
+  padding: 0 5px;
+  display: flex;
+  font-size: 24px;
+}
+
+.todo__container__input {
+  margin-right: 10px;
+}
+
+.delete_all {
+  padding: 5px;
+  position: absolute;
+  right: 0;
+}
+
+.highlight {
+  background: gray;
+  color: white;
+  border-radius: 50%;
+}
+
+.todo__container__p {
+  width: 100%;
+}
+
+.todo__container__button {
+  padding: 5px;
+}
+
+.item_checked {
+  text-decoration: line-through;
+}
+
+.day {
+  position: relative;
+}
+
+.hasList {
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  background: black;
+  position: absolute;
+  top: 20px;
+}
+
+.prev__date, .next__date {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.indicator > div {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.seperator {
+  margin: 0 5px;
+}
+
+.hidden {
+  display: none;
+}
