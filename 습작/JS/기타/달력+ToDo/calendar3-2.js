@@ -151,8 +151,11 @@ function deleteItem(event) {
   const parentElement = event.target.parentNode;
   const listContainer = parentElement.parentNode;
   listContainer.removeChild(parentElement);
-  const newLists = Array.from(listContainer.childNodes).map(ele => ele.childNodes[1].innerText);
-  localStorage.setItem(key, JSON.stringify(newLists));
+  const todayList = getLocalStorageKey().find(dateValue => dateValue === key);
+  let defaultContents = JSON.parse(localStorage.getItem(todayList));
+  const selectedIndex = parentElement.childNodes[1].innerText;
+  defaultContents.splice(defaultContents.indexOf(selectedIndex), 1);
+  localStorage.setItem(key, JSON.stringify(defaultContents));
 }
 
 function deleteAll() {
@@ -354,40 +357,47 @@ const selectMonth = () => {
 };
 
 const defaultUI = () => {
-  if (localStorage.length !== 0) {
     const todoDate = document.querySelector('.todo__date .this__date');
     const key = todoDate.innerText.replace(/\n/g, '');
     const todoContainer = document.querySelector('.todo__container');
+    const textInput = document.querySelector('.text_input');
+    textInput.value = '';
     const todayList = getLocalStorageKey().find(dateValue => dateValue === key);
     const defaultContents = JSON.parse(localStorage.getItem(todayList));
-    const $ul = makeUl.makeElement();
-    makeUl.putClass($ul);
-    for (let i = 0; i < defaultContents.length; i++) {
-      const $li = makeLi.makeElement();
-      makeLi.putClass($li);
-      const $input = makeInput.makeElement();
-      makeInput.putTypeToTarget($input, 'checkbox');
-      makeInput.putClass($input);
-      makeInput.putEventListener($input, 'change', checkFinished);
-      const $p = makeP.makeElement();
-      makeP.putClass($p);
-      makeP.textIs($p, defaultContents[i]);
-      const $button = makeButton.makeElement();
-      makeButton.putClass($button);
-      makeButton.textIs($button, 'delete');
-      makeButton.putEventListener($button, 'click', deleteItem);
-      $li.appendChild($input);
-      $li.appendChild($p);
-      $li.appendChild($button);
-      $ul.appendChild($li);
+    if (defaultContents === null) {
+      const $ul = makeUl.makeElement();
+      makeUl.putClass($ul);
+      todoContainer.appendChild($ul);
+    } else {
+      const $ul = makeUl.makeElement();
+      makeUl.putClass($ul);
+      for (let i = 0; i < defaultContents.length; i++) {
+        const $li = makeLi.makeElement();
+        makeLi.putClass($li);
+        const $input = makeInput.makeElement();
+        makeInput.putTypeToTarget($input, 'checkbox');
+        makeInput.putClass($input);
+        makeInput.putEventListener($input, 'change', checkFinished);
+        const $p = makeP.makeElement();
+        makeP.putClass($p);
+        makeP.textIs($p, defaultContents[i]);
+        const $button = makeButton.makeElement();
+        makeButton.putClass($button);
+        makeButton.textIs($button, 'delete');
+        makeButton.putEventListener($button, 'click', deleteItem);
+        $li.appendChild($input);
+        $li.appendChild($p);
+        $li.appendChild($button);
+        $ul.appendChild($li);
+      }
+      todoContainer.appendChild($ul);
     }
-    todoContainer.appendChild($ul);
-  }
 };
 
 function addList() {
   const todoContainer = document.querySelector('.todo__container');
   const textInput = document.querySelector('.text_input');
+  if (textInput.value === '') return;
   const $ul = makeUl.makeElement();
   makeUl.putClass($ul);
   const $li = makeLi.makeElement();
