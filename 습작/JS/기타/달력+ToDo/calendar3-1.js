@@ -67,10 +67,12 @@ class MakeList {
   }
 
   getDate(event) {
-    
+    const selectedDate = event.target.dataset.date;
+    const selectedList = JSON.parse(localStorage.getItem(selectedDate));
+    return selectedList;
   }
 
-  listFormat() {
+  listFormat(event, index) {
     const $li = document.createElement(this.element2);
     $li.classList.add('todo__container__contents');
     const $input = document.createElement(this.element3);
@@ -79,7 +81,7 @@ class MakeList {
     $input.classList.add('checkbox');
     const $p = document.createElement(this.element4);
     $p.classList.add('list__item');
-    $p.textContent = `element type: ${this.element4}`;
+    $p.textContent = this.getDate(event)[index];
     const $button = document.createElement(this.element5);
     $button.classList.add(`todo__container__${this.element5}`);
     $button.textContent = `element type: ${this.element5}`;
@@ -87,8 +89,21 @@ class MakeList {
     $li.appendChild($input);
     $li.appendChild($p);
     $li.appendChild($button);
-    $ul.appendChild($li);
-    return $ul;
+    return $li;
+  }
+
+  wrapForMakeList(event) {
+    const todoContainer = document.querySelector('.todo__container');
+    const selectedDate = event.target.dataset.date;
+    const selectedList = JSON.parse(localStorage.getItem(selectedDate));
+    todoContainer.innerHTML = '';
+    const $ul = document.createElement(this.element1);
+    $ul.classList.add('todo__list__container');
+    if (!Object.keys(localStorage).includes(selectedDate)) return;
+    for (let i = 0; i < selectedList.length; i++) {
+      $ul.appencChild(this.listFormat(event, i));
+    }
+    todoContainer.appendChild($ul);
   }
 }
 
@@ -209,35 +224,35 @@ function selectDecades() {
 
 /* 주요기능 모음 */
 
-function showSelectedList(event) {
-  const todoContainer = document.querySelector('.todo__container');
-  const selectedDate = event.target.dataset.date;
-  const selectedList = JSON.parse(localStorage.getItem(selectedDate));
-  todoContainer.innerHTML = '';
-  const $ul = document.createElement('ul');
-  $ul.classList.add('.todo__list__container');
-  if (!Object.keys(localStorage).includes(selectedDate)) return;
-  for (let i = 0; i < selectedList.length; i++) {
-    const $li = document.createElement('li');
-    $li.classList.add('todo__list__contents');
-    const $input = document.createElement('input');
-    $input.type = 'checkbox';
-    $input.classList.add('checkbox');
-    $input.addEventListener('change', checkFinished);
-    const $p = document.createElement('p');
-    $p.classList.add('list__item');
-    $p.textContent = selectedList[i];
-    const $button = document.createElement('button');
-    $button.classList.add('delete');
-    $button.textContent = 'delete';
-    $button.addEventListener('click', deleteItem);
-    $li.appendChild($input);
-    $li.appendChild($p);
-    $li.appendChild($button);
-    $ul.appendChild($li);
-  }
-  todoContainer.appendChild($ul);
-}
+// function showSelectedList(event) {
+//   const todoContainer = document.querySelector('.todo__container');
+//   const selectedDate = event.target.dataset.date;
+//   const selectedList = JSON.parse(localStorage.getItem(selectedDate));
+//   todoContainer.innerHTML = '';
+//   const $ul = document.createElement('ul');
+//   $ul.classList.add('.todo__list__container');
+//   if (!Object.keys(localStorage).includes(selectedDate)) return;
+//   for (let i = 0; i < selectedList.length; i++) {
+//     const $li = document.createElement('li');
+//     $li.classList.add('todo__list__contents');
+//     const $input = document.createElement('input');
+//     $input.type = 'checkbox';
+//     $input.classList.add('checkbox');
+//     $input.addEventListener('change', checkFinished);
+//     const $p = document.createElement('p');
+//     $p.classList.add('list__item');
+//     $p.textContent = selectedList[i];
+//     const $button = document.createElement('button');
+//     $button.classList.add('delete');
+//     $button.textContent = 'delete';
+//     $button.addEventListener('click', deleteItem);
+//     $li.appendChild($input);
+//     $li.appendChild($p);
+//     $li.appendChild($button);
+//     $ul.appendChild($li);
+//   }
+//   todoContainer.appendChild($ul);
+// }
 
 function showPrevORNextList(dateValue) {
   const todoContainer = document.querySelector('.todo__container');
@@ -290,7 +305,7 @@ const calendarGenerator = (year = derivedVarContainer.currentYear, month = deriv
   }
   const days = document.querySelectorAll('.day');
   days.forEach(day => day.addEventListener('click', toDoCurrentDate));
-  days.forEach(dayBox => dayBox.addEventListener('click', showSelectedList));
+  days.forEach(dayBox => dayBox.addEventListener('click', testClass.listFormat));
   days.forEach(dayBox => dayBox.addEventListener('click', selectedDay));
   showHasToDoLists();
 };
