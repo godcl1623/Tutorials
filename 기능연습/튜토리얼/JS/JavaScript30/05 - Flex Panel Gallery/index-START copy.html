@@ -27,8 +27,6 @@
       min-height: 100vh;
       overflow: hidden;
       /*==========삭제 필요한 내용==========*/
-      display: flex;
-      cursor: pointer;
       /*==========삭제 필요한 내용 끝==========*/
     }
 
@@ -48,11 +46,6 @@
       background-size: cover;
       background-position: center;
       /*==========삭제 필요한 내용==========*/
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      z-index: 1;
       /*==========삭제 필요한 내용 끝==========*/
     }
 
@@ -68,28 +61,9 @@
       width: 100%;
       transition: transform 0.5s;
       /*==========삭제 필요한 내용==========*/
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       /*==========삭제 필요한 내용 끝==========*/
     }
     /*==========삭제 필요한 내용==========*/
-    .panel > p:first-child {
-      transform: translateY(-100%);
-    }
-
-    .panel.active > p:first-child {
-      transform: translateY(0);
-    }
-
-    .panel > p:last-child {
-      transform: translateY(100%);
-    }
-
-    .panel.active > p:last-child {
-      transform: translateY(0);
-    }
     /*==========삭제 필요한 내용 끝==========*/
     .panel p {
       text-transform: uppercase;
@@ -105,7 +79,6 @@
     .panel.open {
       font-size: 40px;
       /*==========삭제 필요한 내용==========*/
-      flex: 5;
       /*==========삭제 필요한 내용 끝==========*/
     }
 
@@ -141,23 +114,7 @@
   </div>
 
   <script>
-    const varContainer = {
-      panel: document.querySelectorAll('.panel')
-    };
-    // const panel = document.querySelectorAll('.panel');
 
-    function makeActive() {
-      this.classList.toggle('open');
-    }
-
-    function callHiddenElements(event) {
-      if (event.propertyName.includes('flex')) {
-        this.classList.toggle('active');
-      }
-    }
-
-    varContainer.panel.forEach(panel => panel.addEventListener('click', makeActive));
-    varContainer.panel.forEach(panel => panel.addEventListener('transitionend', callHiddenElements));
   </script>
 
 
