@@ -11,14 +11,8 @@
   <script>
     const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
 
-    function makeGreen() {
-      const p = document.querySelector('p');
-      p.style.color = '#BADA55';
-      p.style.fontSize = '50px';
-    }
-
     // Regular
-const ppap = 'pineapple';
+
     // Interpolated
 
     // Styled
@@ -36,23 +30,11 @@ const ppap = 'pineapple';
     // Viewing DOM Elements
 
     // Grouping together
-dogs.forEach(dog => {
-  console.groupCollapsed(`${dog.name}`);
-    console.log(`This is ${dog.name}`);
-    console.log(`${dog.name} is ${dog.age} years old`);
-    console.log(`Which means, ${dog.name} is ${dog.age * 7} dog years old`);
-  console.groupEnd(`${dog.name}`);
-});
+
     // counting
 
     // timing
-console.time('fetching data');
-fetch('https://github.com/taraczel/Tutorials.git')
-  .then(data => data.json())
-  .then(data => {
-    console.timeEnd('fetching data!');
-    console.log(data);
-  });
+
   </script>
 </body>
 </html>
