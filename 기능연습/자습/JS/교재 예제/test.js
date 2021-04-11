@@ -1,4 +1,6 @@
-const foo = { 'fizz-buzz': true };
-const { 'fizz-buzz': fizzBuzz } = foo;
+function myFunction(x, y, z) { }
+var args = [0, 1, 2];
+myFunction.apply(null, args); // this
 
-console.log(fizzBuzz); // "true"
+function testFunction(...args) {}
+testFunction();
