@@ -10,7 +10,12 @@ class App extends Component {
     this.state = {
       subject1: {title:'WEB', text:'World Wide Web!'},
       subject2: {title:'React', text:'For UI'},
-      contents: {title:'HTML', desc:'HTML is HyperText Markup Language.'}
+      contents: {title:'HTML', desc:'HTML is HyperText Markup Language.'},
+      menu: [
+        {id: 1, title: 'HTML', desc:'HTML is for information'},
+        {id: 2, title: 'CSS', desc:'CSS is for design'},
+        {id: 3, title: 'JavaScript', desc:'JavaScript is for interaction'},
+      ]
     }
   }
   render() {
@@ -18,7 +23,7 @@ class App extends Component {
       <div className="App">
         <Subject title={this.state.subject1.title} text={this.state.subject1.text}></Subject>
         <Subject title={this.state.subject2.title} text={this.state.subject2.text}></Subject>
-        <Menu></Menu>
+        <Menu data={this.state.menu}></Menu>
         <Contents title={this.state.contents.title} desc={this.state.contents.desc}></Contents>
       </div>
     )
