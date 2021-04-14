@@ -8,7 +8,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: 'welcome',
+      mode: 'read',
       welcome: {title: 'Welcome', desc: 'Hello, React !!'},
       subject1: {title:'WEB', text:'World Wide Web!'},
       subject2: {title:'React', text:'For UI'},
@@ -35,8 +35,10 @@ class App extends Component {
         <header>
           <h1><a href="/" onClick={function(event){
             event.preventDefault();
-            alert('hi');
-          }}>{this.state.subject1.title}</a></h1>
+            this.setState(
+              {mode: 'welcome'}
+            );
+          }.bind(this)}>{this.state.subject1.title}</a></h1>
           {this.state.subject1.text}
         </header>
         {/* <Subject title={this.state.subject2.title} text={this.state.subject2.text}></Subject> */}
