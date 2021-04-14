@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 class Subject extends Component {
-  render(){
+  render() {
     return (
       <header>
-        <h1><a href="/">{this.props.title}</a></h1>
-        {this.props.text}
+        <h1>{this.props.title}</h1>
+        {this.props.desc}
       </header>
     );
   }
