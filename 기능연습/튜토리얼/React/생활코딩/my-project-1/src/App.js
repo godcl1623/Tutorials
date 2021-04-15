@@ -39,9 +39,16 @@ class App extends Component {
             this.setState(
               {mode: 'welcome'}
             );
-          }.bind(this)}></Subject>
+          }.bind(this)}
+        ></Subject>
         {/* <Subject title={this.state.subject2.title} text={this.state.subject2.text}></Subject> */}
-        <Menu data={this.state.menu}></Menu>
+        <Menu
+          data={this.state.menu}
+          onClickElement={function(event) {
+            event.preventDefault();
+            this.setState({mode: 'read'});
+          }.bind(this)}
+        ></Menu>
         <Contents title={_title} desc={_desc}></Contents>
       </div>
     )
