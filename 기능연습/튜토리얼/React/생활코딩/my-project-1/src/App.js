@@ -27,14 +27,12 @@ class App extends Component {
       _title = this.state.welcome.title;
       _desc = this.state.welcome.desc;
     } else if (this.state.mode === 'read') {
-      let i = 0;
-      while (i < this.state.menu.length) {
-        if (this.state.menu[i].id === this.state.selectedContentId) {
+      this.state.menu.forEach((element, i) => {
+        if (element.id === this.state.selectedContentId) {
           _title = this.state.menu[i].title;
           _desc = this.state.menu[i].desc;
         }
-        i++;
-      }
+      })
     }
     return (
       <div className="App">
