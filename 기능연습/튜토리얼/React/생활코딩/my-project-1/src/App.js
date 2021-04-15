@@ -31,16 +31,15 @@ class App extends Component {
     }
     return (
       <div className="App">
-        {/* <Subject title={this.state.subject1.title} text={this.state.subject1.text}></Subject> */}
-        <header>
-          <h1><a href="/" onClick={function(event){
+        <Subject
+          title={this.state.subject1.title}
+          text={this.state.subject1.text}
+          onClickElement={function(event) {
             event.preventDefault();
             this.setState(
               {mode: 'welcome'}
             );
-          }.bind(this)}>{this.state.subject1.title}</a></h1>
-          {this.state.subject1.text}
-        </header>
+          }.bind(this)}></Subject>
         {/* <Subject title={this.state.subject2.title} text={this.state.subject2.text}></Subject> */}
         <Menu data={this.state.menu}></Menu>
         <Contents title={_title} desc={_desc}></Contents>
