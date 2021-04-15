@@ -10,6 +10,7 @@ class App extends Component {
     this.state = {
       mode: 'read',
       welcome: {title: 'Welcome', desc: 'Hello, React !!'},
+      selectedContentId: 3,
       subject1: {title:'WEB', text:'World Wide Web!'},
       subject2: {title:'React', text:'For UI'},
       contents: {title:'HTML', desc:'HTML is HyperText Markup Language.'},
@@ -26,16 +27,21 @@ class App extends Component {
       _title = this.state.welcome.title;
       _desc = this.state.welcome.desc;
     } else if (this.state.mode === 'read') {
-      _title = this.state.menu[0].title;
-      _desc = this.state.menu[0].desc;
+      let i = 0;
+      while (i < this.state.menu.length) {
+        if (this.state.menu[i].id === this.state.selectedContentId) {
+          _title = this.state.menu[i].title;
+          _desc = this.state.menu[i].desc;
+        }
+        i++;
+      }
     }
     return (
       <div className="App">
         <Subject
           title={this.state.subject1.title}
           text={this.state.subject1.text}
-          onClickElement={function(event) {
-            event.preventDefault();
+          onClickElement={function() {
             this.setState(
               {mode: 'welcome'}
             );
@@ -44,9 +50,11 @@ class App extends Component {
         {/* <Subject title={this.state.subject2.title} text={this.state.subject2.text}></Subject> */}
         <Menu
           data={this.state.menu}
-          onClickElement={function(event) {
-            event.preventDefault();
-            this.setState({mode: 'read'});
+          onClickElement={function(id) {
+            this.setState({
+              mode: 'read',
+              selectedContentId: Number(id)
+            });
           }.bind(this)}
         ></Menu>
         <Contents title={_title} desc={_desc}></Contents>

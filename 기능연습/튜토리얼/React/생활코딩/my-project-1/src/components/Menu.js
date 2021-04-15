@@ -8,11 +8,21 @@ class Menu extends Component {
     while (i < data.length) {
       lists.push(
         <li key={data[i].id}>
+          {/* <a 
+            href={"/content/"+data[i].id}
+            data-id={data[i].id}
+            onClick={function(event) {
+              event.preventDefault();
+              this.props.onClickElement(event.target.dataset.id);
+            }.bind(this)}
+          > */}
           <a 
             href={"/content/"+data[i].id}
-            onClick={function(event) {
-              this.props.onClickElement(event);
-            }.bind(this)}
+            data-id={data[i].id}
+            onClick={function(id, event) {
+              event.preventDefault();
+              this.props.onClickElement(id);
+            }.bind(this, data[i].id)}
           >
             {data[i].title}
           </a>
