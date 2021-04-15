@@ -10,6 +10,7 @@ class App extends Component {
     this.state = {
       mode: 'read',
       welcome: {title: 'Welcome', desc: 'Hello, React !!'},
+      selectedContentId: 3,
       subject1: {title:'WEB', text:'World Wide Web!'},
       subject2: {title:'React', text:'For UI'},
       contents: {title:'HTML', desc:'HTML is HyperText Markup Language.'},
@@ -26,23 +27,34 @@ class App extends Component {
       _title = this.state.welcome.title;
       _desc = this.state.welcome.desc;
     } else if (this.state.mode === 'read') {
-      _title = this.state.menu[0].title;
-      _desc = this.state.menu[0].desc;
+      this.state.menu.forEach((element, i) => {
+        if (element.id === this.state.selectedContentId) {
+          _title = this.state.menu[i].title;
+          _desc = this.state.menu[i].desc;
+        }
+      })
     }
     return (
       <div className="App">
-        {/* <Subject title={this.state.subject1.title} text={this.state.subject1.text}></Subject> */}
-        <header>
-          <h1><a href="/" onClick={function(event){
-            event.preventDefault();
+        <Subject
+          title={this.state.subject1.title}
+          text={this.state.subject1.text}
+          onClickElement={function() {
             this.setState(
               {mode: 'welcome'}
             );
-          }.bind(this)}>{this.state.subject1.title}</a></h1>
-          {this.state.subject1.text}
-        </header>
+          }.bind(this)}
+        ></Subject>
         {/* <Subject title={this.state.subject2.title} text={this.state.subject2.text}></Subject> */}
-        <Menu data={this.state.menu}></Menu>
+        <Menu
+          data={this.state.menu}
+          onClickElement={function(id) {
+            this.setState({
+              mode: 'read',
+              selectedContentId: Number(id)
+            });
+          }.bind(this)}
+        ></Menu>
         <Contents title={_title} desc={_desc}></Contents>
       </div>
     )
