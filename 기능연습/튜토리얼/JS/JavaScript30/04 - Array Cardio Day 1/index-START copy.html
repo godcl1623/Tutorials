@@ -70,14 +70,25 @@
     */
     // 7. sort Exercise - 주의!!
     // Sort the people alphabetically by last name
-
-    // const alpha = people.sort((prevOne, thisOne) => {
-    //   const [prevOne.last]
-    // });
+    const alpha = people.sort((prevOne, thisOne) => {
+      const [aLast, aFirst] = prevOne.split(', ');
+      const [bLast, bFirst] = thisOne.split(', ');
+      return aLast > bLast ? 1 : -1;
+    });
+    console.table(alpha);
+    // console.log(newArray);
+    // console.log(alpha);
     // 8. Reduce Exercise - 주의!!
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const transportation = data.reduce((obj, item) => {
+      if (!obj[item]) {
+        obj[item] = 0;
+      }
+      obj[item]++;
+      return obj;
+    }, {});
+    console.log(transportation);
   </script>
 </body>
 </html>
