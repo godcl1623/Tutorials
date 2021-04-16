@@ -22,6 +22,7 @@ class App extends Component {
         {id: 3, title: 'JavaScript', desc:'JavaScript is for interaction'},
       ]
     }
+    this.maxContentId = this.state.menu[this.state.menu.length - 1].id;
   }
   render() {
     let _title, _desc, _article;
@@ -44,7 +45,13 @@ class App extends Component {
         _article =
           <CreateContent
             onSubmitAction={(_title, _desc) => {
-              console.log(_title, _desc);
+              this.maxContentId++;
+              const _content = this.state.menu.concat(
+                {id: this.maxContentId, title: _title, desc: _desc}
+              )
+              this.setState({
+                menu: _content
+              })
             }}
           ></CreateContent>;
         break;
