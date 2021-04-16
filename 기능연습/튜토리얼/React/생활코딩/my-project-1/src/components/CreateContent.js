@@ -9,8 +9,9 @@ class CreateContent extends Component {
           action="/submit_process"
           method="post"
           onSubmit={event => {
+            const target = event.target;
             event.preventDefault();
-            alert('submit !');
+            this.props.onSubmitAction(target.title.value, target.desc.value);
           }}
         >
           <p>

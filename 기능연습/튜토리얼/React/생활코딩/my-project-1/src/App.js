@@ -41,7 +41,12 @@ class App extends Component {
         _article = <ReadContent title={_title} desc={_desc}></ReadContent>;
         break;
       case 'create':
-        _article = <CreateContent></CreateContent>;
+        _article =
+          <CreateContent
+            onSubmitAction={(_title, _desc) => {
+              console.log(_title, _desc);
+            }}
+          ></CreateContent>;
         break;
       default:
         break;
