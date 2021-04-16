@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 
 class Menu extends Component {
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.data !== this.props.data) {
+      return true;
+    }
+    return false;
+  }
   render() {
     const data = this.props.data;
     const lists = [];
