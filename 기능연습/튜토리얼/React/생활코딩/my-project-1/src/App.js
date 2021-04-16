@@ -3,6 +3,7 @@ import './App.css';
 import Subject from './components/Subject';
 import Menu from './components/Menu';
 import Contents from './components/Contents';
+import Control from './components/Control';
 
 class App extends Component {
   constructor(props) {
@@ -55,6 +56,13 @@ class App extends Component {
             });
           }.bind(this)}
         ></Menu>
+        <Control
+          onClickElement={_mode => {
+            this.setState({
+              mode: _mode
+            })
+          }}
+        ></Control>
         <Contents title={_title} desc={_desc}></Contents>
       </div>
     )
