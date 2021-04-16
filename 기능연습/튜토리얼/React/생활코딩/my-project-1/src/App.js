@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Subject from './components/Subject';
 import Menu from './components/Menu';
-import Contents from './components/Contents';
+import ReadContent from './components/ReadContent';
+import CreateContent from './components/CreateContent';
 import Control from './components/Control';
 
 class App extends Component {
@@ -23,17 +24,27 @@ class App extends Component {
     }
   }
   render() {
-    let _title, _desc;
-    if (this.state.mode === 'welcome') {
-      _title = this.state.welcome.title;
-      _desc = this.state.welcome.desc;
-    } else if (this.state.mode === 'read') {
-      this.state.menu.forEach((element, i) => {
-        if (element.id === this.state.selectedContentId) {
-          _title = this.state.menu[i].title;
-          _desc = this.state.menu[i].desc;
-        }
-      })
+    let _title, _desc, _article;
+    switch(this.state.mode) {
+      case 'welcome':
+        _title = this.state.welcome.title;
+        _desc = this.state.welcome.desc;
+        _article = <ReadContent title={_title} desc={_desc}></ReadContent>;
+        break;
+      case 'read':
+        this.state.menu.forEach((element, i) => {
+          if (element.id === this.state.selectedContentId) {
+            _title = this.state.menu[i].title;
+            _desc = this.state.menu[i].desc;
+          }
+        });
+        _article = <ReadContent title={_title} desc={_desc}></ReadContent>;
+        break;
+      case 'create':
+        _article = <CreateContent></CreateContent>;
+        break;
+      default:
+        break;
     }
     return (
       <div className="App">
@@ -63,7 +74,7 @@ class App extends Component {
             })
           }}
         ></Control>
-        <Contents title={_title} desc={_desc}></Contents>
+        {_article}
       </div>
     )
   }
