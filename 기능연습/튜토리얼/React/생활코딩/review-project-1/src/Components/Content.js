@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 
-class Contents extends Component {
+class Content extends Component {
   render() {
-    return (
+    return(
       <article>
-        <h1>{this.props.title}</h1>
+        <h1>
+          {this.props.title}
+        </h1>
         {this.props.desc}
       </article>
     );
   }
 }
 
-export default Contents;
+export default Content;
