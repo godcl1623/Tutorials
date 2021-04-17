@@ -1,18 +1,27 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class Menu extends Component {
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.data !== this.props.data) {
+      return true;
+    }
+    return false;
+  }
   render() {
+    console.log('menu');
     const data = this.props.data;
     const lists = [];
     data.forEach(element => {
       lists.push(
-        <li key={element.id}>
+        <li
+          key = {element.id}
+        >
           <a
-            href={`/contents/${element.id}`}
-            data-id={element.id}
-            onClick={event => {
+            href = {`/contents/${element.id}`}
+            data-id = {element.id}
+            onClick = {event => {
               event.preventDefault();
-              this.props.onClickElement(event.target.dataset.id);
+              this.props.onClickElements(event.target.dataset.id);
             }}
           >
             {element.title}

@@ -4,6 +4,7 @@ import Subject from './components/Subject';
 import Menu from './components/Menu';
 import ReadContent from './components/ReadContent';
 import CreateContent from './components/CreateContent';
+import UpdateContent from './components/UpdateContent';
 import Control from './components/Control';
 
 class App extends Component {
@@ -24,7 +25,25 @@ class App extends Component {
     }
     this.maxContentId = this.state.menu[this.state.menu.length - 1].id;
   }
-  render() {
+  getReadContent() {
+    // this.state.menu.map((element, i) => {
+    //   let data;
+    //   if (element.id === this.state.selectedContentId) {
+    //     // return this.state.menu[i];
+    //     data = this.state.menu[i];
+    //   }
+    //   return data;
+    // });
+    let i = 0;
+    while (i < this.state.menu.length) {
+      let data = this.state.menu[i];
+      if (data.id === this.state.selectedContentId) {
+        return data;
+      }
+      i++;
+    }
+  }
+  decideArticle() {
     let _title, _desc, _article;
     switch(this.state.mode) {
       case 'welcome':
@@ -33,13 +52,15 @@ class App extends Component {
         _article = <ReadContent title={_title} desc={_desc}></ReadContent>;
         break;
       case 'read':
-        this.state.menu.forEach((element, i) => {
-          if (element.id === this.state.selectedContentId) {
-            _title = this.state.menu[i].title;
-            _desc = this.state.menu[i].desc;
-          }
-        });
-        _article = <ReadContent title={_title} desc={_desc}></ReadContent>;
+        // this.state.menu.forEach((element, i) => {
+        //   if (element.id === this.state.selectedContentId) {
+        //     _title = this.state.menu[i].title;
+        //     _desc = this.state.menu[i].desc;
+        //   }
+        // });
+        const _content = this.getReadContent();
+        // console.log(this.getReadContent());
+        _article = <ReadContent title={_content.title} desc={_content.desc}></ReadContent>;
         break;
       case 'create':
         _article =
@@ -50,14 +71,41 @@ class App extends Component {
                 {id: this.maxContentId, title: _title, desc: _desc}
               )
               this.setState({
-                menu: _content
+                menu: _content,
+                mode: 'read',
+                selectedContentId: this.maxContentId
               })
             }}
           ></CreateContent>;
         break;
+        case 'update':
+          const _info = this.getReadContent();
+          _article =
+            <UpdateContent
+              data = {_info}
+              onSubmitAction={(_id, _title, _desc) => {
+                const _content = Array.from(this.state.menu);
+                let i = 0;
+                while (i < this.state.menu.length) {
+                  if (_content[i].id === _id) {
+                    _content[i] = {id: _id, title: _title, desc: _desc};
+                    break;
+                  }
+                  i++;
+                }
+                this.setState({
+                  menu: _content,
+                  mode: 'read'
+                });
+              }}
+            ></UpdateContent>;
+          break;
       default:
         break;
     }
+    return _article;
+  }
+  render() {
     return (
       <div className="App">
         <Subject
@@ -86,7 +134,7 @@ class App extends Component {
             })
           }}
         ></Control>
-        {_article}
+        {this.decideArticle()}
       </div>
     )
   }

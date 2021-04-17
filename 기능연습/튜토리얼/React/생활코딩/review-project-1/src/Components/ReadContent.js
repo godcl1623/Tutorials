@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-class Content extends Component {
+class ReadContent extends Component {
   render() {
+    console.log('read');
     return(
       <article>
         <h1>
@@ -13,4 +14,4 @@ class Content extends Component {
   }
 }
 
-export default Content;
+export default ReadContent;
