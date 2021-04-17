@@ -71,7 +71,9 @@ class App extends Component {
                 {id: this.maxContentId, title: _title, desc: _desc}
               )
               this.setState({
-                menu: _content
+                menu: _content,
+                mode: 'read',
+                selectedContentId: this.maxContentId
               })
             }}
           ></CreateContent>;
@@ -81,14 +83,20 @@ class App extends Component {
           _article =
             <UpdateContent
               data = {_info}
-              onSubmitAction={(_title, _desc) => {
-                this.maxContentId++;
-                const _content = this.state.menu.concat(
-                  {id: this.maxContentId, title: _title, desc: _desc}
-                )
+              onSubmitAction={(_id, _title, _desc) => {
+                const _content = Array.from(this.state.menu);
+                let i = 0;
+                while (i < this.state.menu.length) {
+                  if (_content[i].id === _id) {
+                    _content[i] = {id: _id, title: _title, desc: _desc};
+                    break;
+                  }
+                  i++;
+                }
                 this.setState({
-                  menu: _content
-                })
+                  menu: _content,
+                  mode: 'read'
+                });
               }}
             ></UpdateContent>;
           break;

@@ -4,6 +4,7 @@ class UpdateContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: this.props.data.id,
       title: this.props.data.title,
       desc: this.props.data.desc
     }
@@ -20,7 +21,6 @@ class UpdateContent extends Component {
     })
   }
   render () {
-    console.log(this.props.data);
     return (
       <article>
         <h2>Update</h2>
@@ -28,9 +28,12 @@ class UpdateContent extends Component {
           action="/submit_process"
           method="post"
           onSubmit={event => {
-            const target = event.target;
             event.preventDefault();
-            this.props.onSubmitAction(target.title.value, target.desc.value);
+            this.props.onSubmitAction(
+              this.state.id,
+              this.state.title,
+              this.state.desc
+            );
           }}
         >
           <p>
