@@ -5,6 +5,7 @@ import Menu from './Components/Menu';
 import ReadContent from './Components/ReadContent';
 import Modify from './Components/Modify';
 import CreateContent from './Components/CreateContent';
+import UpdateContent from './Components/UpdateContent';
 
 class App extends Component {
   constructor(props) {
@@ -22,22 +23,19 @@ class App extends Component {
     }
     this.maxContentNumber = this.state.menu.length;
   }
-  render() {
-    let _title, _desc, _content;
+  getMatchingElement() {
+    const gettingData = this.state.menu.find(element => element.id === this.selectedContentId);
+    return gettingData;
+  }
+  renderList() {
+    const {title: _title, desc: _desc} = this.getMatchingElement();
+    let _content;
     switch (this.state.mode) {
       case 'welcome':
-        _title = this.state.welcome.title;
-        _desc = this.state.welcome.desc;
-        _content = <ReadContent title={_title} desc={_desc}></ReadContent>;
+        _content = <ReadContent title={_title} desc={_desc}/>;
         break;
       case 'read':
-        this.state.menu.forEach((element, i) => {
-          if (element.id === this.selectedContentId) {
-            _title = this.state.menu[i].title;
-            _desc = this.state.menu[i].desc;
-            _content = <ReadContent title={_title} desc={_desc}></ReadContent>;
-          }
-        });
+        _content = <ReadContent title = {_title} desc = {_desc}/>;
         break;
       case 'create':
         _content = <CreateContent
@@ -49,14 +47,37 @@ class App extends Component {
               desc: _desc
             });
             this.setState({
-              menu: newContent
+              menu: newContent,
+              mode: 'read'
             })
+            this.selectedContentId = this.maxContentNumber;
           }}
-        ></CreateContent>;
+        />
+        break;
+      case 'update':
+        _content = <UpdateContent
+          data = {this.getMatchingElement()}
+          onClickSubmitBtn = {(_id, _title, _desc) => {
+            const newContent = Array.from(this.state.menu);
+            newContent.forEach((element, i) => {
+              if (element.id === _id) {
+                newContent[i] = {id: _id, title: _title, desc: _desc}
+              }
+            });
+            this.setState({
+              menu: newContent,
+              mode: 'read'
+            })
+            this.selectedContentId = this.maxContentNumber;
+          }}
+        />
         break;
       default:
         break;
     }
+    return _content;
+  }
+  render() {
     return(
       <div id="root">
         <Subject
@@ -67,7 +88,7 @@ class App extends Component {
               mode: 'welcome'
             })
           }}
-        ></Subject>
+        />
         <Menu
           data = {this.state.menu}
           onClickElements = {id => {
@@ -76,15 +97,15 @@ class App extends Component {
             })
             this.selectedContentId = Number(id);
           }}
-        ></Menu>
+        />
         <Modify
           onClickButton = {selectedMode => {
             this.setState({
               mode: selectedMode
             })
           }}
-        ></Modify>
-        {_content}
+        />
+        {this.renderList()}
       </div>
     );
   }
