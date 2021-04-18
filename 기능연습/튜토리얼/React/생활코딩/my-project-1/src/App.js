@@ -26,22 +26,8 @@ class App extends Component {
     this.maxContentId = this.state.menu[this.state.menu.length - 1].id;
   }
   getReadContent() {
-    // this.state.menu.map((element, i) => {
-    //   let data;
-    //   if (element.id === this.state.selectedContentId) {
-    //     // return this.state.menu[i];
-    //     data = this.state.menu[i];
-    //   }
-    //   return data;
-    // });
-    let i = 0;
-    while (i < this.state.menu.length) {
-      let data = this.state.menu[i];
-      if (data.id === this.state.selectedContentId) {
-        return data;
-      }
-      i++;
-    }
+    const test = this.state.menu.find(element => element.id === this.state.selectedContentId);
+    return test;
   }
   decideArticle() {
     let _title, _desc, _article;
@@ -52,14 +38,7 @@ class App extends Component {
         _article = <ReadContent title={_title} desc={_desc}></ReadContent>;
         break;
       case 'read':
-        // this.state.menu.forEach((element, i) => {
-        //   if (element.id === this.state.selectedContentId) {
-        //     _title = this.state.menu[i].title;
-        //     _desc = this.state.menu[i].desc;
-        //   }
-        // });
         const _content = this.getReadContent();
-        // console.log(this.getReadContent());
         _article = <ReadContent title={_content.title} desc={_content.desc}></ReadContent>;
         break;
       case 'create':

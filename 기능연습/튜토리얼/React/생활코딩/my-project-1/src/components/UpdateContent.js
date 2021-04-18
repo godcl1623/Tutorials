@@ -15,7 +15,7 @@ class UpdateContent extends Component {
   //   }
   //   return false;
   // }
-  changeValue(event) {
+  changeValue = event => {
     this.setState({
       [event.target.name]: event.target.value
     })
@@ -42,7 +42,7 @@ class UpdateContent extends Component {
               name="title"
               placeholder="Title"
               value={this.state.title}
-              onChange={this.changeValue.bind(this)}
+              onChange={this.changeValue}
             ></input>
           </p>
           <p>
@@ -50,7 +50,7 @@ class UpdateContent extends Component {
               name="desc"
               placeholder="Description"
               value={this.state.desc}
-              onChange={this.changeValue.bind(this)}
+              onChange={this.changeValue}
             ></textarea>
           </p>
           <p>
