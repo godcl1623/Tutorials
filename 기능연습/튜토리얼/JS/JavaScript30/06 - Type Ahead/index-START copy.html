@@ -17,20 +17,17 @@
 <script>
   const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
-  const varContainer = {
-    cities: [],
-    search: document.querySelector('.search'),
-    suggestions: document.querySelector('.suggestions')
-  }
-
+  const lists = [];
+  const search = document.querySelector('.search');
+  const suggestions = document.querySelector('.suggestions');
   fetch(endpoint)
     .then(blob => blob.json())
-    .then(data => varContainer.cities.push(...data));
+    .then(data => lists.push(...data));
   
   function findMatches(wordToMatch, comparingArray) {
-    return comparingArray.filter(matchingItem => {
+    return comparingArray.filter(texts => {
       const regex = new RegExp(wordToMatch, 'gi');
-      return matchingItem.city.match(regex) || matchingItem.state.match(regex);
+      return texts.city.match(regex) || texts.state.match(regex);
     });
   }
 
@@ -38,10 +35,9 @@
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
-
   function displayingMatches() {
-    const matchingArray = findMatches(this.value, varContainer.cities);
-    const html = matchingArray.map(result => {
+    const searchResult = findMatches(this.value, lists);
+    const html = searchResult.map(result => {
       const regex = new RegExp(this.value, 'gi');
       const cityName = result.city.replace(regex, `<span class="hl">${this.value}</span>`);
       const stateName = result.state.replace(regex, `<span class="hl">${this.value}</span>`);
@@ -52,11 +48,11 @@
         </li>
       `;
     }).join('');
-    varContainer.suggestions.innerHTML = html;
+    suggestions.innerHTML = html;
   }
 
-  varContainer.search.addEventListener('change', displayingMatches);
-  varContainer.search.addEventListener('keyup', displayingMatches);
+  search.addEventListener('change', displayingMatches);
+  search.addEventListener('keyup', displayingMatches);
 </script>
 </body>
 </html>
