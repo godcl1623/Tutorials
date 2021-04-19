@@ -9,33 +9,28 @@ class UpdateContent extends Component {
       desc: this.props.data.desc
     }
   }
-  // shouldComponentUpdate(nextProps) {
-  //   if (nextProps.title !== this.props.title) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
   changeValue = event => {
     this.setState({
       [event.target.name]: event.target.value
     })
   }
-  render () {
-    return (
+  render() {
+    return(
       <article>
-        <h2>Update</h2>
+        <h1>Update</h1>
         <form
-          action="/submit_process"
+          action="/submit_progress"
           method="post"
           onSubmit={event => {
             event.preventDefault();
-            this.props.onSubmitAction(
-              this.state.id,
-              this.state.title,
-              this.state.desc
-            );
+            this.props.onSubmitContent(this.state.id, this.state.title, this.state.desc);
           }}
         >
+          <input
+            type="hidden"
+            name="id"
+            value={this.state.id}
+          />
           <p>
             <input
               type="text"
@@ -43,7 +38,7 @@ class UpdateContent extends Component {
               placeholder="Title"
               value={this.state.title}
               onChange={this.changeValue}
-            ></input>
+            />
           </p>
           <p>
             <textarea
@@ -51,14 +46,14 @@ class UpdateContent extends Component {
               placeholder="Description"
               value={this.state.desc}
               onChange={this.changeValue}
-            ></textarea>
+            />
           </p>
           <p>
             <input
               type="submit"
               name="submit"
-              value="submit"
-            ></input>
+              value="Submit"
+            />
           </p>
         </form>
       </article>

@@ -1,40 +1,38 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class CreateContent extends Component {
   render() {
-    console.log('create')
     return(
       <article>
-        <h1>
-          Create
-        </h1>
+        <h1>Create</h1>
         <form
-          action = "/submit_process"
-          method = "post"
-          onSubmit = {event => {
+          action="/submit_progress"
+          method="post"
+          onSubmit={event => {
+            const target = event.target;
             event.preventDefault();
-            this.props.onClickSubmitBtn(event.target.title.value, event.target.desc.value);
+            this.props.onSubmitContent(target.title.value, target.desc.value);
           }}
         >
           <p>
             <input
-              type = "text"
-              name = "title"
-              placeholder = "Title"
-            ></input>
+              type="text"
+              name="title"
+              placeholder="Title"
+            />
           </p>
           <p>
             <textarea
-              name = "desc"
-              placeholder = "Description"
-            ></textarea>
+              name="desc"
+              placeholder="Description"
+            />
           </p>
           <p>
             <input
-              type = "submit"
-              name = "submit"
-              value = "submit"
-            ></input>
+              type="submit"
+              name="submit"
+              value="Submit"
+            />
           </p>
         </form>
       </article>

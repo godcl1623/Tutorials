@@ -1,14 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class Subject extends Component {
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.title !== this.props.title) {
-      return true;
-    }
-    return false;
-  }
   render() {
-    console.log('subject');
     return(
       <header>
         <h1>

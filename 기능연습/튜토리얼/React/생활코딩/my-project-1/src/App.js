@@ -26,41 +26,18 @@ class App extends Component {
     this.maxContentId = this.state.menu[this.state.menu.length - 1].id;
   }
   getReadContent() {
-    // this.state.menu.map((element, i) => {
-    //   let data;
-    //   if (element.id === this.state.selectedContentId) {
-    //     // return this.state.menu[i];
-    //     data = this.state.menu[i];
-    //   }
-    //   return data;
-    // });
-    let i = 0;
-    while (i < this.state.menu.length) {
-      let data = this.state.menu[i];
-      if (data.id === this.state.selectedContentId) {
-        return data;
-      }
-      i++;
-    }
+    const test = this.state.menu.find(element => element.id === this.state.selectedContentId);
+    return test;
   }
   decideArticle() {
-    let _title, _desc, _article;
+    const {title: _title, desc: _desc} = this.getReadContent();
+    let _article;
     switch(this.state.mode) {
       case 'welcome':
-        _title = this.state.welcome.title;
-        _desc = this.state.welcome.desc;
         _article = <ReadContent title={_title} desc={_desc}></ReadContent>;
         break;
       case 'read':
-        // this.state.menu.forEach((element, i) => {
-        //   if (element.id === this.state.selectedContentId) {
-        //     _title = this.state.menu[i].title;
-        //     _desc = this.state.menu[i].desc;
-        //   }
-        // });
-        const _content = this.getReadContent();
-        // console.log(this.getReadContent());
-        _article = <ReadContent title={_content.title} desc={_content.desc}></ReadContent>;
+        _article = <ReadContent title={_title} desc={_desc}></ReadContent>;
         break;
       case 'create':
         _article =
@@ -129,6 +106,23 @@ class App extends Component {
         ></Menu>
         <Control
           onClickElement={_mode => {
+            if (_mode === 'delete') {
+              if (window.confirm('삭제 하시겠습니까?')) {
+                const deleteTarget = Array.from(this.state.menu);
+                deleteTarget.forEach((element, i) => {
+                  if (element.id === this.state.selectedContentId) {
+                    deleteTarget.splice(i, 1);
+                  }
+                })
+                this.setState({
+                  menu: deleteTarget,
+                  mode: 'welcome'
+                })
+                console.log(deleteTarget)
+                alert('삭제 되었습니다 !');
+              }
+              return;
+            }
             this.setState({
               mode: _mode
             })
