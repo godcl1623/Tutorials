@@ -6,7 +6,8 @@ const varContainer = {
   progressBar: document.querySelector('.progress__filled'),
   playBtn: document.querySelector('.toggle'),
   ranges: document.querySelectorAll('input[type="range"]'),
-  skipBtns: document.querySelectorAll('.player__button')
+  skipBtns: document.querySelectorAll('.player__button'),
+  fullScreen: document.querySelector('.full')
 }
 // 2. 함수 만들기
 function playVideo(event) {
@@ -25,6 +26,7 @@ function handleBtn() {
 
 function skipVideo() {
   const video = varContainer.video;
+  if (!this.dataset.skip) return;
   video.currentTime += parseFloat(this.dataset.skip);
 }
 
@@ -46,6 +48,18 @@ function changeProgress(event) {
   const progress = varContainer.progress;
   video.currentTime = (event.offsetX / progress.offsetWidth) * video.duration;
 }
+let isFull = false;
+function makeFull() {
+  const player = varContainer.player;
+  if (isFull === false) {
+    isFull = true;
+    player.requestFullscreen();
+  } else {
+    isFull = false;
+    document.exitFullscreen();
+  }
+}
+
 // 3. 이벤트 리스너
 varContainer.player.addEventListener('click', playVideo);
 varContainer.player.addEventListener('click', handleBtn);
@@ -58,3 +72,4 @@ varContainer.progress.addEventListener('change', changeProgress);
 varContainer.progress.addEventListener('mousemove', (e) => {isClicked && changeProgress(e)});
 varContainer.progress.addEventListener('mousedown', () => {isClicked = true});
 varContainer.progress.addEventListener('mouseup', () => {isClicked = false});
+varContainer.fullScreen.addEventListener('click', makeFull);
