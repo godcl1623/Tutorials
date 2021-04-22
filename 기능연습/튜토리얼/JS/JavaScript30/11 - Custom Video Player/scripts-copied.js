@@ -60,6 +60,16 @@ function makeFull() {
   }
 }
 
+function hideControls() {
+  let timeout;
+  const controls = document.querySelector('.player__controls');
+  clearTimeout(timeout);
+  controls.style.transform = `translateY(${0})`;
+  timeout = setTimeout(function() {
+    controls.style.transform = `translateY(${100}%) translateY(${-5}px)`;
+  }, 1500);
+}
+
 // 3. 이벤트 리스너
 varContainer.player.addEventListener('click', playVideo);
 varContainer.player.addEventListener('click', handleBtn);
@@ -73,3 +83,4 @@ varContainer.progress.addEventListener('mousemove', (e) => {isClicked && changeP
 varContainer.progress.addEventListener('mousedown', () => {isClicked = true});
 varContainer.progress.addEventListener('mouseup', () => {isClicked = false});
 varContainer.fullScreen.addEventListener('click', makeFull);
+varContainer.player.addEventListener('mousemove', hideControls);
