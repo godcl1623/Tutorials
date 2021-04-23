@@ -1,0 +1,14 @@
+/* GLOBAL 공통요소 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+
+:root {
+  /* 색상 */
+  --background: white;
+  /* 수치 */
+  --size: 16px;
+}
