@@ -1,10 +1,12 @@
 {
     "parser": "babel-eslint",
     "parserOptions": {
-      "ecmaVersion": 11
+      "ecmaVersion": 12
     },
     "env": {
       "browser": true,
+      "commonjs": true,
+      "es2021": true,
       "node": true
     },
     "globals": {
