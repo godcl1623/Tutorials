@@ -7,21 +7,7 @@
 </head>
 <body>
 <script>
-  const secretArr = [];
-  const secretCode = 'papercages';
 
-  function secretFunc(event) {
-    secretArr.push(event.key);
-    console.log(`${secretArr.length}, ${secretCode.length}`);
-    secretArr.splice(-secretCode.length - 1, secretArr.length - secretCode.length);
-    if (secretArr.join('').includes(secretCode)) {
-      alert('Welcome !');
-      cornify_add();
-    }
-    console.log(secretArr);
-  }
-  
-  window.addEventListener('keyup', secretFunc);
 </script>
 </body>
 </html>
