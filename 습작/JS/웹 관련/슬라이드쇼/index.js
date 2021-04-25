@@ -41,6 +41,19 @@ const putRadioBtns = () => {
   dataIndexer(radios);
 };
 
+const putProgress = () => {
+  containers.forEach(element => {
+    const $progress = document.createElement('progress');
+    $progress.value = 0;
+    $progress.max = 40;
+    $progress.classList.add('progress-bar');
+    // const $filler = document.createElement('div');
+    // $filler.classList.add('progress-filler');
+    // $progress.appendChild($filler);
+    element.appendChild($progress);
+  });
+};
+
 const hideContainer = () => {
   Array.from(containers).forEach(container => {
     if (container.dataset.index === String(orderIndex + 1)) {
@@ -66,12 +79,22 @@ const showCurrentOrder = () => {
   });
 };
 
+const fillProgress = () => {
+  // const date = new Date();
+  const progress = document.querySelector('progress');
+  let cnt = 0;
+  setInterval(() => {
+    progress.value = cnt;
+    cnt++;
+  }, 100);
+};
+
 const autoImgChanger = () => {
   setInterval(() => {
     plusIndex();
     hideContainer();
     showCurrentOrder();
-  }, 2000);
+  }, 5000);
 };
 
 function moveImage() {
@@ -88,8 +111,10 @@ function moveImage() {
 // 이벤트 리스너 모음
 dataIndexer(containers);
 putRadioBtns();
+putProgress();
 hideContainer();
 orderIndexer();
 showCurrentOrder();
 buttons.forEach(button => button.addEventListener('click', moveImage));
-autoImgChanger();
+// autoImgChanger();
+// fillProgress();
