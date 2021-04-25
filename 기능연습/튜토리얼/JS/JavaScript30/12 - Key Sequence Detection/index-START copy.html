@@ -7,7 +7,18 @@
 </head>
 <body>
 <script>
+  const secretContainer = [];
+  const secretCode = 'taraczel';
 
+  function secretFunc(event) {
+    secretContainer.push(event.key);
+    secretContainer.splice(-secretContainer.length - 1, secretContainer.length - secretCode.length);
+    if (secretContainer.join('').includes(secretCode)) {
+      alert('Welcome !');
+    }
+  }
+
+  window.addEventListener('keyup', secretFunc);
 </script>
 </body>
 </html>
