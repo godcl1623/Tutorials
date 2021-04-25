@@ -23,7 +23,7 @@ class App extends React.Component {
     );
   }
 
-  render() {
+  renderContent() {
     if (this.state.errMsg && !this.state.lat) {
       return <div>Error: {this.state.errMsg}</div>
     }
@@ -33,6 +33,13 @@ class App extends React.Component {
     }
   
     return <Loader message="Waiting User's Selection"/>
+  }
+
+  render() {
+      return (<div className="border red">
+        {this.renderContent()}
+      </div>
+    );
   }
 }
 
