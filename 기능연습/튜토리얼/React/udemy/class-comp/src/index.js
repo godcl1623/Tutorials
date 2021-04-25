@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SeasonDisplay from './SeasonDisplay';
+import Loader from './Loader';
 
 // const App = () => {
 //   window.navigator.geolocation.getCurrentPosition(
@@ -12,31 +14,32 @@ import ReactDOM from 'react-dom';
 // }
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      lat: null,
-      errMsg: ''
-    }
+  state = {lat: null, errMsg: ''};
+
+  componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
-      position => {
-        this.setState({lat: position.coords.latitude});
-      },
-      err => {
-        this.setState({errMsg: err.message});
-      }
+      position => this.setState({lat: position.coords.latitude}),
+      err => this.setState({errMsg: err.message})
     );
   }
-  render() {
+
+  renderContent() {
     if (this.state.errMsg && !this.state.lat) {
       return <div>Error: {this.state.errMsg}</div>
     }
   
     if (!this.state.errMsg && this.state.lat) {
-      return <div>Latitude: {this.state.lat}</div>
+      return <SeasonDisplay lat={this.state.lat} />
     }
   
-    return <div> Loading ! </div>
+    return <Loader message="Waiting User's Selection"/>
+  }
+
+  render() {
+      return (<div className="border red">
+        {this.renderContent()}
+      </div>
+    );
   }
 }
 
