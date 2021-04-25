@@ -31,10 +31,9 @@ const putRadioBtns = () => {
   const $div = document.createElement('div');
   for (let i = 0; i < images.length; i++) {
     $div.classList.add('radioContainer');
-    const $input = document.createElement('input');
-    $input.type = 'radio';
-    $input.classList.add('imgOrder');
-    $div.appendChild($input);
+    const $span = document.createElement('span');
+    $span.classList.add('imgOrder');
+    $div.appendChild($span);
   }
   body.appendChild($div);
   const radios = Array.from($div.childNodes);
@@ -111,7 +110,7 @@ function moveImage() {
 // 이벤트 리스너 모음
 dataIndexer(containers);
 putRadioBtns();
-putProgress();
+// putProgress();
 hideContainer();
 orderIndexer();
 showCurrentOrder();
