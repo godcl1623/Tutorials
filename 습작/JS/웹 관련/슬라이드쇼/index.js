@@ -6,6 +6,20 @@ const buttons = document.querySelectorAll('button');
 const containers = document.querySelectorAll('.container');
 let orderIndex = 0;
 // 함수 모음
+function minusIndex() {
+  if (orderIndex === 0) {
+    orderIndex = imgArray.length;
+  }
+  orderIndex--;
+}
+
+function plusIndex() {
+  if (orderIndex === imgArray.length - 1) {
+    orderIndex = -1;
+  }
+  orderIndex++;
+}
+
 const dataIndexer = target => {
   Array.from(target).forEach((element, i) => {
     element.dataset.index = i + 1;
@@ -52,19 +66,13 @@ const showCurrentOrder = () => {
   });
 };
 
-function minusIndex() {
-  if (orderIndex === 0) {
-    orderIndex = imgArray.length;
-  }
-  orderIndex--;
-}
-
-function plusIndex() {
-  if (orderIndex === imgArray.length - 1) {
-    orderIndex = -1;
-  }
-  orderIndex++;
-}
+const autoImgChanger = () => {
+  setInterval(() => {
+    plusIndex();
+    hideContainer();
+    showCurrentOrder();
+  }, 2000);
+};
 
 function moveImage() {
   if (this.className === 'prev') {
@@ -84,3 +92,4 @@ hideContainer();
 orderIndexer();
 showCurrentOrder();
 buttons.forEach(button => button.addEventListener('click', moveImage));
+autoImgChanger();
