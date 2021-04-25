@@ -15,7 +15,7 @@ const dataIndexer = target => {
 const putRadioBtns = () => {
   const body = document.querySelector('body');
   const $div = document.createElement('div');
-  for (let i = 0; i < images.length ; i++) {
+  for (let i = 0; i < images.length; i++) {
     $div.classList.add('radioContainer');
     const $input = document.createElement('input');
     $input.type = 'radio';
@@ -23,6 +23,8 @@ const putRadioBtns = () => {
     $div.appendChild($input);
   }
   body.appendChild($div);
+  const radios = Array.from($div.childNodes);
+  dataIndexer(radios);
 };
 
 const hideContainer = () => {
@@ -38,6 +40,15 @@ const hideContainer = () => {
 const orderIndexer = () => {
   Array.from(orders).forEach((order, i) => {
     order.innerText = `${i + 1} / ${orders.length}`;
+  });
+};
+
+const showCurrentOrder = () => {
+  const radios = document.querySelectorAll('input');
+  radios.forEach(element => {
+    element.dataset.index === String(orderIndex + 1)
+      ? (element.checked = true)
+      : (element.checked = false);
   });
 };
 
@@ -59,9 +70,11 @@ function moveImage() {
   if (this.className === 'prev') {
     minusIndex();
     hideContainer();
+    showCurrentOrder();
   } else {
     plusIndex();
     hideContainer();
+    showCurrentOrder();
   }
 }
 // 이벤트 리스너 모음
@@ -69,4 +82,5 @@ dataIndexer(containers);
 putRadioBtns();
 hideContainer();
 orderIndexer();
+showCurrentOrder();
 buttons.forEach(button => button.addEventListener('click', moveImage));
