@@ -28,7 +28,9 @@ html, body {
 
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .container {
@@ -81,6 +83,7 @@ button {
   display: flex;
   justify-content: center;
   position: absolute;
+  top: 0;
 }
 
 .imgOrder {
@@ -96,9 +99,32 @@ button {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.imgOrder.current {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 .progress-bar {
   width: 100%;
   position: absolute;
   top: 0;
   background: rgba(0, 0, 0, 0.3);
+}
+
+.thumb-container {
+  width: 60%;
+  height: 10%;
+  display: flex;
+  cursor: pointer;
+}
+
+.thumb-nail *{
+  filter: opacity(70%);
+}
+
+.thumb-nail *:hover {
+  filter: opacity(100%);
+}
+
+.thumb-nail *.current {
+  filter: opacity(100%);
 }
