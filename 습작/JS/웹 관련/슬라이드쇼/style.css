@@ -117,10 +117,14 @@ button {
   cursor: pointer;
 }
 
-.thumb-nail {
+.thumb-nail *{
   filter: opacity(70%);
 }
 
-.thumb-nail:hover {
+.thumb-nail *:hover {
+  filter: opacity(100%);
+}
+
+.thumb-nail *.current {
   filter: opacity(100%);
 }

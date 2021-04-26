@@ -1,10 +1,17 @@
 // 상수 모음
+function generatedElem() {
+  const radios = document.querySelectorAll('.imgOrder');
+  return radios;
+}
+
 const body = document.querySelector('body');
 const orders = document.querySelectorAll('.order');
-const images = document.querySelectorAll('img');
+const images = document.querySelectorAll('.display');
 const imgArray = Array.from(images);
 const buttons = document.querySelectorAll('button');
 const containers = document.querySelectorAll('.container');
+const thumbnails = document.querySelectorAll('.thumb-nail img');
+const thumbContainer = document.querySelector('.thumb-container');
 let orderIndex = 0;
 // 함수 모음
 function minusIndex() {
@@ -39,6 +46,7 @@ const putRadioBtns = () => {
   body.appendChild($div);
   const radios = Array.from($div.childNodes);
   dataIndexer(radios);
+  dataIndexer(thumbnails);
 };
 
 const putProgress = () => {
@@ -70,9 +78,8 @@ const orderIndexer = () => {
   });
 };
 
-const showCurrentOrder = () => {
-  const radios = document.querySelectorAll('.imgOrder');
-  radios.forEach(element => {
+const showCurrentOrder = iterable => {
+  iterable.forEach(element => {
     element.dataset.index === String(orderIndex + 1)
       ? element.classList.add('current')
       : element.classList.remove('current');
@@ -93,7 +100,8 @@ const autoImgChanger = () => {
   setInterval(() => {
     plusIndex();
     hideContainer();
-    showCurrentOrder();
+    // showCurrentOrder(generatedElem());
+    showCurrentOrder(thumbnails);
   }, 3000);
 };
 
@@ -101,36 +109,49 @@ function moveImage() {
   if (this.className === 'prev') {
     minusIndex();
     hideContainer();
-    showCurrentOrder();
+    // showCurrentOrder(generatedElem());
+    showCurrentOrder(thumbnails);
   } else {
     plusIndex();
     hideContainer();
-    showCurrentOrder();
+    // showCurrentOrder(generatedElem());
+    showCurrentOrder(thumbnails);
   }
 }
 
-function testFunc(event) {
-  if (event.target.tagName !== 'SPAN') return;
-  const span = document.querySelectorAll('span');
-  containers.forEach(container => {
-    (event.target.dataset.index === container.dataset.index)
-      ? container.classList.remove('hide')
-      : container.classList.add('hide');
-  });
-  span.forEach(elem => {
+function makeCurrent(event, iterable) {
+  iterable.forEach(elem => {
     elem === event.target
       ? elem.classList.add('current')
       : elem.classList.remove('current');
   });
 }
+
+function displayByBtns(event) {
+  if (
+    event.target.tagName !== 'SPAN' &&
+    !event.target.parentNode.classList.contains('thumb-nail')
+  )
+    return;
+  containers.forEach(container => {
+    event.target.dataset.index === container.dataset.index
+      ? container.classList.remove('hide')
+      : container.classList.add('hide');
+  });
+  makeCurrent(event, generatedElem());
+  makeCurrent(event, thumbnails);
+}
+
 // 이벤트 리스너 모음
 dataIndexer(containers);
 putRadioBtns();
 // putProgress();
 hideContainer();
 orderIndexer();
-showCurrentOrder();
+// showCurrentOrder(generatedElem());
+showCurrentOrder(thumbnails);
 buttons.forEach(button => button.addEventListener('click', moveImage));
 // autoImgChanger();
 // fillProgress();
-body.addEventListener('click', testFunc);
+body.addEventListener('click', displayByBtns);
+thumbContainer.addEventListener('click', displayByBtns);
