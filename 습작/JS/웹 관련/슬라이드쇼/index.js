@@ -1,4 +1,5 @@
 // 상수 모음
+const body = document.querySelector('body');
 const orders = document.querySelectorAll('.order');
 const images = document.querySelectorAll('img');
 const imgArray = Array.from(images);
@@ -70,11 +71,11 @@ const orderIndexer = () => {
 };
 
 const showCurrentOrder = () => {
-  const radios = document.querySelectorAll('input');
+  const radios = document.querySelectorAll('.imgOrder');
   radios.forEach(element => {
     element.dataset.index === String(orderIndex + 1)
-      ? (element.checked = true)
-      : (element.checked = false);
+      ? element.classList.add('current')
+      : element.classList.remove('current');
   });
 };
 
@@ -93,7 +94,7 @@ const autoImgChanger = () => {
     plusIndex();
     hideContainer();
     showCurrentOrder();
-  }, 5000);
+  }, 3000);
 };
 
 function moveImage() {
@@ -107,6 +108,21 @@ function moveImage() {
     showCurrentOrder();
   }
 }
+
+function testFunc(event) {
+  if (event.target.tagName !== 'SPAN') return;
+  const span = document.querySelectorAll('span');
+  containers.forEach(container => {
+    (event.target.dataset.index === container.dataset.index)
+      ? container.classList.remove('hide')
+      : container.classList.add('hide');
+  });
+  span.forEach(elem => {
+    elem === event.target
+      ? elem.classList.add('current')
+      : elem.classList.remove('current');
+  });
+}
 // 이벤트 리스너 모음
 dataIndexer(containers);
 putRadioBtns();
@@ -117,3 +133,4 @@ showCurrentOrder();
 buttons.forEach(button => button.addEventListener('click', moveImage));
 // autoImgChanger();
 // fillProgress();
+body.addEventListener('click', testFunc);
