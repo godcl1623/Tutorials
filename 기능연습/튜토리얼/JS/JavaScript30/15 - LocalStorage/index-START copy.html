@@ -26,14 +26,66 @@
   </div>
 
 <script>
+  function testFunc() {
+    const input = document.querySelectorAll('input');
+    return input;
+  }
   const form = document.querySelector('form');
+  const plates = document.querySelector('.plates');
+  const temporalArray = JSON.parse(localStorage.getItem('tapas')) || [];
+
+  function displayingData(dataArray = [], target) {
+    // target.innerHTML = dataArray.map((data, i) => {
+    //   return `
+    //     <li>
+    //       <input
+    //         type="checkbox"
+    //         id="item ${i}"
+    //         data-index="${i}"
+    //         ${data.done ? 'checked' : ''}
+    //       />
+    //       <label for="item ${i}">${data.value}</label>
+    //     </li>
+    //   `;
+    // }).join('');
+    dataArray.forEach((data, i) => {
+      const $li = document.createElement('li');
+      const $input = document.createElement('input');
+      $input.type = 'checkbox';
+      $input.id = `item ${i}`;
+      $input.dataset.index = i;
+      const $label = document.createElement('label');
+      $label.textContent = data.value;
+      $li.appendChild($input);
+      $li.appendChild($label);
+      target.appendChild($li);
+    });
+  }
 
   function updateList(event) {
     event.preventDefault();
-    console.log(this.item.value);
+    const temporalStorage = {
+      value: this.item.value,
+      done: false
+    };
+    temporalArray.push(temporalStorage);
+    displayingData(temporalArray, plates);
+    localStorage.setItem('tapas', JSON.stringify(temporalArray));
+    this.reset();
+  }
+
+  function maintainChecked(event) {
+    if (!event.target.matches('input')) return;
+    const el = event.target;
+    const index = el.dataset.index;
+    temporalArray[index].done = !temporalArray[index].done;
+    localStorage.setItem('tapas', JSON.stringify(temporalArray));
+    displayingData(temporalArray, plates);
   }
 
   form.addEventListener('submit', updateList);
+  plates.addEventListener('click', maintainChecked);
+  displayingData(temporalArray, plates);
 </script>
 
 
