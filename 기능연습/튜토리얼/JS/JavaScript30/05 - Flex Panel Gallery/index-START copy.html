@@ -140,24 +140,19 @@
   </div>
 
   <script>
-    const varContainer = {
-      allPanel: document.querySelectorAll('.panel')
-    };
+    const eachPanels = document.querySelectorAll('.panel');
 
-    function opener() {
+    function openPanel() {
       this.classList.toggle('open');
     }
 
-    function activer(event) {
-      if (event.propertyName.includes('flex')) {
-        this.classList.toggle('active');
-      }
+    function activatePanel(event) {
+      if (!event.propertyName.includes('flex')) return;
+      this.classList.toggle('active');
     }
 
-    varContainer.allPanel.forEach(element => {
-      element.addEventListener('click', opener);
-      element.addEventListener('transitionend', activer);
-    });
+    eachPanels.forEach(panel => panel.addEventListener('click', openPanel));
+    eachPanels.forEach(panel => panel.addEventListener('transitionend', activatePanel));
   </script>
 
 

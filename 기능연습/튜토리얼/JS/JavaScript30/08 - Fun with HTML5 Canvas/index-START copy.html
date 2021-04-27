@@ -7,50 +7,52 @@
 <body>
 <canvas id="draw" width="800" height="800"></canvas>
 <script>
-  const canvas = document.querySelector('#draw');
+  const canvas = document.querySelector('canvas');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  const canvasContext = canvas.getContext('2d');
-  canvasContext.strokeStyle = '#BADA55';
-  canvasContext.lineJoin = 'round';
-  canvasContext.lineCap = 'round';
-  canvasContext.lineWidth = 50;
-
+  const ctx = canvas.getContext('2d');
+  ctx.strokeStyle = '#BADA55';
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.lineWidth = 100;
+  ctx.globalCompositeOperation = 'multiply';
   let isDrawing = false;
-  let lastX = 0;
+  let lastX =0;
   let lastY = 0;
   let hue = 0;
   let direction = true;
 
-  function drawing(event) {
+  function drawPicture(event) {
     if (!isDrawing) return;
-    canvasContext.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-    canvasContext.beginPath();
-    canvasContext.moveTo(lastX, lastY);
-    canvasContext.lineTo(event.offsetX, event.offsetY);
-    canvasContext.stroke();
-    canvasContext.globalCompositeOperation = 'multiply';
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(event.offsetX, event.offsetY);
+    ctx.stroke();
     [lastX, lastY] = [event.offsetX, event.offsetY];
     hue++;
     if (hue >= 360) {
-      hue = 0;
-    }
-    if (canvasContext.lineWidth >= 100 || canvasContext.lineWidth <= 10) {
-      direction = !direction;
-    }
-    if (direction) {
-      canvasContext.lineWidth++;
-    } else {
-      canvasContext.lineWidth--;
-    }
+		hue = 0;
+	}
+
+	if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+		direction = !direction;
+	}
+
+	if (direction) {
+		ctx.lineWidth++;
+	} else {
+		ctx.lineWidth--;
+	}
   }
 
-  canvas.addEventListener('mousemove', drawing);
+  canvas.addEventListener('mousemove', drawPicture);
   canvas.addEventListener('mousedown', event => {
     isDrawing = true;
-    [lastX, lastY] = [event.offsetX, event.offsetY];
+    lastX = event.offsetX;
+    lastY = event.offsetY;
   });
-  canvas.addEventListener('mouseup', () => {isDrawing = false});
+  canvas.addEventListener('mouseup', () => {isDrawing = false;});
   canvas.addEventListener('mouseout', () => {isDrawing = false});
 </script>
 

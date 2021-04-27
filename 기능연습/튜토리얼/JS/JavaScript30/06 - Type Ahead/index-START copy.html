@@ -16,43 +16,42 @@
   </form>
 <script>
   const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
-
-  const lists = [];
   const search = document.querySelector('.search');
-  const suggestions = document.querySelector('.suggestions');
+  const storage = [];
   fetch(endpoint)
     .then(blob => blob.json())
-    .then(data => lists.push(...data));
+    .then(data => storage.push(...data));
   
-  function findMatches(wordToMatch, comparingArray) {
-    return comparingArray.filter(texts => {
+  const matchingData = (wordToMatch, database) => {
+    return database.filter(query => {
       const regex = new RegExp(wordToMatch, 'gi');
-      return texts.city.match(regex) || texts.state.match(regex);
+      return query.city.match(regex) || query.state.match(regex);
     });
-  }
+  };
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
-  function displayingMatches() {
-    const searchResult = findMatches(this.value, lists);
-    const html = searchResult.map(result => {
+  function displayingData() {
+    const searched = matchingData(this.value, storage);
+    const suggestions = document.querySelector('.suggestions');
+    const html = searched.map(place => {
       const regex = new RegExp(this.value, 'gi');
-      const cityName = result.city.replace(regex, `<span class="hl">${this.value}</span>`);
-      const stateName = result.state.replace(regex, `<span class="hl">${this.value}</span>`);
+      const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+      const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
       return `
         <li>
           <span class="name">${cityName}, ${stateName}</span>
-          <span class="population">${numberWithCommas(result.population)}</span>
+          <span class="population">${numberWithCommas(place.population)}</span>
         </li>
       `;
     }).join('');
     suggestions.innerHTML = html;
-  }
+  };
 
-  search.addEventListener('change', displayingMatches);
-  search.addEventListener('keyup', displayingMatches);
+  search.addEventListener('keydown', displayingData);
+  search.addEventListener('change', displayingData);
 </script>
 </body>
 </html>

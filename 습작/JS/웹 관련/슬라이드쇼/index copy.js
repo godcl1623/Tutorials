@@ -15,8 +15,8 @@ const slider = document.querySelector('ul');
 slider.style.width = `${bodyWidth * totalSlides}px`;
 
 // next, prev
-var nextBtn = document.getElementsByClassName('next');
-var prevBtn = document.getElementsByClassName('prev');
+var nextBtn = document.querySelector('.next');
+var prevBtn = document.querySelector('.prev');
 nextBtn.addEventListener('click', function () {
     plusSlides(1);
 });
@@ -60,11 +60,11 @@ function showSlides(n) {
 //pagination
 slides.forEach(function () {
   var li = document.createElement('li');
-  document.querySelector('#slider-pagination-wrap ul').appendChild(li);
+  document.querySelector('ul').appendChild(li);
 })
 
 function pagination() {
-  var dots = document.querySelectorAll('#slider-pagination-wrap ul li');
+  var dots = document.querySelectorAll('li');
   dots.forEach(function (element) {
       element.classList.remove('active');
   });
