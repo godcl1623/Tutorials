@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../App.css';
+import './Management.css';
 
 class Management extends Component {
   render() {

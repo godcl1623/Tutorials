@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../App.css';
+import './Main.css';
 
 class Main extends Component {
   render() {
@@ -7,28 +7,34 @@ class Main extends Component {
       <div className="main-form">
         <form>
           <section className="area name">
-            <span>이름</span>
-            <input type="text" />
-            <span>성</span>
-            <input type="text" />
-            <span>성별</span>
-            <input type="text" />
+            <p>
+              이름
+              <input type="text" />
+            </p>
+            <p>
+              성
+              <input type="text" />
+            </p>
+            <p>
+              성별
+              <input type="text" />
+            </p>
           </section>
           <section className="area email">
-            <span>이메일</span>
+            <p>이메일</p>
             <input type="text" />
-            <span>@</span>
+            <p>@</p>
             <input type="text" />
           </section>
           <section className="area statistics">
-            <span>가입경로</span>
+            <p>가입경로</p>
             <textarea />
-            <span>관심사</span>
+            <p>관심사</p>
             <section className="area multi-choice">
               <input type="radio" />
-              <span>lorem ipsum</span>
+              <p>lorem ipsum</p>
             </section>
-            <span>희망 배송시간</span>
+            <p>희망 배송시간</p>
             <textarea />
           </section>
           <input type="submit" />
