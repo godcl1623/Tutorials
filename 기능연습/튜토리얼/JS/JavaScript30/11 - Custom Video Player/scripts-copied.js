@@ -1,86 +1,50 @@
 // 1. 요소 받기
-const varContainer = {
-  player: document.querySelector('.player'),
-  video: document.querySelector('.player__video'),
-  progress: document.querySelector('.progress'),
-  progressBar: document.querySelector('.progress__filled'),
-  playBtn: document.querySelector('.toggle'),
-  ranges: document.querySelectorAll('input[type="range"]'),
-  skipBtns: document.querySelectorAll('.player__button'),
-  fullScreen: document.querySelector('.full')
-}
+const player = document.querySelector('.player');
+const video = document.querySelector('video');
+const progress = document.querySelector('.progress');
+const progressBar = document.querySelector('.progress__filled');
+const playBtn = document.querySelector('.toggle');
+const ranges = document.querySelectorAll('.player__slider');
+const buttons = document.querySelectorAll('.player__button');
+let isClicked = false;
 // 2. 함수 만들기
-function playVideo(event) {
-  const video = varContainer.video;
+function playVid(event) {
+  if (event.target !== video && event.target !== playBtn) return;
   const method = video.paused ? 'play' : 'pause';
-  if (event.target === video || event.target === varContainer.playBtn) {
-    video[method]();
-  }
+  video[method]();
 }
 
-function handleBtn() {
-  const video = varContainer.video;
-  const playBtn = varContainer.playBtn;
+function btnChanger() {
   video.paused ? playBtn.textContent = '►' : playBtn.textContent = '❚ ❚';
 }
 
-function skipVideo() {
-  const video = varContainer.video;
-  if (!this.dataset.skip) return;
+function skipVid() {
+  if (this.classList.contains('full') || this.classList.contains('toggle')) return;
   video.currentTime += parseFloat(this.dataset.skip);
 }
 
-function handleRange() {
-  const video = varContainer.video;
+function changeValue() {
   video[this.name] = this.value;
-  console.log(this.value);
 }
 
-function fillProgress() {
-  const video = varContainer.video;
-  const progressBar = varContainer.progressBar;
+function showProgress() {
   const percent = (video.currentTime / video.duration) * 100;
   progressBar.style.flexBasis = `${percent}%`;
 }
 
 function changeProgress(event) {
-  const video = varContainer.video;
-  const progress = varContainer.progress;
-  video.currentTime = (event.offsetX / progress.offsetWidth) * video.duration;
+  // if (!isClicked) return;
+  const changedTime = (event.offsetX / progress.offsetWidth) * video.duration;
+  video.currentTime = changedTime;
 }
-let isFull = false;
-function makeFull() {
-  const player = varContainer.player;
-  if (isFull === false) {
-    isFull = true;
-    player.requestFullscreen();
-  } else {
-    isFull = false;
-    document.exitFullscreen();
-  }
-}
-
-function hideControls() {
-  let timeout;
-  const controls = document.querySelector('.player__controls');
-  clearTimeout(timeout);
-  controls.style.transform = `translateY(${0})`;
-  timeout = setTimeout(function() {
-    controls.style.transform = `translateY(${100}%) translateY(${-5}px)`;
-  }, 1500);
-}
-
 // 3. 이벤트 리스너
-varContainer.player.addEventListener('click', playVideo);
-varContainer.player.addEventListener('click', handleBtn);
-varContainer.skipBtns.forEach(buttons => buttons.addEventListener('click', skipVideo));
-varContainer.ranges.forEach(inputs => inputs.addEventListener('change', handleRange));
-varContainer.ranges.forEach(inputs => inputs.addEventListener('mousemove', handleRange));
-varContainer.video.addEventListener('timeupdate', fillProgress);
-let isClicked = false;
-varContainer.progress.addEventListener('change', changeProgress);
-varContainer.progress.addEventListener('mousemove', (e) => {isClicked && changeProgress(e)});
-varContainer.progress.addEventListener('mousedown', () => {isClicked = true});
-varContainer.progress.addEventListener('mouseup', () => {isClicked = false});
-varContainer.fullScreen.addEventListener('click', makeFull);
-varContainer.player.addEventListener('mousemove', hideControls);
+player.addEventListener('click', playVid);
+player.addEventListener('click', btnChanger);
+buttons.forEach(button => button.addEventListener('click', skipVid));
+ranges.forEach(range => range.addEventListener('change', changeValue));
+ranges.forEach(range => range.addEventListener('mousemove', changeValue));
+video.addEventListener('timeupdate', showProgress);
+progress.addEventListener('click', changeProgress);
+progress.addEventListener('mousemove', event => {isClicked && changeProgress(event)});
+progress.addEventListener('mousedown', () => isClicked = true);
+progress.addEventListener('mouseup', () => isClicked = false);

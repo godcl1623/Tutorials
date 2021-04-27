@@ -20,74 +20,20 @@
       <li>Loading Tapas...</li>
     </ul>
     <form class="add-items">
-      <input type="text" name="item" placeholder="Item Name" required>
+      <input type="text" name="item" value="test" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
     </form>
   </div>
 
 <script>
-const form = document.querySelector('.add-items');
-const plates = document.querySelector('.plates');
-const storageValue = [];
-const items = JSON.parse(localStorage.getItem('items')) || [];
+  const form = document.querySelector('form');
 
-const addList = (array = [], display) => {
-  display.innerHTML = array.map((element, i) => {
-    return `
-      <li>
-        <input type="checkbox"
-          data-index=${i}
-          id="item${i}"
-          ${element.done ? 'checked' : ''}
-        />
-        <label for="items${i}">${element.text}</label>
-      </li>
-    `;
-  }).join('');
-};
+  function updateList(event) {
+    event.preventDefault();
+    console.log(this.item.value);
+  }
 
-// 억지로 innerHTML 사용하지 않을 경우
-// const addList = (array = [], display) => {
-//   if (display.childNodes[1].textContent.includes('Loading Tapas...')) {
-//     display.removeChild(display.childNodes[1]);
-//   }
-//   const $li = document.createElement('li');
-//   $li.classList.add('tapas');
-//   array.forEach(element => {
-//     $li.innerText = element.text;
-//     display.appendChild($li);
-//   });
-//   // array.map(element => {
-//   //   $li.innerText = element.text;
-//   //   display.appendChild($li);
-//   //   return display;
-//   // });
-// };
-
-function addItems(event) {
-  event.preventDefault();
-  const temporalStorage = {
-    text: form.item.value,
-    done: false
-  };
-  items.push(temporalStorage);
-  addList(items, plates);
-  localStorage.setItem('items', JSON.stringify(items));
-  this.reset();
-}
-
-function toggleDone(event) {
-  if (!event.target.matches('input')) return;
-  const el = e.target;
-  const index = el.dataset.index;
-  items[index].done = !items[index].done;
-  localStorage.setItem('items', JSON.stringify(items));
-  addList(items, plates);
-}
-
-form.addEventListener('submit', addItems);
-plates.addEventListener('click', toggleDone);
-addList(items, plates);
+  form.addEventListener('submit', updateList);
 </script>
 
 

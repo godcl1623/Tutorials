@@ -8,17 +8,16 @@
 <body>
 <script>
   const secretContainer = [];
-  const secretCode = 'taraczel';
-
-  function secretFunc(event) {
+  const secretCode = 'papercages';
+  function playSecret(event) {
     secretContainer.push(event.key);
-    secretContainer.splice(-secretContainer.length - 1, secretContainer.length - secretCode.length);
-    if (secretContainer.join('').includes(secretCode)) {
-      alert('Welcome !');
+    secretContainer.splice(-secretCode.length - 1, secretContainer.length - secretCode.length);
+    console.log(secretContainer);
+    if (secretContainer.join('') === secretCode) {
+      cornify_add();
     }
   }
-
-  window.addEventListener('keyup', secretFunc);
+  window.addEventListener('keyup', playSecret);
 </script>
 </body>
 </html>
