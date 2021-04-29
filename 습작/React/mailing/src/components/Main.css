@@ -2,3 +2,12 @@
 .main-form, .main-form *{
   border: 1px solid black;
 }
+
+.area.name {
+  display: flex;
+  flex-direction: column;
+}
+
+.area.name input {
+  margin-left: 10px;
+}

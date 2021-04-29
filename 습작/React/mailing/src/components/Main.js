@@ -9,7 +9,7 @@ class Main extends Component {
           <section className="area name">
             <p>
               이름
-              <input type="text" />
+              <input type="text" name="name" placeholder="이름" />
             </p>
             <p>
               성
