@@ -35,6 +35,50 @@
   </style>
 
 <script>
+  const debounce = function(target, wait = 20, immediate = true) {
+    let timeout;
+    return function() {
+      let context = this;
+      let args = arguments;
+      let later = function() {
+        timeout = null;
+        if (!immediate) target.apply(context, args);
+      }
+      let callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) target.apply(context, args);
+    }
+  }
+
+  const hero = document.querySelector('.hero');
+  const text = hero.querySelector('h1');
+
+  function giveShadowEffect(event) {
+    // console.log(event);
+    // const width = hero.offsetWidth;
+    // const height = hero.offsetHeight;
+    const {offsetWidth: width, offsetHeight: height} = hero;
+    // let x = event.offsetX;
+    // let y = event.offsetY;
+    let {offsetX: x, offsetY: y} = event;
+    const walk = 200;
+    if (this !== event.target) {
+      x = x + event.target.offsetLeft;
+      y = y + event.target.offsetTop;
+    }
+    // console.log(x, y);
+    const xWalk = (x / width * walk) - (walk / 2);
+    const yWalk = (y / height * walk) - (walk / 2);
+    text.style.textShadow = `
+      ${xWalk}px ${yWalk}px 10px rgba(0, 0, 0, 0.7),
+      ${xWalk * -1}px ${yWalk * -1}px 10px rgba(255, 0, 0, 0.7),
+      ${yWalk}px ${xWalk}px 10px rgba(0, 255, 0, 0.7),
+      ${yWalk * -1}px ${xWalk * -1}px 10px rgba(0, 0, 255, 0.7)
+    `;
+  }
+
+  hero.addEventListener('mousemove', debounce(giveShadowEffect, 3));
 </script>
 </body>
 </html>
