@@ -48,6 +48,40 @@
 <script>
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
 
+const splitedArr = bands.map(element => {
+  const tempArr = element.split(' ');
+  if (tempArr[0] === 'The' || tempArr[0] === 'A' || tempArr[0] === 'An') tempArr.splice(0, 1);
+  return tempArr.join(' ');
+});
+const sortedArr = splitedArr.sort((prev, now) => {
+  return prev > now ? 1 : -1;
+});
+function arrayUnifier() {
+  const copiedArr = Array.from(sortedArr);
+  const newSplit = copiedArr.map(element => element.split(' '));
+  newSplit.forEach(eachArr => {
+    if (eachArr[0] === 'Plot' || eachArr[0] === 'Devil' || eachArr[0] === 'Bled' || eachArr[0] === 'Midway') {
+      eachArr.unshift('The');
+    } else if (eachArr[0] === 'Skylit') {
+      eachArr.unshift('A');
+    } else if (eachArr[0] === 'Old') {
+      eachArr.unshift('An');
+    }
+  })
+  return newSplit.map(splitedElements => splitedElements.join(' '));
+}
+function addList() {
+  const body = document.querySelector('body');
+  const bands = body.querySelector('#bands');
+  arrayUnifier().forEach(bandName => {
+    const $li = document.createElement('li');
+    $li.innerText = bandName;
+    bands.appendChild($li);
+  });
+}
+
+addList();
+
 </script>
 
 </body>
