@@ -3,11 +3,79 @@
   border: 1px solid black;
 }
 
-.area.name {
-  display: flex;
-  flex-direction: column;
+.main-form {
+  margin: 50px auto;
+  border-radius: 10px;
+  padding: 0 20px;
+  width: 40%;
+  height: 75%;
+  background-color: var(--form-background);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  position: relative;
 }
 
-.area.name input {
+.main-form input[type=text] {
   margin-left: 10px;
+  height: 30px;
+}
+
+.main-form form {
+  /* padding: 20px; */
+  width: 100%;
+  height: 100%;
+}
+
+.name, .family, .gender {
+  /* grid-area: name; */
+  margin-top: 20px;
+  width: 50%;
+}
+
+.area.email {
+  /* grid-area: email; */
+  margin-top: 20px;
+  width: 100%;
+}
+
+.area.statistics {
+  margin-top: 20px;
+  width: 100%;
+  display: grid;
+  grid-template-areas:
+    "source-header source-input"
+    "interest-header interest-input"
+    "time-header time-input";
+}
+
+.area.statistics p:first-child {
+  grid-area: source-header;
+}
+
+.area.statistics textarea {
+  grid-area: source-input;
+}
+
+.area.statistics P:nth-child(2) {
+  grid-area: interest-header;
+}
+
+.area.statistics .multi-choice {
+  grid-area: interest-input;
+}
+
+.area.statistics p:nth-child(3) {
+  grid-area: time-header;
+}
+
+.area.statistics textarea:nth-child(2) {
+  grid-area: time-input;
+}
+
+.main-form form input[type=submit] {
+  position: absolute;
+  width: 70px;
+  height: 50px;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
