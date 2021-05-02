@@ -182,7 +182,34 @@
     </li>
   </ul>
 <script>
+  const li = document.querySelectorAll('.videos li');
+  function discomposer(arr) {
+    const target = Array.from(arr);
+    return target.map(elements => elements.dataset.time.split(':'));
+  }
 
+  let minutes = [];
+  let seconds = [];
+  function divider(arr) {
+    arr.forEach(elements => minutes.push(elements[0]));
+    arr.forEach(elements => seconds.push(elements[1]));
+  }
+  divider(discomposer(li));
+  const minutesSum = minutes.reduce((total, current) => {
+    return parseFloat(total) + parseFloat(current);
+  }, 0);
+  const secondsSum = seconds.reduce((total, current) => {
+    return parseFloat(total) + parseFloat(current);
+  }, 0);
+  function calculator(min, sec) {
+    const totalTime = (min * 60) + sec;
+    const totalHour = (totalTime - totalTime%3600)/3600;
+    const totalMin = (totalTime - totalHour*3600 - (totalTime - totalHour*3600)%60)/60;
+    const totalSec = totalTime - totalHour*3600 - totalMin*60;
+    console.log(`${totalHour}시간 ${totalMin}분 ${totalSec}초`);
+  }
+
+calculator(minutesSum, secondsSum);
 </script>
 </body>
 </html>
