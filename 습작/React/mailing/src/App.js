@@ -8,7 +8,7 @@ class App extends Component {
     return(
       <div className="App_Root">
         <Main />
-        <Management />
+        {/* <Management /> */}
       </div>
     );
   }
