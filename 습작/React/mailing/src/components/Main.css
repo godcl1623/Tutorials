@@ -1,81 +1,152 @@
 /* MAIN - GLOBAL */
 .main-form, .main-form *{
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 .main-form {
   margin: 50px auto;
   border-radius: 10px;
   padding: 0 20px;
-  width: 40%;
-  height: 75%;
+  width: 600px;
+  height: 450px;
   background-color: var(--form-background);
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
   position: relative;
 }
 
-.main-form input[type=text] {
-  margin-left: 10px;
-  height: 30px;
-}
-
 .main-form form {
-  /* padding: 20px; */
-  width: 100%;
-  height: 100%;
-}
-
-.name, .family, .gender {
-  /* grid-area: name; */
-  margin-top: 20px;
-  width: 50%;
-}
-
-.area.email {
-  /* grid-area: email; */
-  margin-top: 20px;
-  width: 100%;
-}
-
-.area.statistics {
-  margin-top: 20px;
-  width: 100%;
   display: grid;
   grid-template-areas:
-    "source-header source-input"
-    "interest-header interest-input"
-    "time-header time-input";
+    "name-header name-input family-header family-input"
+    "gender-header gender-input . ."
+    "email-header email-input email-input email-input"
+    "source-header source-input source-input source-input"
+    "interest-header interest-header interest-header interest-header"
+    "interest-input interest-input interest-input interest-input"
+    "favorite-header favorite-input favorite-input favorite-input"
+    ". submit submit .";
+  position: relative;
 }
 
-.area.statistics p:first-child {
+.name-header, .family-header, .gender-header, .email-header, .source-header, .interest-header, .favorite-header {
+  margin-top: 20px;
+  width: 70px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.favorite-header {
+  width: 100px;
+}
+
+.name-input, .family-input, .gender-input, .email-input, .source-input, .interest-input, .favorite-input {
+  margin-top: 20px;
+  padding: 5px;
+  height: 30px;
+  /* font-size: 16px; */
+}
+
+.main-form .name-header {
+  grid-area: name-header;
+}
+
+.main-form .name-input {
+  grid-area: name-input;
+}
+
+.main-form .family-header {
+  grid-area: family-header;
+}
+
+.main-form .family-input {
+  grid-area: family-input;
+}
+
+.main-form .gender-header {
+  grid-area: gender-header;
+}
+
+.main-form .gender-input {
+  grid-area: gender-input;
+}
+
+.main-form .email-header {
+  grid-area: email-header;
+}
+
+.main-form .email-input {
+  grid-area: email-input;
+}
+
+.main-form .source-header {
   grid-area: source-header;
 }
 
-.area.statistics textarea {
+.main-form .source-input {
   grid-area: source-input;
 }
 
-.area.statistics P:nth-child(2) {
+.main-form .interest-header {
   grid-area: interest-header;
 }
 
-.area.statistics .multi-choice {
+.main-form .interest-input {
   grid-area: interest-input;
+  margin-top: 5px;
+  padding: 0 15px;
+  height: 100%;
+  display: grid;
+  grid-template-areas:
+    "box1 box2 box3 box4"
+    "box5 box6 box7 box8";
+  font-size: 14px;
 }
 
-.area.statistics p:nth-child(3) {
-  grid-area: time-header;
+.main-form .interest-input .selection-container {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.area.statistics textarea:nth-child(2) {
-  grid-area: time-input;
+.main-form .interest-input .selection-container p {
+  margin-left: 5px;
 }
 
-.main-form form input[type=submit] {
+.main-form .favorite-header {
+  grid-area: favorite-header;
+}
+
+.main-form .favorite-input {
+  grid-area: favorite-input;
+}
+
+.main-form .submit {
+  grid-area: submit;
+  margin-top: 30px;
+  border-color: transparent;
+  border-radius: 7px;
+  width: 50px;
+  height: 30px;
+  background-color: var(--form-background);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   position: absolute;
-  width: 70px;
-  height: 50px;
-  top: 75%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.main-form .submit:active {
+  filter: brightness(0.9);
+}
+
+.email-input {
+  padding: 0;
+}
+
+.email-input input {
+  width: 47%;
+  height: 100%;
 }
