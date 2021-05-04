@@ -150,3 +150,7 @@
   width: 47%;
   height: 100%;
 }
+
+#management {
+  display: none;
+}

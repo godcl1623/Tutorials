@@ -17,11 +17,17 @@ class Main extends Component {
             name="interest"
             value={values[i]}
           />
-          <p>lorem ipsum {i+1}</p>
+          <p>{value}</p>
         </div>);
       return interestForm;
     });
     return interests;
+  };
+
+  sendToStorage = data => {
+    const formValue = JSON.parse(localStorage.getItem('localFormValue')) || [];
+    formValue.push(data);
+    localStorage.setItem('localFormValue', JSON.stringify(formValue));
   };
 
   handleSubmit = event => {
@@ -36,7 +42,8 @@ class Main extends Component {
       interests: data.getAll('interest'),
       favorite: data.get('favorite-time')
     }
-    console.log({value});
+    this.sendToStorage(value);
+    event.target.reset();
   }
 
   render() {
@@ -57,7 +64,6 @@ class Main extends Component {
               id="name-input"
               type="text"
               name="name"
-              defaultValue="bar"
             />
           <label
             className="family-header"
@@ -69,7 +75,6 @@ class Main extends Component {
               id="family-input"
               type="text"
               name="family"
-              defaultValue="foo"
             />
           <label
             className="gender-header"
@@ -81,7 +86,6 @@ class Main extends Component {
               id="gender-input"
               type="text"
               name="gender"
-              defaultValue="apache"
             />
           <label
             className="email-header"
@@ -93,13 +97,11 @@ class Main extends Component {
               <input
                 type="text"
                 name="email-id"
-                defaultValue="email"
               />
               <span>@</span>
               <input
                 type="text"
                 name="email-provider"
-                defaultValue="provider.com"
               />
             </section>
           <label
@@ -111,7 +113,6 @@ class Main extends Component {
             <textarea
               id="source-input"
               name="source"
-              defaultValue="비밀"
             />
           <label
             className="interest-header"
@@ -131,14 +132,13 @@ class Main extends Component {
             <textarea
               id="favorite-input"
               name="favorite-time"
-              defaultValue="오전 14시"
             />
           <input
             id="submit"
             type="submit"
           />
         </form>
-        {/* <button>관리</button> */}
+        <button id="management">관리</button>
       </div>
     );
   }
