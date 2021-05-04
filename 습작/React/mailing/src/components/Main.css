@@ -142,15 +142,18 @@
   filter: brightness(0.9);
 }
 
-#email-input {
+.main-form #email-input {
   padding: 0;
 }
 
-#email-input input {
+.main-form #email-input input {
   width: 47%;
   height: 100%;
 }
 
-#management {
+.main-form #management {
   display: none;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
