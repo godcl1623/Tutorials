@@ -41,7 +41,7 @@
   width: 100px;
 }
 
-.name-input, .family-input, .gender-input, .email-input, .source-input, .interest-input, .favorite-input {
+#name-input, #family-input, #gender-input, #email-input, #source-input, #interest-input, #favorite-input {
   margin-top: 20px;
   padding: 5px;
   height: 30px;
@@ -52,7 +52,7 @@
   grid-area: name-header;
 }
 
-.main-form .name-input {
+.main-form #name-input {
   grid-area: name-input;
 }
 
@@ -60,7 +60,7 @@
   grid-area: family-header;
 }
 
-.main-form .family-input {
+.main-form #family-input {
   grid-area: family-input;
 }
 
@@ -68,7 +68,7 @@
   grid-area: gender-header;
 }
 
-.main-form .gender-input {
+.main-form #gender-input {
   grid-area: gender-input;
 }
 
@@ -76,7 +76,7 @@
   grid-area: email-header;
 }
 
-.main-form .email-input {
+.main-form #email-input {
   grid-area: email-input;
 }
 
@@ -84,7 +84,7 @@
   grid-area: source-header;
 }
 
-.main-form .source-input {
+.main-form #source-input {
   grid-area: source-input;
 }
 
@@ -92,7 +92,7 @@
   grid-area: interest-header;
 }
 
-.main-form .interest-input {
+.main-form #interest-input {
   grid-area: interest-input;
   margin-top: 5px;
   padding: 0 15px;
@@ -104,14 +104,14 @@
   font-size: 14px;
 }
 
-.main-form .interest-input .selection-container {
+.main-form #interest-input #selection-container {
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.main-form .interest-input .selection-container p {
+.main-form #interest-input #selection-container p {
   margin-left: 5px;
 }
 
@@ -119,11 +119,11 @@
   grid-area: favorite-header;
 }
 
-.main-form .favorite-input {
+.main-form #favorite-input {
   grid-area: favorite-input;
 }
 
-.main-form .submit {
+.main-form #submit {
   grid-area: submit;
   margin-top: 30px;
   border-color: transparent;
@@ -138,15 +138,22 @@
   cursor: pointer;
 }
 
-.main-form .submit:active {
+.main-form #submit:active {
   filter: brightness(0.9);
 }
 
-.email-input {
+.main-form #email-input {
   padding: 0;
 }
 
-.email-input input {
+.main-form #email-input input {
   width: 47%;
   height: 100%;
+}
+
+.main-form #management {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
