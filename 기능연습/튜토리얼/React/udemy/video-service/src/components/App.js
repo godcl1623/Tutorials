@@ -34,10 +34,10 @@ class App extends React.Component {
         <SearchBar
           onFormSubmit={this.onTermSubmit}
         />
+        검색 결과: {this.state.videos.length} 건
         <VideoDetail
           video={this.state.selectedVideo}
         />
-        검색 결과: {this.state.videos.length} 건
         <VideoList 
           videos={this.state.videos}
           onVideoSelect={this.onVideoSelect}
