@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from './SearchBar';
 import YoutubeAPI from '../api/YoutubeAPI';
+import VideoList from './VideoList';
 
 class App extends React.Component {
   state={ videos: [] }
@@ -21,6 +22,9 @@ class App extends React.Component {
           onFormSubmit={this.onTermSubmit}
         />
         검색 결과: {this.state.videos.length} 건
+        <VideoList 
+          videos={this.state.videos}
+        />
       </div>
     );
   }
