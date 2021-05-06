@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles/Main-form.css';
 
 const MainForm = props => {
   return(

@@ -1,20 +1,5 @@
 /* MAIN - GLOBAL */
-.main-form, .main-form *{
-  /* border: 1px solid black; */
-}
-
-.main-form {
-  margin: 50px auto;
-  border-radius: 10px;
-  padding: 0 20px;
-  width: 600px;
-  height: 450px;
-  background-color: var(--form-background);
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-  position: relative;
-}
-
-.main-form form {
+.main form {
   display: grid;
   grid-template-areas:
     "name-header name-input family-header family-input"
@@ -48,51 +33,51 @@
   /* font-size: 16px; */
 }
 
-.main-form .name-header {
+.main .name-header {
   grid-area: name-header;
 }
 
-.main-form #name-input {
+.main #name-input {
   grid-area: name-input;
 }
 
-.main-form .family-header {
+.main .family-header {
   grid-area: family-header;
 }
 
-.main-form #family-input {
+.main #family-input {
   grid-area: family-input;
 }
 
-.main-form .gender-header {
+.main .gender-header {
   grid-area: gender-header;
 }
 
-.main-form #gender-input {
+.main #gender-input {
   grid-area: gender-input;
 }
 
-.main-form .email-header {
+.main .email-header {
   grid-area: email-header;
 }
 
-.main-form #email-input {
+.main #email-input {
   grid-area: email-input;
 }
 
-.main-form .source-header {
+.main .source-header {
   grid-area: source-header;
 }
 
-.main-form #source-input {
+.main #source-input {
   grid-area: source-input;
 }
 
-.main-form .interest-header {
+.main .interest-header {
   grid-area: interest-header;
 }
 
-.main-form #interest-input {
+.main #interest-input {
   grid-area: interest-input;
   margin-top: 5px;
   padding: 0 15px;
@@ -104,26 +89,26 @@
   font-size: 14px;
 }
 
-.main-form #interest-input #selection-container {
+.main #interest-input #selection-container {
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.main-form #interest-input #selection-container p {
+.main #interest-input #selection-container p {
   margin-left: 5px;
 }
 
-.main-form .favorite-header {
+.main .favorite-header {
   grid-area: favorite-header;
 }
 
-.main-form #favorite-input {
+.main #favorite-input {
   grid-area: favorite-input;
 }
 
-.main-form #submit {
+.main #submit {
   grid-area: submit;
   margin-top: 30px;
   border-color: transparent;
@@ -138,22 +123,15 @@
   cursor: pointer;
 }
 
-.main-form #submit:active {
+.main #submit:active {
   filter: brightness(0.9);
 }
 
-.main-form #email-input {
+.main #email-input {
   padding: 0;
 }
 
-.main-form #email-input input {
+.main #email-input input {
   width: 47%;
   height: 100%;
-}
-
-.main-form #management {
-  display: none;
-  position: absolute;
-  right: 0;
-  bottom: 0;
 }
