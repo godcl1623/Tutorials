@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MainForm from './Main-form';
-import './Main.css';
+import Navigation from './Navigation';
+import './styles/Main.css';
 
 class Main extends Component {
   selections = function() {
@@ -50,6 +51,7 @@ class Main extends Component {
   render() {
     return(
       <div className="main">
+        <Navigation />
         <MainForm
           interestList={this.selections()}
           onSubmitForm={this.handleSubmit}
