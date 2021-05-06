@@ -49,7 +49,7 @@ class Main extends Component {
 
   render() {
     return(
-      <div className="main-form">
+      <div className="main">
         <MainForm
           interestList={this.selections()}
           onSubmitForm={this.handleSubmit}
