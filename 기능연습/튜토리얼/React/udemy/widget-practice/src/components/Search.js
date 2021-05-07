@@ -10,7 +10,11 @@ const Search = () => {
       <div key={result.pageid} className="item">
         <div className="content">
           <div className="header">
-            {result.title}
+            <a
+              href={`https://ko.wikipedia.org?curid=${result.pageid}`}
+            >
+              {result.title}
+            </a>
           </div>
           {/* {result.snippet} */}
           <span dangerouslySetInnerHTML={{__html: result.snippet}}></span>
@@ -21,7 +25,7 @@ const Search = () => {
 
   useEffect(() => {
     const searchQuery = async () => {
-      const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
+      const { data } = await axios.get('https://ko.wikipedia.org/w/api.php', {
         params: {
           action: 'query',
           list: 'search',
@@ -34,8 +38,14 @@ const Search = () => {
       setResults(data.query.search);
     }
 
-    if (term !== '') {
-      searchQuery();
+    const timeoutId = setTimeout(() => {
+      if (term) {
+        searchQuery();
+      }
+    }, 500);
+
+    return () => {
+      clearTimeout(timeoutId);
     }
   }, [term]);
 
