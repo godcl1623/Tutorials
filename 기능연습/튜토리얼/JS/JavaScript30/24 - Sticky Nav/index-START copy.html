@@ -54,20 +54,7 @@
   </div>
 
 <script>
-  const nav = document.querySelector('nav');
-  const navTop = nav.offsetTop;
 
-  function onScrollPage() {
-    if (window.scrollY >= navTop) {
-      document.body.classList.add('fixed-nav');
-      // document.body.style.paddingTop = `${nav.offsetHeight}px`;
-    } else {
-      document.body.classList.remove('fixed-nav');
-      // document.body.style.paddingTop = 0;
-    }
-  }
-
-  window.addEventListener('scroll', onScrollPage);
 </script>
 
 </body>
