@@ -6,11 +6,13 @@ import MainAbout from './Main-about';
 import '../styles/Main.css';
 
 class Main extends Component {
-  state={selectedClass: 'MainForm'}
+  state={
+    selectedClass: 'MainForm'
+  }
 
-  whatIsThis = (e) => {
+  whatIsThis = (event) => {
     this.setState({
-      selectedClass: e.target.classList.value
+      selectedClass: event.target.classList.value
     })
   }
 
@@ -29,15 +31,9 @@ class Main extends Component {
 
   render() {
     return(
-      <div className="main" onClick={this.whatIsThis}>
+      <div className="main" onClick={this.whatIsThis} >
         <Navigation />
         {this.changeComponent()}
-        <button
-          id="management"
-          onClick={() => {alert('관리 기능 구현 중!')}}
-        >
-          관리
-        </button>
       </div>
     );
   }

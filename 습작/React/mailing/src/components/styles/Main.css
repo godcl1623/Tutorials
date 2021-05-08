@@ -54,13 +54,6 @@
   filter: brightness(90%);
 }
 
-.main #management {
-  display: none;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
-
 .main .loading, .main .main-start, .main .main-about {
   position: absolute;
   top: 50%;
