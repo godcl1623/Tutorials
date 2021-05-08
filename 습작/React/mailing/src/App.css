@@ -10,6 +10,7 @@
   --test: 20px;
   /* coloring */
   --background: skyblue;
+  --man-background: grey;
   --form-background: white;
 }
 
@@ -28,4 +29,11 @@ body {
 
 p {
   display: inline-block;
+}
+
+.App_root #management {
+  /* display: none; */
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }

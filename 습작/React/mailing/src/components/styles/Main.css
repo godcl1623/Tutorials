@@ -54,9 +54,9 @@
   filter: brightness(90%);
 }
 
-.main #management {
-  display: none;
+.main .loading, .main .main-start, .main .main-about {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
