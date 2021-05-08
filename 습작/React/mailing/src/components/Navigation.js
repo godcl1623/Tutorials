@@ -6,13 +6,13 @@ class Navigation extends React.Component {
       <div className="navigation">
         <ul className="main-menu">
           <li className="start-page">
-            <button>Main Page</button>
+            <button className="MainStart">Main Page</button>
           </li>
           <li className="introduction">
-            <button>About Us</button>
+            <button className="MainAbout">About Us</button>
           </li>
           <li className="sign-up">
-            <button>Sign-up</button>
+            <button className="MainForm">Sign-up</button>
           </li>
         </ul>
       </div>

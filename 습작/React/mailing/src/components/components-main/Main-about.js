@@ -9,3 +9,5 @@ class MainAbout extends Component {
     );
   }
 }
+
+export default MainAbout;
