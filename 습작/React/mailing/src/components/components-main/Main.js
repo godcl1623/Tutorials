@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import Navigation from '../Navigation';
 import MainForm from './Main-form';
-import Navigation from './Navigation';
-import './styles/Main.css';
+import MainStart from './Main-start';
+import '../styles/Main.css';
 
 class Main extends Component {
   selections = function() {
