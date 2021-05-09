@@ -1,13 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-const Dropdown = ({ options, selected, onSelectedChange }) => {
+const Dropdown = ({ options, selected, onSelectedChange, label, example }) => {
   const [open, setOpen] = useState(false);
+  const [fontColor, setFontColor] = useState('black');
+
+  const ref = useRef();
 
   useEffect(() => {
-    document.body.addEventListener('click', () => {
+    const onBodyClick = event => {
+      if (ref.current.contains(event.target)) return;
       setOpen(false);
-    }, {capture: true});
+    };
+
+    document.body.addEventListener('click', onBodyClick, {capture: true});
+
+    return () => {
+      document.body.removeEventListener('click', onBodyClick, {capture: true});
+    }
   }, []);
+
+  useEffect(() => {
+    setFontColor(selected.value);
+  }, [fontColor, selected])
 
   const renderedColors = options.map(option => {
     if (option.value === selected.value) {
@@ -19,17 +33,17 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
         className="item"
         onClick={()=>{
           onSelectedChange(option)
+          setFontColor(option.value)
         }}
       >
         {option.label}
       </div>
     );
   });
-
   return(
-    <div className="ui form">
+    <div ref={ref} className="ui form">
       <div className="field">
-        <label className="label">Select a Color</label>
+        <label className="label">{label}</label>
         <div
           className={`ui selection dropdown ${open ? 'visible active' : ''}`}
           onClick={() => {
@@ -43,6 +57,11 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
           </div>
         </div>
       </div>
+      <h2
+        style={{color: `${fontColor}`}}
+      >
+        {example}
+      </h2>
     </div>
   );
 }
