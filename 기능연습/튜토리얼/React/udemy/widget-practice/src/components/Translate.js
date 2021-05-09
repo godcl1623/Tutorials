@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Dropdown from './Dropdown';
+import Convert from './Convert';
 
 const options = [
   {
@@ -22,18 +23,26 @@ const Translate = () => {
 
   return(
     <div>
+      <div className="ui form">
+        <div className="field">
+          <label className="label">Enter Text</label>
+          <input
+            value={text}
+            onChange={event => {
+              setText(event.target.value)
+            }}
+          />
+        </div>
+      </div>
       <Dropdown
         label='Select a Language'
         options={options}
         selected={language}
         onSelectedChange={setLanguage}
       />
-      <input
-        value={text}
-        onChange={event => {
-          setText(event.target.value)
-        }}
-      />
+      <hr />
+      <h3 className="ui header">Output</h3>
+      <Convert text={text} language={language} />
     </div>
   );
 }
