@@ -54,7 +54,11 @@
   filter: brightness(90%);
 }
 
-.management .loading, .management .management-start, .management .management-about {
+.management .loading,
+.management .management-start,
+.management .management-stat,
+.management .management-write,
+.management .management-list {
   position: absolute;
   top: 50%;
   left: 50%;

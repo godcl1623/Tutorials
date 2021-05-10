@@ -34,7 +34,7 @@ const MainForm = () => {
   };
 
   const handleSubmit = event => {
-    event.preventDefault();
+    // event.preventDefault();
     const data = new FormData(event.target);
     const value = {
       name: data.get('name'),
@@ -51,8 +51,8 @@ const MainForm = () => {
 
   return(
     <form
-      action="/submit_process"
-      method="post"
+      // action="/submit_process"
+      // method="post"
       onSubmit={handleSubmit}
     >
       <label

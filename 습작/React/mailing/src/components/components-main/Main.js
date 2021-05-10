@@ -15,7 +15,6 @@ class Main extends Component {
   }
 
   whatIsThis = (event) => {
-    console.log(event.target)
     const classValue = event.target.classList.value;
     if (classValue === 'main' || classValue === '' ||
       classValue === 'navigation' || classValue === 'main-menu') return;
