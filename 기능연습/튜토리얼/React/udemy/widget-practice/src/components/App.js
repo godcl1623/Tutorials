@@ -4,6 +4,7 @@ import Search from './Search';
 import Dropdown from './Dropdown';
 import Translate from './Translate';
 import Route from './Route';
+import Navigation from './Navigation';
 
 const items = [
   {
@@ -35,47 +36,12 @@ const options = [
   }
 ];
 
-// const router = () => {
-//   switch(window.location.pathname) {
-//     case '/search':
-//       return <Search />;
-//     // case '/dropdown':
-//     //   return(
-//     //     <Dropdown
-//     //       label='Select a Color'
-//     //       options={options}
-//     //       selected={selected}
-//     //       onSelectedChange={setSelected}
-//     //       example='폰트 색상 미리보기'
-//     //     />
-//     //   );
-//     case '/translate':
-//       return <Translate />;
-//     default:
-//       return <Accordion items={items} />;
-//   }
-// }
-
 const App = () => {
   const [selected, setSelected] = useState('');
-  const [showDropdown, setShowDropdown] = useState(true);
 
   return(
     <div>
-      {/* <Accordion items={items} /> */}
-      {/* <Search /> */}
-      {/* <button onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
-      {showDropdown ?
-        <Dropdown
-          label='Select a Color'
-          options={options}
-          selected={selected}
-          onSelectedChange={setSelected}
-          example='폰트 색상 미리보기'
-        /> : null
-      } */}
-      {/* <Translate /> */}
-      {/* {router()} */}
+      <Navigation />
       <Route path="/">
         <Accordion items={items} />
       </Route>
