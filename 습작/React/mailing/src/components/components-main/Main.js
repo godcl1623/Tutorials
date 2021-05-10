@@ -6,11 +6,19 @@ import MainAbout from './Main-about';
 import '../styles/Main.css';
 
 class Main extends Component {
-  state={
-    selectedClass: 'MainForm'
+  constructor(props) {
+    super(props);
+    this.state={
+      selectedClass: 'MainForm'
+    }
+    this.scopeRef = React.createRef();
   }
 
   whatIsThis = (event) => {
+    console.log(event.target)
+    const classValue = event.target.classList.value;
+    if (classValue === 'main' || classValue === '' ||
+      classValue === 'navigation' || classValue === 'main-menu') return;
     this.setState({
       selectedClass: event.target.classList.value
     })
@@ -29,10 +37,27 @@ class Main extends Component {
     }
   }
 
+  navigationMenu = [
+    {
+      className: 'MainStart',
+      textValue: 'Main Page'
+    },
+    {
+      className: 'MainAbout',
+      textValue: 'About Us'
+    },
+    {
+      className: 'MainForm',
+      textValue: 'Sign-up'
+    }
+  ]
+
   render() {
     return(
       <div className="main" onClick={this.whatIsThis} >
-        <Navigation />
+        <Navigation
+          menuData={this.navigationMenu}
+        />
         {this.changeComponent()}
       </div>
     );
