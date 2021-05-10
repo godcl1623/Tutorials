@@ -3,6 +3,8 @@ import Accordion from './Accordion';
 import Search from './Search';
 import Dropdown from './Dropdown';
 import Translate from './Translate';
+import Route from './Route';
+import Navigation from './Navigation';
 
 const items = [
   {
@@ -35,24 +37,29 @@ const options = [
 ];
 
 const App = () => {
-  // const [selected, setSelected] = useState('');
-  // const [showDropdown, setShowDropdown] = useState(true);
+  const [selected, setSelected] = useState('');
 
   return(
     <div>
-      {/* <Accordion items={items} /> */}
-      {/* <Search /> */}
-      {/* <button onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
-      {showDropdown ?
+      <Navigation />
+      <Route path="/">
+        <Accordion items={items} />
+      </Route>
+      <Route path="/search">
+        <Search />
+      </Route>
+      <Route path="/dropdown">
         <Dropdown
           label='Select a Color'
           options={options}
           selected={selected}
           onSelectedChange={setSelected}
           example='폰트 색상 미리보기'
-        /> : null
-      } */}
-      <Translate />
+        />
+      </Route>
+      <Route path="/translate">
+        <Translate />
+      </Route>
     </div>
   );
 }

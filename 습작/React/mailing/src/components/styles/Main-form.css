@@ -65,6 +65,12 @@
   grid-area: email-input;
 }
 
+.main #email-input #email-provider {
+  padding: 5px;
+  height: 30px;
+  width: 49.7%;
+}
+
 .main .source-header {
   grid-area: source-header;
 }
