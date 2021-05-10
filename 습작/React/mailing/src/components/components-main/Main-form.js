@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/Main-form.css';
 
 const MainForm = () => {
+  useEffect(() => {
+    const select = document.querySelectorAll('select');
+    select.forEach(element => element.value = '');
+  }, []);
+
   const selections = () => {
     const values = [];
     for (let i = 0; i < 8; i++) {
@@ -78,11 +83,14 @@ const MainForm = () => {
       >
         성별
       </label>
-        <input
-          id="gender-input"
-          type="text"
-          name="gender"
-        />
+      <select
+        id="gender-input"
+        name="gender"
+      >
+        <option>남</option>
+        <option>여</option>
+        <option>비공개</option>
+      </select>
       <label
         className="email-header"
         htmlFor="email-input"
@@ -95,10 +103,15 @@ const MainForm = () => {
             name="email-id"
           />
           <span>@</span>
-          <input
-            type="text"
+          <select
+            id="email-provider"
             name="email-provider"
-          />
+          >
+            <option>gmail.com</option>
+            <option>hotmail.com</option>
+            <option>naver.com</option>
+            <option>daum.net</option>
+          </select>
         </section>
       <label
         className="source-header"
@@ -106,10 +119,14 @@ const MainForm = () => {
       >
         가입경로
       </label>
-        <textarea
-          id="source-input"
-          name="source"
-        />
+      <select
+        id="source-input"
+        name="source"
+      >
+        <option>Lorem ipsum dolor sit amet 1.</option>
+        <option>Lorem ipsum dolor sit amet 2.</option>
+        <option>Lorem ipsum dolor sit amet 3.</option>
+      </select>
       <label
         className="interest-header"
         htmlFor="interest-input"
@@ -125,10 +142,15 @@ const MainForm = () => {
       >
         희망 배송시간
       </label>
-        <textarea
-          id="favorite-input"
-          name="favorite-time"
-        />
+      <select
+        id="favorite-input"
+        name="favorite-time"
+      >
+        <option>오전 9시</option>
+        <option>오후 12시</option>
+        <option>오후 3시</option>
+        <option>오후 6시</option>
+      </select>
       <input
         id="submit"
         type="submit"
