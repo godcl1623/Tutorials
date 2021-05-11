@@ -1,31 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBar from './SearchBar';
-import YoutubeAPI from '../api/YoutubeAPI';
 import VideoList from './VideoList';
 import VideoDetail from './VideoDetail';
+import useVideos from '../hooks/useVideos';
 
 const App = () => {
-  const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(undefined);
+  const [videos, searchVideo] = useVideos('haha ha');
 
-  const onTermSubmit = async input => {
-    const response = await YoutubeAPI.get('/search', {
-      params: {
-        q: input
-      }
-    });
-    setVideos(response.data.items);
-    setSelectedVideo(response.data.items[0]);
-  };
-
-  const onVideoSelect = selectedVid => {
-    setSelectedVideo(selectedVid);
-  };
+  useEffect(() => {
+    setSelectedVideo(videos[0]);
+  }, [videos]);
 
   return(
     <div className="ui container">
       <SearchBar
-        onFormSubmit={onTermSubmit}
+        onFormSubmit={searchVideo}
       />
       검색 결과: {videos.length} 건
       <div className="ui grid">
@@ -38,7 +28,7 @@ const App = () => {
           <div className="five wide column">
             <VideoList 
               videos={videos}
-              onVideoSelect={onVideoSelect}
+              onVideoSelect={setSelectedVideo}
             />
           </div>
         </div>
