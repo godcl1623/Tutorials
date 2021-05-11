@@ -1,58 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchBar from './SearchBar';
 import YoutubeAPI from '../api/YoutubeAPI';
 import VideoList from './VideoList';
 import VideoDetail from './VideoDetail';
 
-class App extends React.Component {
-  state={
-    videos: [],
-    selectedVideo: undefined
-  }
+const App = () => {
+  const [videos, setVideos] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState(undefined);
 
-  onTermSubmit = async input => {
+  const onTermSubmit = async input => {
     const response = await YoutubeAPI.get('/search', {
       params: {
         q: input
       }
     });
-    this.setState({
-      videos: response.data.items,
-      selectedVideo: response.data.items[0]
-    })
+    setVideos(response.data.items);
+    setSelectedVideo(response.data.items[0]);
   };
 
-  onVideoSelect = selectedVid => {
-    this.setState({
-      selectedVideo: selectedVid
-    })
+  const onVideoSelect = selectedVid => {
+    setSelectedVideo(selectedVid);
   };
 
-  render() {
-    return(
-      <div className="ui container">
-        <SearchBar
-          onFormSubmit={this.onTermSubmit}
-        />
-        검색 결과: {this.state.videos.length} 건
-        <div className="ui grid">
-          <div className="ui row">
-            <div className="eleven wide column">
-              <VideoDetail
-                video={this.state.selectedVideo}
-              />
-            </div>
-            <div className="five wide column">
-              <VideoList 
-                videos={this.state.videos}
-                onVideoSelect={this.onVideoSelect}
-              />
-            </div>
+  return(
+    <div className="ui container">
+      <SearchBar
+        onFormSubmit={onTermSubmit}
+      />
+      검색 결과: {videos.length} 건
+      <div className="ui grid">
+        <div className="ui row">
+          <div className="eleven wide column">
+            <VideoDetail
+              video={selectedVideo}
+            />
+          </div>
+          <div className="five wide column">
+            <VideoList 
+              videos={videos}
+              onVideoSelect={onVideoSelect}
+            />
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default App;
