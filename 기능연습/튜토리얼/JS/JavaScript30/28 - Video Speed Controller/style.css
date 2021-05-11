@@ -19,10 +19,12 @@ video {
 }
 
 .speed {
-  background: #efefef;
+  /* background: #efefef; */
+  background: linear-gradient(-170deg, #2376ae 0%, #c16ecf 100%);
   flex: 1;
   display: flex;
-  align-items: flex-start;
+  /* align-items: flex-start; */
+  align-items: flex-end;
   margin: 10px;
   border-radius: 50px;
   box-shadow: 0 0 1px 3px rgba(0,0,0,0.1);
@@ -31,12 +33,14 @@ video {
 
 .speed-bar {
   width: 100%;
-  background: linear-gradient(-170deg, #2376ae 0%, #c16ecf 100%);
+  /* background: linear-gradient(-170deg, #2376ae 0%, #c16ecf 100%); */
+  background: white;
   text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2px;
-  color: white;
+  /* color: white; */
+  color: gray;
   height: 16.3%;
 }
