@@ -19,7 +19,7 @@ const SearchBar = (props) => {
         onSubmit={submitQuery}
       >
         <div className="field">
-          <label>Video Search</label>
+          <label>Search Video</label>
           <input
             type="text"
             value={text}
