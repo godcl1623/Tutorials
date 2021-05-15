@@ -30,7 +30,6 @@ const SongList = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return { songs: state.songs };
 };
 
