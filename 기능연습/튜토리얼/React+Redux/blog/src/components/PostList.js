@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions';
 
-const PostList = ({fetchPosts}) => {
+const PostList = ({fetchPosts, posts}) => {
   useEffect(() => {
     fetchPosts();
   }, [fetchPosts]);
 
+  console.log(posts);
   return(
     <div>
       <h1>PostList</h1>
@@ -15,7 +16,7 @@ const PostList = ({fetchPosts}) => {
 };
 
 const mapStateToProps = state => {
-  return null;
+  return { posts: state.posts };
 };
 
-export default connect(null, { fetchPosts })(PostList);
+export default connect(mapStateToProps, { fetchPosts })(PostList);
