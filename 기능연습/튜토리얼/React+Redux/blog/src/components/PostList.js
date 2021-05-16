@@ -7,10 +7,25 @@ const PostList = ({fetchPosts, posts}) => {
     fetchPosts();
   }, [fetchPosts]);
 
-  console.log(posts);
+  const renderList = () => {
+    return posts.map(post => {
+      return (
+        <div className="item" key={post.id}>
+          <i className="large middle aligned icon user" />
+          <div className="content">
+            <div className="description">
+              <h2>{post.title}</h2>
+              <p>{post.body}</p>
+            </div>
+          </div>
+        </div>
+      );
+    });
+  };
+
   return(
-    <div>
-      <h1>PostList</h1>
+    <div className="ui relaxed divided list">
+      {renderList()}
     </div>
   );
 };
