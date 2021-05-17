@@ -2,20 +2,26 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchUser } from '../actions';
 
-const UserHeader = ({ fetchUser, userId }) => {
+const UserHeader = ({ fetchUser, userId, users }) => {
   useEffect(() => {
     fetchUser(userId);
   }, [fetchUser, userId]);
 
+  const user = users.find(user => user.id === userId);
+
+  if (!user) {
+    return null;
+  }
+
   return(
-    <div>
-      UserHeader
+    <div className="header">
+      {user.name}
     </div>
   );
 }
 
 const mapStateToProps = state => {
-  return null;
+  return { users: state.users };
 };
 
-export default connect(null, { fetchUser })(UserHeader);
+export default connect(mapStateToProps, { fetchUser })(UserHeader);
