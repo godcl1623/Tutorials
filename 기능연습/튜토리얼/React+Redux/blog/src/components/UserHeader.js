@@ -1,14 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { fetchUser } from '../actions';
 
-const UserHeader = ({ fetchUser, userId, users }) => {
-  useEffect(() => {
-    fetchUser(userId);
-  }, [fetchUser, userId]);
-
-  const user = users.find(user => user.id === userId);
-
+const UserHeader = ({ user }) => {
   if (!user) {
     return null;
   }
@@ -20,8 +13,8 @@ const UserHeader = ({ fetchUser, userId, users }) => {
   );
 }
 
-const mapStateToProps = state => {
-  return { users: state.users };
+const mapStateToProps = (state, ownProps) => {
+  return { user: state.users.find(user => user.id === ownProps.userId) };
 };
 
-export default connect(mapStateToProps, { fetchUser })(UserHeader);
+export default connect(mapStateToProps)(UserHeader);
