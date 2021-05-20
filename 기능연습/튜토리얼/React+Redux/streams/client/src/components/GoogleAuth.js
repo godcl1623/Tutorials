@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { whenSignIn, whenSignOut } from '../components/actions';
 
-const GoogleAuth = () => {
+const GoogleAuth = ({ whenSignIn, whenSignOut }) => {
   const [isSignedIn, setIsSignedIn] = useState(null);
 
   useEffect(() => {
     window.gapi.load('client:auth2', () => {
-      const onAuthChange = () => {
-        const auth = window.gapi.auth2.getAuthInstance();
-        setIsSignedIn(auth.isSignedIn.get());
+      const onAuthChange = (isSignedIn) => {
+        if (isSignedIn) {
+          whenSignIn();
+        } else {
+          whenSignOut();
+        }
       };
 
       window.gapi.client.init({
@@ -19,7 +24,7 @@ const GoogleAuth = () => {
         auth.isSignedIn.listen(onAuthChange);
       });
     });
-  }, []);
+  }, [whenSignIn, whenSignOut]);
 
   const makeSignIn = () => {
     const auth = window.gapi.auth2.getAuthInstance();
@@ -67,4 +72,4 @@ const GoogleAuth = () => {
   );
 };
 
-export default GoogleAuth;
+export default connect(null, { whenSignIn, whenSignOut })(GoogleAuth);
