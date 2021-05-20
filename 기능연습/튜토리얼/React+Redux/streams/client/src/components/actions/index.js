@@ -6,6 +6,6 @@ export const whenSignIn = () => {
 
 export const whenSignOut = () => {
   return {
-    type: 'SIGN_Out'
+    type: 'SIGN_OUT'
   }
 }
