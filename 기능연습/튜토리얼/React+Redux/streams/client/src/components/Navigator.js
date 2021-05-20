@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import GoogleAuth from './GoogleAuth';
 
 const Navigator = () => {
   return (
@@ -12,6 +13,7 @@ const Navigator = () => {
           All Streams
         </Link>
       </div>
+      <GoogleAuth />
     </div>
   );
 };
