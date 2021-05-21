@@ -6,8 +6,9 @@ const GoogleAuth = ({ whenSignIn, whenSignOut, isSignedIn }) => {
   useEffect(() => {
     window.gapi.load('client:auth2', () => {
       const onAuthChange = (isSignedIn) => {
+        const auth = window.gapi.auth2.getAuthInstance();
         if (isSignedIn) {
-          whenSignIn();
+          whenSignIn(auth.currentUser.get().getId());
         } else {
           whenSignOut();
         }
@@ -26,7 +27,7 @@ const GoogleAuth = ({ whenSignIn, whenSignOut, isSignedIn }) => {
 
   const makeSignIn = () => {
     const auth = window.gapi.auth2.getAuthInstance();
-    auth.signIn(auth.currentUser.get().getId());
+    auth.signIn();
     console.log(`the user ${auth.currentUser.get().getId()} is signed in !`);
   };
 
