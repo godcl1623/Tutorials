@@ -4,7 +4,6 @@ import { whenSignIn, whenSignOut } from '../components/actions';
 
 const GoogleAuth = ({ whenSignIn, whenSignOut, isSignedIn }) => {
   useEffect(() => {
-    console.log(whenSignOut())
     window.gapi.load('client:auth2', () => {
       const onAuthChange = (isSignedIn) => {
         if (isSignedIn) {
@@ -27,14 +26,14 @@ const GoogleAuth = ({ whenSignIn, whenSignOut, isSignedIn }) => {
 
   const makeSignIn = () => {
     const auth = window.gapi.auth2.getAuthInstance();
-    auth.signIn();
-    console.log('the user is signed in !');
+    auth.signIn(auth.currentUser.get().getId());
+    console.log(`the user ${auth.currentUser.get().getId()} is signed in !`);
   };
 
   const makeSignOut = () => {
     const auth = window.gapi.auth2.getAuthInstance();
     auth.signOut();
-    console.log('the user is signed out !');
+    console.log(`the user ${auth.currentUser.get().getId()} is signed out !`);
   };
 
   const renderLoginBtn = () => {
