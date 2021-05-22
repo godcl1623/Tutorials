@@ -1,28 +1,29 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-const SteamCreate = ({ handleSubmit }) => {
-  const renderError = ({ error, touched }) => {
-    if (touched && error) {
-      return(
-        <div className="ui error message">
-          <div className="header">{ error }</div>
-        </div>
-      );
-    }
-  };
-
-  const renderInput = ({ input, Label, meta }) => {
-    const caseError = `field ${meta.error && meta.touched ? 'error' : ''}`
-    return (
-      <div className={ caseError } >
-        <label>{ Label }</label>
-        <input {...input} autoComplete="off" />
-        {renderError(meta)}
+const renderError = ({ error, touched }) => {
+  if (touched && error) {
+    return(
+      <div className="ui error message">
+        <div className="header">{ error }</div>
       </div>
     );
-  };
+  }
+};
 
+const renderInput = ({ input, Label, meta }) => {
+  const caseError = `field ${meta.error && meta.touched ? 'error' : ''}`
+  return (
+    <div className={ caseError } >
+      <label>{ Label }</label>
+      <input {...input} autoComplete="off" />
+      {renderError(meta)}
+    </div>
+  );
+};
+
+
+const SteamCreate = ({ handleSubmit }) => {
   const onSubmit = (formValues) => {
     console.log(formValues);
   };
