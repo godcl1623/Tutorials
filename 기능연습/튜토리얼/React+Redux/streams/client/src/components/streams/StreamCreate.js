@@ -1,11 +1,17 @@
 import React from 'react';
+import { Field, reduxForm } from 'redux-form';
 
 const SteamCreate = () => {
   return (
     <div>
-      <h1>SteamCreate</h1>
+      <form>
+        <Field name="title" />
+        <Field name="description" />
+      </form>
     </div>
   );
 };
 
-export default SteamCreate;
+export default reduxForm({
+  form: 'CreateStream'
+})(SteamCreate);
