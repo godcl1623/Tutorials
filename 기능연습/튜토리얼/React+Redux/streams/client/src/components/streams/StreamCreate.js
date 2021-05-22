@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-const SteamCreate = () => {
+const SteamCreate = ({ handleSubmit }) => {
   const renderInput = ({ input, Label }) => {
     return (
       <div className="field" >
@@ -11,11 +11,16 @@ const SteamCreate = () => {
     );
   };
 
+  const onSubmit = (formValues) => {
+    console.log(formValues);
+  };
+
   return (
     <div>
-      <form className="ui form">
+      <form className="ui form" onSubmit={handleSubmit(onSubmit)}>
         <Field name="title" component={renderInput} Label="Title: " />
         <Field name="description" component={renderInput} Label="Description: " />
+        <button className="ui button primary">Submit</button>
       </form>
     </div>
   );
