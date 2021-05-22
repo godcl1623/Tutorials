@@ -2,15 +2,20 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 const SteamCreate = () => {
-  const renderInput = ({ input }) => {
-    return <input { ...input }/>
+  const renderInput = ({ input, Label }) => {
+    return (
+      <div className="field" >
+        <label>{ Label }</label>
+        <input { ...input }/>
+      </div>
+    );
   };
 
   return (
     <div>
-      <form>
-        <Field name="title" component={renderInput} />
-        <Field name="description" component={renderInput} />
+      <form className="ui form">
+        <Field name="title" component={renderInput} Label="Title: " />
+        <Field name="description" component={renderInput} Label="Description: " />
       </form>
     </div>
   );
