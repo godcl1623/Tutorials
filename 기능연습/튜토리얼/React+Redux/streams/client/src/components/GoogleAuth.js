@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { whenSignIn, whenSignOut } from '../components/actions';
+import { whenSignIn, whenSignOut } from '../actions';
 
 const GoogleAuth = ({ whenSignIn, whenSignOut, isSignedIn }) => {
   useEffect(() => {

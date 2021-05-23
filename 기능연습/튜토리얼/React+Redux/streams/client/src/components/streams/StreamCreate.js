@@ -1,30 +1,33 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import { createStreams } from '../../actions';
 
-const SteamCreate = ({ handleSubmit }) => {
-  const renderError = ({ error, touched }) => {
-    if (touched && error) {
-      return(
-        <div className="ui error message">
-          <div className="header">{ error }</div>
-        </div>
-      );
-    }
-  };
-
-  const renderInput = ({ input, Label, meta }) => {
-    const caseError = `field ${meta.error && meta.touched ? 'error' : ''}`
-    return (
-      <div className={ caseError } >
-        <label>{ Label }</label>
-        <input {...input} autoComplete="off" />
-        {renderError(meta)}
+const renderError = ({ error, touched }) => {
+  if (touched && error) {
+    return(
+      <div className="ui error message">
+        <div className="header">{ error }</div>
       </div>
     );
-  };
+  }
+};
 
+const renderInput = ({ input, Label, meta }) => {
+  const caseError = `field ${meta.error && meta.touched ? 'error' : ''}`
+  return (
+    <div className={ caseError } >
+      <label>{ Label }</label>
+      <input {...input} autoComplete="off" />
+      {renderError(meta)}
+    </div>
+  );
+};
+
+
+const SteamCreate = ({ handleSubmit, createStreams }) => {
   const onSubmit = (formValues) => {
-    console.log(formValues);
+    createStreams(formValues);
   };
 
   return (
@@ -51,7 +54,9 @@ const validate = formValues => {
   return errors;
 }
 
-export default reduxForm({
+const formWrap = reduxForm({
   form: 'CreateStream',
   validate: validate
 })(SteamCreate);
+
+export default connect(null, { createStreams })(formWrap);
