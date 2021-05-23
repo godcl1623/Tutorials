@@ -25,9 +25,9 @@ const renderInput = ({ input, Label, meta }) => {
 };
 
 
-const SteamCreate = ({ handleSubmit }) => {
+const SteamCreate = ({ handleSubmit, createStreams }) => {
   const onSubmit = (formValues) => {
-    console.log(formValues);
+    createStreams(formValues);
   };
 
   return (
@@ -54,7 +54,9 @@ const validate = formValues => {
   return errors;
 }
 
-export default reduxForm({
+const formWrap = reduxForm({
   form: 'CreateStream',
   validate: validate
 })(SteamCreate);
+
+export default connect(null, { createStreams })(formWrap);
