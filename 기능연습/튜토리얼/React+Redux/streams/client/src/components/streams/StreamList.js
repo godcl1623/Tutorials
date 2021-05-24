@@ -2,15 +2,35 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchStreams } from '../../actions';
 
-const StreamList = ({ fetchStreams }) => {
+const StreamList = ({ fetchStreams, streams }) => {
   useEffect(() => {
     fetchStreams();
   }, [fetchStreams]);
+
+  const renderList = () => {
+    return streams.map(stream => {
+      return (
+        <div className="item" key={stream.id}>
+          <i className="large middle aligned icon camera" />
+          <div className="content">
+            {stream.title}
+            <div className="description">{stream.description}</div>
+          </div>
+        </div>
+      );
+    });
+  };
+
   return (
     <div>
-      <h1>StreamList</h1>
+      <h2>Streams List</h2>
+      <div className="ui celled list">{renderList()}</div>
     </div>
   );
 };
 
-export default connect(null, { fetchStreams })(StreamList);
+const mapStateToProps = state => {
+  return { streams: Object.values(state.streams) };
+}
+
+export default connect(mapStateToProps, { fetchStreams })(StreamList);
