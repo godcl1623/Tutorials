@@ -12,12 +12,12 @@ const StreamList = ({ fetchStreams, streams, currentUserId, isSignedIn }) => {
     if (stream.userId === currentUserId) {
       return (
         <div className="right floated content">
-          <button className="ui button primary">
+          <Link to={`/streams/edit/${stream.id}`} className="ui button primary">
             편집
-          </button>
-          <button className="ui button negative">
+          </Link>
+          <Link to={`/streams/delete/${stream.id}`} className="ui button negative">
             삭제
-          </button>
+          </Link>
         </div>
       );
     }
