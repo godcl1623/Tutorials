@@ -37,6 +37,7 @@
     "htmlparser2": "^6.1.0",
     "jsesc": "^2.5.2",
     "lodash": "^4.17.21",
+    "node-media-server": "^2.2.6",
     "source-map": "^0.5.7",
     "to-fast-properties": "^2.0.0",
     "type-fest": "^0.20.2"
