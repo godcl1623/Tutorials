@@ -1,0 +1,22 @@
+import React from 'react';
+import UserCreate from './UserCreate';
+// import LanguageContext from './contexts/LanguageContext';
+import { LanguageStore } from './contexts/LanguageContext';
+import ColorContext from './contexts/ColorContext';
+import LanguageSelector from './LanguageSelector';
+
+const App = () => {
+  return (
+    <div className="ui container">
+      <LanguageStore>
+        <LanguageSelector />
+        {/* {language} */}
+        <ColorContext.Provider value="red">
+          <UserCreate />
+        </ColorContext.Provider>
+      </LanguageStore>
+    </div>
+  );
+};
+
+export default App;
