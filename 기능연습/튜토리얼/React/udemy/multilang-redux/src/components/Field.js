@@ -5,7 +5,7 @@ const Field = () => {
   const context = useContext(LanguageContext);
 
   const labelText = () => {
-    switch(context) {
+    switch(context.language) {
       case 'korean':
         return '문장';
       case 'english':

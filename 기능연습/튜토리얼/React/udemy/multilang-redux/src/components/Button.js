@@ -1,13 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import LanguageContext from './contexts/LanguageContext';
 import ColorContext from './contexts/ColorContext';
 
 const Button = () => {
-  const context = useContext(LanguageContext);
-
-  const btnText = (value) => {
+  const btnText = (language) => {
     // switch(context) {
-    switch(value) {
+    switch(language) {
       case 'korean':
         return '제출';
       case 'english':
@@ -23,7 +21,7 @@ const Button = () => {
     return (
       <button className={`ui button ${color}`}>
         <LanguageContext.Consumer>
-          {value => btnText(value)}
+          {({ language }) => btnText(language)}
         </LanguageContext.Consumer>
       </button>
     );

@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import LanguageContext from './contexts/LanguageContext';
 
-const LanguageSelector = ({ setLanguage }) => {
+const LanguageSelector = () => {
+  const context = useContext(LanguageContext);
+
   return(
     <div>
       언어를 선택하세요:
       <i
         className="flag kr"
-        onClick={() => setLanguage('korean')}
+        onClick={() => context.setLanguage('korean')}
       />
       <i
         className="flag us"
-        onClick={() => setLanguage('english')}
+        onClick={() => context.setLanguage('english')}
       />
       <i
         className="flag jp"
-        onClick={() => setLanguage('japanese')}
+        onClick={() => context.setLanguage('japanese')}
       />
     </div>
   );
