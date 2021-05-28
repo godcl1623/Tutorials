@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import LanguageContext from './contexts/LanguageContext';
+import ColorContext from './contexts/ColorContext';
 
 const Button = () => {
   const context = useContext(LanguageContext);
@@ -18,12 +19,20 @@ const Button = () => {
     }
   };
 
+  const renderBtn = color => {
+    return (
+      <button className={`ui button ${color}`}>
+        <LanguageContext.Consumer>
+          {value => btnText(value)}
+        </LanguageContext.Consumer>
+      </button>
+    );
+  }
+
   return(
-    <button className="ui button primary">
-      <LanguageContext.Consumer>
-        {value => btnText(value)}
-      </LanguageContext.Consumer>
-    </button>
+    <ColorContext.Consumer>
+      {color => renderBtn(color)}
+    </ColorContext.Consumer>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import UserCreate from './UserCreate';
 import LanguageContext from './contexts/LanguageContext';
+import ColorContext from './contexts/ColorContext';
 
 const App = () => {
   const [ language, setLanguage ] = useState('korean');
@@ -22,7 +23,9 @@ const App = () => {
       />
       {/* {language} */}
       <LanguageContext.Provider value={language}>
+      <ColorContext.Provider value="red">
         <UserCreate />
+      </ColorContext.Provider>
       </LanguageContext.Provider>
     </div>
   );
