@@ -4,8 +4,9 @@ import LanguageContext from './contexts/LanguageContext';
 const Button = () => {
   const context = useContext(LanguageContext);
 
-  const btnText = () => {
-    switch(context) {
+  const btnText = (value) => {
+    // switch(context) {
+    switch(value) {
       case 'korean':
         return '제출';
       case 'english':
@@ -18,7 +19,11 @@ const Button = () => {
   };
 
   return(
-    <button className="ui button primary">{btnText()}</button>
+    <button className="ui button primary">
+      <LanguageContext.Consumer>
+        {value => btnText(value)}
+      </LanguageContext.Consumer>
+    </button>
   );
 };
 
