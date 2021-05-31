@@ -18,10 +18,19 @@ const app = http.createServer((request, response) => {
     const control = title => {
       const create = `<a href="/create">create</a>`;
       const update = `<a href="/update?id=${title}">update</a>`;
+      const deleteBtn = `
+        <form
+          action="/process_delete"
+          method="post"
+        >
+          <input type="hidden" name="id" value="${title}">
+          <input type="submit" name="delete" value="delete">
+        </form>
+      `;
       if (queryData.id === undefined) {
         return create;
       }
-      return `${create} ${update}`;
+      return `${create} ${update} ${deleteBtn}`;
     };
 
     const template = (title, list, article, control) => {
@@ -90,9 +99,8 @@ const app = http.createServer((request, response) => {
         const { title, description: desc } = post;
         fs.writeFile(`./src/${title}`, desc, 'utf8', error => {
           if (error) throw error;
-          // showResponse((302, {Location: `http://localhost:3000/?id=${title}`}), '');
           response.writeHead(302, {
-            Location: `http://localhost:3000/?id=${title}`
+            Location: `/?id=${title}`
           });
           response.end();
         });
@@ -114,7 +122,6 @@ const app = http.createServer((request, response) => {
           )
         );
       });
-      // showResponse(200, 'test');
     } else if (pathname === '/process_update') {
       let body = '';
       request.on('data', data => {
@@ -128,10 +135,26 @@ const app = http.createServer((request, response) => {
           fs.writeFile(`./src/${title}`, desc, 'utf8', error => {
             if (error) throw error;
             response.writeHead(302, {
-              Location: `http://localhost:3000/?id=${title}`
+              Location: `/?id=${title}`
             });
             response.end();
           });
+        });
+      });
+    } else if (pathname === '/process_delete') {
+      let body = '';
+      request.on('data', data => {
+        body += data;
+      });
+      request.on('end', () => {
+        const post = qs.parse(body);
+        const { id } = post;
+        fs.unlink(`./src/${id}`, error => {
+          if (error) throw error;
+          response.writeHead(302, {
+            Location: `/`
+          });
+          response.end();
         });
       });
     } else {
