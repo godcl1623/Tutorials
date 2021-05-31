@@ -2,6 +2,8 @@ const http = require('http');
 const fs = require('fs');
 const url = require('url');
 const qs = require('querystring');
+const path = require('path');
+const sanitizeHtml = require('sanitize-html');
 
 const app = http.createServer((request, response) => {
   const _url = request.url;
@@ -71,8 +73,11 @@ const app = http.createServer((request, response) => {
         const data = 'Hello, NodeJS !!';
         showResponse(200, template(title, list, article(title, data), control(title)));
       } else {
-        fs.readFile(`./src/${queryData.id}`, 'utf8', (err, data) => {
-          showResponse(200, template(title, list, article(title, data), control(title)));
+        const filteredId = path.parse(queryData.id).base;
+        fs.readFile(`./src/${filteredId}`, 'utf8', (err, data) => {
+          const sanitizedTitle = sanitizeHtml(title);
+          const sanitizedData = sanitizeHtml(data);
+          showResponse(200, template(sanitizedTitle, list, article(sanitizedTitle, sanitizedData), control(sanitizedTitle)));
         });
       }
     } else if (pathname === '/create') {
@@ -106,15 +111,18 @@ const app = http.createServer((request, response) => {
         });
       });
     } else if (pathname === '/update') {
-      fs.readFile(`./src/${queryData.id}`, 'utf8', (err, data) => {
+      const filteredId = path.parse(queryData.id).base;
+      fs.readFile(`./src/${filteredId}`, 'utf8', (err, data) => {
+        const sanitizedTitle = sanitizeHtml(title);
+        const sanitizedData = sanitizeHtml(data);
         showResponse(200, template(title, list, `
               <form
                 action="/process_update"
                 method="post"
               >
-                <input type="hidden" name="id" value="${title}">
-                <p><input type="text" name="title" placeholder="title" value="${title}"></p>
-                <p><textarea name="description" placeholder="description">${data}</textarea></p>
+                <input type="hidden" name="id" value="${sanitizedTitle}">
+                <p><input type="text" name="title" placeholder="title" value="${sanitizedTitle}"></p>
+                <p><textarea name="description" placeholder="description">${sanitizedData}</textarea></p>
                 <p><input type="submit"></p>
               </form>
             `,
@@ -149,7 +157,8 @@ const app = http.createServer((request, response) => {
       request.on('end', () => {
         const post = qs.parse(body);
         const { id } = post;
-        fs.unlink(`./src/${id}`, error => {
+        const filteredId = path.parse(id).base;
+        fs.unlink(`./src/${filteredId}`, error => {
           if (error) throw error;
           response.writeHead(302, {
             Location: `/`
