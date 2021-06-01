@@ -2,9 +2,9 @@ const http = require('http');
 const fs = require('fs');
 const url = require('url');
 const qs = require('querystring');
-const path = require('path');
+// const path = require('path');
 const mysql = require('mysql');
-const sanitizeHtml = require('sanitize-html');
+// const sanitizeHtml = require('sanitize-html');
 const tools = require('./custom_module/customTools');
 const pwd = require('./custom_module/pwd');
 
@@ -22,6 +22,7 @@ const app = http.createServer((request, response) => {
   const { pathname } = url.parse(_url, true);
   let title = queryData.id;
   fs.readdir('./src', (error, filelist) => {
+    if (error) throw error;
     const showResponse = (code, result) => {
       response.writeHead(code);
       response.end(result);
@@ -70,7 +71,7 @@ const app = http.createServer((request, response) => {
           tools.template(
             'create',
             tools.list(table),
-            tools.form('create', ''),
+            tools.form('create', '', '', ''),
             tools.control(title, queryData)
           )
         );
@@ -96,29 +97,21 @@ const app = http.createServer((request, response) => {
         );
       });
     } else if (pathname === '/update') {
-      const filteredId = path.parse(queryData.id).base;
-      fs.readFile(`./src/${filteredId}`, 'utf8', (err, data) => {
-        const sanitizedTitle = sanitizeHtml(title);
-        const sanitizedData = sanitizeHtml(data);
-        showResponse(
-          200,
-          tools.template(
-            title,
-            tools.list(filelist),
-            `
-              <form
-                action="/process_update"
-                method="post"
-              >
-                <input type="hidden" name="id" value="${sanitizedTitle}">
-                <p><input type="text" name="title" placeholder="title" value="${sanitizedTitle}"></p>
-                <p><textarea name="description" placeholder="description">${sanitizedData}</textarea></p>
-                <p><input type="submit"></p>
-              </form>
-            `,
-            ''
-          )
-        );
+      db.query('select * from topic', (error, table) => {
+        if (error) throw error;
+        db.query('select * from topic where id=?', [queryData.id], (error2, tabledata) => {
+          if (error2) throw error;
+          const { id, title, description: desc } = tabledata[0];
+          showResponse(
+            200,
+            tools.template(
+              'update',
+              tools.list(table),
+              tools.form('update', id, title, desc),
+              tools.control(title, queryData)
+            )
+          );
+        });
       });
     } else if (pathname === '/process_update') {
       let body = '';
@@ -128,16 +121,17 @@ const app = http.createServer((request, response) => {
       request.on('end', () => {
         const post = qs.parse(body);
         const { title, description: desc, id } = post;
-        fs.rename(`./src/${id}`, `./src/${title}`, error => {
-          if (error) throw error;
-          fs.writeFile(`./src/${title}`, desc, 'utf8', error => {
+        db.query(
+          'UPDATE topic SET title=?, description=? WHERE id=?',
+          [title, desc, id],
+          (error, modifiedData) => {
             if (error) throw error;
             response.writeHead(302, {
-              Location: `/?id=${title}`
+              Location: `/?id=${id}`
             });
             response.end();
-          });
-        });
+          }
+        );
       });
     } else if (pathname === '/process_delete') {
       let body = '';
@@ -147,11 +141,10 @@ const app = http.createServer((request, response) => {
       request.on('end', () => {
         const post = qs.parse(body);
         const { id } = post;
-        const filteredId = path.parse(id).base;
-        fs.unlink(`./src/${filteredId}`, error => {
+        db.query(`DELETE FROM topic WHERE id=?`, [id], (error, updatedTable) => {
           if (error) throw error;
           response.writeHead(302, {
-            Location: `/`
+            Location: '/'
           });
           response.end();
         });

@@ -52,15 +52,15 @@ module.exports = {
     `;
   },
 
-  form: (mode, value) => {
+  form: (mode, id, title, desc) => {
     return `
       <form
         action="/process_${mode}"
         method="post"
       >
-        <input type="hidden" name="id" value="${value}">
-        <p><input type="text" name="title" placeholder="title" value="${value}"></p>
-        <p><textarea name="description" placeholder="description">${value}</textarea></p>
+        <input type="hidden" name="id" value="${id}">
+        <p><input type="text" name="title" placeholder="title" value="${title}"></p>
+        <p><textarea name="description" placeholder="description">${desc}</textarea></p>
         <p><input type="submit"></p>
       </form>
     `;
