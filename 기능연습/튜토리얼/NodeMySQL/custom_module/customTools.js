@@ -50,5 +50,19 @@ module.exports = {
       <h2>${title}</h2>
       <p>${data}</p>
     `;
+  },
+
+  form: (mode, value) => {
+    return `
+      <form
+        action="/process_${mode}"
+        method="post"
+      >
+        <input type="hidden" name="id" value="${value}">
+        <p><input type="text" name="title" placeholder="title" value="${value}"></p>
+        <p><textarea name="description" placeholder="description">${value}</textarea></p>
+        <p><input type="submit"></p>
+      </form>
+    `;
   }
 };
