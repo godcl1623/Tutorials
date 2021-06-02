@@ -45,14 +45,15 @@ module.exports = {
     `;
   },
 
-  article: (title, data) => {
+  article: (title, data, author = '') => {
     return `
       <h2>${title}</h2>
       <p>${data}</p>
+      <p>${author !== '' ? `article written by ${author}` : ''}</p>
     `;
   },
 
-  form: (mode, id, title, desc) => {
+  form: (mode, id = '', title = '', desc = '', options = '') => {
     return `
       <form
         action="/process_${mode}"
@@ -61,8 +62,21 @@ module.exports = {
         <input type="hidden" name="id" value="${id}">
         <p><input type="text" name="title" placeholder="title" value="${title}"></p>
         <p><textarea name="description" placeholder="description">${desc}</textarea></p>
+        <p>
+          <select name="author">
+            ${options}
+          </select>
+        </p>
         <p><input type="submit"></p>
       </form>
     `;
+  },
+
+  option: array => {
+    return array.map(arrayElement => {
+      return `
+        <option value=${arrayElement.id}>${arrayElement.name}</option>
+      `;
+    });
   }
 };

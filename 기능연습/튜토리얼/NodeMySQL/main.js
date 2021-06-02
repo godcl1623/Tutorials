@@ -47,34 +47,41 @@ const app = http.createServer((request, response) => {
       } else {
         db.query('select * from topic', (error, table) => {
           if (error) throw error;
-          db.query('select * from topic where id=?', [queryData.id], (error2, tabledata) => {
-            if (error2) throw error;
-            title = tabledata[0].title;
-            const { id, description: desc } = tabledata[0];
-            showResponse(
-              200,
-              tools.template(
-                title,
-                tools.list(table),
-                tools.article(title, desc),
-                tools.control(id, queryData)
-              )
-            );
-          });
+          db.query(
+            'select * from topic left join author on topic.author_id=author.id where topic.id=?',
+            [queryData.id],
+            (error2, tabledata) => {
+              if (error2) throw error;
+              title = tabledata[0].title;
+              const { id, description: desc, name } = tabledata[0];
+              showResponse(
+                200,
+                tools.template(
+                  title,
+                  tools.list(table),
+                  tools.article(title, desc, name),
+                  tools.control(id, queryData)
+                )
+              );
+            }
+          );
         });
       }
     } else if (pathname === '/create') {
       db.query('select * from topic', (error, table) => {
-        if (error) throw error;
-        showResponse(
-          200,
-          tools.template(
-            'create',
-            tools.list(table),
-            tools.form('create', '', '', ''),
-            tools.control(title, queryData)
-          )
-        );
+        db.query('select * from author', (error, authors) => {
+          console.log(authors[0].id)
+          if (error) throw error;
+          showResponse(
+            200,
+            tools.template(
+              'create',
+              tools.list(table),
+              tools.form('create', '', '', '', tools.option(authors)),
+              tools.control(title, queryData)
+            )
+          );
+        });
       });
     } else if (pathname === '/process_create') {
       let body = '';
@@ -83,10 +90,11 @@ const app = http.createServer((request, response) => {
       });
       request.on('end', () => {
         const post = qs.parse(body);
-        const { title, description: desc } = post;
+        const { title, description: desc, author } = post;
+        // console.log(id);
         db.query(
           'insert into topic (title, description, created, author_id) values(?, ?, NOW(), ?)',
-          [title, desc, 1],
+          [title, desc, author],
           (error, table) => {
             if (error) throw error;
             response.writeHead(302, {
