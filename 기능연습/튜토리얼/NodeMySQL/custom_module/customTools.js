@@ -32,9 +32,16 @@ module.exports = {
         <head>
           <title>WEB1 - ${title}</title>
           <meta charset="utf-8">
+          <style>
+            table, table * {
+              padding: 5px;
+              border: 1px solid black;
+            }
+          </style>
         </head>
         <body>
           <h1><a href="/">WEB</a></h1>
+          <a href="/author">author</a>
           <ol>
             ${list}
           </ol>
@@ -45,28 +52,47 @@ module.exports = {
     `;
   },
 
-  article: (title, data, author = '') => {
+  article: (title = '', data = '', author = '', form = '') => {
     return `
       <h2>${title}</h2>
       <p>${data}</p>
       <p>${author !== '' ? `article written by ${author}` : ''}</p>
+      <p>${form}</p>
     `;
   },
 
   form: (mode, id = '', title = '', desc = '', options = '') => {
+    const dropdown = () => {
+      if (mode === 'add_author') return '';
+      return `
+        <p>
+          <select name="author">
+            ${options}
+          </select>
+        </p>
+      `;
+    };
+
     return `
       <form
         action="/process_${mode}"
         method="post"
       >
         <input type="hidden" name="id" value="${id}">
-        <p><input type="text" name="title" placeholder="title" value="${title}"></p>
-        <p><textarea name="description" placeholder="description">${desc}</textarea></p>
         <p>
-          <select name="author">
-            ${options}
-          </select>
+          <input
+            type="text"
+            name="title"
+            placeholder="${mode === 'add_author' ? 'name' : 'title'}"
+            value="${title}">
         </p>
+        <p>
+          <textarea
+            name="description"
+            placeholder="${mode === 'add_author' ? 'title' : 'description'}"
+          >${desc}</textarea>
+        </p>
+          ${dropdown()}
         <p><input type="submit"></p>
       </form>
     `;
@@ -83,5 +109,44 @@ module.exports = {
       `;
       })
       .join(' ');
+  },
+
+  table: table => {
+    const tablerow = table
+      .map(element => {
+        const deleteBtn = `
+      <form
+        action="/process_delete"
+        method="post"
+      >
+        <input type="hidden" name="id" value="${element.id}">
+        <input type="submit" name="delete" value="delete">
+      </form>
+    `;
+        return `
+        <tr>
+          <td>${element.name}</td>
+          <td>${element.profile}</td>
+          <td><a href="/update?id=${element.id}">update</a></td>
+          <td>${deleteBtn}</td>
+        </tr>
+      `;
+      })
+      .join(' ');
+    return `
+      <table>
+        <thead>
+          <tr>
+            <td>name</td>
+            <td>title</td>
+            <td>update</td>
+            <td>delete</td>
+          </tr>
+        </thead>
+        <tbody>
+          ${tablerow}
+        </tbody>
+      </table>
+    `;
   }
 };

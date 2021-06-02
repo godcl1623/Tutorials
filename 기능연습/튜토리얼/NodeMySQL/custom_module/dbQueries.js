@@ -1,6 +1,14 @@
 const qs = require('querystring');
 const db = require('./db');
 const tools = require('./customTools');
+const author = require('./author');
+
+exports.template = () => {
+  db.query('select * from topic', (error, table) => {
+    if (error) throw error;
+    return table;
+  });
+};
 
 exports.home = (response, queryData) => {
   db.query('select * from topic', (error, table) => {
