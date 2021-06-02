@@ -72,11 +72,16 @@ module.exports = {
     `;
   },
 
-  option: array => {
-    return array.map(arrayElement => {
-      return `
-        <option value=${arrayElement.id}>${arrayElement.name}</option>
+  option: (array, authorId) => {
+    return array
+      .map(arrayElement => {
+        return `
+        <option
+          value=${arrayElement.id}
+          ${arrayElement.id === authorId ? ' selected' : ''}
+        >${arrayElement.name}</option>
       `;
-    });
+      })
+      .join(' ');
   }
 };

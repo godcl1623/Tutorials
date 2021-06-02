@@ -53,14 +53,14 @@ const app = http.createServer((request, response) => {
             (error2, tabledata) => {
               if (error2) throw error;
               title = tabledata[0].title;
-              const { id, description: desc, name } = tabledata[0];
+              const { description: desc, name } = tabledata[0];
               showResponse(
                 200,
                 tools.template(
                   title,
                   tools.list(table),
                   tools.article(title, desc, name),
-                  tools.control(id, queryData)
+                  tools.control(queryData.id, queryData)
                 )
               );
             }
@@ -91,7 +91,6 @@ const app = http.createServer((request, response) => {
       request.on('end', () => {
         const post = qs.parse(body);
         const { title, description: desc, author } = post;
-        // console.log(id);
         db.query(
           'insert into topic (title, description, created, author_id) values(?, ?, NOW(), ?)',
           [title, desc, author],
@@ -109,16 +108,18 @@ const app = http.createServer((request, response) => {
         if (error) throw error;
         db.query('select * from topic where id=?', [queryData.id], (error2, tabledata) => {
           if (error2) throw error;
-          const { id, title, description: desc } = tabledata[0];
-          showResponse(
-            200,
-            tools.template(
-              'update',
-              tools.list(table),
-              tools.form('update', id, title, desc),
-              tools.control(title, queryData)
-            )
-          );
+          db.query('select * from author', (error3, authors) => {
+            const { id, title, description: desc, author_id } = tabledata[0];
+            showResponse(
+              200,
+              tools.template(
+                'update',
+                tools.list(table),
+                tools.form('update', id, title, desc, tools.option(authors, author_id)),
+                ''
+              )
+            );
+          });
         });
       });
     } else if (pathname === '/process_update') {
@@ -128,10 +129,10 @@ const app = http.createServer((request, response) => {
       });
       request.on('end', () => {
         const post = qs.parse(body);
-        const { title, description: desc, id } = post;
+        const { title, description: desc, id, author } = post;
         db.query(
-          'UPDATE topic SET title=?, description=? WHERE id=?',
-          [title, desc, id],
+          'UPDATE topic SET title=?, description=?, author_id=? WHERE id=?',
+          [title, desc, author, id],
           (error, modifiedData) => {
             if (error) throw error;
             response.writeHead(302, {
