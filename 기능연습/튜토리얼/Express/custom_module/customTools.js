@@ -4,7 +4,7 @@ module.exports = {
   list: array => {
     return array
       .map(element => {
-        return `<li><a href="/?id=${element.id}">${sanitizeHTML(element.title)}</a></li>`;
+        return `<li><a href="/page/${element.id}">${sanitizeHTML(element.title)}</a></li>`;
       })
       .join(' ');
   },

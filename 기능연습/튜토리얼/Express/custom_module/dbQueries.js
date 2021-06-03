@@ -10,13 +10,12 @@ exports.template = () => {
   });
 };
 
-exports.home = (response, queryData) => {
+exports.home = (res, queryData) => {
   db.query('select * from topic', (error, table) => {
     if (error) throw error;
     const title = 'Welcome';
     const data = 'Hello, NodeJS !!';
-    response.writeHead(200);
-    response.end(
+    res.send(
       tools.template(
         title,
         tools.list(table),
@@ -27,22 +26,21 @@ exports.home = (response, queryData) => {
   });
 };
 
-exports.specific = (response, queryData) => {
+exports.specific = (res, params) => {
   db.query('select * from topic', (error, table) => {
     if (error) throw error;
     db.query(
       'select * from topic left join author on topic.author_id=author.id where topic.id=?',
-      [queryData.id],
+      [params.id],
       (error2, tabledata) => {
         if (error2) throw error;
         const { title, description: desc, name } = tabledata[0];
-        response.writeHead(200);
-        response.end(
+        res.send(
           tools.template(
             title,
             tools.list(table),
             tools.article(sanitizeHTML(title), sanitizeHTML(desc), sanitizeHTML(name)),
-            tools.control(queryData.id, queryData)
+            tools.control(params.id, params)
           )
         );
       }
@@ -55,8 +53,7 @@ exports.createForm = (response, queryData) => {
     if (error) throw error;
     db.query('select * from author', (error2, authors) => {
       if (error2) throw error2;
-      response.writeHead(200);
-      response.end(
+      response.send(
         tools.template(
           'create',
           tools.list(table),
@@ -82,7 +79,7 @@ exports.createProcess = (request, response) => {
       (error, table) => {
         if (error) throw error;
         response.writeHead(302, {
-          Location: `/?id=${table.insertId}`
+          Location: `/page/${table.insertId}`
         });
         response.end();
       }

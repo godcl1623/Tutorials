@@ -1,19 +1,27 @@
-const http = require('http');
-const url = require('url');
+const express = require('express');
 const query = require('./custom_module/dbQueries');
-const author = require('./custom_module/author');
 
-const app = http.createServer((request, response) => {
-  const _url = request.url;
-  const { query: queryData, pathname } = url.parse(_url, true);
-  switch (pathname) {
-    case '/':
-      if (queryData.id === undefined) {
-        query.home(response, queryData);
-        break;
-      }
-      query.specific(response, queryData);
-      break;
+const app = express();
+
+app.get('/', (req, res) => {
+  query.home(res, req.params);
+});
+
+app.get('/page/:id', (req, res) => {
+  query.specific(res, req.params);
+});
+
+app.get('/create', (req, res) => {
+  query.createForm(res, req.params);
+});
+
+app.post('/process_create', (req, res) => {
+  query.createProcess(req, res);
+});
+
+app.listen(3000, () => console.log('Example app listening on port 3000 !'));
+
+/*
     case '/create':
       query.createForm(response, queryData);
       break;
@@ -50,3 +58,4 @@ const app = http.createServer((request, response) => {
   }
 });
 app.listen(3000);
+*/
