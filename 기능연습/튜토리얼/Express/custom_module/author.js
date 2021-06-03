@@ -9,8 +9,7 @@ exports.list = (response, queryData) => {
     db.query('select * from author', (error2, table) => {
       if (error2) throw error2;
       const title = 'Author List';
-      response.writeHead(200);
-      response.end(
+      response.send(
         tools.template(
           title,
           tools.list(topics),
@@ -48,8 +47,7 @@ exports.updateForm = (response, queryData) => {
       db.query('select * from author where id=?', [queryData.id], (error3, tabledata) => {
         if (error3) throw error3;
         const { id, name: title, profile: desc } = tabledata[0];
-        response.writeHead(200);
-        response.end(
+        response.send(
           tools.template(
             'Author Update',
             tools.list(table),

@@ -4,14 +4,14 @@ module.exports = {
   list: array => {
     return array
       .map(element => {
-        return `<li><a href="/?id=${element.id}">${sanitizeHTML(element.title)}</a></li>`;
+        return `<li><a href="/page/${element.id}">${sanitizeHTML(element.title)}</a></li>`;
       })
       .join(' ');
   },
 
   control: (title, condition) => {
     const create = `<a href="/create">create</a>`;
-    const update = `<a href="/update?id=${title}">update</a>`;
+    const update = `<a href="/update/${title}">update</a>`;
     const deleteBtn = `
       <form
         action="/process_delete"
@@ -131,7 +131,7 @@ module.exports = {
         <tr>
           <td>${sanitizeHTML(element.name)}</td>
           <td>${sanitizeHTML(element.profile)}</td>
-          <td><a href="/author_update?id=${element.id}">update</a></td>
+          <td><a href="/author_update/${element.id}">update</a></td>
           <td>${deleteBtn}</td>
         </tr>
       `;
