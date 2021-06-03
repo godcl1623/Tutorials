@@ -43,3 +43,48 @@ exports.addProcess = (request, response) => {
     );
   });
 };
+
+exports.updateForm = (response, queryData) => {
+  db.query('select * from topic', (error, table) => {
+    if (error) throw error;
+    db.query('select * from author', (error2, authors) => {
+      if (error2) throw error2;
+      db.query('select * from author where id=?', [queryData.id], (error3, tabledata) => {
+        if (error3) throw error3;
+        const { id, name: title, profile: desc } = tabledata[0];
+        console.log(id, title, desc);
+        response.writeHead(200);
+        response.end(
+          tools.template(
+            'Author Update',
+            tools.list(table),
+            tools.form('author_update', id, title, desc),
+            tools.control('Author Update', queryData)
+          )
+        );
+      });
+    });
+  });
+};
+
+exports.updateProcess = (request, response) => {
+  let body = '';
+  request.on('data', data => {
+    body += data;
+  });
+  request.on('end', () => {
+    const post = qs.parse(body);
+    const { id, title, description: desc } = post;
+    db.query(
+      'UPDATE author SET name=?, profile=? where id=?',
+      [title, desc, id],
+      (error, modifiedData) => {
+        if (error) throw error;
+        response.writeHead(302, {
+          Location: `/author`
+        });
+        response.end();
+      }
+    );
+  });
+};

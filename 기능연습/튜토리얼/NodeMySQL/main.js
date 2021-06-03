@@ -26,6 +26,10 @@ const app = http.createServer((request, response) => {
       return author.list(response, queryData);
     case '/process_add_author':
       return author.addProcess(request, response);
+    case '/author_update':
+      return author.updateForm(response, queryData);
+    case '/process_author_update':
+      return author.updateProcess(request, response);
     default:
       return query.notFound(response);
   }

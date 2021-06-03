@@ -63,7 +63,7 @@ module.exports = {
 
   form: (mode, id = '', title = '', desc = '', options = '') => {
     const dropdown = () => {
-      if (mode === 'add_author') return '';
+      if (mode === 'add_author' || mode === 'author_update') return '';
       return `
         <p>
           <select name="author">
@@ -83,13 +83,13 @@ module.exports = {
           <input
             type="text"
             name="title"
-            placeholder="${mode === 'add_author' ? 'name' : 'title'}"
+            placeholder="${mode === 'add_author' || mode === 'author_update' ? 'name' : 'title'}"
             value="${title}">
         </p>
         <p>
           <textarea
             name="description"
-            placeholder="${mode === 'add_author' ? 'title' : 'description'}"
+            placeholder="${mode === 'add_author' || mode === 'author_update' ? 'title' : 'description'}"
           >${desc}</textarea>
         </p>
           ${dropdown()}
@@ -127,7 +127,7 @@ module.exports = {
         <tr>
           <td>${element.name}</td>
           <td>${element.profile}</td>
-          <td><a href="/update?id=${element.id}">update</a></td>
+          <td><a href="/author_update?id=${element.id}">update</a></td>
           <td>${deleteBtn}</td>
         </tr>
       `;
