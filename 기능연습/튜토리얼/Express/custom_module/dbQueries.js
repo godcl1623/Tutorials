@@ -129,7 +129,7 @@ exports.updateProcess = (request, response) => {
       error => {
         if (error) throw error;
         response.writeHead(302, {
-          Location: `/?id=${id}`
+          Location: `/page/${id}`
         });
         response.end();
       }

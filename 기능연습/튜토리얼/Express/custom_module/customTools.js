@@ -11,7 +11,7 @@ module.exports = {
 
   control: (title, condition) => {
     const create = `<a href="/create">create</a>`;
-    const update = `<a href="/update?id=${title}">update</a>`;
+    const update = `<a href="/update/${title}">update</a>`;
     const deleteBtn = `
       <form
         action="/process_delete"

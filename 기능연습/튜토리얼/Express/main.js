@@ -19,24 +19,21 @@ app.post('/process_create', (req, res) => {
   query.createProcess(req, res);
 });
 
+app.get('/update/:id', (req, res) => {
+  query.updateForm(res, req.params);
+});
+
+app.post('/process_update', (req, res) => {
+  query.updateProcess(req, res);
+});
+
+app.post('/process_delete', (req, res) => {
+  query.erase(req, res);
+});
+
 app.listen(3000, () => console.log('Example app listening on port 3000 !'));
 
 /*
-    case '/create':
-      query.createForm(response, queryData);
-      break;
-    case '/process_create':
-      query.createProcess(request, response);
-      break;
-    case '/update':
-      query.updateForm(response, queryData);
-      break;
-    case '/process_update':
-      query.updateProcess(request, response);
-      break;
-    case '/process_delete':
-      query.erase(request, response);
-      break;
     case '/author':
       author.list(response, queryData);
       break;
