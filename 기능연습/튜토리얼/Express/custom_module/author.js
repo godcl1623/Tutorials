@@ -9,8 +9,7 @@ exports.list = (response, queryData) => {
     db.query('select * from author', (error2, table) => {
       if (error2) throw error2;
       const title = 'Author List';
-      response.writeHead(200);
-      response.end(
+      response.send(
         tools.template(
           title,
           tools.list(topics),

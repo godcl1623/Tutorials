@@ -1,5 +1,6 @@
 const express = require('express');
 const query = require('./custom_module/dbQueries');
+const author = require('./custom_module/author');
 
 const app = express();
 
@@ -31,12 +32,17 @@ app.post('/process_delete', (req, res) => {
   query.erase(req, res);
 });
 
+app.get('/author', (req, res) => {
+  author.list(res, req.params);
+});
+
+app.post('/process_add_author', (req, res) => {
+  author.addProcess(req, res);
+});
+
 app.listen(3000, () => console.log('Example app listening on port 3000 !'));
 
 /*
-    case '/author':
-      author.list(response, queryData);
-      break;
     case '/process_add_author':
       author.addProcess(request, response);
       break;
