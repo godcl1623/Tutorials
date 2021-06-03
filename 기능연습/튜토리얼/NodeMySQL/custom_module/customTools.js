@@ -1,8 +1,10 @@
+const sanitizeHTML = require('sanitize-html');
+
 module.exports = {
   list: array => {
     return array
       .map(element => {
-        return `<li><a href="/?id=${element.id}">${element.title}</a></li>`;
+        return `<li><a href="/?id=${element.id}">${sanitizeHTML(element.title)}</a></li>`;
       })
       .join(' ');
   },
@@ -84,7 +86,7 @@ module.exports = {
             type="text"
             name="title"
             placeholder="${mode === 'add_author' || mode === 'author_update' ? 'name' : 'title'}"
-            value="${title}">
+            value="${sanitizeHTML(title)}">
         </p>
         <p>
           <textarea
@@ -92,7 +94,7 @@ module.exports = {
             placeholder="${
               mode === 'add_author' || mode === 'author_update' ? 'title' : 'description'
             }"
-          >${desc}</textarea>
+          >${sanitizeHTML(desc)}</textarea>
         </p>
           ${dropdown()}
         <p><input type="submit"></p>
@@ -107,7 +109,7 @@ module.exports = {
         <option
           value=${arrayElement.id}
           ${arrayElement.id === authorId ? ' selected' : ''}
-        >${arrayElement.name}</option>
+        >${sanitizeHTML(arrayElement.name)}</option>
       `;
       })
       .join(' ');
@@ -127,8 +129,8 @@ module.exports = {
     `;
         return `
         <tr>
-          <td>${element.name}</td>
-          <td>${element.profile}</td>
+          <td>${sanitizeHTML(element.name)}</td>
+          <td>${sanitizeHTML(element.profile)}</td>
           <td><a href="/author_update?id=${element.id}">update</a></td>
           <td>${deleteBtn}</td>
         </tr>

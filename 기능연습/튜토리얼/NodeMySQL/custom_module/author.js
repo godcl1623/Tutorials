@@ -1,4 +1,5 @@
 const qs = require('querystring');
+const sanitizeHTML = require('sanitize-html');
 const db = require('./db');
 const tools = require('./customTools');
 
@@ -42,18 +43,26 @@ exports.addProcess = (request, response) => {
 exports.updateForm = (response, queryData) => {
   db.query('select * from topic', (error, table) => {
     if (error) throw error;
-    db.query('select * from author where id=?', [queryData.id], (error2, tabledata) => {
+    db.query('select * from author', (error2, authors) => {
       if (error2) throw error2;
-      const { id, name: title, profile: desc } = tabledata[0];
-      response.writeHead(200);
-      response.end(
-        tools.template(
-          'Author Update',
-          tools.list(table),
-          tools.form('author_update', id, title, desc),
-          tools.control('Author Update', queryData)
-        )
-      );
+      db.query('select * from author where id=?', [queryData.id], (error3, tabledata) => {
+        if (error3) throw error3;
+        const { id, name: title, profile: desc } = tabledata[0];
+        response.writeHead(200);
+        response.end(
+          tools.template(
+            'Author Update',
+            tools.list(table),
+            tools.article(
+              'Author List',
+              tools.table(authors),
+              '',
+              tools.form('author_update', id, sanitizeHTML(title), sanitizeHTML(desc))
+            ),
+            tools.control('Author Update', queryData)
+          )
+        );
+      });
     });
   });
 };

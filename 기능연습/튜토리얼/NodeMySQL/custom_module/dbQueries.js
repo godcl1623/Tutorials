@@ -1,4 +1,5 @@
 const qs = require('querystring');
+const sanitizeHTML = require('sanitize-html');
 const db = require('./db');
 const tools = require('./customTools');
 
@@ -40,7 +41,7 @@ exports.specific = (response, queryData) => {
           tools.template(
             title,
             tools.list(table),
-            tools.article(title, desc, name),
+            tools.article(sanitizeHTML(title), sanitizeHTML(desc), sanitizeHTML(name)),
             tools.control(queryData.id, queryData)
           )
         );
@@ -102,7 +103,13 @@ exports.updateForm = (response, queryData) => {
           tools.template(
             'update',
             tools.list(table),
-            tools.form('update', id, title, desc, tools.option(authors, authorId)),
+            tools.form(
+              'update',
+              id,
+              sanitizeHTML(title),
+              sanitizeHTML(desc),
+              tools.option(authors, authorId)
+            ),
             ''
           )
         );
