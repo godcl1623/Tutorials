@@ -47,8 +47,7 @@ exports.updateForm = (response, queryData) => {
       db.query('select * from author where id=?', [queryData.id], (error3, tabledata) => {
         if (error3) throw error3;
         const { id, name: title, profile: desc } = tabledata[0];
-        response.writeHead(200);
-        response.end(
+        response.send(
           tools.template(
             'Author Update',
             tools.list(table),

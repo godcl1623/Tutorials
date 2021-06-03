@@ -40,25 +40,22 @@ app.post('/process_add_author', (req, res) => {
   author.addProcess(req, res);
 });
 
+app.get('/author_update/:id', (req, res) => {
+  author.updateForm(res, req.params);
+});
+
+app.post('/process_author_update', (req, res) => {
+  author.updateProcess(req, res);
+});
+
+app.post('/process_author_delete', (req, res) => {
+  author.erase(req, res);
+});
+
 app.listen(3000, () => console.log('Example app listening on port 3000 !'));
 
 /*
-    case '/process_add_author':
-      author.addProcess(request, response);
-      break;
-    case '/author_update':
-      author.updateForm(response, queryData);
-      break;
-    case '/process_author_update':
-      author.updateProcess(request, response);
-      break;
-    case '/process_author_delete':
-      author.erase(request, response);
-      break;
-    default:
-      query.notFound(response);
-      break;
-  }
-});
-app.listen(3000);
+default:
+  query.notFound(response);
+  break;
 */

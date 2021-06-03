@@ -131,7 +131,7 @@ module.exports = {
         <tr>
           <td>${sanitizeHTML(element.name)}</td>
           <td>${sanitizeHTML(element.profile)}</td>
-          <td><a href="/author_update?id=${element.id}">update</a></td>
+          <td><a href="/author_update/${element.id}">update</a></td>
           <td>${deleteBtn}</td>
         </tr>
       `;
