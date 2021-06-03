@@ -9,31 +9,44 @@ const app = http.createServer((request, response) => {
   switch (pathname) {
     case '/':
       if (queryData.id === undefined) {
-        return query.home(response, queryData);
+        query.home(response, queryData);
+        break;
       }
-      return query.specific(response, queryData);
+      query.specific(response, queryData);
+      break;
     case '/create':
-      return query.createForm(response, queryData);
-    case 'process_create':
-      return query.createProcess(request, response);
+      query.createForm(response, queryData);
+      break;
+    case '/process_create':
+      query.createProcess(request, response);
+      break;
     case '/update':
-      return query.updateForm(response, queryData);
+      query.updateForm(response, queryData);
+      break;
     case '/process_update':
-      return query.updateProcess(request, response);
+      query.updateProcess(request, response);
+      break;
     case '/process_delete':
-      return query.erase(request, response);
+      query.erase(request, response);
+      break;
     case '/author':
-      return author.list(response, queryData);
+      author.list(response, queryData);
+      break;
     case '/process_add_author':
-      return author.addProcess(request, response);
+      author.addProcess(request, response);
+      break;
     case '/author_update':
-      return author.updateForm(response, queryData);
+      author.updateForm(response, queryData);
+      break;
     case '/process_author_update':
-      return author.updateProcess(request, response);
+      author.updateProcess(request, response);
+      break;
     case '/process_author_delete':
-      return author.erase(request, response);
+      author.erase(request, response);
+      break;
     default:
-      return query.notFound(response);
+      query.notFound(response);
+      break;
   }
 });
 app.listen(3000);
