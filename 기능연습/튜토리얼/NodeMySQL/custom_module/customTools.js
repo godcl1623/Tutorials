@@ -89,7 +89,9 @@ module.exports = {
         <p>
           <textarea
             name="description"
-            placeholder="${mode === 'add_author' || mode === 'author_update' ? 'title' : 'description'}"
+            placeholder="${
+              mode === 'add_author' || mode === 'author_update' ? 'title' : 'description'
+            }"
           >${desc}</textarea>
         </p>
           ${dropdown()}
@@ -116,7 +118,7 @@ module.exports = {
       .map(element => {
         const deleteBtn = `
       <form
-        action="/process_delete"
+        action="/process_author_delete"
         method="post"
       >
         <input type="hidden" name="id" value="${element.id}">

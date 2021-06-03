@@ -1,7 +1,6 @@
 const qs = require('querystring');
 const db = require('./db');
 const tools = require('./customTools');
-const author = require('./author');
 
 exports.template = () => {
   db.query('select * from topic', (error, table) => {
@@ -123,7 +122,7 @@ exports.updateProcess = (request, response) => {
     db.query(
       'UPDATE topic SET title=?, description=?, author_id=? WHERE id=?',
       [title, desc, author, id],
-      (error, modifiedData) => {
+      error => {
         if (error) throw error;
         response.writeHead(302, {
           Location: `/?id=${id}`
@@ -142,7 +141,7 @@ exports.erase = (request, response) => {
   request.on('end', () => {
     const post = qs.parse(body);
     const { id } = post;
-    db.query(`DELETE FROM topic WHERE id=?`, [id], (error, updatedTable) => {
+    db.query(`DELETE FROM topic WHERE id=?`, [id], error => {
       if (error) throw error;
       response.writeHead(302, {
         Location: '/'
@@ -155,4 +154,4 @@ exports.erase = (request, response) => {
 exports.notFound = response => {
   response.writeHead(404);
   response.end('404: Page Not Found');
-}
+};

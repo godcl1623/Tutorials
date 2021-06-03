@@ -30,6 +30,8 @@ const app = http.createServer((request, response) => {
       return author.updateForm(response, queryData);
     case '/process_author_update':
       return author.updateProcess(request, response);
+    case '/process_author_delete':
+      return author.erase(request, response);
     default:
       return query.notFound(response);
   }
