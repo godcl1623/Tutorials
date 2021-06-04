@@ -1,9 +1,11 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const compression = require('compression');
 const query = require('./custom_module/dbQueries');
 const author = require('./custom_module/author');
 
 const app = express();
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }), compression());
 
 app.get('/', (req, res) => {
   query.home(res, req.params);
