@@ -39,6 +39,11 @@ module.exports = {
               padding: 5px;
               border: 1px solid black;
             }
+            img {
+              margin-top: 10px;
+              width: 400px;
+              display: block;
+            }
           </style>
         </head>
         <body>
