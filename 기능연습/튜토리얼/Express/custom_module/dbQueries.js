@@ -1,10 +1,6 @@
-const express = require('express');
 const sanitizeHTML = require('sanitize-html');
 const db = require('./db');
 const tools = require('./customTools');
-
-const app = express();
-app.use(express.static('public'));
 
 exports.template = () => {
   db.query('select * from topic', (error, table) => {
@@ -40,6 +36,9 @@ exports.specific = (res, params) => {
       [params.id],
       (error2, tabledata) => {
         if (error2) throw error;
+        if (tabledata[0] === undefined) {
+          this.notFound(res);
+        }
         const { title, description: desc, name } = tabledata[0];
         res.send(
           tools.template(
@@ -94,6 +93,9 @@ exports.updateForm = (response, queryData) => {
       if (error2) throw error2;
       db.query('select * from author', (error3, authors) => {
         if (error3) throw error3;
+        if (tabledata[0] === undefined) {
+          this.notFound(response);
+        }
         const { id, title, description: desc, author_id: authorId } = tabledata[0];
         response.writeHead(200);
         response.end(
