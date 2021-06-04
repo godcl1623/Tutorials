@@ -1,4 +1,3 @@
-const qs = require('querystring');
 const sanitizeHTML = require('sanitize-html');
 const db = require('./db');
 const tools = require('./customTools');
@@ -66,25 +65,19 @@ exports.createForm = (response, queryData) => {
 };
 
 exports.createProcess = (request, response) => {
-  let body = '';
-  request.on('data', data => {
-    body += data;
-  });
-  request.on('end', () => {
-    const post = qs.parse(body);
-    const { title, description: desc, author } = post;
-    db.query(
-      'insert into topic (title, description, created, author_id) values(?, ?, NOW(), ?)',
-      [title, desc, author],
-      (error, table) => {
-        if (error) throw error;
-        response.writeHead(302, {
-          Location: `/page/${table.insertId}`
-        });
-        response.end();
-      }
-    );
-  });
+  const post = request.body;
+  const { title, description: desc, author } = post;
+  db.query(
+    'insert into topic (title, description, created, author_id) values(?, ?, NOW(), ?)',
+    [title, desc, author],
+    (error, table) => {
+      if (error) throw error;
+      response.writeHead(302, {
+        Location: `/page/${table.insertId}`
+      });
+      response.end();
+    }
+  );
 };
 
 exports.updateForm = (response, queryData) => {
@@ -116,42 +109,30 @@ exports.updateForm = (response, queryData) => {
 };
 
 exports.updateProcess = (request, response) => {
-  let body = '';
-  request.on('data', data => {
-    body += data;
-  });
-  request.on('end', () => {
-    const post = qs.parse(body);
-    const { title, description: desc, id, author } = post;
-    db.query(
-      'UPDATE topic SET title=?, description=?, author_id=? WHERE id=?',
-      [title, desc, author, id],
-      error => {
-        if (error) throw error;
-        response.writeHead(302, {
-          Location: `/page/${id}`
-        });
-        response.end();
-      }
-    );
-  });
+  const post = request.body;
+  const { title, description: desc, id, author } = post;
+  db.query(
+    'UPDATE topic SET title=?, description=?, author_id=? WHERE id=?',
+    [title, desc, author, id],
+    error => {
+      if (error) throw error;
+      response.writeHead(302, {
+        Location: `/page/${id}`
+      });
+      response.end();
+    }
+  );
 };
 
 exports.erase = (request, response) => {
-  let body = '';
-  request.on('data', data => {
-    body += data;
-  });
-  request.on('end', () => {
-    const post = qs.parse(body);
-    const { id } = post;
-    db.query(`DELETE FROM topic WHERE id=?`, [id], error => {
-      if (error) throw error;
-      response.writeHead(302, {
-        Location: '/'
-      });
-      response.end();
+  const post = request.body;
+  const { id } = post;
+  db.query(`DELETE FROM topic WHERE id=?`, [id], error => {
+    if (error) throw error;
+    response.writeHead(302, {
+      Location: '/'
     });
+    response.end();
   });
 };
 

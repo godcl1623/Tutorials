@@ -3,6 +3,7 @@ const query = require('./custom_module/dbQueries');
 const author = require('./custom_module/author');
 
 const app = express();
+app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
   query.home(res, req.params);
