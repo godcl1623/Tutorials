@@ -5,7 +5,7 @@ const query = require('./custom_module/dbQueries');
 const author = require('./custom_module/author');
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }), compression());
+app.use(bodyParser.urlencoded({ extended: false }), compression(), express.static('public'));
 
 app.get('/', (req, res) => {
   query.home(res, req.params);

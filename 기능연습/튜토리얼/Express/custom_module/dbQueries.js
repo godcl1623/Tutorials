@@ -1,6 +1,10 @@
+const express = require('express');
 const sanitizeHTML = require('sanitize-html');
 const db = require('./db');
 const tools = require('./customTools');
+
+const app = express();
+app.use(express.static('public'));
 
 exports.template = () => {
   db.query('select * from topic', (error, table) => {
@@ -13,7 +17,10 @@ exports.home = (res, queryData) => {
   db.query('select * from topic', (error, table) => {
     if (error) throw error;
     const title = 'Welcome';
-    const data = 'Hello, NodeJS !!';
+    const data = `
+      Hello, NodeJS !!
+      <img src="/img/hello.jpg">
+    `;
     res.send(
       tools.template(
         title,
