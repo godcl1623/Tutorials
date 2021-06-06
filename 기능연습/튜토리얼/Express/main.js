@@ -11,28 +11,28 @@ app.get('/', (req, res) => {
   query.home(res, req.params);
 });
 
-app.get('/page/:id', (req, res) => {
-  query.specific(res, req.params);
-});
-
-app.get('/create', (req, res) => {
+app.get('/topic/create', (req, res) => {
   query.createForm(res, req.params);
 });
 
-app.post('/process_create', (req, res) => {
+app.post('/topic/process_create', (req, res) => {
   query.createProcess(req, res);
 });
 
-app.get('/update/:id', (req, res) => {
+app.get('/topic/update/:id', (req, res) => {
   query.updateForm(res, req.params);
 });
 
-app.post('/process_update', (req, res) => {
+app.post('/topic/process_update', (req, res) => {
   query.updateProcess(req, res);
 });
 
-app.post('/process_delete', (req, res) => {
+app.post('/topic/process_delete', (req, res) => {
   query.erase(req, res);
+});
+
+app.get('/topic/:id', (req, res) => {
+  query.specific(res, req.params);
 });
 
 app.get('/author', (req, res) => {

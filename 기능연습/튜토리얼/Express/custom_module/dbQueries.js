@@ -79,7 +79,7 @@ exports.createProcess = (request, response) => {
     (error, table) => {
       if (error) throw error;
       response.writeHead(302, {
-        Location: `/page/${table.insertId}`
+        Location: `/topic/${table.insertId}`
       });
       response.end();
     }
@@ -126,7 +126,7 @@ exports.updateProcess = (request, response) => {
     error => {
       if (error) throw error;
       response.writeHead(302, {
-        Location: `/page/${id}`
+        Location: `/topic/${id}`
       });
       response.end();
     }
