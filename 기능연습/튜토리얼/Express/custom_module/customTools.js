@@ -4,17 +4,17 @@ module.exports = {
   list: array => {
     return array
       .map(element => {
-        return `<li><a href="/page/${element.id}">${sanitizeHTML(element.title)}</a></li>`;
+        return `<li><a href="/topic/${element.id}">${sanitizeHTML(element.title)}</a></li>`;
       })
       .join(' ');
   },
 
   control: (title, condition) => {
-    const create = `<a href="/create">create</a>`;
-    const update = `<a href="/update/${title}">update</a>`;
+    const create = `<a href="/topic/create">create</a>`;
+    const update = `<a href="/topic/update/${title}">update</a>`;
     const deleteBtn = `
       <form
-        action="/process_delete"
+        action="/topic/process_delete"
         method="post"
       >
         <input type="hidden" name="id" value="${title}">
@@ -82,7 +82,11 @@ module.exports = {
 
     return `
       <form
-        action="/process_${mode}"
+        action="${
+          mode === 'add_author' || mode === 'author_update'
+            ? `/process_${mode}`
+            : `/topic/process_${mode}`
+        }"
         method="post"
       >
         <input type="hidden" name="id" value="${id}">

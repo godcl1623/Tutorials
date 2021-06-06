@@ -1,4 +1,3 @@
-const qs = require('querystring');
 const sanitizeHTML = require('sanitize-html');
 const db = require('./db');
 const tools = require('./customTools');
@@ -22,20 +21,14 @@ exports.list = (response, queryData) => {
 };
 
 exports.addProcess = (request, response) => {
-  let body = '';
-  request.on('data', data => {
-    body += data;
-  });
-  request.on('end', () => {
-    const post = qs.parse(body);
-    const { title, description } = post;
-    db.query('insert into author (name, profile) values(?, ?)', [title, description], error => {
-      if (error) throw error;
-      response.writeHead(302, {
-        Location: `/author`
-      });
-      response.end();
+  const post = request.body;
+  const { title, description } = post;
+  db.query('insert into author (name, profile) values(?, ?)', [title, description], error => {
+    if (error) throw error;
+    response.writeHead(302, {
+      Location: `/author`
     });
+    response.end();
   });
 };
 
@@ -66,37 +59,25 @@ exports.updateForm = (response, queryData) => {
 };
 
 exports.updateProcess = (request, response) => {
-  let body = '';
-  request.on('data', data => {
-    body += data;
-  });
-  request.on('end', () => {
-    const post = qs.parse(body);
-    const { id, title, description: desc } = post;
-    db.query('UPDATE author SET name=?, profile=? where id=?', [title, desc, id], error => {
-      if (error) throw error;
-      response.writeHead(302, {
-        Location: `/author`
-      });
-      response.end();
+  const post = request.body;
+  const { id, title, description: desc } = post;
+  db.query('UPDATE author SET name=?, profile=? where id=?', [title, desc, id], error => {
+    if (error) throw error;
+    response.writeHead(302, {
+      Location: `/author`
     });
+    response.end();
   });
 };
 
 exports.erase = (request, response) => {
-  let body = '';
-  request.on('data', data => {
-    body += data;
-  });
-  request.on('end', () => {
-    const post = qs.parse(body);
-    const { id } = post;
-    db.query(`DELETE FROM author WHERE id=?`, [id], error => {
-      if (error) throw error;
-      response.writeHead(302, {
-        Location: '/author'
-      });
-      response.end();
+  const post = request.body;
+  const { id } = post;
+  db.query(`DELETE FROM author WHERE id=?`, [id], error => {
+    if (error) throw error;
+    response.writeHead(302, {
+      Location: '/author'
     });
+    response.end();
   });
 };
