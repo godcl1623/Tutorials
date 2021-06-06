@@ -1,5 +1,5 @@
 const express = require('express');
-const query = require('./dbQueries');
+const query = require('../dbQueries');
 
 const router = express.Router();
 
