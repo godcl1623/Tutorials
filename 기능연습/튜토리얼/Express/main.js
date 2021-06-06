@@ -1,12 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
+const helmet = require('helmet');
 const topicRouter = require('./custom_module/routes/topic');
 const indexRouter = require('./custom_module/routes/index');
 const authorRouter = require('./custom_module/routes/author_routes');
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }), compression(), express.static('public'));
+app.use(
+  bodyParser.urlencoded({ extended: false }),
+  compression(),
+  express.static('public'),
+  helmet()
+);
 
 app.use('/topic', topicRouter);
 
