@@ -1,4 +1,3 @@
-const qs = require('querystring');
 const sanitizeHTML = require('sanitize-html');
 const db = require('./db');
 const tools = require('./customTools');

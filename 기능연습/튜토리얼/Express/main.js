@@ -3,36 +3,14 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const query = require('./custom_module/dbQueries');
 const author = require('./custom_module/author');
+const topicRouter = require('./custom_module/topic');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }), compression(), express.static('public'));
+app.use('/topic', topicRouter);
 
 app.get('/', (req, res) => {
   query.home(res, req.params);
-});
-
-app.get('/topic/create', (req, res) => {
-  query.createForm(res, req.params);
-});
-
-app.post('/topic/process_create', (req, res) => {
-  query.createProcess(req, res);
-});
-
-app.get('/topic/update/:id', (req, res) => {
-  query.updateForm(res, req.params);
-});
-
-app.post('/topic/process_update', (req, res) => {
-  query.updateProcess(req, res);
-});
-
-app.post('/topic/process_delete', (req, res) => {
-  query.erase(req, res);
-});
-
-app.get('/topic/:id', (req, res) => {
-  query.specific(res, req.params);
 });
 
 app.get('/author', (req, res) => {
