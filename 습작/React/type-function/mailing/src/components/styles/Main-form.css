@@ -1,0 +1,143 @@
+/* MAIN - GLOBAL */
+.main form {
+  display: grid;
+  grid-template-areas:
+    "name-header name-input family-header family-input"
+    "gender-header gender-input . ."
+    "email-header email-input email-input email-input"
+    "source-header source-input source-input source-input"
+    "interest-header interest-header interest-header interest-header"
+    "interest-input interest-input interest-input interest-input"
+    "favorite-header favorite-input favorite-input favorite-input"
+    ". submit submit .";
+  position: relative;
+}
+
+.name-header, .family-header, .gender-header, .email-header, .source-header, .interest-header, .favorite-header {
+  margin-top: 20px;
+  width: 70px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.favorite-header {
+  width: 100px;
+}
+
+#name-input, #family-input, #gender-input, #email-input, #source-input, #interest-input, #favorite-input {
+  margin-top: 20px;
+  padding: 5px;
+  height: 30px;
+  /* font-size: 16px; */
+}
+
+.main .name-header {
+  grid-area: name-header;
+}
+
+.main #name-input {
+  grid-area: name-input;
+}
+
+.main .family-header {
+  grid-area: family-header;
+}
+
+.main #family-input {
+  grid-area: family-input;
+}
+
+.main .gender-header {
+  grid-area: gender-header;
+}
+
+.main #gender-input {
+  grid-area: gender-input;
+}
+
+.main .email-header {
+  grid-area: email-header;
+}
+
+.main #email-input {
+  grid-area: email-input;
+}
+
+.main #email-input #email-provider {
+  padding: 5px;
+  height: 30px;
+  width: 49.7%;
+}
+
+.main .source-header {
+  grid-area: source-header;
+}
+
+.main #source-input {
+  grid-area: source-input;
+}
+
+.main .interest-header {
+  grid-area: interest-header;
+}
+
+.main #interest-input {
+  grid-area: interest-input;
+  margin-top: 5px;
+  padding: 0 15px;
+  height: 100%;
+  display: grid;
+  grid-template-areas:
+    "box1 box2 box3 box4"
+    "box5 box6 box7 box8";
+  font-size: 14px;
+}
+
+.main #interest-input #selection-container {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main #interest-input #selection-container p {
+  margin-left: 5px;
+}
+
+.main .favorite-header {
+  grid-area: favorite-header;
+}
+
+.main #favorite-input {
+  grid-area: favorite-input;
+}
+
+.main #submit {
+  grid-area: submit;
+  margin-top: 30px;
+  border-color: transparent;
+  border-radius: 7px;
+  width: 50px;
+  height: 30px;
+  background-color: var(--form-background);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  cursor: pointer;
+}
+
+.main #submit:active {
+  filter: brightness(0.9);
+}
+
+.main #email-input {
+  padding: 0;
+}
+
+.main #email-input input {
+  width: 47%;
+  height: 100%;
+}
