@@ -6,7 +6,7 @@ const NewsList = () => {
   const [newsInput, setNewsInput] = useState('');
 
   const displayNews = event => {
-    this.newsList.forEach(element => {
+    newsList.forEach(element => {
       if (
         element.headline === event.target.textContent ||
         element.newsInput === event.target.textContent

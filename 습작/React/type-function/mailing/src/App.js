@@ -23,7 +23,7 @@ const App = () => {
   };
 
   const changeComponent = () => {
-    if (this.state.isManagementActive) {
+    if (isManagementActive) {
       return <Management />;
     } else {
       return <Main />;
