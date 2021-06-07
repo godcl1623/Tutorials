@@ -10,7 +10,7 @@ class Main extends Component {
     super(props);
     this.state={
       selectedClass: 'MainForm'
-    }
+    };
     this.scopeRef = React.createRef();
   }
 

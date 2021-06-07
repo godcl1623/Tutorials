@@ -1,9 +1,8 @@
 import React from 'react';
 
-class Navigation extends React.Component {
-  renderList = () => {
-    const menuList = this.props.menuData;
-    return menuList.map((menu, index) => {
+const Navigation = ({ menuData }) => {
+  const renderList = () => {
+    return menuData.map((menu, index) => {
       return (
         <li key={index} className={`list ${index}`}>
           <button className={menu.className}>{menu.textValue}</button>
@@ -12,15 +11,11 @@ class Navigation extends React.Component {
     });
   };
 
-  render() {
-    return(
-      <div className="navigation">
-        <ul className="main-menu">
-          {this.renderList()}
-        </ul>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="navigation">
+      <ul className="main-menu">{renderList()}</ul>
+    </div>
+  );
+};
 
 export default Navigation;

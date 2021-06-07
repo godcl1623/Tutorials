@@ -5,60 +5,39 @@ import './App.css';
 
 const App = () => {
   const [isManagementActive, setIsManagementActive] = useState(false);
+
   useEffect(() => {
     if (isManagementActive) {
       document.body.style.backgroundColor = 'var(--man-background)';
     } else {
       document.body.style.backgroundColor = 'var(--background)';
     }
-  }, []);
+  }, [isManagementActive]);
+
+  const toggleManage = () => {
+    if (!isManagementActive) {
+      setIsManagementActive(true);
+    } else {
+      setIsManagementActive(false);
+    }
+  };
+
+  const changeComponent = () => {
+    if (this.state.isManagementActive) {
+      return <Management />;
+    } else {
+      return <Main />;
+    }
+  };
+
+  return (
+    <div className="App_Root">
+      {changeComponent()}
+      <button id="management" onClick={toggleManage}>
+        관리
+      </button>
+    </div>
+  );
 };
-/*class App extends Component {
-  state={
-    isManagementActive: false
-  }
-
-  componentDidUpdate() {
-    if (this.state.isManagementActive) {
-      document.body.style.backgroundColor = 'var(--man-background)';
-    } else {
-      document.body.style.backgroundColor = 'var(--background)';
-    }
-  }
-
-  toggleManage = () => {
-    if (!this.state.isManagementActive) {
-      this.setState({
-        isManagementActive: true
-      })
-    } else {
-      this.setState({
-        isManagementActive: false
-      })
-    }
-  }
-
-  changeComponent = () => {
-    if (this.state.isManagementActive) {
-      return <Management />
-    } else {
-      return <Main />
-    }
-  }
-
-  render() {
-    return(
-      <div className="App_Root">
-        {this.changeComponent()}
-        <button
-          id="management"
-          onClick={this.toggleManage}
-        >
-          관리
-        </button>
-      </div>
-    );
-  }
-}*/
 
 export default App;
