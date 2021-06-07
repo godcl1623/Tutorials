@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Navigation from '../Navigation';
 import ManageMain from './Mana-start';
 import Statistics from './Mana-stats';
@@ -6,34 +6,37 @@ import WriteNews from './Mana-write';
 import NewsList from './Mana-list';
 import '../styles/Management.css';
 
-class Management extends Component {
-  state={selectedClass: 'ManageMain'}
+const Management = () => {
+  const [selectedClass, setSelectedClass] = useState('ManageMain');
 
-  whatIsThis = (event) => {
+  const whatIsThis = event => {
     const classValue = event.target.classList.value;
-    if (classValue === 'main' || classValue === '' ||
-      classValue === 'navigation' || classValue === 'main-menu') return;
-    this.setState({
-      selectedClass: event.target.classList.value
-    })
-  }
+    if (
+      classValue === 'main' ||
+      classValue === '' ||
+      classValue === 'navigation' ||
+      classValue === 'main-menu'
+    )
+      return;
+    setSelectedClass(event.target.classList.value);
+  };
 
-  changeComponent = () => {
-    switch (this.state.selectedClass) {
+  const changeComponent = () => {
+    switch (selectedClass) {
       case 'ManageMain':
-        return <ManageMain />
+        return <ManageMain />;
       case 'Statistics':
-        return <Statistics />
+        return <Statistics />;
       case 'WriteNews':
-        return <WriteNews />
+        return <WriteNews />;
       case 'NewsList':
-        return <NewsList />
+        return <NewsList />;
       default:
-        return <h1 className="loading">Loading...</h1>
+        return <h1 className="loading">Loading...</h1>;
     }
-  }
+  };
 
-  navigationMenu = [
+  const navigationMenu = [
     {
       className: 'ManageMain',
       textValue: 'Main Page'
@@ -52,16 +55,12 @@ class Management extends Component {
     }
   ];
 
-  render() {
-    return(
-      <div className="management" onClick={this.whatIsThis}>
-        <Navigation
-          menuData={this.navigationMenu}
-        />
-        {this.changeComponent()}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="management" onClick={whatIsThis}>
+      <Navigation menuData={navigationMenu} />
+      {changeComponent()}
+    </div>
+  );
+};
 
 export default Management;

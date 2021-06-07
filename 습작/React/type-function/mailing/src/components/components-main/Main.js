@@ -1,42 +1,40 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Navigation from '../Navigation';
 import MainForm from './Main-form';
 import MainStart from './Main-start';
 import MainAbout from './Main-about';
 import '../styles/Main.css';
 
-class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state={
-      selectedClass: 'MainForm'
-    };
-    this.scopeRef = React.createRef();
-  }
+const Main = () => {
+  const [selectedClass, setSelectedClass] = useState('MainForm');
+  // const scopeRef = useRef();
 
-  whatIsThis = (event) => {
+  const whatIsThis = event => {
     const classValue = event.target.classList.value;
-    if (classValue === 'main' || classValue === '' ||
-      classValue === 'navigation' || classValue === 'main-menu') return;
-    this.setState({
-      selectedClass: event.target.classList.value
-    })
-  }
+    if (
+      classValue === 'main' ||
+      classValue === '' ||
+      classValue === 'navigation' ||
+      classValue === 'main-menu'
+    )
+      return;
+    setSelectedClass(event.target.classList.value);
+  };
 
-  changeComponent = () => {
-    switch (this.state.selectedClass) {
+  const changeComponent = () => {
+    switch (selectedClass) {
       case 'MainStart':
-        return <MainStart />
+        return <MainStart />;
       case 'MainForm':
-        return <MainForm />
+        return <MainForm />;
       case 'MainAbout':
-        return <MainAbout />
+        return <MainAbout />;
       default:
-        return <h1 className="loading">Loading...</h1>
+        return <h1 className="loading">Loading...</h1>;
     }
-  }
+  };
 
-  navigationMenu = [
+  const navigationMenu = [
     {
       className: 'MainStart',
       textValue: 'Main Page'
@@ -49,18 +47,14 @@ class Main extends Component {
       className: 'MainForm',
       textValue: 'Sign-up'
     }
-  ]
+  ];
 
-  render() {
-    return(
-      <div className="main" onClick={this.whatIsThis} >
-        <Navigation
-          menuData={this.navigationMenu}
-        />
-        {this.changeComponent()}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="main" onClick={whatIsThis}>
+      <Navigation menuData={navigationMenu} />
+      {changeComponent()}
+    </div>
+  );
+};
 
 export default Main;
