@@ -1,45 +1,33 @@
-import React, { Component } from 'react'
+import React from 'react';
 
-class WriteNews extends Component {
-  sendToStorage = data => {
+const WriteNews = () => {
+  const sendToStorage = data => {
     const formValue = JSON.parse(localStorage.getItem('NewsList')) || [];
     formValue.push(data);
     localStorage.setItem('NewsList', JSON.stringify(formValue));
   };
 
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
     const data = new FormData(event.target);
     const value = {
       headline: data.get('headline'),
       newsInput: data.get('news-input')
-    }
-    this.sendToStorage(value);
+    };
+    sendToStorage(value);
     event.target.reset();
-  }
-  render() {
-    return(
-      <div className="management-write">
-        <h1>뉴스작성</h1>
-        <form
-          onSubmit={this.handleSubmit}
-        >
-          <input
-            type="text"
-            name="headline"
-            placeholder="제목"
-          />
-          <textarea
-            name="news-input"
-            placeholder="내용"
-          />
-          <input
-            type="submit"
-          />
-        </form>
-      </div>
-    );
-  }
-}
+  };
+
+  return (
+    <div className="management-write">
+      <h1>뉴스작성</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="headline" placeholder="제목" />
+        <textarea name="news-input" placeholder="내용" />
+        <input type="submit" />
+      </form>
+    </div>
+  );
+};
 
 export default WriteNews;
