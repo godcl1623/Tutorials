@@ -11,7 +11,15 @@ const Navigation = ({ menuData }) => {
           case 'MainForm':
             return 'form';
           case 'MainStart':
-            return 'main';
+            return '';
+          case 'ManageMain':
+            return '';
+          case 'Statistics':
+            return 'stats';
+          case 'WriteNews':
+            return 'write';
+          case 'NewsList':
+            return 'lists';
           default:
             return '';
         }

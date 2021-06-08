@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import Navigation from '../Navigation';
 import ManageMain from './Mana-start';
 import Statistics from './Mana-stats';
@@ -7,35 +8,6 @@ import NewsList from './Mana-list';
 import '../styles/Management.css';
 
 const Management = () => {
-  const [selectedClass, setSelectedClass] = useState('ManageMain');
-
-  const whatIsThis = event => {
-    const classValue = event.target.classList.value;
-    if (
-      classValue === 'main' ||
-      classValue === '' ||
-      classValue === 'navigation' ||
-      classValue === 'main-menu'
-    )
-      return;
-    setSelectedClass(event.target.classList.value);
-  };
-
-  const changeComponent = () => {
-    switch (selectedClass) {
-      case 'ManageMain':
-        return <ManageMain />;
-      case 'Statistics':
-        return <Statistics />;
-      case 'WriteNews':
-        return <WriteNews />;
-      case 'NewsList':
-        return <NewsList />;
-      default:
-        return <h1 className="loading">Loading...</h1>;
-    }
-  };
-
   const navigationMenu = [
     {
       className: 'ManageMain',
@@ -56,9 +28,14 @@ const Management = () => {
   ];
 
   return (
-    <div className="management" onClick={whatIsThis}>
-      <Navigation menuData={navigationMenu} />
-      {changeComponent()}
+    <div className="management">
+      <BrowserRouter>
+        <Navigation menuData={navigationMenu} />
+        <Route path="/" exact component={ManageMain} />
+        <Route path="/stats" exact component={Statistics} />
+        <Route path="/write" exact component={WriteNews} />
+        <Route path="/lists" exact component={NewsList} />
+      </BrowserRouter>
     </div>
   );
 };
