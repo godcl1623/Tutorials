@@ -1,0 +1,66 @@
+/* Management - GLOBAL */
+.management, .management * {
+  border: 1px solid black;
+}
+
+.management {
+  margin: 50px auto;
+  border-radius: 10px;
+  padding: 0 20px;
+  width: 600px;
+  height: 450px;
+  background-color: var(--form-background);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.management .navigation {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding: 20px;
+  height: 250px;
+  background-color: var(--form-background);
+  position: absolute;
+  top: 50%;
+  left: -160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-50%);
+}
+
+.management .navigation ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.management .navigation ul li {
+  margin: 10px;
+}
+
+.management .navigation ul li button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100px;
+  background: #efefef;
+  cursor: pointer;
+}
+
+.management .navigation ul li button:active {
+  filter: brightness(90%);
+}
+
+.management .loading,
+.management .management-start,
+.management .management-stat,
+.management .management-write,
+.management .management-list {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
