@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { isManagementActive, mainCurrentPage, manaCurrentPage } from './actions';
+import * as actions from './actions';
 import Main from './components/components-main/Main';
 import Management from './components/components-mana/Management';
 import './App.css';
@@ -56,7 +56,7 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  activateMana: isManagementActive,
-  makeMain: mainCurrentPage,
-  makeMana: manaCurrentPage
+  activateMana: actions.isManagementActive,
+  makeMain: actions.mainCurrentPage,
+  makeMana: actions.manaCurrentPage
 })(App);
