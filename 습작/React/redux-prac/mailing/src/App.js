@@ -24,11 +24,8 @@ const App = () => {
   };
 
   const changeComponent = () => {
-    if (isManagementActive) {
-      return <Route path="/" component={Management} />;
-    } else {
-      return <Route path="/" component={Main} />;
-    }
+    if (isManagementActive) return <Route path="/" component={Management} />;
+    return <Route path="/" component={Main} />;
   };
 
   return (
