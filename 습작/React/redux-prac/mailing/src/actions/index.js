@@ -5,9 +5,16 @@ export const isManagementActive = boolean => {
   };
 };
 
-export const currentPage = selected => {
+export const mainCurrentPage = selected => {
   return {
-    type: 'CURRENT_PAGE',
+    type: 'CURRENT_PAGE_MAIN',
+    payload: selected
+  };
+};
+
+export const manaCurrentPage = selected => {
+  return {
+    type: 'CURRENT_PAGE_MANA',
     payload: selected
   };
 };

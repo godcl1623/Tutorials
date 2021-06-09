@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { isManagementActive } from './actions';
 import Main from './components/components-main/Main';
 import Management from './components/components-mana/Management';
 import './App.css';
 
-const App = () => {
-  const [isManagementActive, setIsManagementActive] = useState(false);
-
+const App = ({ appState, activateMana }) => {
   useEffect(() => {
-    if (isManagementActive) {
+    if (appState) {
       document.body.style.backgroundColor = 'var(--man-background)';
     } else {
       document.body.style.backgroundColor = 'var(--background)';
     }
-  }, [isManagementActive]);
+  }, [appState]);
 
   const toggleManage = () => {
-    if (!isManagementActive) {
-      setIsManagementActive(true);
+    if (!appState) {
+      activateMana(true);
     } else {
-      setIsManagementActive(false);
+      activateMana(false);
     }
   };
 
   const changeComponent = () => {
-    if (isManagementActive) return <Route path="/" component={Management} />;
+    if (appState) return <Route path="/" component={Management} />;
     return <Route path="/" component={Main} />;
   };
 
@@ -40,4 +40,10 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = state => {
+  return { appState: state.appState };
+};
+
+export default connect(mapStateToProps, {
+  activateMana: isManagementActive
+})(App);
