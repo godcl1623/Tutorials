@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { manaCurrentPage } from '../../actions';
 import Navigation from '../Navigation';
 import ManageMain from './Mana-start';
 import Statistics from './Mana-stats';
@@ -7,7 +9,7 @@ import WriteNews from './Mana-write';
 import NewsList from './Mana-list';
 import '../styles/Management.css';
 
-const Management = () => {
+const Management = ({ manaState, makeCurrentPage }) => {
   const navigationMenu = [
     {
       className: 'ManageMain',
@@ -27,17 +29,42 @@ const Management = () => {
     }
   ];
 
+  const whatIsThis = event => {
+    const target = event.target.className;
+    const menus = navigationMenu.map(element => element.className);
+    if (!menus.includes(target)) return;
+    makeCurrentPage(target);
+  };
+
+  const distributor = () => {
+    switch (manaState) {
+      case 'ManageMain':
+        return <Route path="/" exact component={ManageMain} />;
+      case 'Statistics':
+        return <Route path="/stats" exact component={Statistics} />;
+      case 'WriteNews':
+        return <Route path="/write" exact component={WriteNews} />;
+      case 'NewsList':
+        return <Route path="/lists" exact component={NewsList} />;
+      default:
+        break;
+    }
+  };
+
   return (
-    <div className="management">
+    <div className="management" onClick={whatIsThis}>
       <BrowserRouter>
         <Navigation menuData={navigationMenu} />
-        <Route path="/" exact component={ManageMain} />
-        <Route path="/stats" exact component={Statistics} />
-        <Route path="/write" exact component={WriteNews} />
-        <Route path="/lists" exact component={NewsList} />
+        {distributor()}
       </BrowserRouter>
     </div>
   );
 };
 
-export default Management;
+const mapStateToProps = state => {
+  return { manaState: state.manaState };
+};
+
+export default connect(mapStateToProps, {
+  makeCurrentPage: manaCurrentPage
+})(Management);

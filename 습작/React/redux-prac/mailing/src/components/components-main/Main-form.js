@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import '../styles/Main-form.css';
 
 const MainForm = () => {
   useEffect(() => {
     const select = document.querySelectorAll('select');
-    select.forEach(element => (element.value = ''));
+    select.forEach(element => {
+      element.value = '';
+    });
   }, []);
 
   const selections = () => {

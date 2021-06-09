@@ -71,8 +71,8 @@ const Statistics = () => {
   const displayList = target => {
     return target.map((element, i) => {
       return (
-        <tbody>
-          <tr key={i}>
+        <tbody key={i}>
+          <tr>
             <td>
               {element.family}
               {element.name}

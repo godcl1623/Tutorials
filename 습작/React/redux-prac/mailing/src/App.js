@@ -1,34 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from './actions';
 import Main from './components/components-main/Main';
 import Management from './components/components-mana/Management';
 import './App.css';
 
-const App = () => {
-  const [isManagementActive, setIsManagementActive] = useState(false);
-
+const App = ({ appState, activateMana, makeMain, makeMana, mainState, manaState }) => {
   useEffect(() => {
-    if (isManagementActive) {
+    if (appState) {
       document.body.style.backgroundColor = 'var(--man-background)';
     } else {
       document.body.style.backgroundColor = 'var(--background)';
     }
-  }, [isManagementActive]);
+  }, [appState]);
+
+  const stateChanger = () => {
+    if (mainState !== 'MainStart') makeMain('MainStart');
+    if (manaState !== 'ManageMain') makeMana('ManageMain');
+  };
 
   const toggleManage = () => {
-    if (!isManagementActive) {
-      setIsManagementActive(true);
+    if (!appState) {
+      activateMana(true);
+      stateChanger();
     } else {
-      setIsManagementActive(false);
+      activateMana(false);
+      stateChanger();
     }
   };
 
   const changeComponent = () => {
-    if (isManagementActive) {
-      return <Route path="/" component={Management} />;
-    } else {
-      return <Route path="/" component={Main} />;
-    }
+    if (appState) return <Route path="/" component={Management} />;
+    return <Route path="/" component={Main} />;
   };
 
   return (
@@ -43,4 +47,16 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    appState: state.appState,
+    mainState: state.mainState,
+    manaState: state.manaState
+  };
+};
+
+export default connect(mapStateToProps, {
+  activateMana: actions.isManagementActive,
+  makeMain: actions.mainCurrentPage,
+  makeMana: actions.manaCurrentPage
+})(App);
