@@ -15,6 +15,19 @@ const Main = () => {
     setCurrentPage(target);
   };
 
+  const distributor = () => {
+    switch (currentPage) {
+      case 'MainStart':
+        return <Route path="/" exact component={MainStart} />;
+      case 'MainAbout':
+        return <Route path="/about" exact component={MainAbout} />;
+      case 'MainForm':
+        return <Route path="/form" exact component={MainForm} />;
+      default:
+        break;
+    }
+  };
+
   const navigationMenu = [
     {
       className: 'MainStart',
@@ -34,9 +47,7 @@ const Main = () => {
     <div className="main" onClick={whatIsThis}>
       <BrowserRouter>
         <Navigation menuData={navigationMenu} />
-        <Route path="/" exact component={MainStart} />
-        <Route path="/form" exact component={MainForm} />
-        <Route path="/about" exact component={MainAbout} />
+        {distributor()}
       </BrowserRouter>
     </div>
   );
