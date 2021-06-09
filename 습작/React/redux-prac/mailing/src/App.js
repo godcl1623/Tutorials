@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { isManagementActive } from './actions';
+import { isManagementActive, mainCurrentPage, manaCurrentPage } from './actions';
 import Main from './components/components-main/Main';
 import Management from './components/components-mana/Management';
 import './App.css';
 
-const App = ({ appState, activateMana }) => {
+const App = ({ appState, activateMana, makeMain, makeMana, mainState, manaState }) => {
   useEffect(() => {
     if (appState) {
       document.body.style.backgroundColor = 'var(--man-background)';
@@ -15,11 +15,18 @@ const App = ({ appState, activateMana }) => {
     }
   }, [appState]);
 
+  const stateChanger = () => {
+    if (mainState !== 'MainStart') makeMain('MainStart');
+    if (manaState !== 'ManageMain') makeMana('ManageMain');
+  };
+
   const toggleManage = () => {
     if (!appState) {
       activateMana(true);
+      stateChanger();
     } else {
       activateMana(false);
+      stateChanger();
     }
   };
 
@@ -41,9 +48,15 @@ const App = ({ appState, activateMana }) => {
 };
 
 const mapStateToProps = state => {
-  return { appState: state.appState };
+  return {
+    appState: state.appState,
+    mainState: state.mainState,
+    manaState: state.manaState
+  };
 };
 
 export default connect(mapStateToProps, {
-  activateMana: isManagementActive
+  activateMana: isManagementActive,
+  makeMain: mainCurrentPage,
+  makeMana: manaCurrentPage
 })(App);
