@@ -7,11 +7,7 @@ import Management from './components/components-mana/Management';
 import './App.css';
 
 const App = ({ appState, activateMana, makeMain, makeMana, mainState, manaState }) => {
-  const [testData, setTestData] = useState('');
   useEffect(() => {
-    fetch('http://localhost:3001')
-      .then(res => res.json())
-      .then(data => console.log(data));
     if (appState) {
       document.body.style.backgroundColor = 'var(--man-background)';
     } else {
