@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from './actions';
@@ -7,7 +7,11 @@ import Management from './components/components-mana/Management';
 import './App.css';
 
 const App = ({ appState, activateMana, makeMain, makeMana, mainState, manaState }) => {
+  const [testData, setTestData] = useState('');
   useEffect(() => {
+    fetch('http://localhost:3001')
+      .then(res => res.json())
+      .then(data => console.log(data));
     if (appState) {
       document.body.style.backgroundColor = 'var(--man-background)';
     } else {
