@@ -18,3 +18,17 @@ export const manaCurrentPage = selected => {
     payload: selected
   };
 };
+
+export const memberlist = array => {
+  return {
+    type: 'MEMBER_LIST',
+    payload: [...array]
+  };
+};
+
+export const newslist = array => {
+  return {
+    type: 'NEWS_LIST',
+    payload: [...array]
+  };
+};

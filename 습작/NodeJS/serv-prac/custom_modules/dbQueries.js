@@ -40,6 +40,14 @@ module.exports = {
     });
   },
 
+  sendMemberList(req, res, next) {
+    db.query('select * from memberform', (error, table) => {
+      if (error) next(error);
+      if (table.length === 0) this.notFound(req, res);
+      res.json(table);
+    });
+  },
+
   individual(req, res) {
     db.query('select * from memberform where id=?', [req.id], (error, member) => {
       if (error) throw error;
@@ -72,6 +80,14 @@ module.exports = {
     });
   },
 
+  sendIndividual(req, res, next) {
+    db.query('select * from memberform where id=?', [req.id], (error, member) => {
+      if (error) next(error);
+      if (member.length === 0) this.notFound(req, res);
+      res.json(member);
+    });
+  },
+
   newsList(req, res) {
     db.query('select * from newslist', (error, table) => {
       if (error) throw error;
@@ -90,8 +106,16 @@ module.exports = {
     });
   },
 
-  eachNews(req, res) {
-    db.query('select * from newslist where id=?', [req.id], (error, news, next) => {
+  sendNewsList(req, res, next) {
+    db.query('select * from newslist', (error, table) => {
+      if (error) next(error);
+      if (table.length === 0) this.notFound(req, res);
+      res.json(table);
+    });
+  },
+
+  eachNews(req, res, next) {
+    db.query('select * from newslist where id=?', [req.id], (error, news) => {
       if (error) next(error);
       if (news.length === 0) this.notFound(req, res);
       const newNews = [...news];
@@ -110,6 +134,14 @@ module.exports = {
         })
         .join(' ');
       res.send(arrangedData);
+    });
+  },
+
+  sendEachNews(req, res, next) {
+    db.query('select * from newslist where id=?', [req.id], (error, news) => {
+      if (error) next(error);
+      if (news.length === 0) this.notFound(req, res);
+      res.json(news);
     });
   },
 

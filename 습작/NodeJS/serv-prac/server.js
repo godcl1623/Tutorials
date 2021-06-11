@@ -10,13 +10,22 @@ const port = 3001;
 app.use(cors(), bodyParser.json(), compression(), helmet());
 
 app.get('/', (req, res) => res.send(query.menu()));
+// app.get('/test', (req, res) => res.json('testValue'));
 
 app.get('/member', (req, res) => {
   query.memberList(req, res);
 });
 
+app.get('/member/get', (req, res, next) => {
+  query.sendMemberList(req, res, next);
+});
+
 app.get('/member/:id', (req, res) => {
   query.individual(req.params, res);
+});
+
+app.get('/member/get/:id', (req, res, next) => {
+  query.sendIndividual(req.params, res, next);
 });
 
 app.get('/news', (req, res) => {
@@ -25,6 +34,14 @@ app.get('/news', (req, res) => {
 
 app.get('/news/:id', (req, res) => {
   query.eachNews(req.params, res);
+});
+
+app.get('/news/get', (req, res, next) => {
+  query.sendNewsList(req, res, next);
+});
+
+app.get('/news/get/:id', (req, res, next) => {
+  query.sendEachNews(req, res, next);
 });
 
 app.use((req, res) => {
