@@ -47,7 +47,7 @@ const Statistics = ({ members, memberlist }) => {
   const favorite = () => {
     const favorite = members
       .map(element => {
-        return element.favorite;
+        return element.favorite_time;
       })
       .reduce((obj, item) => {
         if (!obj[item]) {

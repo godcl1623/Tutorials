@@ -145,6 +145,19 @@ module.exports = {
     });
   },
 
+  addMember(req, res, next) {
+    const post = req.body;
+    const { name, family, gender, email, source, interest, favorite } = post;
+    db.query(
+      'insert into memberform (name, family, gender, email, source, interests, favorite_time) values(?, ?, ?, ?, ?, ?, ?)',
+      [name, family, gender, email, source, interest, favorite],
+      (error, table) => {
+        if (error) next(error);
+        res.send(table);
+      }
+    );
+  },
+
   notFound(req, res) {
     res.status(404).send('Page Not Found !');
   }

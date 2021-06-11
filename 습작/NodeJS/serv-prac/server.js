@@ -7,10 +7,14 @@ const query = require('./custom_modules/dbQueries');
 
 const app = express();
 const port = 3001;
-app.use(cors(), bodyParser.json(), compression(), helmet());
+app.use(cors(), compression(), helmet());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 
-app.get('/', (req, res) => res.send(query.menu()));
-// app.get('/test', (req, res) => res.json('testValue'));
+app.get('/', (req, res) => {
+  res.send(query.menu());
+});
+// app.post('/test', (req, res) => console.log(req.body));
 
 app.get('/member', (req, res) => {
   query.memberList(req, res);
@@ -26,6 +30,10 @@ app.get('/member/:id', (req, res) => {
 
 app.get('/member/get/:id', (req, res, next) => {
   query.sendIndividual(req.params, res, next);
+});
+
+app.post('/member/add', (req, res, next) => {
+  query.addMember(req, res, next);
 });
 
 app.get('/news', (req, res) => {

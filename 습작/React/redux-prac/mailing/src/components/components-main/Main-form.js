@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 import '../styles/Main-form.css';
 
 const MainForm = () => {
@@ -32,8 +33,22 @@ const MainForm = () => {
     const email = `${tempData['email-id']}@${tempData['email-provider']}`;
     delete tempData['email-id'];
     delete tempData['email-provider'];
-    const newData = { ...tempData, email };
-    sendToStorage(newData);
+    const interest = String(tempData.tempInterest);
+    delete tempData.tempInterest;
+    const newData = { ...tempData, email, interest };
+    // sendToStorage(newData);
+    // console.log(newData);
+    // fetch('http://localhost:3001/test', {
+    //   method: 'POST',
+    //   mode: 'cors',
+    //   headers: {
+    //     'Content-Type': 'application/x-www-form-urlencoded'
+    //   }
+    // }).then(response => response.json());
+    axios
+      .post('http://localhost:3001/member/add', newData)
+      .then(() => console.log('Data Post Success !'))
+      .catch(err => console.error(err));
   };
 
   const onError = error => {
@@ -47,15 +62,20 @@ const MainForm = () => {
     for (let i = 0; i < 8; i++) {
       values.push(`lorem ${i + 1}`);
     }
-    const interests = values.map((value, i) => {
+    const tempInterests = values.map((value, i) => {
       return (
         <div key={i} id="selection-container">
-          <input id={`cb${i + 1}`} type="checkbox" {...register('interest')} value={values[i]} />
+          <input
+            id={`cb${i + 1}`}
+            type="checkbox"
+            {...register('tempInterest')}
+            value={values[i]}
+          />
           <p>{value}</p>
         </div>
       );
     });
-    return interests;
+    return tempInterests;
   };
 
   return (
@@ -80,8 +100,8 @@ const MainForm = () => {
         성별
       </label>
       <select id="gender-input" {...register('gender')}>
-        <option>남</option>
-        <option>여</option>
+        <option>남성</option>
+        <option>여성</option>
         <option>비공개</option>
       </select>
       <label className="email-header" htmlFor="email-input">
@@ -112,7 +132,7 @@ const MainForm = () => {
       <label className="favorite-header" htmlFor="favorite-input">
         희망 배송시간
       </label>
-      <select id="favorite-input" {...register('favorite-time')}>
+      <select id="favorite-input" {...register('favorite')}>
         <option>오전 9시</option>
         <option>오후 12시</option>
         <option>오후 3시</option>
