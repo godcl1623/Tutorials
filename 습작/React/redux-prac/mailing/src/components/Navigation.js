@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 const Navigation = ({ menuData }) => {
   const renderList = () => {
     return menuData.map((menu, index) => {
+      if (menu.className === 'MemberUpdate') return;
       const dest = target => {
         switch (target.className) {
           case 'MainAbout':

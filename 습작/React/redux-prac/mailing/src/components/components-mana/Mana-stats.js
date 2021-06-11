@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { memberlist } from '../../actions';
 
-const Statistics = () => {
-  const memberList = JSON.parse(localStorage.getItem('localFormValue'));
+const Statistics = ({ members, memberlist }) => {
+  useEffect(() => {
+    fetch('http://localhost:3001/member/get')
+      .then(blob => blob.json())
+      .then(data => memberlist(data));
+  }, [memberlist]);
 
   const gender = genderInput => {
-    return memberList.filter(element => element.gender === genderInput).length;
+    return members.filter(element => element.gender === genderInput).length;
   };
 
   const source = sourceId => {
-    return memberList.filter(
-      element => element.source[element.source.length - 2] === String(sourceId)
-    ).length;
+    return members.filter(element => element.source[element.source.length - 2] === String(sourceId))
+      .length;
   };
 
   const interests = () => {
-    const interests = memberList.reduce((obj, item) => {
+    const interests = members.reduce((obj, item) => {
       for (let i = 0; i < item.interests.length; i++) {
         if (!obj[item.interests[i]]) {
           obj[item.interests[i]] = 0;
@@ -38,9 +44,9 @@ const Statistics = () => {
   };
 
   const favorite = () => {
-    const favorite = memberList
+    const favorite = members
       .map(element => {
-        return element.favorite;
+        return element.favorite_time;
       })
       .reduce((obj, item) => {
         if (!obj[item]) {
@@ -79,6 +85,30 @@ const Statistics = () => {
             </td>
             <td>{element.gender}</td>
             <td>{element.email}</td>
+            <td>
+              <Link className="MemberUpdate" to="/stats/update">
+                수정
+              </Link>
+            </td>
+            <td>
+              <button
+                onClick={() => {
+                  console.log(element);
+                  fetch('http://localhost:3001/member/delete', {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(element)
+                  })
+                    .then(() => console.log('Data Post Success !'))
+                    .catch(err => console.error(err));
+                }}
+              >
+                삭제
+              </button>
+            </td>
           </tr>
         </tbody>
       );
@@ -96,16 +126,18 @@ const Statistics = () => {
             <th>이름</th>
             <th>성별</th>
             <th>이메일</th>
+            <th>수정</th>
+            <th>삭제</th>
           </tr>
         </thead>
-        {displayList(memberList)}
+        {displayList(members)}
       </table>
       <table>
         <tbody>
           <tr>
             <th>성별 통계</th>
-            <td>남:{gender('남')}</td>
-            <td>여:{gender('여')}</td>
+            <td>남:{gender('남성')}</td>
+            <td>여:{gender('여성')}</td>
             <td>비공개:{gender('비공개')}</td>
           </tr>
           <tr>
@@ -128,4 +160,8 @@ const Statistics = () => {
   );
 };
 
-export default Statistics;
+const mapStateToProps = state => {
+  return { members: state.memberList };
+};
+
+export default connect(mapStateToProps, { memberlist })(Statistics);

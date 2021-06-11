@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from './actions';
@@ -8,6 +8,9 @@ import './App.css';
 
 const App = ({ appState, activateMana, makeMain, makeMana, mainState, manaState }) => {
   useEffect(() => {
+    // fetch('http://localhost:3001/member/get')
+    //   .then(blob => blob.json())
+    //   .then(data => console.log(data));
     if (appState) {
       document.body.style.backgroundColor = 'var(--man-background)';
     } else {
