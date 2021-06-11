@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import { newslist } from '../../actions';
 
-const NewsList = () => {
-  const newsList = JSON.parse(localStorage.getItem('NewsList'));
+const NewsList = ({ news, newslist }) => {
+  useEffect(() => {
+    axios.get('http://localhost:3001/news/get').then(blob => newslist(blob.data));
+    if (news.length === 0) return;
+    console.log('this is news', news);
+  }, [newslist]);
+
   const [headline, setHeadline] = useState('');
   const [newsInput, setNewsInput] = useState('');
 
   const displayNews = event => {
-    newsList.forEach(element => {
+    news.forEach(element => {
       if (
-        element.headline === event.target.textContent ||
-        element.newsInput === event.target.textContent
+        element.title === event.target.textContent ||
+        element.contents === event.target.textContent
       ) {
         setHeadline(event.target.parentNode.childNodes[0].textContent);
         setNewsInput(event.target.parentNode.childNodes[1].textContent);
@@ -18,11 +26,11 @@ const NewsList = () => {
   };
 
   const displayNewsList = () => {
-    return newsList.map((element, index) => {
+    return news.map((element, index) => {
       return (
         <tr key={index} onClick={e => displayNews(e)}>
-          <td>{element.headline}</td>
-          <td>{element.newsInput}</td>
+          <td>{element.title}</td>
+          <td>{element.contents}</td>
         </tr>
       );
     });
@@ -49,4 +57,8 @@ const NewsList = () => {
   );
 };
 
-export default NewsList;
+const mapStateToProps = state => {
+  return { news: state.newsList };
+};
+
+export default connect(mapStateToProps, { newslist })(NewsList);

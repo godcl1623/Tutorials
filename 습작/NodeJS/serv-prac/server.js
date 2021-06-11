@@ -32,12 +32,12 @@ app.get('/news', (req, res) => {
   query.newsList(req, res);
 });
 
-app.get('/news/:id', (req, res) => {
-  query.eachNews(req.params, res);
-});
-
 app.get('/news/get', (req, res, next) => {
   query.sendNewsList(req, res, next);
+});
+
+app.get('/news/:id', (req, res) => {
+  query.eachNews(req.params, res);
 });
 
 app.get('/news/get/:id', (req, res, next) => {
