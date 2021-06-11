@@ -158,6 +158,19 @@ module.exports = {
     );
   },
 
+  addNews(req, res, next) {
+    const post = req.body;
+    const { headline, contents } = post;
+    db.query(
+      'insert into newslist (title, contents) values(?, ?)',
+      [headline, contents],
+      (error, table) => {
+        if (error) next(error);
+        res.send(table);
+      }
+    );
+  },
+
   notFound(req, res) {
     res.status(404).send('Page Not Found !');
   }

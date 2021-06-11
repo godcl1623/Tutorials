@@ -22,12 +22,6 @@ const MainForm = () => {
     }
   }, [isSubmitSuccessful, reset]);
 
-  const sendToStorage = data => {
-    const formValue = JSON.parse(localStorage.getItem('localFormValue')) || [];
-    formValue.push(data);
-    localStorage.setItem('localFormValue', JSON.stringify(formValue));
-  };
-
   const onSubmitSuccess = data => {
     const tempData = { ...data };
     const email = `${tempData['email-id']}@${tempData['email-provider']}`;
@@ -36,15 +30,6 @@ const MainForm = () => {
     const interest = String(tempData.tempInterest);
     delete tempData.tempInterest;
     const newData = { ...tempData, email, interest };
-    // sendToStorage(newData);
-    // console.log(newData);
-    // fetch('http://localhost:3001/test', {
-    //   method: 'POST',
-    //   mode: 'cors',
-    //   headers: {
-    //     'Content-Type': 'application/x-www-form-urlencoded'
-    //   }
-    // }).then(response => response.json());
     axios
       .post('http://localhost:3001/member/add', newData)
       .then(() => console.log('Data Post Success !'))
@@ -79,11 +64,7 @@ const MainForm = () => {
   };
 
   return (
-    <form
-      // action="/submit_process"
-      // method="post"
-      onSubmit={handleSubmit(onSubmitSuccess, onError)}
-    >
+    <form onSubmit={handleSubmit(onSubmitSuccess, onError)}>
       <label className="name-header" htmlFor="name-input">
         이름
       </label>

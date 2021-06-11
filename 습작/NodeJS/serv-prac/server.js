@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded());
 app.get('/', (req, res) => {
   res.send(query.menu());
 });
-// app.post('/test', (req, res) => console.log(req.body));
+app.post('/test', (req, res) => console.log(req.body));
 
 app.get('/member', (req, res) => {
   query.memberList(req, res);
@@ -50,6 +50,10 @@ app.get('/news/:id', (req, res) => {
 
 app.get('/news/get/:id', (req, res, next) => {
   query.sendEachNews(req, res, next);
+});
+
+app.post('/news/add', (req, res, next) => {
+  query.addNews(req, res, next);
 });
 
 app.use((req, res) => {
