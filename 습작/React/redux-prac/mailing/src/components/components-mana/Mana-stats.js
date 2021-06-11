@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { memberlist } from '../../actions';
 
 const Statistics = ({ members, memberlist }) => {
@@ -7,8 +8,6 @@ const Statistics = ({ members, memberlist }) => {
     fetch('http://localhost:3001/member/get')
       .then(blob => blob.json())
       .then(data => memberlist(data));
-    if (members.length === 0) return;
-    console.log(members);
   }, [memberlist]);
 
   const gender = genderInput => {
@@ -86,6 +85,30 @@ const Statistics = ({ members, memberlist }) => {
             </td>
             <td>{element.gender}</td>
             <td>{element.email}</td>
+            <td>
+              <Link className="MemberUpdate" to="/stats/update">
+                수정
+              </Link>
+            </td>
+            <td>
+              <button
+                onClick={() => {
+                  console.log(element);
+                  fetch('http://localhost:3001/member/delete', {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(element)
+                  })
+                    .then(() => console.log('Data Post Success !'))
+                    .catch(err => console.error(err));
+                }}
+              >
+                삭제
+              </button>
+            </td>
           </tr>
         </tbody>
       );
@@ -103,6 +126,8 @@ const Statistics = ({ members, memberlist }) => {
             <th>이름</th>
             <th>성별</th>
             <th>이메일</th>
+            <th>수정</th>
+            <th>삭제</th>
           </tr>
         </thead>
         {displayList(members)}

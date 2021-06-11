@@ -7,6 +7,7 @@ import ManageMain from './Mana-start';
 import Statistics from './Mana-stats';
 import WriteNews from './Mana-write';
 import NewsList from './Mana-list';
+import DataUpdate from './Mana-update';
 import '../styles/Management.css';
 
 const Management = ({ manaState, makeCurrentPage }) => {
@@ -26,6 +27,10 @@ const Management = ({ manaState, makeCurrentPage }) => {
     {
       className: 'NewsList',
       textValue: '뉴스 리스트'
+    },
+    {
+      className: 'MemberUpdate',
+      textValue: '정보 수정'
     }
   ];
 
@@ -46,6 +51,8 @@ const Management = ({ manaState, makeCurrentPage }) => {
         return <Route path="/write" exact component={WriteNews} />;
       case 'NewsList':
         return <Route path="/lists" exact component={NewsList} />;
+      case 'MemberUpdate':
+        return <Route path="/stats/update" exact component={DataUpdate} />;
       default:
         break;
     }

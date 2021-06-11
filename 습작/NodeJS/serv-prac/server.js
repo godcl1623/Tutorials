@@ -36,6 +36,10 @@ app.post('/member/add', (req, res, next) => {
   query.addMember(req, res, next);
 });
 
+app.post('/member/delete', (req, res, next) => {
+  query.deleteMember(req, res, next);
+});
+
 app.get('/news', (req, res) => {
   query.newsList(req, res);
 });

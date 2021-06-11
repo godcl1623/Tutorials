@@ -153,7 +153,6 @@ module.exports = {
       [name, family, gender, email, source, interest, favorite],
       (error, table) => {
         if (error) next(error);
-        res.send(table);
       }
     );
   },
@@ -166,9 +165,16 @@ module.exports = {
       [headline, contents],
       (error, table) => {
         if (error) next(error);
-        res.send(table);
       }
     );
+  },
+
+  deleteMember(req, res, next) {
+    const post = req.body;
+    const { id } = post;
+    db.query('delete from memberform where id=?', [id], (error, data) => {
+      if (error) next(error);
+    });
   },
 
   notFound(req, res) {
