@@ -1,8 +1,24 @@
 const db = require('./db');
 
-exports.template = (req, res) => {
-  db.query('select * from memberform', (error, table) => {
-    if (error) throw error;
-    res.send(table);
-  });
+module.exports = {
+  template: () => {
+    return `
+      <!doctype html>
+      <html>
+        <head>
+          <title>My Server</title>
+          <meta charset="utf-8">
+        </head>
+        <body>
+          <h1>서버 연결 성공 !</h1>
+          <p>
+            <a href="/member">회원 목록</a>
+          </p>
+          <p>
+            <a href="/news">작성 뉴스 목록</a>
+          </p>
+        </body>
+      </html>
+    `;
+  }
 };
