@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { newslist } from '../../actions';
+import { newslist, selectedNews } from '../../actions';
 
-const NewsList = ({ news, newslist }) => {
+const NewsList = ({ news, newslist, selectedNews, selected }) => {
   useEffect(() => {
     axios.get('http://localhost:3001/news/get').then(blob => newslist(blob.data));
     if (news.length === 0) return;
     console.log('this is news', news);
   }, [newslist]);
-
-  const [headline, setHeadline] = useState('');
-  const [newsInput, setNewsInput] = useState('');
 
   const displayNews = event => {
     news.forEach(element => {
@@ -19,8 +16,10 @@ const NewsList = ({ news, newslist }) => {
         element.title === event.target.textContent ||
         element.contents === event.target.textContent
       ) {
-        setHeadline(event.target.parentNode.childNodes[0].textContent);
-        setNewsInput(event.target.parentNode.childNodes[1].textContent);
+        selectedNews(
+          event.target.parentNode.childNodes[0].textContent,
+          event.target.parentNode.childNodes[1].textContent
+        );
       }
     });
   };
@@ -50,15 +49,24 @@ const NewsList = ({ news, newslist }) => {
         <tbody>{displayNewsList()}</tbody>
       </table>
       <form>
-        <input type="text" name="headline" id="headline" value={headline} onChange={() => {}} />
-        <textarea name="news-input" id="news-input" value={newsInput} onChange={() => {}} />
+        <input
+          type="text"
+          name="headline"
+          id="headline"
+          value={selected.title}
+          onChange={() => {}}
+        />
+        <textarea name="news-input" id="news-input" value={selected.contents} onChange={() => {}} />
       </form>
     </div>
   );
 };
 
 const mapStateToProps = state => {
-  return { news: state.newsList };
+  return {
+    news: state.newsList,
+    selected: state.selectedNews
+  };
 };
 
-export default connect(mapStateToProps, { newslist })(NewsList);
+export default connect(mapStateToProps, { newslist, selectedNews })(NewsList);
