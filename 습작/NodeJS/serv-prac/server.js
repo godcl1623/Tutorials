@@ -41,6 +41,10 @@ app.post('/member/delete', (req, res, next) => {
   query.deleteMember(req, res, next);
 });
 
+app.post('/member/update/:id', (req, res, next) => {
+  query.updateMember(req, res, next);
+});
+
 app.get('/news', (req, res) => {
   query.newsList(req, res);
 });

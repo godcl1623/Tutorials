@@ -4,27 +4,34 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { memberInfo } from '../../actions';
 import { Select, Input, Label, Checkbox } from './module';
-import { source, favorite, provider, gender } from './tempDB';
+import { sources, favorite, provider, genders } from './tempDB';
 
 const CommonForm = ({ memberId, member, memberInfo }) => {
-  console.log(memberId, member);
+  // eslint-disable-next-line camelcase
+  const { name, family, gender, email, interests, source, favorite_time } = member;
+
+  console.log(email);
+
   const {
     register,
     watch,
     handleSubmit,
     reset,
     formState: { isSubmitSuccessful }
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      _name: name,
+      _family: family,
+      _gender: gender,
+      _email: email,
+      _interests: interests,
+      _source: source,
+      _favorite: favorite_time
+    }
+  });
 
-  const {
-    name: _name,
-    family: _family,
-    gender: _gender,
-    email: _email,
-    interests: _interests,
-    source: _source,
-    favorite_time: _favorite
-  } = member;
+  // const emailId = email.split('@')[0];
+  // const emailProvider = email.split('@')[1];
 
   useEffect(() => {
     const select = document.querySelectorAll('select');
@@ -49,10 +56,17 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
     const interest = String(tempData.tempInterest);
     delete tempData.tempInterest;
     const newData = { ...tempData, email, interest };
-    axios
-      .post('http://localhost:3001/member/add', newData)
-      .then(() => console.log('Data Post Success !'))
-      .catch(err => console.error(err));
+    if (member === undefined) {
+      axios
+        .post('http://localhost:3001/member/add', newData)
+        .then(() => console.log('Data Post Success !'))
+        .catch(err => console.error(err));
+    } else {
+      axios
+        .post('http://localhost:3001/member/update/:id', newData)
+        .then(() => console.log('Data Post Success !'))
+        .catch(err => console.error(err));
+    }
   };
 
   const onError = error => {
@@ -62,12 +76,12 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
   // console.log(watch());
 
   const selections = () => {
-    const cbValue = member === undefined ? '' : Array(_interests);
     const values = [];
     for (let i = 0; i < 8; i++) {
       values.push(`lorem ${i + 1}`);
     }
     const tempInterests = values.map((value, i) => {
+      // const isChecked = interests.split(',').includes(value);
       return (
         <div key={i} id="selection-container">
           <Checkbox
@@ -75,14 +89,9 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
             type="checkbox"
             register={register}
             name="tempInterest"
-            value={cbValue}
-          />
-          {/* <input
-            id={`cb${i + 1}`}
-            type="checkbox"
-            {...register('tempInterest')}
             value={values[i]}
-          /> */}
+            // isChecked={isChecked}
+          />
           <p>{value}</p>
         </div>
       );
@@ -93,18 +102,11 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
   return (
     <form onSubmit={handleSubmit(onSubmitSuccess, onError)}>
       <Label isFor="name" tag="이름" />
-      <Input
-        id="name-input"
-        type="text"
-        register={register}
-        name="name"
-        isRequired={true}
-        value={_name}
-      />
+      <Input id="name-input" type="text" register={register} name="_name" isRequired={true} />
       <Label isFor="family" tag="성" />
-      <Input id="family-input" type="text" register={register} name="family" value={_family} />
+      <Input id="family-input" type="text" register={register} name="family" />
       <Label isFor="gender" tag="성별" />
-      <Select id="gender-input" array={gender} register={register} name="gender" value={_gender} />
+      <Select id="gender-input" array={genders} register={register} name="gender" />
       <Label isFor="email" tag="이메일" />
       <section id="email-input">
         <Input type="text" register={register} name="email-id" />
@@ -112,17 +114,11 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
         <Select id="email-provider" array={provider} register={register} name="email-provider" />
       </section>
       <Label isFor="source" tag="가입경로" />
-      <Select id="source-input" array={source} register={register} name="source" value={_source} />
+      <Select id="source-input" array={sources} register={register} name="source" />
       <Label isFor="interest" tag="관심사" />
       <section id="interest-input">{selections()}</section>
       <Label isFor="favorite" tag="희망 배송시간" />
-      <Select
-        id="favorite-input"
-        array={favorite}
-        register={register}
-        name="favorite"
-        value={_favorite}
-      />
+      <Select id="favorite-input" array={favorite} register={register} name="favorite" />
       <input id="submit" type="submit" />
     </form>
   );

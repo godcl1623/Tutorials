@@ -177,6 +177,11 @@ module.exports = {
     });
   },
 
+  updateMember(req, res, next) {
+    const post = req.body;
+    console.log(post);
+  },
+
   notFound(req, res) {
     res.status(404).send('Page Not Found !');
   }

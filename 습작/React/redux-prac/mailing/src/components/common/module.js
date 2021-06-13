@@ -11,7 +11,7 @@ export const Select = ({ array, id, register, name, value }) => {
 };
 
 export const Input = ({ id = '', type, register, name, value, isRequired = false }) => {
-  const inputValue = value === undefined ? '' : 'test';
+  const inputValue = value === undefined ? '' : value;
   if (isRequired) {
     <input
       id={id}
@@ -31,7 +31,6 @@ export const Label = ({ isFor, tag }) => {
   );
 };
 
-export const Checkbox = ({ id, type, register, name, value }) => {
-  const cbValue = value === undefined ? '' : value;
-  return <input id={id} type={type} {...register(name)} value={cbValue} />;
+export const Checkbox = ({ id, type, register, name, value, isChecked }) => {
+  return <input id={id} type={type} {...register(name)} value={value} checked={isChecked} />;
 };
