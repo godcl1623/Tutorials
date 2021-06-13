@@ -25,6 +25,10 @@ app.get('/member/get', (req, res, next) => {
   query.sendMemberList(req, res, next);
 });
 
+app.post('/member/update/:id', (req, res, next) => {
+  query.updateMember(req, res, next);
+});
+
 app.get('/member/:id', (req, res) => {
   query.individual(req.params, res);
 });
@@ -39,10 +43,6 @@ app.post('/member/add', (req, res, next) => {
 
 app.post('/member/delete', (req, res, next) => {
   query.deleteMember(req, res, next);
-});
-
-app.post('/member/update/:id', (req, res, next) => {
-  query.updateMember(req, res, next);
 });
 
 app.get('/news', (req, res) => {

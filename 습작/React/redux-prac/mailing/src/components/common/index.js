@@ -1,5 +1,7 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable camelcase */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
@@ -15,21 +17,28 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
     watch,
     handleSubmit,
     reset,
-    formState: { isSubmitSuccessful }
+    formState: { isSubmitSuccessful },
+    setValue
   } = useForm();
 
   const memberData = {
-    _name: name || '',
-    _family: family || '',
-    _gender: gender || '',
     _email: email || '',
-    _interests: interests || '',
-    _source: source || '',
-    _favorite: favorite_time || ''
+    _interests: interests || ''
   };
 
   const emailId = memberData._email.split('@')[0];
   const emailProvider = memberData._email.split('@')[1];
+
+  const test = () => {
+    setValue('name', name);
+    setValue('family', family);
+    setValue('gender', gender);
+    setValue('email-id', emailId);
+    setValue('email-provider', emailProvider);
+    setValue('tempInterests', interests);
+    setValue('source', source);
+    setValue('favorite', favorite_time);
+  };
 
   useEffect(() => {
     const select = document.querySelectorAll('select');
@@ -43,7 +52,10 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
       const getMemberInfo = async () => {
         const response = await axios
           .get(`http://localhost:3001/member/get/${memberId}`)
-          .then(data => memberInfo(...data.data));
+          .then(data => memberInfo(...data.data))
+          .then(result => {
+            test();
+          });
         return response;
       };
       getMemberInfo();
@@ -55,17 +67,20 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
     const email = `${tempData['email-id']}@${tempData['email-provider']}`;
     delete tempData['email-id'];
     delete tempData['email-provider'];
-    const interest = String(tempData.tempInterest);
-    delete tempData.tempInterest;
+    const interest = String(tempData.tempInterests);
+    delete tempData.tempInterests;
     const newData = { ...tempData, email, interest };
-    if (member === undefined) {
+    if (member.name === undefined) {
+      console.log('foo');
+      // console.log(newData);
       axios
         .post('http://localhost:3001/member/add', newData)
         .then(() => console.log('Data Post Success !'))
         .catch(err => console.error(err));
     } else {
+      console.log(newData);
       axios
-        .post('http://localhost:3001/member/update/:id', newData)
+        .post(`http://localhost:3001/member/update/${memberId}`, newData)
         .then(() => console.log('Data Post Success !'))
         .catch(err => console.error(err));
     }
@@ -77,6 +92,8 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
   };
   // console.log(watch());
 
+  const testest = [];
+
   const selections = () => {
     const values = [];
     for (let i = 0; i < 8; i++) {
@@ -84,16 +101,23 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
     }
     const tempInterests = values.map((value, i) => {
       const isChecked = memberData._interests.split(',').includes(value);
+      // const isChecked = [true, true, false, false, true, true, false, true];
+      const newRef = React.createRef();
+      testest.push(newRef);
       return (
         <div key={i} id="selection-container">
-          <Checkbox
+          {/* <Checkbox
             id={`cb${i + 1}`}
             type="checkbox"
             register={register}
             name="tempInterest"
-            value={values[i]}
             isChecked={isChecked}
-          />
+            ref={testest}
+            onClick={e => {
+              console.log(testest.current);
+            }}
+          /> */}
+          <input id={`cb${i + 1}`} type={"checkbox"} {...register("tempInterests")} defaultChecked={isChecked} ref={newRef} value={values[i]} />
           <p>{value}</p>
         </div>
       );
@@ -115,9 +139,8 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
         id="name-input"
         type="text"
         register={register}
-        name="_name"
+        name="name"
         isRequired={true}
-        value={memberData._name}
       />
       <Label isFor="family" tag="성" />
       <Input
@@ -125,7 +148,6 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
         type="text"
         register={register}
         name="family"
-        value={memberData._family}
       />
       <Label isFor="gender" tag="성별" />
       <Select
@@ -133,18 +155,16 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
         array={genders}
         register={register}
         name="gender"
-        value={memberData._gender}
       />
       <Label isFor="email" tag="이메일" />
       <section id="email-input">
-        <Input type="text" register={register} name="email-id" value={emailId} />
+        <Input type="text" register={register} name="email-id" />
         <span>@</span>
         <Select
           id="email-provider"
           array={provider}
           register={register}
           name="email-provider"
-          value={emailProvider}
         />
       </section>
       <Label isFor="source" tag="가입경로" />
@@ -153,7 +173,6 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
         array={sources}
         register={register}
         name="source"
-        value={memberData._source}
       />
       <Label isFor="interest" tag="관심사" />
       <section id="interest-input">{selections()}</section>
@@ -163,7 +182,6 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
         array={favorite}
         register={register}
         name="favorite"
-        value={memberData._favorite}
       />
       <input id="submit" type="submit" />
     </form>
