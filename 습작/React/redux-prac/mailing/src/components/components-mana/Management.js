@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { manaCurrentPage } from '../../actions';
 import Navigation from '../Navigation';
 import ManageMain from './Mana-start';
@@ -52,7 +53,7 @@ const Management = ({ manaState, makeCurrentPage }) => {
       case 'NewsList':
         return <Route path="/lists" exact component={NewsList} />;
       case 'MemberUpdate':
-        return <Route path="/stats/update" exact component={DataUpdate} />;
+        return <Route path="/stats/update/:id" exact component={DataUpdate} />;
       default:
         break;
     }

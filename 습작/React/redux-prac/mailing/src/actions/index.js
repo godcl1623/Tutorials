@@ -42,3 +42,10 @@ export const selectedNews = (title, contents) => {
     }
   };
 };
+
+export const memberInfo = obj => {
+  return {
+    type: 'MEMBER_INFO',
+    payload: { ...obj }
+  };
+};

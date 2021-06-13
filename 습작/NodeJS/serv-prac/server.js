@@ -14,7 +14,8 @@ app.use(bodyParser.urlencoded());
 app.get('/', (req, res) => {
   res.send(query.menu());
 });
-app.post('/test', (req, res) => console.log(req.body));
+// app.post('/test', (req, res) => console.log(req.body));
+app.get('/test', (req, res) => console.log(res));
 
 app.get('/member', (req, res) => {
   query.memberList(req, res);
@@ -22,6 +23,10 @@ app.get('/member', (req, res) => {
 
 app.get('/member/get', (req, res, next) => {
   query.sendMemberList(req, res, next);
+});
+
+app.post('/member/update/:id', (req, res, next) => {
+  query.updateMember(req, res, next);
 });
 
 app.get('/member/:id', (req, res) => {

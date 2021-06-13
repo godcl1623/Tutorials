@@ -177,6 +177,19 @@ module.exports = {
     });
   },
 
+  updateMember(req, res, next) {
+    const { id } = req.params;
+    const post = req.body;
+    const { name, family, gender, email, source, interest, favorite } = post;
+    db.query(
+      'update memberform set name=?, family=?, gender=?, email=?, source=?, interests=?, favorite_time=? where id=?',
+      [name, family, gender, email, source, interest, favorite, id],
+      (error, table) => {
+        if (error) next(error);
+      }
+    );
+  },
+
   notFound(req, res) {
     res.status(404).send('Page Not Found !');
   }
