@@ -1,9 +1,9 @@
 import React from 'react';
-import MainForm from '../components-main/Main-form';
+import CommonForm from '../common';
 import '../styles/Main-form.css';
 
-const DataUpdate = () => {
-  return <MainForm />;
+const DataUpdate = props => {
+  return <CommonForm memberId={props.match.params.id} />;
 };
 
 export default DataUpdate;

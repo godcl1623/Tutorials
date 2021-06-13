@@ -14,7 +14,8 @@ app.use(bodyParser.urlencoded());
 app.get('/', (req, res) => {
   res.send(query.menu());
 });
-app.post('/test', (req, res) => console.log(req.body));
+// app.post('/test', (req, res) => console.log(req.body));
+app.get('/test', (req, res) => console.log(res));
 
 app.get('/member', (req, res) => {
   query.memberList(req, res);
