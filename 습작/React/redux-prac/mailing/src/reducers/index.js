@@ -1,16 +1,12 @@
 import { combineReducers } from 'redux';
-import appStateReducer from './appState';
-import mainStateReducer from './mainPageState';
-import manaStateReducer from './manaPageState';
-import memberStateReducer from './memberState';
-import newsStateReducer from './newsState';
-import selectedNewsReducer from './selectedState';
+import * as reducers from './reducers';
 
 export default combineReducers({
-  appState: appStateReducer,
-  mainState: mainStateReducer,
-  manaState: manaStateReducer,
-  memberList: memberStateReducer,
-  newsList: newsStateReducer,
-  selectedNews: selectedNewsReducer
+  appState: reducers.appStateReducer,
+  mainState: reducers.mainStateReducer,
+  manaState: reducers.manaStateReducer,
+  memberList: reducers.memberStateReducer,
+  newsList: reducers.newsStateReducer,
+  selectedNews: reducers.selectedNewsReducer,
+  selectedMember: reducers.selectedMemberReducer
 });
