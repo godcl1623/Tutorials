@@ -33,10 +33,11 @@ export const newslist = array => {
   };
 };
 
-export const selectedNews = (title, contents) => {
+export const selectedNews = (id, title, contents) => {
   return {
     type: 'SELECTED_NEWS',
     payload: {
+      id,
       title,
       contents
     }
@@ -46,6 +47,13 @@ export const selectedNews = (title, contents) => {
 export const memberInfo = obj => {
   return {
     type: 'MEMBER_INFO',
+    payload: { ...obj }
+  };
+};
+
+export const oldInfo = obj => {
+  return {
+    type: 'OLD_INFO',
     payload: { ...obj }
   };
 };

@@ -86,7 +86,7 @@ const Statistics = ({ members, memberlist }) => {
             <td>{element.gender}</td>
             <td>{element.email}</td>
             <td>
-              <Link className="MemberUpdate" to={`/stats/update/${element.id}`}>
+              <Link className="MemberUpdate" exact to={`/stats/update/${element.id}`}>
                 수정
               </Link>
             </td>

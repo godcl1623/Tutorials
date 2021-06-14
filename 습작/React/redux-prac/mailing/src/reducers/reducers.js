@@ -1,3 +1,5 @@
+import { oldInfo } from '../actions';
+
 export const appStateReducer = (appState = false, action) => {
   if (action.type === 'IS_MANAGEMENT_ACTIVE') {
     return action.payload;
@@ -50,5 +52,10 @@ export const selectedNewsReducer = (state = {}, action) => {
 
 export const selectedMemberReducer = (state = {}, action) => {
   if (action.type === 'MEMBER_INFO') return action.payload;
+  return state;
+};
+
+export const comparisonReducer = (state = {}, action) => {
+  if (action.type === 'OLD_INFO') return action.payload;
   return state;
 };

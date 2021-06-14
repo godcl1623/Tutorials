@@ -4,14 +4,16 @@
 import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { memberInfo } from '../../actions';
+import { memberInfo, oldInfo } from '../../actions';
 import { Select, Input, Label, Checkbox } from './module';
 import { sources, favorite, provider, genders } from './tempDB';
 
-const CommonForm = ({ memberId, member, memberInfo }) => {
-  const { name, family, gender, email, interests, source, favorite_time } = member;
+import Statistics from '../components-mana/Mana-stats';
 
+const CommonForm = ({ memberId, member, memberInfo, oldInfo, oldMemberInfo }) => {
+  const { name, family, gender, email, interests, source, favorite_time } = member;
   const {
     register,
     watch,
@@ -41,26 +43,25 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
   };
 
   useEffect(() => {
-    const select = document.querySelectorAll('select');
-    select.forEach(element => {
-      element.value = '';
-    });
-    if (isSubmitSuccessful) {
-      reset();
+    if (member.name === undefined) {
+      const select = document.querySelectorAll('select');
+      select.forEach(element => {
+        element.value = '';
+      });
     }
     if (memberId !== undefined) {
       const getMemberInfo = async () => {
         const response = await axios
           .get(`http://localhost:3001/member/get/${memberId}`)
-          .then(data => memberInfo(...data.data))
-          .then(result => {
-            test();
-          });
+          .then(data => memberInfo(...data.data));
         return response;
       };
       getMemberInfo();
     }
-  }, [isSubmitSuccessful, reset, memberId, memberInfo]);
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset, member, memberInfo]);
 
   const onSubmitSuccess = data => {
     const tempData = { ...data };
@@ -100,10 +101,18 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
       values.push(`lorem ${i + 1}`);
     }
     const tempInterests = values.map((value, i) => {
-      const isChecked = memberData._interests.split(',').includes(value);
+      if (member.name === undefined) {
+        return (
+          <div key={i} id="selection-container">
+          <input id={`cb${i + 1}`} type={"checkbox"} {...register("tempInterests")} value={values[i]} />
+          <p>{value}</p>
+        </div>
+        );
+      }
       // const isChecked = [true, true, false, false, true, true, false, true];
       const newRef = React.createRef();
       testest.push(newRef);
+      const isChecked = interests.split(',').includes(value);
       return (
         <div key={i} id="selection-container">
           {/* <Checkbox
@@ -125,13 +134,14 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
     return tempInterests;
   };
 
-  if (member === undefined) {
+  if (member.name === undefined || member.name === oldMemberInfo.name) {
     return (
       <div>
         <h1>Loading...</h1>
       </div>
     );
   }
+  test();
   return (
     <form onSubmit={handleSubmit(onSubmitSuccess, onError)}>
       <Label isFor="name" tag="이름" />
@@ -160,12 +170,18 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
       <section id="email-input">
         <Input type="text" register={register} name="email-id" />
         <span>@</span>
-        <Select
+        {/* <Select
           id="email-provider"
           array={provider}
           register={register}
           name="email-provider"
-        />
+        /> */}
+        <select id="email-provider" {...register('email-provider')} onChange={() => {}}>
+          <option>gmail.com</option>
+          <option>hotmail.com</option>
+          <option>naver.com</option>
+          <option>daum.net</option>
+        </select>
       </section>
       <Label isFor="source" tag="가입경로" />
       <Select
@@ -184,12 +200,19 @@ const CommonForm = ({ memberId, member, memberInfo }) => {
         name="favorite"
       />
       <input id="submit" type="submit" />
+      <Link
+        to="/stats"
+        render={() => <Statistics />}
+        onClick={() => oldInfo(member)}
+      >
+        이동
+      </Link>
     </form>
   );
 };
 
 const mapStateToProps = state => {
-  return { member: state.selectedMember };
+  return { member: state.selectedMember, oldMemberInfo: state.oldMemberInfo };
 };
 
-export default connect(mapStateToProps, { memberInfo })(CommonForm);
+export default connect(mapStateToProps, { memberInfo, oldInfo })(CommonForm);

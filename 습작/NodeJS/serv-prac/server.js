@@ -65,6 +65,14 @@ app.post('/news/add', (req, res, next) => {
   query.addNews(req, res, next);
 });
 
+app.post('/news/delete', (req, res, next) => {
+  query.deleteNews(req, res, next);
+});
+
+app.post('/news/update/:id', (req, res, next) => {
+  query.updateNews(req, res, next);
+});
+
 app.use((req, res) => {
   res.status(404).send('Page Not Found !');
 });

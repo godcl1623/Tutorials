@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { manaCurrentPage } from '../../actions';
@@ -63,7 +63,7 @@ const Management = ({ manaState, makeCurrentPage }) => {
     <div className="management" onClick={whatIsThis}>
       <BrowserRouter>
         <Navigation menuData={navigationMenu} />
-        {distributor()}
+        <Switch>{distributor()}</Switch>
       </BrowserRouter>
     </div>
   );
