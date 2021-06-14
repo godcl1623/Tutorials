@@ -4,12 +4,15 @@
 import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { memberInfo, isStateChanged } from '../../actions';
+import { memberInfo, oldInfo } from '../../actions';
 import { Select, Input, Label, Checkbox } from './module';
 import { sources, favorite, provider, genders } from './tempDB';
 
-const CommonForm = ({ memberId, member, memberInfo, isChanged, isStateChanged }) => {
+import Statistics from '../components-mana/Mana-stats';
+
+const CommonForm = ({ memberId, member, memberInfo, oldInfo, oldMemberInfo }) => {
   const { name, family, gender, email, interests, source, favorite_time } = member;
   const {
     register,
@@ -58,10 +61,7 @@ const CommonForm = ({ memberId, member, memberInfo, isChanged, isStateChanged })
     if (isSubmitSuccessful) {
       reset();
     }
-    if (isChanged === true) {
-      isStateChanged(isChanged);
-    }
-  }, [isSubmitSuccessful, reset, member, isChanged]);
+  }, [isSubmitSuccessful, reset, member, memberInfo]);
 
   const onSubmitSuccess = data => {
     const tempData = { ...data };
@@ -134,7 +134,7 @@ const CommonForm = ({ memberId, member, memberInfo, isChanged, isStateChanged })
     return tempInterests;
   };
 
-  if (member.name === undefined) {
+  if (member.name === undefined || member.name === oldMemberInfo.name) {
     return (
       <div>
         <h1>Loading...</h1>
@@ -200,12 +200,19 @@ const CommonForm = ({ memberId, member, memberInfo, isChanged, isStateChanged })
         name="favorite"
       />
       <input id="submit" type="submit" />
+      <Link
+        to="/stats"
+        render={() => <Statistics />}
+        onClick={() => oldInfo(member)}
+      >
+        이동
+      </Link>
     </form>
   );
 };
 
 const mapStateToProps = state => {
-  return { member: state.selectedMember, isChanged: state.isChanged };
+  return { member: state.selectedMember, oldMemberInfo: state.oldMemberInfo };
 };
 
-export default connect(mapStateToProps, { memberInfo, isStateChanged })(CommonForm);
+export default connect(mapStateToProps, { memberInfo, oldInfo })(CommonForm);

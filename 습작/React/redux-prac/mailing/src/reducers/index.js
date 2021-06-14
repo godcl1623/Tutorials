@@ -9,5 +9,5 @@ export default combineReducers({
   newsList: reducers.newsStateReducer,
   selectedNews: reducers.selectedNewsReducer,
   selectedMember: reducers.selectedMemberReducer,
-  isChanged: reducers.checkStateReducer
+  oldMemberInfo: reducers.comparisonReducer
 });

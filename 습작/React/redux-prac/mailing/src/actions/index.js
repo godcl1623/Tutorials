@@ -51,9 +51,9 @@ export const memberInfo = obj => {
   };
 };
 
-export const isStateChanged = boolean => {
+export const oldInfo = obj => {
   return {
-    type: 'IS_STATE_CHANGED',
-    payload: !boolean
+    type: 'OLD_INFO',
+    payload: { ...obj }
   };
 };
