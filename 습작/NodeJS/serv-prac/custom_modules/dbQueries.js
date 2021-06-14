@@ -190,6 +190,27 @@ module.exports = {
     );
   },
 
+  deleteNews(req, res, next) {
+    const post = req.body;
+    const { id } = post;
+    db.query('delete from newslist where id=?', [id], (error, data) => {
+      if (error) next(error);
+    });
+  },
+
+  updateNews(req, res, next) {
+    const { id } = req.params;
+    const post = req.body;
+    const { title, contents } = post;
+    db.query(
+      'update newslist set title=?, contents=? where id=?',
+      [title, contents, id],
+      (error, table) => {
+        if (error) next(error);
+      }
+    );
+  },
+
   notFound(req, res) {
     res.status(404).send('Page Not Found !');
   }

@@ -33,10 +33,11 @@ export const newslist = array => {
   };
 };
 
-export const selectedNews = (title, contents) => {
+export const selectedNews = (id, title, contents) => {
   return {
     type: 'SELECTED_NEWS',
     payload: {
+      id,
       title,
       contents
     }
