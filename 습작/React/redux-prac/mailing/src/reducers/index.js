@@ -8,5 +8,6 @@ export default combineReducers({
   memberList: reducers.memberStateReducer,
   newsList: reducers.newsStateReducer,
   selectedNews: reducers.selectedNewsReducer,
-  selectedMember: reducers.selectedMemberReducer
+  selectedMember: reducers.selectedMemberReducer,
+  isChanged: reducers.checkStateReducer
 });

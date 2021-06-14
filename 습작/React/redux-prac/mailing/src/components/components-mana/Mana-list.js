@@ -30,7 +30,7 @@ const NewsList = ({ news, newslist, selectedNews, selected }) => {
     if (isSubmitSuccessful) {
       reset();
     }
-  }, [newslist, isSubmitSuccessful, reset]);
+  }, [newslist, isSubmitSuccessful, reset, selected]);
 
   const displayNews = event => {
     console.log(event.target.parentNode.childNodes);

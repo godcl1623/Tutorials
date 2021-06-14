@@ -50,3 +50,10 @@ export const memberInfo = obj => {
     payload: { ...obj }
   };
 };
+
+export const isStateChanged = boolean => {
+  return {
+    type: 'IS_STATE_CHANGED',
+    payload: !boolean
+  };
+};

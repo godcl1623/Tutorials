@@ -52,3 +52,8 @@ export const selectedMemberReducer = (state = {}, action) => {
   if (action.type === 'MEMBER_INFO') return action.payload;
   return state;
 };
+
+export const checkStateReducer = (state = false, action) => {
+  if (action.type === 'IS_STATE_CHANGED') return action.payload;
+  return state;
+};
