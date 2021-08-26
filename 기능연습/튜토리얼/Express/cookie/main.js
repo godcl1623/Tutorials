@@ -39,8 +39,8 @@ var app = http.createServer(function(request,response){
     var _url = request.url;
     var queryData = url.parse(_url, true).query;
     var pathname = url.parse(_url, true).pathname;
-    // var isOwner = authIsOwner(request, response);
-    // console.log(isOwner);
+    var isOwner = authIsOwner(request, response);
+    console.log(isOwner);
     if(pathname === '/'){
       if(queryData.id === undefined){
         fs.readdir('./data', function(error, filelist){
@@ -80,6 +80,14 @@ var app = http.createServer(function(request,response){
         });
       }
     } else if(pathname === '/create'){
+      if (authIsOwner(request, response) === false) {
+        var result = `
+          <p>YOU SHALL NOT PASS !!!</p>
+          <a href="/login">login</a>
+        `;
+        response.end(result);
+        return false;
+      }
       fs.readdir('./data', function(error, filelist){
         var title = 'WEB - create';
         var list = template.list(filelist);
@@ -98,6 +106,14 @@ var app = http.createServer(function(request,response){
         response.end(html);
       });
     } else if(pathname === '/create_process'){
+      if (authIsOwner(request, response) === false) {
+        var result = `
+          <p>YOU SHALL NOT PASS !!!</p>
+          <a href="/login">login</a>
+        `;
+        response.end(result);
+        return false;
+      }
       var body = '';
       request.on('data', function(data){
           body = body + data;
@@ -112,6 +128,14 @@ var app = http.createServer(function(request,response){
           })
       });
     } else if(pathname === '/update'){
+      if (authIsOwner(request, response) === false) {
+        var result = `
+          <p>YOU SHALL NOT PASS !!!</p>
+          <a href="/login">login</a>
+        `;
+        response.end(result);
+        return;
+      }
       fs.readdir('./data', function(error, filelist){
         var filteredId = path.parse(queryData.id).base;
         fs.readFile(`data/${filteredId}`, 'utf8', function(err, description){
@@ -138,6 +162,14 @@ var app = http.createServer(function(request,response){
         });
       });
     } else if(pathname === '/update_process'){
+      if (authIsOwner(request, response) === false) {
+        var result = `
+          <p>YOU SHALL NOT PASS !!!</p>
+          <a href="/login">login</a>
+        `;
+        response.end(result);
+        return false;
+      }
       var body = '';
       request.on('data', function(data){
           body = body + data;
@@ -155,6 +187,14 @@ var app = http.createServer(function(request,response){
           });
       });
     } else if(pathname === '/delete_process'){
+      if (authIsOwner(request, response) === false) {
+        var result = `
+          <p>YOU SHALL NOT PASS !!!</p>
+          <a href="/login">login</a>
+        `;
+        response.end(result);
+        return false;
+      }
       var body = '';
       request.on('data', function(data){
           body = body + data;
@@ -204,6 +244,23 @@ var app = http.createServer(function(request,response){
         } else {
           response.end('Who?');
         }
+      })
+    } else if (pathname === '/logout_process') {
+      var body = '';
+      request.on('data', function(data) {
+        body = body + data;
+      });
+      request.on('end', function() {
+        var post = qs.parse(body);
+        response.writeHead(302, {
+          'Set-Cookie': [
+            `email=; Max-Age=0`,
+            `password=; Max-Age=0`,
+            `nickname=; Max-Age=0`
+          ],
+          Location: '/'
+        });
+        response.end();
       })
     } else {
       response.writeHead(404);
