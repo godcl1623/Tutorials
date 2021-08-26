@@ -1,3 +1,7 @@
+/* eslint-disable operator-assignment */
+/* eslint-disable no-var */
+/* eslint-disable object-shorthand */
+/* eslint-disable prettier/prettier */
 module.exports = {
   HTML:function(title, list, body, control){
     return `
@@ -8,6 +12,7 @@ module.exports = {
       <meta charset="utf-8">
     </head>
     <body>
+      <a href="/login">login</a>
       <h1><a href="/">WEB</a></h1>
       ${list}
       ${control}
