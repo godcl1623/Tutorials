@@ -1,10 +1,18 @@
+/* eslint-disable no-redeclare */
+/* eslint-disable no-unused-vars */
+/* eslint-disable operator-assignment */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable block-scoped-var */
+/* eslint-disable prefer-arrow-callback */
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-var */
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
-var template = require('./lib/template.js');
 var path = require('path');
 var sanitizeHtml = require('sanitize-html');
+var template = require('./lib/template.js');
 
 var app = http.createServer(function(request,response){
     var _url = request.url;
@@ -135,9 +143,26 @@ var app = http.createServer(function(request,response){
             response.end();
           })
       });
-    } else {
+    } else if (pathname === '/login')  {
+      fs.readdir('./data', function(error, filelist){
+        var title = 'Login';
+        var list = template.list(filelist);
+        var html = template.HTML(title, list,
+          `<form action="login_process" method="post">
+            <p><input type="text" name="email" placeholder="email"></p>
+            <p><input type="text" name="email" placeholder="email"></p>
+            <p><input type="text" name="email" placeholder="email"></p>
+          </form>
+          `,
+          `<a href="/create">create</a>`
+        );
+        response.writeHead(200);
+        response.end(html);
+      });
+    }
+    else {
       response.writeHead(404);
       response.end('Not found');
     }
 });
-app.listen(3000);
+app.listen(3001);
