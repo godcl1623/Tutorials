@@ -6,9 +6,9 @@ var sanitizeHtml = require('sanitize-html');
 var template = require('../lib/template.js');
 
 var authData = {
-  email: 'egoing777@gmail.com',
-  password: '111111',
-  nickname: 'egoing'
+  email: 'email@email.com',
+  password: '0000',
+  nickname: 'foo'
 }
 
 router.get('/login', function (request, response) {
