@@ -58,7 +58,44 @@
   // */
 
   // 6. unknown: 무엇이 담길지 알 수 없는 상태
+  // 타입 구분을 위해 타입스크립트를 사용하는 것이므로 unknown을 사용할 이유도 없고, 사용하지 않는 것이 권장
+  // unknown 타입이 존재하는 경우: TS는 JS와 같이 쓰일 수 있는데, JS의 동적 타입을 대처하기 위해 unknown 타입이 존재
   let notSure: unknown = 0;
   notSure = 'he';
   notSure = true;
+
+  // 7. any: 아무거나 다 쓸 수 있음
+  // unknown은 차라리 뭐가 올지 모르겠다는 뉘앙스긴 한데, any는 뭘 쓰던 말던 신경쓰지 않는다는 뉘앙스라 더 주의 필요
+  let anything: any = 0;
+  anything = 'hello';
+
+  // 8. void: 함수가 아무것도 리턴하지 않을 경우
+  // 일반적으로 함수가 리턴하는 값의 타입을 명시하는 것이 좋지만, void의 경우에는 생략 가능. 단, 개발 조직의 개발문화에 따라 다를 수 있음
+  function print(): void {
+    console.log('hello');
+    // 함수가 콘솔 출력 기능만 담당하는 경우, console.log 다음에 return;이 생략된 상태임
+    // 이러한 상태의 함수 타입을 void 타입이라 함
+  }
+  // 아래와 같이 변수에는 void를 선언하지 않음 - 사실상 undefined만 할당 가능한 상태이기 때문
+  let unusable: void = undefined;
+
+  // 8. never: void와 같이 함수에서 설정할 수 있는 타입
+  // 리턴값의 타입이 never라는 것은 함수가 값을 리턴하지 않겠다는 의미임
+  // 사례: throw error 혹은 while(true)로 루프 실행
+  function throwError(message: string): never {
+    // message -> server(log)
+    // throw new Error(message);
+    // while(true){}
+  }
+  // void와 마찬가지로 never도 변수에 할당하진 않음
+  let neverEnding: never;
+
+  // 9. object: 원시 타입을 제외한 모든 타입을 할당 가능
+  // 역시 가리지 않고 무엇이든 담을 수 있기 때문에 사용하지 않는 것을 권장함 - Object 타입도 타입을 명확히 명시하는 것을 추천
+  let obj: object;
+  function acceptSomeObj(obj: object) {
+    // Do Something
+  }
+  acceptSomeObj({ foo: 'bar' });
+  acceptSomeObj({ fox: 'hati hati hati ho' });
 }
