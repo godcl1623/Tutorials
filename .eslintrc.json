@@ -1,5 +1,5 @@
 {
-    "parser": "babel-eslint",
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
       "ecmaVersion": 12
     },
@@ -12,8 +12,8 @@
     "globals": {
       "_": false
     },
-    "plugins": ["import", "html", "prettier"],
-    "extends": ["airbnb-base", "plugin:prettier/recommended"],
+    "plugins": ["import", "html", "prettier", "@typescript-eslint"],
+    "extends": ["airbnb-base", "plugin:import/errors", "plugin:import/warnings", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended", "prettier/@typescript-eslint"],
     "rules": {
       // "off" or 0 - turn the rule off
       // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
