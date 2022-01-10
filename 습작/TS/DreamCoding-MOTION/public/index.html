@@ -5,16 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOTION_V1</title>
+    <link rel="stylesheet" href="../src/style/style.css">
   </head>
   <body>
     <article id="motion_container">
       <nav id="motion_menu">
         <h1>MOTION</h1>
         <ul id="motion_menu_btns">
-          <li class="menu_items">IMAGE</li>
-          <li class="menu_items">VIDEO</li>
-          <li class="menu_items">NOTE</li>
-          <li class="menu_items">TASK</li>
+          <li class="menu_items">
+            <button class="menu_btn">IMAGE</button>
+          </li>
+          <li class="menu_items">
+            <button class="menu_btn">VIDEO</button>
+          </li>
+          <li class="menu_items">
+            <button class="menu_btn">NOTE</button>
+          </li>
+          <li class="menu_items">
+            <button class="menu_btn">TASK</button>
+          </li>
         </ul>
       </nav>
       <article id="motion_posts">
@@ -47,7 +56,9 @@
     </article>
     <div id="modal_bg">
       <div id="modal_body">
-        <button class="btn_close">×</button>
+        <div class="close_container">
+          <button class="btn_close">×</button>
+        </div>
         <form id="form_post">
           <div class="input_container">
             <label for="title">Title</label>
@@ -57,8 +68,10 @@
             <label for="URL">URL</label>
             <input name="URL" class=:"url">
           </div>
-          <button>ADD</button>
         </form>
+        <div class="btn_container">
+          <button>ADD</button>
+        </div>
       </div>
     </div>
   </body>
