@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOTION_V1</title>
+  </head>
+  <body>
+    <article id="motion_container">
+      <nav id="motion_menu">
+        <h1>MOTION</h1>
+        <ul id="motion_menu_btns">
+          <li class="menu_items">IMAGE</li>
+          <li class="menu_items">VIDEO</li>
+          <li class="menu_items">NOTE</li>
+          <li class="menu_items">TASK</li>
+        </ul>
+      </nav>
+      <article id="motion_posts">
+        <section class="media image">
+          <div class="image_wrapper">
+            <img src="" alt="img">
+          </div>
+          <div class="posts_title">
+            <h2>Image</h2>
+          </div>
+          <div class="close_container">
+            <button class="btn_close">×</button>
+          </div>
+        </section>
+        <section class="posts note">
+          <div class="posts_container">
+            <h2>Note</h2>
+            <p>Note Body</p>
+          </div>
+          <div class="close_container">
+            <button class="btn_close">×</button>
+          </div>
+        </section>
+      </article>
+      <footer id="motion_cr">
+        <p id="cr_text">
+          ⓒ Copyright by Dream Coding Academy. All rights reserved.
+        </p>
+      </footer>
+    </article>
+    <div id="modal_bg">
+      <div id="modal_body">
+        <button class="btn_close">×</button>
+        <form id="form_post">
+          <div class="input_container">
+            <label for="title">Title</label>
+            <input name="title" class="title">
+          </div>
+          <div class="input_container">
+            <label for="URL">URL</label>
+            <input name="URL" class=:"url">
+          </div>
+          <button>ADD</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
