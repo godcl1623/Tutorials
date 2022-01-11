@@ -44,6 +44,9 @@ div#modal_bg {
   height: 100%;
   background: var(--translucent-black);
   /* ts로 교체 */
+}
+
+.disabled {
   display: none;
 }
 
@@ -108,6 +111,8 @@ div#modal_bg div#modal_body form#form_post {
 
 /* ############### article ############### */
 article#motion_container {
+  /* width: 50%; */
+  width: 90%;
   height: 100%;
   background: var(--document-bg-color);
   display: flex;
@@ -145,6 +150,15 @@ nav#motion_menu ul li button.menu_btn {
   color: var(--smokywhite);
   font-size: 12px;
   font-weight: bold;
+  cursor: pointer;
+}
+
+nav#motion_menu ul li button.menu_btn:hover {
+  transform: scale(1.05);
+}
+
+nav#motion_menu ul li button.menu_btn:active {
+  transform: scale(1);
 }
 
 /* ########## posts ########## */
@@ -181,6 +195,18 @@ article#motion_posts section {
   align-items: center;
 }
 
+.close_container button {
+  cursor: pointer;
+}
+
+.close_container button:hover {
+  transform: scale(1.05);
+}
+
+.close_container button:active {
+  transform: scale(1);
+}
+
 .posts {
   display: flex;
   width: 100%;
@@ -206,6 +232,7 @@ article#motion_posts section {
 /* ########## footer ########## */
 footer#motion_cr {
   background: var(--translucent-black);
+  text-align: center;
 }
 
 footer#motion_cr p#cr_text {
