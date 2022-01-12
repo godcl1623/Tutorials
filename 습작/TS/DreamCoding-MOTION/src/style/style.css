@@ -44,6 +44,7 @@ div#modal_bg {
   height: 100%;
   background: var(--translucent-black);
   /* ts로 교체 */
+  z-index: 0;
 }
 
 .disabled {
@@ -63,6 +64,7 @@ div#modal_bg div#modal_body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 20;
 }
 
 .close_container, .btn_container {
@@ -77,6 +79,7 @@ div#modal_bg div#modal_body {
   height: 30px;
   background: none;
   color: var(--accent-color);
+  cursor: pointer;
 }
 
 div#modal_bg div#modal_body form#form_post {
@@ -100,6 +103,10 @@ div#modal_bg div#modal_body form#form_post {
 
 .input_container input {
   height: 30px;
+}
+
+.input_container textarea {
+  height: 50px;
 }
 
 .btn_container button {
@@ -188,22 +195,22 @@ article#motion_posts section {
   font-size: 12px;
 }
 
-.close_container {
+article#motion_posts .close_container {
   width: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.close_container button {
+article#motion_posts .close_container button {
   cursor: pointer;
 }
 
-.close_container button:hover {
+article#motion_posts .close_container button:hover {
   transform: scale(1.05);
 }
 
-.close_container button:active {
+article#motion_posts .close_container button:active {
   transform: scale(1);
 }
 
