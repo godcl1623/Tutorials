@@ -114,6 +114,7 @@ div#modal_bg div#modal_body form#form_post {
   background: var(--accent-color);
   color: var(--smokywhite);
   font-weight: bold;
+  cursor: pointer;
 }
 
 /* ############### article ############### */

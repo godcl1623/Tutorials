@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOTION_V1</title>
     <link rel="stylesheet" href="../src/style/style.css">
-    <script defer src="../src/index.js"></script>
+    <script defer src="../build/index.js"></script>
   </head>
   <body>
     <article id="motion_container">
@@ -58,20 +58,16 @@
     <div id="modal_bg" class="disabled">
       <div id="modal_body">
         <div class="close_container">
-          <button class="btn_close">×</button>
+          <button id="btn_close">×</button>
         </div>
         <form id="form_post">
           <div class="input_container">
             <label for="title">Title</label>
-            <input name="title" class="title">
+            <input name="title" class="title need_ext">
           </div>
-          <!-- <div class="input_container">
-            <label for="URL">URL</label>
-            <input name="URL" class="url">
-          </div> -->
         </form>
         <div class="btn_container">
-          <button>ADD</button>
+          <button id="btn_add">ADD</button>
         </div>
       </div>
     </div>
