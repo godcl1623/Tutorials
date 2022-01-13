@@ -12,8 +12,8 @@ interface IPostCreator {
 }
 declare abstract class ProtoPostCreator<B, M, T> implements IPostCreator {
     protected abstract baseModule(ipt: B): HTMLElement;
-    protected abstract mediaPostCreator(ipt: M): HTMLElement;
-    protected abstract textPostCreator(ipt: T): HTMLElement;
+    protected abstract mediaPostCreator(ipt: M, url?: string, title?: string): HTMLElement | HTMLElement[];
+    protected abstract textPostCreator(ipt: T, body?: string, title?: string): HTMLElement;
     abstract ctnCreator(): HTMLElement;
 }
 declare class PostCreator extends ProtoPostCreator<BasePayload, MediaPayload, TxtPayload> {
@@ -29,6 +29,7 @@ declare const menuBtns: NodeListOf<Element> | undefined;
 declare const modalBg: Element | null;
 declare const modalForm: Element | null | undefined;
 declare const modalCloseBtn: Element | null | undefined;
+declare let selectedMenu: string | null;
 declare function modalOpener(btns: NodeListOf<Element> | undefined, target: Element | null): void;
 declare function modalCloser(bg: Element | null, btn: Element | null | undefined): void;
 declare type SectionBase = {
@@ -41,8 +42,15 @@ declare type SectionMedia = {
 declare type SectionTxt = {
     postsCntClass: string;
 };
-declare const addBtn: Element | null | undefined;
 declare class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, SectionTxt> {
     protected menuType: string | null;
-    constructor(menuType: string | null);
+    protected title?: string | undefined;
+    protected url?: string | undefined;
+    protected body?: string | undefined;
+    constructor(menuType: string | null, title?: string | undefined, url?: string | undefined, body?: string | undefined);
+    protected baseModule(ipt: SectionBase): HTMLElement;
+    protected mediaPostCreator(ipt: SectionMedia, url: string, title: string): HTMLElement[];
+    protected textPostCreator(ipt: SectionTxt, body: string, title: string): HTMLElement;
+    ctnCreator(): HTMLElement;
 }
+declare const addBtn: Element | null | undefined;
