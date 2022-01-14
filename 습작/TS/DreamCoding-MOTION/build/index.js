@@ -2,18 +2,16 @@
 class ProtoPostCreator {
 }
 class PostCreator extends ProtoPostCreator {
+    // eslint-disable-next-line no-unused-vars
     constructor(menuType) {
         super();
         this.menuType = menuType;
     }
     baseModule(ipt) {
-        const $div = document.createElement('div');
-        $div.className = 'input_container del_target';
         const $label = document.createElement('label');
         $label.htmlFor = ipt.forVal;
         $label.textContent = ipt.labelTxt;
-        $div.appendChild($label);
-        return $div;
+        return $label;
     }
     mediaPostCreator(ipt) {
         const $input = document.createElement('input');
@@ -40,8 +38,7 @@ class PostCreator extends ProtoPostCreator {
             };
             const baseCnt = this.baseModule(basePayload);
             const mediaPost = this.mediaPostCreator(mediaPayload);
-            baseCnt === null || baseCnt === void 0 ? void 0 : baseCnt.appendChild(mediaPost);
-            result = baseCnt;
+            result = [baseCnt, mediaPost];
         }
         else {
             const basePayload = {
@@ -54,8 +51,7 @@ class PostCreator extends ProtoPostCreator {
             };
             const baseCnt = this.baseModule(basePayload);
             const txtPost = this.textPostCreator(txtPayload);
-            baseCnt === null || baseCnt === void 0 ? void 0 : baseCnt.appendChild(txtPost);
-            result = baseCnt;
+            result = [baseCnt, txtPost];
         }
         return result;
     }
@@ -67,16 +63,26 @@ const modalBg = document.querySelector('#modal_bg');
 const modalForm = modalBg === null || modalBg === void 0 ? void 0 : modalBg.querySelector('form#form_post');
 const modalCloseBtn = modalBg === null || modalBg === void 0 ? void 0 : modalBg.querySelector('#btn_close');
 let selectedMenu = '';
-function modalOpener(btns, target) {
+function modalOpener(
+// eslint-disable-next-line no-undef
+btns, modalBg, modalForm) {
     btns === null || btns === void 0 ? void 0 : btns.forEach(btn => btn.addEventListener('click', (e) => {
         // null인 경우가 있을 수 있으므로 주의
         const eTargetToHTML = e.target;
         selectedMenu = eTargetToHTML.textContent;
         const postCreator = new PostCreator(eTargetToHTML.textContent);
         const $inputCnt = postCreator.ctnCreator();
-        const modalForm = target === null || target === void 0 ? void 0 : target.querySelector('form#form_post');
-        target === null || target === void 0 ? void 0 : target.classList.remove('disabled');
-        modalForm === null || modalForm === void 0 ? void 0 : modalForm.appendChild($inputCnt);
+        const targetCtn = modalForm === null || modalForm === void 0 ? void 0 : modalForm.querySelector('.ap_target');
+        modalBg === null || modalBg === void 0 ? void 0 : modalBg.classList.remove('disabled');
+        const titleVal = modalForm === null || modalForm === void 0 ? void 0 : modalForm.childNodes[1].childNodes[3];
+        if (titleVal.value !== '')
+            titleVal.value = '';
+        if ((targetCtn === null || targetCtn === void 0 ? void 0 : targetCtn.childNodes.length) === 0) {
+            $inputCnt.forEach(item => targetCtn === null || targetCtn === void 0 ? void 0 : targetCtn.appendChild(item));
+        }
+        else {
+            $inputCnt.forEach((item, idx) => targetCtn === null || targetCtn === void 0 ? void 0 : targetCtn.replaceChild(item, targetCtn.childNodes[idx]));
+        }
     }));
 }
 function modalCloser(bg, btn) {
@@ -84,20 +90,23 @@ function modalCloser(bg, btn) {
     targets.forEach(target => target === null || target === void 0 ? void 0 : target.addEventListener('click', (e) => {
         const eTargetToHTML = e.target;
         if (eTargetToHTML.id === 'modal_bg' || eTargetToHTML.id === 'btn_close' || eTargetToHTML.id === 'btn_add') {
-            const delTarget = bg === null || bg === void 0 ? void 0 : bg.querySelector('.del_target');
-            const modalForm = bg === null || bg === void 0 ? void 0 : bg.querySelector('form#form_post');
             bg === null || bg === void 0 ? void 0 : bg.classList.add('disabled');
-            if (delTarget) {
-                modalForm === null || modalForm === void 0 ? void 0 : modalForm.removeChild(delTarget);
-            }
         }
     }));
 }
-modalOpener(menuBtns, modalBg);
+modalOpener(menuBtns, modalBg, modalForm);
 modalCloser(modalBg, modalCloseBtn);
 // 임시 작성
 class SectionCreator extends ProtoPostCreator {
-    constructor(menuType, title, url, body) {
+    constructor(
+    // eslint-disable-next-line no-unused-vars
+    menuType, 
+    // eslint-disable-next-line no-unused-vars
+    title, 
+    // eslint-disable-next-line no-unused-vars
+    url, 
+    // eslint-disable-next-line no-unused-vars
+    body) {
         super();
         this.menuType = menuType;
         this.title = title;
@@ -230,29 +239,21 @@ class SectionCreator extends ProtoPostCreator {
     }
     ;
 }
-const addBtn = modalBg === null || modalBg === void 0 ? void 0 : modalBg.querySelector('button#btn_add');
-addBtn === null || addBtn === void 0 ? void 0 : addBtn.addEventListener('click', (e) => {
-    const inputCtns = modalForm === null || modalForm === void 0 ? void 0 : modalForm.querySelectorAll('.input_container');
-    const inputsArr = [];
+modalForm === null || modalForm === void 0 ? void 0 : modalForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const eTargetToHTML = e.target;
+    const formVals = [];
     const motionPosts = document.querySelector('article#motion_posts');
     let $section;
-    /* ########## input vs textarea 구분 메커니즘 필요 ########## */
-    inputCtns === null || inputCtns === void 0 ? void 0 : inputCtns.forEach(inputCtn => {
-        Array.from(inputCtn.childNodes)
-            .filter(childNode => {
-            const cnToHTML = childNode;
-            if (cnToHTML.classList) {
-                return cnToHTML.classList.contains('need_ext');
-            }
-        })
-            .forEach(inptWithVal => inputsArr.push(inptWithVal));
-    });
+    Object.keys(eTargetToHTML)
+        .slice(0, 2)
+        .forEach(key => formVals.push(eTargetToHTML[key].value));
     if (selectedMenu === 'IMAGE' || selectedMenu === 'VIDEO') {
-        const sectionCreator = new SectionCreator(selectedMenu, inputsArr[0].value, inputsArr[1].value);
+        const sectionCreator = new SectionCreator(selectedMenu, formVals[0], formVals[1]);
         $section = sectionCreator.ctnCreator();
     }
     else {
-        const sectionCreator = new SectionCreator(selectedMenu, inputsArr[0].value, '', inputsArr[1].value);
+        const sectionCreator = new SectionCreator(selectedMenu, formVals[0], '', formVals[1]);
         $section = sectionCreator.ctnCreator();
     }
     motionPosts === null || motionPosts === void 0 ? void 0 : motionPosts.appendChild($section);

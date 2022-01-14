@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* 1. 추가 메뉴 모듈화 */
 type BasePayload = {
   forVal: string;
@@ -12,32 +13,33 @@ type MediaPayload = {
 type TxtPayload = MediaPayload;
 
 interface IPostCreator {
-  ctnCreator(): HTMLElement;
+  ctnCreator(): HTMLElement | HTMLElement[];
 }
 
 abstract class ProtoPostCreator<B, M, T> implements IPostCreator {
+  // eslint-disable-next-line no-unused-vars
   protected abstract baseModule(ipt: B): HTMLElement;
 
+  // eslint-disable-next-line no-unused-vars
   protected abstract mediaPostCreator(ipt: M, url?: string, title?: string): HTMLElement | HTMLElement[];
 
+  // eslint-disable-next-line no-unused-vars
   protected abstract textPostCreator(ipt: T, body?: string, title?: string): HTMLElement;
 
-  abstract ctnCreator(): HTMLElement;
+  abstract ctnCreator(): HTMLElement | HTMLElement[];
 }
 
 class PostCreator extends ProtoPostCreator<BasePayload, MediaPayload, TxtPayload> {
+  // eslint-disable-next-line no-unused-vars
   constructor(protected menuType: string | null) {
     super();
   }
 
   protected baseModule(ipt: BasePayload): HTMLElement {
-    const $div = document.createElement('div');
-    $div.className = 'input_container del_target';
     const $label = document.createElement('label');
     $label.htmlFor = ipt.forVal;
     $label.textContent = ipt.labelTxt;
-    $div.appendChild($label);
-    return $div;
+    return $label;
   }
 
   protected mediaPostCreator(ipt: MediaPayload): HTMLElement {
@@ -54,8 +56,8 @@ class PostCreator extends ProtoPostCreator<BasePayload, MediaPayload, TxtPayload
     return $area;
   }
 
-  ctnCreator(): HTMLElement {
-    let result: HTMLElement;
+  ctnCreator(): HTMLElement[] {
+    let result: HTMLElement[];
     if (this.menuType === 'IMAGE' || this.menuType === 'VIDEO') {
       const basePayload: BasePayload = {
         forVal: 'URL',
@@ -67,8 +69,7 @@ class PostCreator extends ProtoPostCreator<BasePayload, MediaPayload, TxtPayload
       };
       const baseCnt = this.baseModule(basePayload);
       const mediaPost = this.mediaPostCreator(mediaPayload);
-      baseCnt?.appendChild(mediaPost);
-      result = baseCnt;
+      result = [baseCnt, mediaPost];
     } else {
       const basePayload: BasePayload = {
         forVal: 'Body',
@@ -80,8 +81,7 @@ class PostCreator extends ProtoPostCreator<BasePayload, MediaPayload, TxtPayload
       };
       const baseCnt = this.baseModule(basePayload);
       const txtPost = this.textPostCreator(txtPayload);
-      baseCnt?.appendChild(txtPost);
-      result = baseCnt;
+      result = [baseCnt, txtPost];
     }
     return result;
   }
@@ -94,7 +94,12 @@ const modalBg = document.querySelector('#modal_bg');
 const modalForm = modalBg?.querySelector('form#form_post');
 const modalCloseBtn = modalBg?.querySelector('#btn_close');
 let selectedMenu: string | null = '';
-function modalOpener(btns: NodeListOf<Element> | undefined, target: Element | null): void {
+function modalOpener(
+  // eslint-disable-next-line no-undef
+  btns: NodeListOf<Element> | undefined,
+  modalBg: Element | null,
+  modalForm: Element | null | undefined
+): void {
   btns?.forEach(btn =>
     btn.addEventListener('click', (e): void => {
       // null인 경우가 있을 수 있으므로 주의
@@ -102,29 +107,31 @@ function modalOpener(btns: NodeListOf<Element> | undefined, target: Element | nu
       selectedMenu = eTargetToHTML.textContent;
       const postCreator: PostCreator = new PostCreator(eTargetToHTML.textContent);
       const $inputCnt = postCreator.ctnCreator();
-      const modalForm = target?.querySelector('form#form_post');
-      target?.classList.remove('disabled');
-      modalForm?.appendChild($inputCnt);
+      const targetCtn = modalForm?.querySelector('.ap_target');
+      modalBg?.classList.remove('disabled');
+      const titleVal = (modalForm?.childNodes[1].childNodes[3] as HTMLInputElement);
+      if (titleVal.value !== '') titleVal.value = '';
+      if (targetCtn?.childNodes.length === 0) {
+        $inputCnt.forEach(item => targetCtn?.appendChild(item));
+      } else {
+        $inputCnt.forEach((item, idx) => targetCtn?.replaceChild(item, targetCtn.childNodes[idx]));
+      }
     })
   );
 }
+
 function modalCloser(bg: Element | null, btn: Element | null | undefined): void {
   const targets = [bg, btn];
   targets.forEach(target =>
     target?.addEventListener('click', (e): void => {
       const eTargetToHTML = e.target as HTMLElement;
       if (eTargetToHTML.id === 'modal_bg' || eTargetToHTML.id === 'btn_close' || eTargetToHTML.id === 'btn_add') {
-        const delTarget = bg?.querySelector('.del_target');
-        const modalForm = bg?.querySelector('form#form_post');
         bg?.classList.add('disabled');
-        if (delTarget) {
-          modalForm?.removeChild(delTarget);
-        }
       }
     })
   );
 }
-modalOpener(menuBtns, modalBg);
+modalOpener(menuBtns, modalBg, modalForm);
 modalCloser(modalBg, modalCloseBtn);
 
 /* 3. 포스트 추가 메커니즘 */
@@ -144,9 +151,13 @@ type SectionTxt = {
 // 임시 작성
 class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, SectionTxt> {
   constructor(
+    // eslint-disable-next-line no-unused-vars
     protected menuType: string | null,
+    // eslint-disable-next-line no-unused-vars
     protected title?: string,
+    // eslint-disable-next-line no-unused-vars
     protected url?: string,
+    // eslint-disable-next-line no-unused-vars
     protected body?: string
   ) {
     super();
@@ -273,28 +284,21 @@ class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, Section
   };
 }
 
-const addBtn = modalBg?.querySelector('button#btn_add');
-addBtn?.addEventListener('click', (e): void => {
-  const inputCtns = modalForm?.querySelectorAll('.input_container');
-  const inputsArr: HTMLElement[] = [];
+modalForm?.addEventListener('submit', (e): void => {
+  e.preventDefault();
+  type SubmitVals = HTMLInputElement | HTMLTextAreaElement;
+  const eTargetToHTML = e.target as HTMLFormElement;
+  const formVals: string[] = [];
   const motionPosts = document.querySelector('article#motion_posts');
   let $section: HTMLElement;
-  /* ########## input vs textarea 구분 메커니즘 필요 ########## */
-  inputCtns?.forEach(inputCtn => {
-    Array.from(inputCtn.childNodes)
-      .filter(childNode => {
-        const cnToHTML = childNode as HTMLElement;
-        if (cnToHTML.classList) {
-          return cnToHTML.classList.contains('need_ext')
-        }
-      })
-      .forEach(inptWithVal => inputsArr.push(inptWithVal as HTMLElement));
-  });
+  Object.keys(eTargetToHTML)
+    .slice(0, 2)
+    .forEach(key => formVals.push((eTargetToHTML[key] as SubmitVals).value));
   if (selectedMenu === 'IMAGE' || selectedMenu === 'VIDEO') {
-    const sectionCreator: SectionCreator = new SectionCreator(selectedMenu, inputsArr[0].value, inputsArr[1].value)
+    const sectionCreator: SectionCreator = new SectionCreator(selectedMenu, formVals[0], formVals[1])
     $section = sectionCreator.ctnCreator();
   } else {
-    const sectionCreator: SectionCreator = new SectionCreator(selectedMenu, inputsArr[0].value, '', inputsArr[1].value);
+    const sectionCreator: SectionCreator = new SectionCreator(selectedMenu, formVals[0], '', formVals[1]);
     $section = sectionCreator.ctnCreator();
   }
   motionPosts?.appendChild($section);
