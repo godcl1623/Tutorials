@@ -150,6 +150,16 @@ type SectionTxt = {
 
 // 임시 작성
 class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, SectionTxt> {
+  protected static _itemId: number = 0;
+
+  get itemId(): number {
+    return SectionCreator._itemId;
+  }
+
+  set itemId(val: number) {
+    SectionCreator._itemId = val
+  }
+
   constructor(
     // eslint-disable-next-line no-unused-vars
     protected menuType: string | null,
@@ -163,13 +173,25 @@ class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, Section
     super();
   }
 
+  /* 4. 포스트 삭제 메커니즘 */
+  protected delPost(e: Event): void {
+    const eTargetToHTML = e.target as HTMLElement;
+    const delTarget = (eTargetToHTML.parentNode!.parentNode! as HTMLElement);
+    const delCnt = document.querySelector('article#motion_posts');
+    delCnt?.removeChild(delTarget);
+  }
+
   protected baseModule(ipt: SectionBase): HTMLElement {
     const $section = document.createElement('section');
     $section.className = ipt.sectionClass;
+    $section.draggable = true;
+    $section.dataset.itemId = String(this.itemId);
     const $div = document.createElement('div');
     $div.className = 'close_container';
     const $btn = document.createElement('button');
-    $btn.className = 'btn_close';
+    $btn.className = 'btn_del';
+    $btn.innerText = '×';
+    $btn.addEventListener('click', this.delPost);
     $div.appendChild($btn);
     $section.appendChild($div);
     return $section;
@@ -186,8 +208,8 @@ class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, Section
     } else {
       const $iframe = document.createElement('iframe');
       const rawUrl: string[] = url.includes('=') ? url.split('=') : url.split('/');
-      $iframe.width = '560';
-      $iframe.height = '315';
+      // $iframe.width = '560';
+      // $iframe.height = '315';
       $iframe.src = `https://www.youtube.com/embed/${rawUrl[rawUrl.length - 1]}`;
       $iframe.title = 'YouTube video player';
       $iframe.frameBorder = '0';
@@ -291,17 +313,18 @@ modalForm?.addEventListener('submit', (e): void => {
   const formVals: string[] = [];
   const motionPosts = document.querySelector('article#motion_posts');
   let $section: HTMLElement;
+  let sectionCreator: SectionCreator;
   Object.keys(eTargetToHTML)
     .slice(0, 2)
     .forEach(key => formVals.push((eTargetToHTML[key] as SubmitVals).value));
   if (selectedMenu === 'IMAGE' || selectedMenu === 'VIDEO') {
-    const sectionCreator: SectionCreator = new SectionCreator(selectedMenu, formVals[0], formVals[1])
+    sectionCreator = new SectionCreator(selectedMenu, formVals[0], formVals[1])
     $section = sectionCreator.ctnCreator();
   } else {
-    const sectionCreator: SectionCreator = new SectionCreator(selectedMenu, formVals[0], '', formVals[1]);
+    sectionCreator = new SectionCreator(selectedMenu, formVals[0], '', formVals[1]);
     $section = sectionCreator.ctnCreator();
   }
   motionPosts?.appendChild($section);
   selectedMenu = '';
-  modalCloser(modalBg, modalCloseBtn);
+  sectionCreator.itemId++;
 });

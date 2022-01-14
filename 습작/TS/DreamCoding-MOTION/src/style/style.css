@@ -119,8 +119,8 @@ div#modal_bg div#modal_body form#form_post {
 
 /* ############### article ############### */
 article#motion_container {
-  /* width: 50%; */
-  width: 90%;
+  width: 50%;
+  /* width: 90%; */
   height: 100%;
   background: var(--document-bg-color);
   display: flex;
@@ -174,10 +174,15 @@ article#motion_posts {
   /* padding: 50px 35px; */
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 article#motion_posts section {
   margin: 30px 0;
+  display: flex;
+  flex-direction: row-reverse;
+  cursor: pointer;
 }
 
 .media {
@@ -186,8 +191,21 @@ article#motion_posts section {
   height: 245px;
 }
 
-.image_wrapper {
+.image_wrapper, .video_wrapper {
   width: 55%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image_wrapper img {
+  width: auto;
+  height: 100%;
+}
+
+.video_wrapper iframe {
+  width: 100%;
+  height: 100%;
 }
 
 .posts_title {

@@ -113,13 +113,30 @@ class SectionCreator extends ProtoPostCreator {
         this.url = url;
         this.body = body;
     }
+    get itemId() {
+        return SectionCreator._itemId;
+    }
+    set itemId(val) {
+        SectionCreator._itemId = val;
+    }
+    /* 4. 포스트 삭제 메커니즘 */
+    delPost(e) {
+        const eTargetToHTML = e.target;
+        const delTarget = eTargetToHTML.parentNode.parentNode;
+        const delCnt = document.querySelector('article#motion_posts');
+        delCnt === null || delCnt === void 0 ? void 0 : delCnt.removeChild(delTarget);
+    }
     baseModule(ipt) {
         const $section = document.createElement('section');
         $section.className = ipt.sectionClass;
+        $section.draggable = true;
+        $section.dataset.itemId = String(this.itemId);
         const $div = document.createElement('div');
         $div.className = 'close_container';
         const $btn = document.createElement('button');
-        $btn.className = 'btn_close';
+        $btn.className = 'btn_del';
+        $btn.innerText = '×';
+        $btn.addEventListener('click', this.delPost);
         $div.appendChild($btn);
         $section.appendChild($div);
         return $section;
@@ -137,8 +154,8 @@ class SectionCreator extends ProtoPostCreator {
         else {
             const $iframe = document.createElement('iframe');
             const rawUrl = url.includes('=') ? url.split('=') : url.split('/');
-            $iframe.width = '560';
-            $iframe.height = '315';
+            // $iframe.width = '560';
+            // $iframe.height = '315';
             $iframe.src = `https://www.youtube.com/embed/${rawUrl[rawUrl.length - 1]}`;
             $iframe.title = 'YouTube video player';
             $iframe.frameBorder = '0';
@@ -239,25 +256,27 @@ class SectionCreator extends ProtoPostCreator {
     }
     ;
 }
+SectionCreator._itemId = 0;
 modalForm === null || modalForm === void 0 ? void 0 : modalForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const eTargetToHTML = e.target;
     const formVals = [];
     const motionPosts = document.querySelector('article#motion_posts');
     let $section;
+    let sectionCreator;
     Object.keys(eTargetToHTML)
         .slice(0, 2)
         .forEach(key => formVals.push(eTargetToHTML[key].value));
     if (selectedMenu === 'IMAGE' || selectedMenu === 'VIDEO') {
-        const sectionCreator = new SectionCreator(selectedMenu, formVals[0], formVals[1]);
+        sectionCreator = new SectionCreator(selectedMenu, formVals[0], formVals[1]);
         $section = sectionCreator.ctnCreator();
     }
     else {
-        const sectionCreator = new SectionCreator(selectedMenu, formVals[0], '', formVals[1]);
+        sectionCreator = new SectionCreator(selectedMenu, formVals[0], '', formVals[1]);
         $section = sectionCreator.ctnCreator();
     }
     motionPosts === null || motionPosts === void 0 ? void 0 : motionPosts.appendChild($section);
     selectedMenu = '';
-    modalCloser(modalBg, modalCloseBtn);
+    sectionCreator.itemId++;
 });
 //# sourceMappingURL=index.js.map

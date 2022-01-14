@@ -47,7 +47,11 @@ declare class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia,
     protected title?: string | undefined;
     protected url?: string | undefined;
     protected body?: string | undefined;
+    protected static _itemId: number;
+    get itemId(): number;
+    set itemId(val: number);
     constructor(menuType: string | null, title?: string | undefined, url?: string | undefined, body?: string | undefined);
+    protected delPost(e: Event): void;
     protected baseModule(ipt: SectionBase): HTMLElement;
     protected mediaPostCreator(ipt: SectionMedia, url: string, title: string): HTMLElement[];
     protected textPostCreator(ipt: SectionTxt, body: string, title: string): HTMLElement;
