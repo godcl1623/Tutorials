@@ -177,7 +177,9 @@ class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, Section
   protected delPost(e: Event): void {
     const eTargetToHTML = e.target as HTMLElement;
     const delTarget = (eTargetToHTML.parentNode!.parentNode! as HTMLElement);
-    const delCnt = document.querySelector('article#motion_posts');
+    // const motionPosts = document.querySelector('article#motion_posts') as HTMLElement;
+    // const delCnt = motionPosts.querySelector('div#drop_zone');
+    const delCnt = document.querySelector('article#motion_posts') as HTMLElement;
     delCnt?.removeChild(delTarget);
   }
 
@@ -308,6 +310,31 @@ class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, Section
   };
 }
 
+modalForm?.addEventListener('submit', (e): void => {
+  e.preventDefault();
+  type SubmitVals = HTMLInputElement | HTMLTextAreaElement;
+  const eTargetToHTML = e.target as HTMLFormElement;
+  const formVals: string[] = [];
+  const motionPosts = document.querySelector('article#motion_posts') as HTMLElement;
+  const dropZone = motionPosts.querySelector('div#drop_zone');
+  let $section: HTMLElement;
+  let sectionCreator: SectionCreator;
+  Object.keys(eTargetToHTML)
+  .slice(0, 2)
+  .forEach(key => formVals.push((eTargetToHTML[key] as SubmitVals).value));
+  if (selectedMenu === 'IMAGE' || selectedMenu === 'VIDEO') {
+    sectionCreator = new SectionCreator(selectedMenu, formVals[0], formVals[1])
+    $section = sectionCreator.ctnCreator();
+  } else {
+    sectionCreator = new SectionCreator(selectedMenu, formVals[0], '', formVals[1]);
+    $section = sectionCreator.ctnCreator();
+  }
+  // dropZone?.appendChild($section);
+  motionPosts?.appendChild($section);
+  selectedMenu = '';
+  sectionCreator.itemId++;
+});
+
 let dragged: HTMLElement;
 
 document.addEventListener('dragstart', (e): void => {
@@ -316,52 +343,56 @@ document.addEventListener('dragstart', (e): void => {
 
 document.addEventListener('dragover', (e): void => {
   e.preventDefault();
-  // (e.target as HTMLElement).style.background = 'white';
 })
 
 document.addEventListener('dragenter', (e): void => {
-  if ((e.target as HTMLElement).className === 'drop_zone') {
-    (e.target as HTMLElement).style.background = 'white';
-  }
+  e.preventDefault();
+  // const dropArea = document.querySelector('article#motion_posts') as HTMLElement;
+  // const eTargetToHTML = e.target as HTMLElement;
+  // const parentOne = eTargetToHTML.parentNode as HTMLElement;
+  // const parentsTwo = parentOne.parentNode as HTMLElement;
+  // const cond = parentOne.classList.contains('posts') || parentOne.classList.contains('media') || parentsTwo.classList.contains('posts') || parentsTwo.classList.contains('media') || eTargetToHTML.id === 'motion_posts';
+  // console.log('from dragenter: ', eTargetToHTML)
+  // if (cond) {
+  //   console.log(Array.from((dragged.parentNode as HTMLElement).childNodes).indexOf(dragged))
+  // }
 })
 
-document.addEventListener('dragleave', (e): void => {
-  if ((e.target as HTMLElement).className === 'drop_zone') {
-    (e.target as HTMLElement).style.background = '';
-  }
+// document.addEventListener('dragleave', (e): void => {
+//   if ((e.target as HTMLElement).className === 'drop_zone') {
+//     (e.target as HTMLElement).style.background = '';
+//   }
+// })
+
+document.addEventListener('dragend', (e): void => {
+  e.preventDefault();
 })
 
 document.addEventListener('drop', (e): void => {
   e.preventDefault();
-  if ((e.target as HTMLElement).className === 'drop_zone') {
-    (e.target as HTMLElement).style.background = "";
-    ((dragged as HTMLElement).parentNode as HTMLElement).removeChild( dragged );
-    (e.target as HTMLElement).appendChild( dragged );
+  const dropArea = document.querySelector('article#motion_posts') as HTMLElement;
+  const itemList = Array.from(dropArea.childNodes);
+  const eTargetToHTML = e.target as HTMLElement;
+  const parentOne = eTargetToHTML.parentNode as HTMLElement;
+  const parentsTwo = parentOne.parentNode as HTMLElement;
+  const cond = parentOne.classList.contains('posts') || parentOne.classList.contains('media') || parentsTwo.classList.contains('posts') || parentsTwo.classList.contains('media') || eTargetToHTML.id === 'motion_posts';
+  if (cond) {
+    if (e.target instanceof HTMLHeadingElement || e.target instanceof HTMLParagraphElement) {
+      console.log(
+        Array
+          .from(dropArea.childNodes)
+          .filter(node => (node as HTMLElement).className)
+          .indexOf(parentsTwo)
+      );
+      console.log(Array.from(dropArea.childNodes).filter(node => (node as HTMLElement).className))
+    } else if (eTargetToHTML.className === 'close_container') {
+      console.log(
+        Array
+          .from(dropArea.childNodes)
+          .filter(node => (node as HTMLElement).className)
+          .indexOf(parentOne)
+      );
+      console.log(Array.from(dropArea.childNodes).filter(node => (node as HTMLElement).className))
+    }
   }
 })
-
-modalForm?.addEventListener('submit', (e): void => {
-  e.preventDefault();
-  type SubmitVals = HTMLInputElement | HTMLTextAreaElement;
-  const eTargetToHTML = e.target as HTMLFormElement;
-  const formVals: string[] = [];
-  const motionPosts = document.querySelector('article#motion_posts');
-  const dropZone = document.createElement('div');
-  dropZone.className = 'drop_zone';
-  let $section: HTMLElement;
-  let sectionCreator: SectionCreator;
-  Object.keys(eTargetToHTML)
-    .slice(0, 2)
-    .forEach(key => formVals.push((eTargetToHTML[key] as SubmitVals).value));
-  if (selectedMenu === 'IMAGE' || selectedMenu === 'VIDEO') {
-    sectionCreator = new SectionCreator(selectedMenu, formVals[0], formVals[1])
-    $section = sectionCreator.ctnCreator();
-  } else {
-    sectionCreator = new SectionCreator(selectedMenu, formVals[0], '', formVals[1]);
-    $section = sectionCreator.ctnCreator();
-  }
-  dropZone.appendChild($section);
-  motionPosts?.appendChild(dropZone);
-  selectedMenu = '';
-  sectionCreator.itemId++;
-});
