@@ -255,6 +255,10 @@ article#motion_posts .close_container button:active {
   height: 50%;
 }
 
+.drop_zone {
+  min-height: 310px;
+}
+
 /* ########## footer ########## */
 footer#motion_cr {
   background: var(--translucent-black);

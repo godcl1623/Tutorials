@@ -231,8 +231,10 @@ class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, Section
     if (this.menuType === 'NOTE') {
       const $h2 = document.createElement('h2');
       $h2.textContent = title;
+      // $h2.draggable = true;
       const $p = document.createElement('p');
       $p.textContent = body;
+      // $p.draggable = true;
       postCnt.appendChild($h2);
       postCnt.appendChild($p);
     } else {
@@ -306,12 +308,46 @@ class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, Section
   };
 }
 
+let dragged: HTMLElement;
+
+document.addEventListener('dragstart', (e): void => {
+  dragged = (e.target as HTMLElement);
+})
+
+document.addEventListener('dragover', (e): void => {
+  e.preventDefault();
+  // (e.target as HTMLElement).style.background = 'white';
+})
+
+document.addEventListener('dragenter', (e): void => {
+  if ((e.target as HTMLElement).className === 'drop_zone') {
+    (e.target as HTMLElement).style.background = 'white';
+  }
+})
+
+document.addEventListener('dragleave', (e): void => {
+  if ((e.target as HTMLElement).className === 'drop_zone') {
+    (e.target as HTMLElement).style.background = '';
+  }
+})
+
+document.addEventListener('drop', (e): void => {
+  e.preventDefault();
+  if ((e.target as HTMLElement).className === 'drop_zone') {
+    (e.target as HTMLElement).style.background = "";
+    ((dragged as HTMLElement).parentNode as HTMLElement).removeChild( dragged );
+    (e.target as HTMLElement).appendChild( dragged );
+  }
+})
+
 modalForm?.addEventListener('submit', (e): void => {
   e.preventDefault();
   type SubmitVals = HTMLInputElement | HTMLTextAreaElement;
   const eTargetToHTML = e.target as HTMLFormElement;
   const formVals: string[] = [];
   const motionPosts = document.querySelector('article#motion_posts');
+  const dropZone = document.createElement('div');
+  dropZone.className = 'drop_zone';
   let $section: HTMLElement;
   let sectionCreator: SectionCreator;
   Object.keys(eTargetToHTML)
@@ -324,7 +360,8 @@ modalForm?.addEventListener('submit', (e): void => {
     sectionCreator = new SectionCreator(selectedMenu, formVals[0], '', formVals[1]);
     $section = sectionCreator.ctnCreator();
   }
-  motionPosts?.appendChild($section);
+  dropZone.appendChild($section);
+  motionPosts?.appendChild(dropZone);
   selectedMenu = '';
   sectionCreator.itemId++;
 });

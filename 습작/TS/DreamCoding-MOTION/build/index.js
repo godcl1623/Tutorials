@@ -177,8 +177,10 @@ class SectionCreator extends ProtoPostCreator {
         if (this.menuType === 'NOTE') {
             const $h2 = document.createElement('h2');
             $h2.textContent = title;
+            // $h2.draggable = true;
             const $p = document.createElement('p');
             $p.textContent = body;
+            // $p.draggable = true;
             postCnt.appendChild($h2);
             postCnt.appendChild($p);
         }
@@ -257,11 +259,39 @@ class SectionCreator extends ProtoPostCreator {
     ;
 }
 SectionCreator._itemId = 0;
+let dragged;
+document.addEventListener('dragstart', (e) => {
+    dragged = e.target;
+});
+document.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    // (e.target as HTMLElement).style.background = 'white';
+});
+document.addEventListener('dragenter', (e) => {
+    if (e.target.className === 'drop_zone') {
+        e.target.style.background = 'white';
+    }
+});
+document.addEventListener('dragleave', (e) => {
+    if (e.target.className === 'drop_zone') {
+        e.target.style.background = '';
+    }
+});
+document.addEventListener('drop', (e) => {
+    e.preventDefault();
+    if (e.target.className === 'drop_zone') {
+        e.target.style.background = "";
+        dragged.parentNode.removeChild(dragged);
+        e.target.appendChild(dragged);
+    }
+});
 modalForm === null || modalForm === void 0 ? void 0 : modalForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const eTargetToHTML = e.target;
     const formVals = [];
     const motionPosts = document.querySelector('article#motion_posts');
+    const dropZone = document.createElement('div');
+    dropZone.className = 'drop_zone';
     let $section;
     let sectionCreator;
     Object.keys(eTargetToHTML)
@@ -275,7 +305,8 @@ modalForm === null || modalForm === void 0 ? void 0 : modalForm.addEventListener
         sectionCreator = new SectionCreator(selectedMenu, formVals[0], '', formVals[1]);
         $section = sectionCreator.ctnCreator();
     }
-    motionPosts === null || motionPosts === void 0 ? void 0 : motionPosts.appendChild($section);
+    dropZone.appendChild($section);
+    motionPosts === null || motionPosts === void 0 ? void 0 : motionPosts.appendChild(dropZone);
     selectedMenu = '';
     sectionCreator.itemId++;
 });

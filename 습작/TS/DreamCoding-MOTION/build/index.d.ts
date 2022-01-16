@@ -57,3 +57,4 @@ declare class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia,
     protected textPostCreator(ipt: SectionTxt, body: string, title: string): HTMLElement;
     ctnCreator(): HTMLElement;
 }
+declare let dragged: HTMLElement;
