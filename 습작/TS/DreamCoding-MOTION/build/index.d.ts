@@ -42,6 +42,22 @@ declare type SectionMedia = {
 declare type SectionTxt = {
     postsCntClass: string;
 };
+declare class Dnd {
+    clientCoords: {};
+    lastElDir: string;
+    initYCoord: number;
+    lastElIdx: number;
+    isClicked: boolean;
+    isMoving: boolean;
+    isDragging: boolean;
+    dragged: HTMLElement | null;
+    motionPosts: HTMLElement;
+    clickFlag: (event: MouseEvent) => void;
+    movingFlag: (event: MouseEvent) => void;
+    chkLastIdx: (event: Event) => void;
+    itemTopOrBot: (event: MouseEvent) => void;
+    eventsController: (tgt: HTMLElement) => void;
+}
 declare class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, SectionTxt> {
     protected menuType: string | null;
     protected title?: string | undefined;
@@ -57,4 +73,3 @@ declare class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia,
     protected textPostCreator(ipt: SectionTxt, body: string, title: string): HTMLElement;
     ctnCreator(): HTMLElement;
 }
-declare let dragged: HTMLElement;

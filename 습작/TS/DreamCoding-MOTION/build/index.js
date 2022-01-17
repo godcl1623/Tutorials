@@ -96,6 +96,86 @@ function modalCloser(bg, btn) {
 }
 modalOpener(menuBtns, modalBg, modalForm);
 modalCloser(modalBg, modalCloseBtn);
+class Dnd {
+    constructor() {
+        this.clientCoords = {};
+        this.lastElDir = '';
+        this.initYCoord = 0;
+        this.lastElIdx = 0;
+        this.isClicked = false;
+        this.isMoving = false;
+        this.isDragging = false;
+        this.dragged = null;
+        this.motionPosts = document.querySelector('article#motion_posts');
+        this.clickFlag = (event) => {
+            if (event.type === 'mousedown') {
+                this.isClicked = true;
+            }
+            else if (event.type === 'mouseup') {
+                this.isClicked = false;
+            }
+        };
+        this.movingFlag = (event) => {
+            // if (this.initYCoord )
+        };
+        this.chkLastIdx = (event) => {
+            const eTargetToHTML = event.target;
+            const parentOne = eTargetToHTML.parentElement;
+            const parentsTwo = parentOne === null || parentOne === void 0 ? void 0 : parentOne.parentElement;
+            const sectionLists = Array.from(this.motionPosts.childNodes).filter(item => item.className);
+            if (eTargetToHTML instanceof HTMLDivElement) {
+                // this.clientCoords = parentOne?.getBoundingClientRect() as DOMRect;
+                this.lastElIdx = sectionLists.indexOf(parentOne);
+            }
+            else if (!eTargetToHTML.className) {
+                // this.clientCoords = parentsTwo?.getBoundingClientRect() as DOMRect;
+                this.lastElIdx = sectionLists.indexOf(parentsTwo);
+            }
+            // console.log(this.lastElIdx);
+            // console.log(this.isDragging);
+        };
+        this.itemTopOrBot = (event) => {
+            const eTargetToHTML = event.target;
+            const parentOne = eTargetToHTML.parentElement;
+            const parentsTwo = parentOne === null || parentOne === void 0 ? void 0 : parentOne.parentElement;
+            if (eTargetToHTML instanceof HTMLDivElement) {
+                this.clientCoords = parentOne === null || parentOne === void 0 ? void 0 : parentOne.getBoundingClientRect();
+            }
+            else if (!eTargetToHTML.className) {
+                this.clientCoords = parentsTwo === null || parentsTwo === void 0 ? void 0 : parentsTwo.getBoundingClientRect();
+            }
+            const itemMid = this.clientCoords.top + (this.clientCoords.height / 2);
+            if (event.clientY > itemMid) {
+                console.log('bot', this.lastElIdx);
+            }
+            else if (event.clientY < itemMid) {
+                console.log('top', this.lastElIdx);
+            }
+        };
+        this.eventsController = (tgt) => {
+            // this.motionPosts.addEventListener('dragstart', (e: DragEvent) => { this.initYCoord = e.pageY});
+            // this.motionPosts.addEventListener('dragover', (e: DragEvent) => {
+            //   e.preventDefault();
+            //   this.chkLastIdx(e);
+            //   // console.log(this.initYCoord, e.pageY)
+            // });
+            tgt.addEventListener('dragover', e => {
+                e.preventDefault();
+                this.chkLastIdx(e);
+                this.itemTopOrBot(e);
+            });
+            // this.motionPosts.addEventListener('drop', e => {
+            //   const currentYCoord = e.clientY;
+            //   if (currentYCoord - this.initYCoord > 0) {
+            //     this.lastElDir = 'down';
+            //   } else if (currentYCoord - this.initYCoord < 0) {
+            //     this.lastElDir = 'up';
+            //   }
+            //   console.log(this.lastElDir)
+            // })
+        };
+    }
+}
 // 임시 작성
 class SectionCreator extends ProtoPostCreator {
     constructor(
@@ -141,6 +221,10 @@ class SectionCreator extends ProtoPostCreator {
         $btn.addEventListener('click', this.delPost);
         $div.appendChild($btn);
         $section.appendChild($div);
+        const dnd = new Dnd();
+        // $section.addEventListener('dragover', (e: Event) => dnd.itemTopOrBot(e));
+        // $section.addEventListener('click', () => dnd.eventsController($section))
+        dnd.eventsController($section);
         return $section;
     }
     ;
@@ -284,57 +368,5 @@ modalForm === null || modalForm === void 0 ? void 0 : modalForm.addEventListener
     motionPosts === null || motionPosts === void 0 ? void 0 : motionPosts.appendChild($section);
     selectedMenu = '';
     sectionCreator.itemId++;
-});
-let dragged;
-document.addEventListener('dragstart', (e) => {
-    dragged = e.target;
-});
-document.addEventListener('dragover', (e) => {
-    e.preventDefault();
-});
-document.addEventListener('dragenter', (e) => {
-    e.preventDefault();
-    // const dropArea = document.querySelector('article#motion_posts') as HTMLElement;
-    // const eTargetToHTML = e.target as HTMLElement;
-    // const parentOne = eTargetToHTML.parentNode as HTMLElement;
-    // const parentsTwo = parentOne.parentNode as HTMLElement;
-    // const cond = parentOne.classList.contains('posts') || parentOne.classList.contains('media') || parentsTwo.classList.contains('posts') || parentsTwo.classList.contains('media') || eTargetToHTML.id === 'motion_posts';
-    // console.log('from dragenter: ', eTargetToHTML)
-    // if (cond) {
-    //   console.log(Array.from((dragged.parentNode as HTMLElement).childNodes).indexOf(dragged))
-    // }
-});
-// document.addEventListener('dragleave', (e): void => {
-//   if ((e.target as HTMLElement).className === 'drop_zone') {
-//     (e.target as HTMLElement).style.background = '';
-//   }
-// })
-document.addEventListener('dragend', (e) => {
-    e.preventDefault();
-});
-document.addEventListener('drop', (e) => {
-    e.preventDefault();
-    const dropArea = document.querySelector('article#motion_posts');
-    const itemList = Array.from(dropArea.childNodes);
-    const eTargetToHTML = e.target;
-    const parentOne = eTargetToHTML.parentNode;
-    const parentsTwo = parentOne.parentNode;
-    const cond = parentOne.classList.contains('posts') || parentOne.classList.contains('media') || parentsTwo.classList.contains('posts') || parentsTwo.classList.contains('media') || eTargetToHTML.id === 'motion_posts';
-    if (cond) {
-        if (e.target instanceof HTMLHeadingElement || e.target instanceof HTMLParagraphElement) {
-            console.log(Array
-                .from(dropArea.childNodes)
-                .filter(node => node.className)
-                .indexOf(parentsTwo));
-            console.log(Array.from(dropArea.childNodes).filter(node => node.className));
-        }
-        else if (eTargetToHTML.className === 'close_container') {
-            console.log(Array
-                .from(dropArea.childNodes)
-                .filter(node => node.className)
-                .indexOf(parentOne));
-            console.log(Array.from(dropArea.childNodes).filter(node => node.className));
-        }
-    }
 });
 //# sourceMappingURL=index.js.map

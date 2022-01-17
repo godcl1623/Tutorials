@@ -148,6 +148,94 @@ type SectionTxt = {
   postsCntClass: string;
 }
 
+class Dnd {
+  clientCoords = {};
+
+  lastElDir: string = '';
+
+  initYCoord: number = 0;
+
+  lastElIdx: number = 0;
+
+  isClicked: boolean = false;
+
+  isMoving: boolean = false;
+
+  isDragging: boolean = false;
+
+  dragged: HTMLElement | null = null;
+
+  motionPosts: HTMLElement = document.querySelector('article#motion_posts') as HTMLElement;
+
+  clickFlag = (event: MouseEvent): void => {
+    if (event.type === 'mousedown') {
+      this.isClicked = true;
+    } else if (event.type === 'mouseup') {
+      this.isClicked = false;
+    }
+  }
+
+  movingFlag = (event: MouseEvent): void => {
+    // if (this.initYCoord )
+  }
+
+  chkLastIdx = (event: Event): void => {
+    const eTargetToHTML = event.target as HTMLElement;
+    const parentOne = eTargetToHTML.parentElement;
+    const parentsTwo = parentOne?.parentElement;
+    const sectionLists = Array.from(this.motionPosts.childNodes).filter(item => (item as HTMLElement).className);
+    if (eTargetToHTML instanceof HTMLDivElement) {
+      // this.clientCoords = parentOne?.getBoundingClientRect() as DOMRect;
+      this.lastElIdx = sectionLists.indexOf(parentOne as HTMLElement);
+    } else if (!eTargetToHTML.className) {
+      // this.clientCoords = parentsTwo?.getBoundingClientRect() as DOMRect;
+      this.lastElIdx = sectionLists.indexOf(parentsTwo as HTMLElement);
+    }
+    // console.log(this.lastElIdx);
+    // console.log(this.isDragging);
+  }
+
+  itemTopOrBot = (event: MouseEvent): void => {
+    const eTargetToHTML = event.target as HTMLElement;
+    const parentOne = eTargetToHTML.parentElement;
+    const parentsTwo = parentOne?.parentElement;
+    if (eTargetToHTML instanceof HTMLDivElement) {
+      this.clientCoords = parentOne?.getBoundingClientRect() as DOMRect;
+    } else if (!eTargetToHTML.className) {
+      this.clientCoords = parentsTwo?.getBoundingClientRect() as DOMRect;
+    }
+    const itemMid = this.clientCoords.top + (this.clientCoords.height / 2);
+    if (event.clientY > itemMid) {
+      console.log('bot', this.lastElIdx)
+    } else if (event.clientY < itemMid) {
+      console.log('top', this.lastElIdx)
+    }
+  }
+
+  eventsController = (tgt: HTMLElement): void => {
+    // this.motionPosts.addEventListener('dragstart', (e: DragEvent) => { this.initYCoord = e.pageY});
+    // this.motionPosts.addEventListener('dragover', (e: DragEvent) => {
+    //   e.preventDefault();
+    //   this.chkLastIdx(e);
+    //   // console.log(this.initYCoord, e.pageY)
+    // });
+    tgt.addEventListener('dragover', e => {
+      e.preventDefault();
+      this.chkLastIdx(e);
+      this.itemTopOrBot(e)
+    })
+    // this.motionPosts.addEventListener('drop', e => {
+    //   const currentYCoord = e.clientY;
+    //   if (currentYCoord - this.initYCoord > 0) {
+    //     this.lastElDir = 'down';
+    //   } else if (currentYCoord - this.initYCoord < 0) {
+    //     this.lastElDir = 'up';
+    //   }
+    //   console.log(this.lastElDir)
+    // })
+  }
+}
+
 // 임시 작성
 class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, SectionTxt> {
   protected static _itemId: number = 0;
@@ -196,6 +284,10 @@ class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, Section
     $btn.addEventListener('click', this.delPost);
     $div.appendChild($btn);
     $section.appendChild($div);
+    const dnd = new Dnd();
+    // $section.addEventListener('dragover', (e: Event) => dnd.itemTopOrBot(e));
+    // $section.addEventListener('click', () => dnd.eventsController($section))
+    dnd.eventsController($section);
     return $section;
   };
 
@@ -334,65 +426,3 @@ modalForm?.addEventListener('submit', (e): void => {
   selectedMenu = '';
   sectionCreator.itemId++;
 });
-
-let dragged: HTMLElement;
-
-document.addEventListener('dragstart', (e): void => {
-  dragged = (e.target as HTMLElement);
-})
-
-document.addEventListener('dragover', (e): void => {
-  e.preventDefault();
-})
-
-document.addEventListener('dragenter', (e): void => {
-  e.preventDefault();
-  // const dropArea = document.querySelector('article#motion_posts') as HTMLElement;
-  // const eTargetToHTML = e.target as HTMLElement;
-  // const parentOne = eTargetToHTML.parentNode as HTMLElement;
-  // const parentsTwo = parentOne.parentNode as HTMLElement;
-  // const cond = parentOne.classList.contains('posts') || parentOne.classList.contains('media') || parentsTwo.classList.contains('posts') || parentsTwo.classList.contains('media') || eTargetToHTML.id === 'motion_posts';
-  // console.log('from dragenter: ', eTargetToHTML)
-  // if (cond) {
-  //   console.log(Array.from((dragged.parentNode as HTMLElement).childNodes).indexOf(dragged))
-  // }
-})
-
-// document.addEventListener('dragleave', (e): void => {
-//   if ((e.target as HTMLElement).className === 'drop_zone') {
-//     (e.target as HTMLElement).style.background = '';
-//   }
-// })
-
-document.addEventListener('dragend', (e): void => {
-  e.preventDefault();
-})
-
-document.addEventListener('drop', (e): void => {
-  e.preventDefault();
-  const dropArea = document.querySelector('article#motion_posts') as HTMLElement;
-  const itemList = Array.from(dropArea.childNodes);
-  const eTargetToHTML = e.target as HTMLElement;
-  const parentOne = eTargetToHTML.parentNode as HTMLElement;
-  const parentsTwo = parentOne.parentNode as HTMLElement;
-  const cond = parentOne.classList.contains('posts') || parentOne.classList.contains('media') || parentsTwo.classList.contains('posts') || parentsTwo.classList.contains('media') || eTargetToHTML.id === 'motion_posts';
-  if (cond) {
-    if (e.target instanceof HTMLHeadingElement || e.target instanceof HTMLParagraphElement) {
-      console.log(
-        Array
-          .from(dropArea.childNodes)
-          .filter(node => (node as HTMLElement).className)
-          .indexOf(parentsTwo)
-      );
-      console.log(Array.from(dropArea.childNodes).filter(node => (node as HTMLElement).className))
-    } else if (eTargetToHTML.className === 'close_container') {
-      console.log(
-        Array
-          .from(dropArea.childNodes)
-          .filter(node => (node as HTMLElement).className)
-          .indexOf(parentOne)
-      );
-      console.log(Array.from(dropArea.childNodes).filter(node => (node as HTMLElement).className))
-    }
-  }
-})
