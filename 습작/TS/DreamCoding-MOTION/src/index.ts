@@ -213,35 +213,39 @@ class Dnd {
       // eslint-disable-next-line no-undef
       const sectionLists: ChildNode[] = Array.from(this.motionPosts.childNodes)
         .filter(item => (item as HTMLElement).className);
+      const currIdx: number = sectionLists.indexOf(this.dragged as HTMLElement);
       // eslint-disable-next-line no-undef
-      let listContainsTarget: ChildNode[];
+      let frontList: ChildNode[] = [];
       // eslint-disable-next-line no-undef
-      let listRest: ChildNode[];
+      let rearList: ChildNode[] = [];
+      // eslint-disable-next-line no-undef
+      let dragFilteredList: ChildNode[] = [];
+      // eslint-disable-next-line no-undef
+      let newList: ChildNode[] = [];
       // 1. 현재 motionPosts nodeList 내 아이템 전체 삭제
-      sectionLists.forEach(section => this.motionPosts.removeChild(section))
+      sectionLists.forEach(section => this.motionPosts.removeChild(section));
       // 2. 드래그 아이템 리스트에서 제거
       // eslint-disable-next-line no-undef
       // 3. nodeList 분리
       if (this.lastElDir === 'top') {
-        listContainsTarget = sectionLists.slice(0, this.lastElIdx);
-        listRest = sectionLists.slice(this.lastElIdx, sectionLists.length);
+        frontList = sectionLists.slice(0, this.lastElIdx);
+        rearList = sectionLists.slice(this.lastElIdx, sectionLists.length);
       } else {
-        listContainsTarget = sectionLists.slice(0, this.lastElIdx + 1);
-        listRest = sectionLists.slice(this.lastElIdx + 1, sectionLists.length);
+        frontList = sectionLists.slice(0, this.lastElIdx + 1);
+        rearList = sectionLists.slice(this.lastElIdx + 1, sectionLists.length);
       }
-      // 4. 드래그 아이템 추가
-      const dragFilteredList = listContainsTarget.filter(section => section !== this.dragged);
-      dragFilteredList.push(this.dragged as HTMLElement);
-      // 5. 리스트 합치기
-      const newList = dragFilteredList.concat(listRest);
+      // 4. 드래그 아이템 추가 & 5. 리스트 합치기
+      if (currIdx < this.lastElIdx) {
+        dragFilteredList = frontList.filter(section => section !== this.dragged);
+        dragFilteredList.push(this.dragged as HTMLElement);
+        newList = dragFilteredList.concat(rearList);
+      } else if (currIdx > this.lastElIdx) {
+        dragFilteredList = rearList.filter(section => section !== this.dragged);
+        frontList.push(this.dragged as HTMLElement);
+        newList = frontList.concat(dragFilteredList);
+      }
       // 6. 새 리스트 node에 추가
       newList.forEach(section => this.motionPosts.appendChild(section));
-      console.log('last dir: ', this.lastElDir)
-      console.log('last idx: ', this.lastElIdx)
-      console.log('original list: ', sectionLists)
-      console.log('list contain target: ', listContainsTarget)
-      console.log('list rest: ', listRest)
-      console.log('newList: ', newList)
     });
   }
 }

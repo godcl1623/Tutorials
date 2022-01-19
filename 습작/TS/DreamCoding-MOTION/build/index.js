@@ -161,36 +161,41 @@ Dnd.dropEventsController = () => {
         // eslint-disable-next-line no-undef
         const sectionLists = Array.from(_a.motionPosts.childNodes)
             .filter(item => item.className);
+        const currIdx = sectionLists.indexOf(_a.dragged);
         // eslint-disable-next-line no-undef
-        let listContainsTarget;
+        let frontList = [];
         // eslint-disable-next-line no-undef
-        let listRest;
+        let rearList = [];
+        // eslint-disable-next-line no-undef
+        let dragFilteredList = [];
+        // eslint-disable-next-line no-undef
+        let newList = [];
         // 1. 현재 motionPosts nodeList 내 아이템 전체 삭제
         sectionLists.forEach(section => _a.motionPosts.removeChild(section));
         // 2. 드래그 아이템 리스트에서 제거
         // eslint-disable-next-line no-undef
         // 3. nodeList 분리
         if (_a.lastElDir === 'top') {
-            listContainsTarget = sectionLists.slice(0, _a.lastElIdx);
-            listRest = sectionLists.slice(_a.lastElIdx, sectionLists.length);
+            frontList = sectionLists.slice(0, _a.lastElIdx);
+            rearList = sectionLists.slice(_a.lastElIdx, sectionLists.length);
         }
         else {
-            listContainsTarget = sectionLists.slice(0, _a.lastElIdx + 1);
-            listRest = sectionLists.slice(_a.lastElIdx + 1, sectionLists.length);
+            frontList = sectionLists.slice(0, _a.lastElIdx + 1);
+            rearList = sectionLists.slice(_a.lastElIdx + 1, sectionLists.length);
         }
-        // 4. 드래그 아이템 추가
-        const dragFilteredList = listContainsTarget.filter(section => section !== _a.dragged);
-        dragFilteredList.push(_a.dragged);
-        // 5. 리스트 합치기
-        const newList = dragFilteredList.concat(listRest);
+        // 4. 드래그 아이템 추가 & 5. 리스트 합치기
+        if (currIdx < _a.lastElIdx) {
+            dragFilteredList = frontList.filter(section => section !== _a.dragged);
+            dragFilteredList.push(_a.dragged);
+            newList = dragFilteredList.concat(rearList);
+        }
+        else if (currIdx > _a.lastElIdx) {
+            dragFilteredList = rearList.filter(section => section !== _a.dragged);
+            frontList.push(_a.dragged);
+            newList = frontList.concat(dragFilteredList);
+        }
         // 6. 새 리스트 node에 추가
         newList.forEach(section => _a.motionPosts.appendChild(section));
-        console.log('last dir: ', _a.lastElDir);
-        console.log('last idx: ', _a.lastElIdx);
-        console.log('original list: ', sectionLists);
-        console.log('list contain target: ', listContainsTarget);
-        console.log('list rest: ', listRest);
-        console.log('newList: ', newList);
     });
 };
 // 임시 작성
