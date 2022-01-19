@@ -169,24 +169,20 @@ Dnd.dropEventsController = () => {
         sectionLists.forEach(section => _a.motionPosts.removeChild(section));
         // 2. 드래그 아이템 리스트에서 제거
         // eslint-disable-next-line no-undef
-        const tempLists = sectionLists.filter(section => section !== _a.dragged);
         // 3. nodeList 분리
         if (_a.lastElDir === 'top') {
-            listContainsTarget = tempLists.slice(0, _a.lastElIdx);
-            console.log(listContainsTarget);
-            listRest = tempLists.slice(_a.lastElIdx, tempLists.length);
-            console.log(listRest);
+            listContainsTarget = sectionLists.slice(0, _a.lastElIdx);
+            listRest = sectionLists.slice(_a.lastElIdx, sectionLists.length);
         }
         else {
-            listContainsTarget = tempLists.slice(0, _a.lastElIdx + 1);
-            console.log(listContainsTarget);
-            listRest = tempLists.slice(_a.lastElIdx + 1, tempLists.length);
-            console.log(listRest);
+            listContainsTarget = sectionLists.slice(0, _a.lastElIdx + 1);
+            listRest = sectionLists.slice(_a.lastElIdx + 1, sectionLists.length);
         }
         // 4. 드래그 아이템 추가
-        listContainsTarget.push(_a.dragged);
+        const dragFilteredList = listContainsTarget.filter(section => section !== _a.dragged);
+        dragFilteredList.push(_a.dragged);
         // 5. 리스트 합치기
-        const newList = listContainsTarget.concat(listRest);
+        const newList = dragFilteredList.concat(listRest);
         // 6. 새 리스트 node에 추가
         newList.forEach(section => _a.motionPosts.appendChild(section));
         console.log('last dir: ', _a.lastElDir);
