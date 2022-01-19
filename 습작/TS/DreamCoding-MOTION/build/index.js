@@ -129,7 +129,7 @@ class Dnd {
                 Dnd.lastElDir = 'top';
             }
             else {
-                Dnd.lastElDir = 'foo';
+                throw new Error('Section direction declaration error !');
             }
         };
         this.dragEventsController = (tgt) => {
@@ -157,12 +157,44 @@ Dnd.dropEventsController = () => {
     });
     _a.motionPosts.addEventListener('drop', (e) => {
         e.preventDefault();
-        const sectionLists = Array.from(_a.motionPosts.childNodes).filter(item => item.className);
-        // console.log(sectionLists.indexOf(this.dragged as HTMLElement))
-        console.log(e.target);
-        console.log('last index: ', _a.lastElIdx);
+        // motionPosts nodeList
+        // eslint-disable-next-line no-undef
+        const sectionLists = Array.from(_a.motionPosts.childNodes)
+            .filter(item => item.className);
+        // eslint-disable-next-line no-undef
+        let listContainsTarget;
+        // eslint-disable-next-line no-undef
+        let listRest;
+        // 1. 현재 motionPosts nodeList 내 아이템 전체 삭제
+        sectionLists.forEach(section => _a.motionPosts.removeChild(section));
+        // 2. 드래그 아이템 리스트에서 제거
+        // eslint-disable-next-line no-undef
+        const tempLists = sectionLists.filter(section => section !== _a.dragged);
+        // 3. nodeList 분리
+        if (_a.lastElDir === 'top') {
+            listContainsTarget = tempLists.slice(0, _a.lastElIdx);
+            console.log(listContainsTarget);
+            listRest = tempLists.slice(_a.lastElIdx, tempLists.length);
+            console.log(listRest);
+        }
+        else {
+            listContainsTarget = tempLists.slice(0, _a.lastElIdx + 1);
+            console.log(listContainsTarget);
+            listRest = tempLists.slice(_a.lastElIdx + 1, tempLists.length);
+            console.log(listRest);
+        }
+        // 4. 드래그 아이템 추가
+        listContainsTarget.push(_a.dragged);
+        // 5. 리스트 합치기
+        const newList = listContainsTarget.concat(listRest);
+        // 6. 새 리스트 node에 추가
+        newList.forEach(section => _a.motionPosts.appendChild(section));
         console.log('last dir: ', _a.lastElDir);
-        console.log('current index: ', sectionLists.indexOf(_a.dragged));
+        console.log('last idx: ', _a.lastElIdx);
+        console.log('original list: ', sectionLists);
+        console.log('list contain target: ', listContainsTarget);
+        console.log('list rest: ', listRest);
+        console.log('newList: ', newList);
     });
 };
 // 임시 작성

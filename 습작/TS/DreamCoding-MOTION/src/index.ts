@@ -188,7 +188,7 @@ class Dnd {
     } else if (event.clientY < itemMid) {
       Dnd.lastElDir = 'top';
     } else {
-      Dnd.lastElDir = 'foo';
+      throw new Error('Section direction declaration error !');
     }
   }
 
@@ -209,12 +209,43 @@ class Dnd {
     });
     this.motionPosts.addEventListener('drop', (e: DragEvent): void => {
       e.preventDefault();
-      const sectionLists = Array.from(this.motionPosts.childNodes).filter(item => (item as HTMLElement).className);
-      // console.log(sectionLists.indexOf(this.dragged as HTMLElement))
-      console.log(e.target)
-      console.log('last index: ', this.lastElIdx)
+      // motionPosts nodeList
+      // eslint-disable-next-line no-undef
+      const sectionLists: ChildNode[] = Array.from(this.motionPosts.childNodes)
+        .filter(item => (item as HTMLElement).className);
+      // eslint-disable-next-line no-undef
+      let listContainsTarget: ChildNode[];
+      // eslint-disable-next-line no-undef
+      let listRest: ChildNode[];
+      // 1. 현재 motionPosts nodeList 내 아이템 전체 삭제
+      sectionLists.forEach(section => this.motionPosts.removeChild(section))
+      // 2. 드래그 아이템 리스트에서 제거
+      // eslint-disable-next-line no-undef
+      const tempLists: ChildNode[] = sectionLists.filter(section => section !== this.dragged);
+      // 3. nodeList 분리
+      if (this.lastElDir === 'top') {
+        listContainsTarget = tempLists.slice(0, this.lastElIdx);
+        console.log(listContainsTarget)
+        listRest = tempLists.slice(this.lastElIdx, tempLists.length);
+        console.log(listRest)
+      } else {
+        listContainsTarget = tempLists.slice(0, this.lastElIdx + 1);
+        console.log(listContainsTarget)
+        listRest = tempLists.slice(this.lastElIdx + 1, tempLists.length);
+        console.log(listRest)
+      }
+      // 4. 드래그 아이템 추가
+      listContainsTarget.push(this.dragged as HTMLElement);
+      // 5. 리스트 합치기
+      const newList = listContainsTarget.concat(listRest);
+      // 6. 새 리스트 node에 추가
+      newList.forEach(section => this.motionPosts.appendChild(section));
       console.log('last dir: ', this.lastElDir)
-      console.log('current index: ', sectionLists.indexOf(this.dragged as HTMLElement))
+      console.log('last idx: ', this.lastElIdx)
+      console.log('original list: ', sectionLists)
+      console.log('list contain target: ', listContainsTarget)
+      console.log('list rest: ', listRest)
+      console.log('newList: ', newList)
     });
   }
 }
