@@ -157,27 +157,15 @@ class Dnd {
 
   lastElIdx: number = 0;
 
-  isClicked: boolean = false;
+  // isClicked: boolean = false;
 
-  isMoving: boolean = false;
+  // isMoving: boolean = false;
 
-  isDragging: boolean = false;
+  // isDragging: boolean = false;
 
   dragged: HTMLElement | null = null;
 
   motionPosts: HTMLElement = document.querySelector('article#motion_posts') as HTMLElement;
-
-  clickFlag = (event: MouseEvent): void => {
-    if (event.type === 'mousedown') {
-      this.isClicked = true;
-    } else if (event.type === 'mouseup') {
-      this.isClicked = false;
-    }
-  }
-
-  movingFlag = (event: MouseEvent): void => {
-    // if (this.initYCoord )
-  }
 
   chkLastIdx = (event: Event): void => {
     const eTargetToHTML = event.target as HTMLElement;
@@ -185,14 +173,10 @@ class Dnd {
     const parentsTwo = parentOne?.parentElement;
     const sectionLists = Array.from(this.motionPosts.childNodes).filter(item => (item as HTMLElement).className);
     if (eTargetToHTML instanceof HTMLDivElement) {
-      // this.clientCoords = parentOne?.getBoundingClientRect() as DOMRect;
       this.lastElIdx = sectionLists.indexOf(parentOne as HTMLElement);
     } else if (!eTargetToHTML.className) {
-      // this.clientCoords = parentsTwo?.getBoundingClientRect() as DOMRect;
       this.lastElIdx = sectionLists.indexOf(parentsTwo as HTMLElement);
     }
-    // console.log(this.lastElIdx);
-    // console.log(this.isDragging);
   }
 
   itemTopOrBot = (event: MouseEvent): void => {
@@ -233,6 +217,13 @@ class Dnd {
     //   }
     //   console.log(this.lastElDir)
     // })
+    this.motionPosts.addEventListener('dragover', (e: DragEvent) => {
+      e.preventDefault();
+    })
+    this.motionPosts.addEventListener('drop', (e: DragEvent) => {
+      e.preventDefault();
+      console.log('foo')
+    })
   }
 }
 

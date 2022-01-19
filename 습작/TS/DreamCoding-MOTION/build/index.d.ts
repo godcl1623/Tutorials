@@ -47,13 +47,8 @@ declare class Dnd {
     lastElDir: string;
     initYCoord: number;
     lastElIdx: number;
-    isClicked: boolean;
-    isMoving: boolean;
-    isDragging: boolean;
     dragged: HTMLElement | null;
     motionPosts: HTMLElement;
-    clickFlag: (event: MouseEvent) => void;
-    movingFlag: (event: MouseEvent) => void;
     chkLastIdx: (event: Event) => void;
     itemTopOrBot: (event: MouseEvent) => void;
     eventsController: (tgt: HTMLElement) => void;

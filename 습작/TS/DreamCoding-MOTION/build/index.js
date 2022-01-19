@@ -102,37 +102,22 @@ class Dnd {
         this.lastElDir = '';
         this.initYCoord = 0;
         this.lastElIdx = 0;
-        this.isClicked = false;
-        this.isMoving = false;
-        this.isDragging = false;
+        // isClicked: boolean = false;
+        // isMoving: boolean = false;
+        // isDragging: boolean = false;
         this.dragged = null;
         this.motionPosts = document.querySelector('article#motion_posts');
-        this.clickFlag = (event) => {
-            if (event.type === 'mousedown') {
-                this.isClicked = true;
-            }
-            else if (event.type === 'mouseup') {
-                this.isClicked = false;
-            }
-        };
-        this.movingFlag = (event) => {
-            // if (this.initYCoord )
-        };
         this.chkLastIdx = (event) => {
             const eTargetToHTML = event.target;
             const parentOne = eTargetToHTML.parentElement;
             const parentsTwo = parentOne === null || parentOne === void 0 ? void 0 : parentOne.parentElement;
             const sectionLists = Array.from(this.motionPosts.childNodes).filter(item => item.className);
             if (eTargetToHTML instanceof HTMLDivElement) {
-                // this.clientCoords = parentOne?.getBoundingClientRect() as DOMRect;
                 this.lastElIdx = sectionLists.indexOf(parentOne);
             }
             else if (!eTargetToHTML.className) {
-                // this.clientCoords = parentsTwo?.getBoundingClientRect() as DOMRect;
                 this.lastElIdx = sectionLists.indexOf(parentsTwo);
             }
-            // console.log(this.lastElIdx);
-            // console.log(this.isDragging);
         };
         this.itemTopOrBot = (event) => {
             const eTargetToHTML = event.target;
@@ -173,6 +158,13 @@ class Dnd {
             //   }
             //   console.log(this.lastElDir)
             // })
+            this.motionPosts.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+            this.motionPosts.addEventListener('drop', (e) => {
+                e.preventDefault();
+                console.log('foo');
+            });
         };
     }
 }
