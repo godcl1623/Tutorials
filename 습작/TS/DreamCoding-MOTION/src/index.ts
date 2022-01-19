@@ -149,33 +149,27 @@ type SectionTxt = {
 }
 
 class Dnd {
-  clientCoords = {};
+  static clientCoords = {};
 
-  lastElDir: string = '';
+  static lastElDir: string = '';
 
-  initYCoord: number = 0;
+  static initYCoord: number = 0;
 
-  lastElIdx: number = 0;
+  static lastElIdx: number = 0;
 
-  // isClicked: boolean = false;
+  static dragged: HTMLElement | null = null;
 
-  // isMoving: boolean = false;
-
-  // isDragging: boolean = false;
-
-  dragged: HTMLElement | null = null;
-
-  motionPosts: HTMLElement = document.querySelector('article#motion_posts') as HTMLElement;
+  static motionPosts: HTMLElement = document.querySelector('article#motion_posts') as HTMLElement;
 
   chkLastIdx = (event: Event): void => {
     const eTargetToHTML = event.target as HTMLElement;
     const parentOne = eTargetToHTML.parentElement;
     const parentsTwo = parentOne?.parentElement;
-    const sectionLists = Array.from(this.motionPosts.childNodes).filter(item => (item as HTMLElement).className);
+    const sectionLists = Array.from(Dnd.motionPosts.childNodes).filter(item => (item as HTMLElement).className);
     if (eTargetToHTML instanceof HTMLDivElement) {
-      this.lastElIdx = sectionLists.indexOf(parentOne as HTMLElement);
+      Dnd.lastElIdx = sectionLists.indexOf(parentOne as HTMLElement);
     } else if (!eTargetToHTML.className) {
-      this.lastElIdx = sectionLists.indexOf(parentsTwo as HTMLElement);
+      Dnd.lastElIdx = sectionLists.indexOf(parentsTwo as HTMLElement);
     }
   }
 
@@ -184,46 +178,44 @@ class Dnd {
     const parentOne = eTargetToHTML.parentElement;
     const parentsTwo = parentOne?.parentElement;
     if (eTargetToHTML instanceof HTMLDivElement) {
-      this.clientCoords = parentOne?.getBoundingClientRect() as DOMRect;
+      Dnd.clientCoords = parentOne?.getBoundingClientRect() as DOMRect;
     } else if (!eTargetToHTML.className) {
-      this.clientCoords = parentsTwo?.getBoundingClientRect() as DOMRect;
+      Dnd.clientCoords = parentsTwo?.getBoundingClientRect() as DOMRect;
     }
-    const itemMid = this.clientCoords.top + (this.clientCoords.height / 2);
+    const itemMid = Dnd.clientCoords.top + (Dnd.clientCoords.height / 2);
     if (event.clientY > itemMid) {
-      console.log('bot', this.lastElIdx)
+      Dnd.lastElDir = 'bot';
     } else if (event.clientY < itemMid) {
-      console.log('top', this.lastElIdx)
+      Dnd.lastElDir = 'top';
+    } else {
+      Dnd.lastElDir = 'foo';
     }
   }
 
-  eventsController = (tgt: HTMLElement): void => {
-    // this.motionPosts.addEventListener('dragstart', (e: DragEvent) => { this.initYCoord = e.pageY});
-    // this.motionPosts.addEventListener('dragover', (e: DragEvent) => {
-    //   e.preventDefault();
-    //   this.chkLastIdx(e);
-    //   // console.log(this.initYCoord, e.pageY)
-    // });
-    tgt.addEventListener('dragover', e => {
+  dragEventsController = (tgt: HTMLElement): void => {
+    tgt.addEventListener('dragstart', (e: DragEvent): void => {
+      Dnd.dragged = e.target as HTMLElement;
+    });
+    tgt.addEventListener('dragover', (e: DragEvent): void => {
       e.preventDefault();
       this.chkLastIdx(e);
       this.itemTopOrBot(e)
-    })
-    // this.motionPosts.addEventListener('drop', e => {
-    //   const currentYCoord = e.clientY;
-    //   if (currentYCoord - this.initYCoord > 0) {
-    //     this.lastElDir = 'down';
-    //   } else if (currentYCoord - this.initYCoord < 0) {
-    //     this.lastElDir = 'up';
-    //   }
-    //   console.log(this.lastElDir)
-    // })
-    this.motionPosts.addEventListener('dragover', (e: DragEvent) => {
+    });
+  }
+
+  static dropEventsController = (): void => {
+    this.motionPosts.addEventListener('dragover', (e: DragEvent): void => {
       e.preventDefault();
-    })
-    this.motionPosts.addEventListener('drop', (e: DragEvent) => {
+    });
+    this.motionPosts.addEventListener('drop', (e: DragEvent): void => {
       e.preventDefault();
-      console.log('foo')
-    })
+      const sectionLists = Array.from(this.motionPosts.childNodes).filter(item => (item as HTMLElement).className);
+      // console.log(sectionLists.indexOf(this.dragged as HTMLElement))
+      console.log(e.target)
+      console.log('last index: ', this.lastElIdx)
+      console.log('last dir: ', this.lastElDir)
+      console.log('current index: ', sectionLists.indexOf(this.dragged as HTMLElement))
+    });
   }
 }
 
@@ -256,8 +248,6 @@ class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, Section
   protected delPost(e: Event): void {
     const eTargetToHTML = e.target as HTMLElement;
     const delTarget = (eTargetToHTML.parentNode!.parentNode! as HTMLElement);
-    // const motionPosts = document.querySelector('article#motion_posts') as HTMLElement;
-    // const delCnt = motionPosts.querySelector('div#drop_zone');
     const delCnt = document.querySelector('article#motion_posts') as HTMLElement;
     delCnt?.removeChild(delTarget);
   }
@@ -276,9 +266,8 @@ class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, Section
     $div.appendChild($btn);
     $section.appendChild($div);
     const dnd = new Dnd();
-    // $section.addEventListener('dragover', (e: Event) => dnd.itemTopOrBot(e));
-    // $section.addEventListener('click', () => dnd.eventsController($section))
-    dnd.eventsController($section);
+    dnd.dragEventsController($section);
+    // Dnd.dropEventsController();
     return $section;
   };
 
@@ -293,8 +282,6 @@ class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, Section
     } else {
       const $iframe = document.createElement('iframe');
       const rawUrl: string[] = url.includes('=') ? url.split('=') : url.split('/');
-      // $iframe.width = '560';
-      // $iframe.height = '315';
       $iframe.src = `https://www.youtube.com/embed/${rawUrl[rawUrl.length - 1]}`;
       $iframe.title = 'YouTube video player';
       $iframe.frameBorder = '0';
@@ -316,10 +303,8 @@ class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, Section
     if (this.menuType === 'NOTE') {
       const $h2 = document.createElement('h2');
       $h2.textContent = title;
-      // $h2.draggable = true;
       const $p = document.createElement('p');
       $p.textContent = body;
-      // $p.draggable = true;
       postCnt.appendChild($h2);
       postCnt.appendChild($p);
     } else {
@@ -399,7 +384,6 @@ modalForm?.addEventListener('submit', (e): void => {
   const eTargetToHTML = e.target as HTMLFormElement;
   const formVals: string[] = [];
   const motionPosts = document.querySelector('article#motion_posts') as HTMLElement;
-  const dropZone = motionPosts.querySelector('div#drop_zone');
   let $section: HTMLElement;
   let sectionCreator: SectionCreator;
   Object.keys(eTargetToHTML)
@@ -412,8 +396,9 @@ modalForm?.addEventListener('submit', (e): void => {
     sectionCreator = new SectionCreator(selectedMenu, formVals[0], '', formVals[1]);
     $section = sectionCreator.ctnCreator();
   }
-  // dropZone?.appendChild($section);
   motionPosts?.appendChild($section);
   selectedMenu = '';
   sectionCreator.itemId++;
 });
+
+Dnd.dropEventsController();

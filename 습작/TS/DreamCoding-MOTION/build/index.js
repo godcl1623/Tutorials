@@ -1,4 +1,5 @@
 "use strict";
+var _a;
 class ProtoPostCreator {
 }
 class PostCreator extends ProtoPostCreator {
@@ -98,25 +99,16 @@ modalOpener(menuBtns, modalBg, modalForm);
 modalCloser(modalBg, modalCloseBtn);
 class Dnd {
     constructor() {
-        this.clientCoords = {};
-        this.lastElDir = '';
-        this.initYCoord = 0;
-        this.lastElIdx = 0;
-        // isClicked: boolean = false;
-        // isMoving: boolean = false;
-        // isDragging: boolean = false;
-        this.dragged = null;
-        this.motionPosts = document.querySelector('article#motion_posts');
         this.chkLastIdx = (event) => {
             const eTargetToHTML = event.target;
             const parentOne = eTargetToHTML.parentElement;
             const parentsTwo = parentOne === null || parentOne === void 0 ? void 0 : parentOne.parentElement;
-            const sectionLists = Array.from(this.motionPosts.childNodes).filter(item => item.className);
+            const sectionLists = Array.from(Dnd.motionPosts.childNodes).filter(item => item.className);
             if (eTargetToHTML instanceof HTMLDivElement) {
-                this.lastElIdx = sectionLists.indexOf(parentOne);
+                Dnd.lastElIdx = sectionLists.indexOf(parentOne);
             }
             else if (!eTargetToHTML.className) {
-                this.lastElIdx = sectionLists.indexOf(parentsTwo);
+                Dnd.lastElIdx = sectionLists.indexOf(parentsTwo);
             }
         };
         this.itemTopOrBot = (event) => {
@@ -124,50 +116,55 @@ class Dnd {
             const parentOne = eTargetToHTML.parentElement;
             const parentsTwo = parentOne === null || parentOne === void 0 ? void 0 : parentOne.parentElement;
             if (eTargetToHTML instanceof HTMLDivElement) {
-                this.clientCoords = parentOne === null || parentOne === void 0 ? void 0 : parentOne.getBoundingClientRect();
+                Dnd.clientCoords = parentOne === null || parentOne === void 0 ? void 0 : parentOne.getBoundingClientRect();
             }
             else if (!eTargetToHTML.className) {
-                this.clientCoords = parentsTwo === null || parentsTwo === void 0 ? void 0 : parentsTwo.getBoundingClientRect();
+                Dnd.clientCoords = parentsTwo === null || parentsTwo === void 0 ? void 0 : parentsTwo.getBoundingClientRect();
             }
-            const itemMid = this.clientCoords.top + (this.clientCoords.height / 2);
+            const itemMid = Dnd.clientCoords.top + (Dnd.clientCoords.height / 2);
             if (event.clientY > itemMid) {
-                console.log('bot', this.lastElIdx);
+                Dnd.lastElDir = 'bot';
             }
             else if (event.clientY < itemMid) {
-                console.log('top', this.lastElIdx);
+                Dnd.lastElDir = 'top';
+            }
+            else {
+                Dnd.lastElDir = 'foo';
             }
         };
-        this.eventsController = (tgt) => {
-            // this.motionPosts.addEventListener('dragstart', (e: DragEvent) => { this.initYCoord = e.pageY});
-            // this.motionPosts.addEventListener('dragover', (e: DragEvent) => {
-            //   e.preventDefault();
-            //   this.chkLastIdx(e);
-            //   // console.log(this.initYCoord, e.pageY)
-            // });
-            tgt.addEventListener('dragover', e => {
+        this.dragEventsController = (tgt) => {
+            tgt.addEventListener('dragstart', (e) => {
+                Dnd.dragged = e.target;
+            });
+            tgt.addEventListener('dragover', (e) => {
                 e.preventDefault();
                 this.chkLastIdx(e);
                 this.itemTopOrBot(e);
             });
-            // this.motionPosts.addEventListener('drop', e => {
-            //   const currentYCoord = e.clientY;
-            //   if (currentYCoord - this.initYCoord > 0) {
-            //     this.lastElDir = 'down';
-            //   } else if (currentYCoord - this.initYCoord < 0) {
-            //     this.lastElDir = 'up';
-            //   }
-            //   console.log(this.lastElDir)
-            // })
-            this.motionPosts.addEventListener('dragover', (e) => {
-                e.preventDefault();
-            });
-            this.motionPosts.addEventListener('drop', (e) => {
-                e.preventDefault();
-                console.log('foo');
-            });
         };
     }
 }
+_a = Dnd;
+Dnd.clientCoords = {};
+Dnd.lastElDir = '';
+Dnd.initYCoord = 0;
+Dnd.lastElIdx = 0;
+Dnd.dragged = null;
+Dnd.motionPosts = document.querySelector('article#motion_posts');
+Dnd.dropEventsController = () => {
+    _a.motionPosts.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
+    _a.motionPosts.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const sectionLists = Array.from(_a.motionPosts.childNodes).filter(item => item.className);
+        // console.log(sectionLists.indexOf(this.dragged as HTMLElement))
+        console.log(e.target);
+        console.log('last index: ', _a.lastElIdx);
+        console.log('last dir: ', _a.lastElDir);
+        console.log('current index: ', sectionLists.indexOf(_a.dragged));
+    });
+};
 // 임시 작성
 class SectionCreator extends ProtoPostCreator {
     constructor(
@@ -195,8 +192,6 @@ class SectionCreator extends ProtoPostCreator {
     delPost(e) {
         const eTargetToHTML = e.target;
         const delTarget = eTargetToHTML.parentNode.parentNode;
-        // const motionPosts = document.querySelector('article#motion_posts') as HTMLElement;
-        // const delCnt = motionPosts.querySelector('div#drop_zone');
         const delCnt = document.querySelector('article#motion_posts');
         delCnt === null || delCnt === void 0 ? void 0 : delCnt.removeChild(delTarget);
     }
@@ -214,9 +209,8 @@ class SectionCreator extends ProtoPostCreator {
         $div.appendChild($btn);
         $section.appendChild($div);
         const dnd = new Dnd();
-        // $section.addEventListener('dragover', (e: Event) => dnd.itemTopOrBot(e));
-        // $section.addEventListener('click', () => dnd.eventsController($section))
-        dnd.eventsController($section);
+        dnd.dragEventsController($section);
+        // Dnd.dropEventsController();
         return $section;
     }
     ;
@@ -232,8 +226,6 @@ class SectionCreator extends ProtoPostCreator {
         else {
             const $iframe = document.createElement('iframe');
             const rawUrl = url.includes('=') ? url.split('=') : url.split('/');
-            // $iframe.width = '560';
-            // $iframe.height = '315';
             $iframe.src = `https://www.youtube.com/embed/${rawUrl[rawUrl.length - 1]}`;
             $iframe.title = 'YouTube video player';
             $iframe.frameBorder = '0';
@@ -255,10 +247,8 @@ class SectionCreator extends ProtoPostCreator {
         if (this.menuType === 'NOTE') {
             const $h2 = document.createElement('h2');
             $h2.textContent = title;
-            // $h2.draggable = true;
             const $p = document.createElement('p');
             $p.textContent = body;
-            // $p.draggable = true;
             postCnt.appendChild($h2);
             postCnt.appendChild($p);
         }
@@ -342,7 +332,6 @@ modalForm === null || modalForm === void 0 ? void 0 : modalForm.addEventListener
     const eTargetToHTML = e.target;
     const formVals = [];
     const motionPosts = document.querySelector('article#motion_posts');
-    const dropZone = motionPosts.querySelector('div#drop_zone');
     let $section;
     let sectionCreator;
     Object.keys(eTargetToHTML)
@@ -356,9 +345,9 @@ modalForm === null || modalForm === void 0 ? void 0 : modalForm.addEventListener
         sectionCreator = new SectionCreator(selectedMenu, formVals[0], '', formVals[1]);
         $section = sectionCreator.ctnCreator();
     }
-    // dropZone?.appendChild($section);
     motionPosts === null || motionPosts === void 0 ? void 0 : motionPosts.appendChild($section);
     selectedMenu = '';
     sectionCreator.itemId++;
 });
+Dnd.dropEventsController();
 //# sourceMappingURL=index.js.map

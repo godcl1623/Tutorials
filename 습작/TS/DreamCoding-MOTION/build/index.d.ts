@@ -43,15 +43,16 @@ declare type SectionTxt = {
     postsCntClass: string;
 };
 declare class Dnd {
-    clientCoords: {};
-    lastElDir: string;
-    initYCoord: number;
-    lastElIdx: number;
-    dragged: HTMLElement | null;
-    motionPosts: HTMLElement;
+    static clientCoords: {};
+    static lastElDir: string;
+    static initYCoord: number;
+    static lastElIdx: number;
+    static dragged: HTMLElement | null;
+    static motionPosts: HTMLElement;
     chkLastIdx: (event: Event) => void;
     itemTopOrBot: (event: MouseEvent) => void;
-    eventsController: (tgt: HTMLElement) => void;
+    dragEventsController: (tgt: HTMLElement) => void;
+    static dropEventsController: () => void;
 }
 declare class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, SectionTxt> {
     protected menuType: string | null;
