@@ -166,7 +166,7 @@ class Dnd {
     const parentOne = eTargetToHTML.parentElement;
     const parentsTwo = parentOne?.parentElement;
     const sectionLists = Array.from(Dnd.motionPosts.childNodes).filter(item => (item as HTMLElement).className);
-    if (eTargetToHTML instanceof HTMLDivElement) {
+    if (eTargetToHTML instanceof HTMLDivElement && eTargetToHTML.className) {
       Dnd.lastElIdx = sectionLists.indexOf(parentOne as HTMLElement);
     } else if (!eTargetToHTML.className) {
       Dnd.lastElIdx = sectionLists.indexOf(parentsTwo as HTMLElement);
@@ -224,9 +224,7 @@ class Dnd {
       let newList: ChildNode[] = [];
       // 1. 현재 motionPosts nodeList 내 아이템 전체 삭제
       sectionLists.forEach(section => this.motionPosts.removeChild(section));
-      // 2. 드래그 아이템 리스트에서 제거
-      // eslint-disable-next-line no-undef
-      // 3. nodeList 분리
+      // 2. nodeList 분리
       if (this.lastElDir === 'top') {
         frontList = sectionLists.slice(0, this.lastElIdx);
         rearList = sectionLists.slice(this.lastElIdx, sectionLists.length);
@@ -234,7 +232,7 @@ class Dnd {
         frontList = sectionLists.slice(0, this.lastElIdx + 1);
         rearList = sectionLists.slice(this.lastElIdx + 1, sectionLists.length);
       }
-      // 4. 드래그 아이템 추가 & 5. 리스트 합치기
+      // 3. 드래그 아이템 추가 & 5. 리스트 합치기
       if (currIdx < this.lastElIdx) {
         dragFilteredList = frontList.filter(section => section !== this.dragged);
         dragFilteredList.push(this.dragged as HTMLElement);
@@ -243,8 +241,10 @@ class Dnd {
         dragFilteredList = rearList.filter(section => section !== this.dragged);
         frontList.push(this.dragged as HTMLElement);
         newList = frontList.concat(dragFilteredList);
+      } else {
+        newList = sectionLists;
       }
-      // 6. 새 리스트 node에 추가
+      // 4. 새 리스트 node에 추가
       newList.forEach(section => this.motionPosts.appendChild(section));
     });
   }
@@ -345,6 +345,16 @@ class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, Section
       const $input = document.createElement('input');
       $input.type = 'checkbox';
       $input.name = 'checkbox'
+      $input.addEventListener('click', (e: Event): void => {
+        const eTargetToHTML = e.target as HTMLElement;
+        const parentToHTML = eTargetToHTML.parentElement as HTMLElement;
+        const textDeco: string = (parentToHTML.childNodes[1] as HTMLElement).style.textDecoration;
+        if (textDeco === '' || textDeco === 'none') {
+          (parentToHTML.childNodes[1] as HTMLElement).style.textDecoration = 'line-through';
+        } else {
+          (parentToHTML.childNodes[1] as HTMLElement).style.textDecoration = 'none';
+        }
+      });
       const $label = document.createElement('label');
       $label.htmlFor = 'checkbox';
       $label.textContent = body;

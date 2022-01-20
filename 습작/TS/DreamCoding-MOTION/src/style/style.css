@@ -17,7 +17,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 html, body {
@@ -52,14 +52,15 @@ div#modal_bg {
 }
 
 div#modal_bg div#modal_body {
+  border-radius: 10px;
   padding: 0.625rem;
-  background: var(--bg-accent-color);
+  background: var(--component-bg-gradient);
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
-  height: 20%;
+  width: 600px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -68,18 +69,23 @@ div#modal_bg div#modal_body {
 }
 
 .close_container, .btn_container {
-  padding: 0 10px;
+  /* padding: 0 10px; */
   width: 100%;
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .close_container button {
-  font-size: 25px;
+  border: none;
+  font-size: 30px;
   width: 30px;
   height: 30px;
   background: none;
   color: var(--accent-color);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 div#modal_bg div#modal_body form#form_post {
@@ -87,8 +93,12 @@ div#modal_bg div#modal_body form#form_post {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+}
+
+form#form_post > div {
+  margin-top: 20px;
 }
 
 .input_container {
@@ -98,19 +108,31 @@ div#modal_bg div#modal_body form#form_post {
 }
 
 .input_container label {
-  color: var(--smokywhite);
+  color: var(--text-accent-color);
+  font-size: 20px;
 }
 
 .input_container input {
-  height: 30px;
+  border: 1px solid var(--border-color);
+  padding: 0 3px;
+  height: 36px;
+  background: var(--text-edit-bg-color);
+  font-size: 24px;
+  color: var(--smokywhite);
 }
 
 .input_container textarea {
+  border: 1px solid var(--border-color);
   height: 50px;
+  background: var(--text-edit-bg-color);
+  font-size: 24px;
+  color: var(--smokywhite);
 }
 
 .btn_container button {
-  padding: 5px 15px;
+  padding: 7px 20px;
+  border: none;
+  border-radius: 5px;
   background: var(--accent-color);
   color: var(--smokywhite);
   font-weight: bold;
@@ -138,14 +160,20 @@ nav#motion_menu {
   top: 0;
 }
 
+nav#motion_menu > * {
+  margin-top: 30px;
+}
+
 nav#motion_menu h1 {
   color: var(--accent-color);
   width: 100%;
   height: 100%;
+  font-size: 30px;
   text-align: center;
 }
 
 nav#motion_menu ul {
+  margin-bottom: 20px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -153,6 +181,8 @@ nav#motion_menu ul {
 }
 
 nav#motion_menu ul li button.menu_btn {
+  margin-right: 6px;
+  border: none;
   padding: 10px 30px;
   background: var(--accent-color);
   color: var(--smokywhite);
@@ -171,18 +201,21 @@ nav#motion_menu ul li button.menu_btn:active {
 
 /* ########## posts ########## */
 article#motion_posts {
-  /* padding: 50px 35px; */
-  width: 100%;
+  padding: 0 35px;
   height: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
+  scrollbar-color: var(--accent-color) var(--border-color);
+  scrollbar-width: thin;
 }
 
 article#motion_posts section {
   margin: 30px 0;
+  box-shadow: 3px 3px 3px 3px var(--shadow-color);
   display: flex;
   flex-direction: row-reverse;
   cursor: pointer;
+  background: var(--component-bg-gradient);
 }
 
 .media {
@@ -211,7 +244,8 @@ article#motion_posts section {
 .posts_title {
   padding: 20px 10px;
   width: 40%;
-  font-size: 12px;
+  font-size: 18px;
+  color: var(--text-accent-color);
 }
 
 article#motion_posts .close_container {
@@ -236,23 +270,42 @@ article#motion_posts .close_container button:active {
 .posts {
   display: flex;
   width: 100%;
-  height: 245px;
+  min-height: 135px;
 }
 
 .posts_container {
   width: 95%;
 }
 .posts_container h2, .posts_container p {
+  padding: 0 15px;
   display: flex;
   align-items: center;
+  font-weight: bold;
 }
 
 .posts_container h2 {
   height: 50%;
+  font-size: 24px;
+  color: var(--text-accent-color);
 }
 
 .posts_container p {
   height: 50%;
+  font-size: 18px;
+  color: var(--smokywhite);
+}
+
+.posts_container > div {
+  padding: 0 35px;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  color: var(--smokywhite);
+}
+
+.posts_container > div input[type=checkbox] {
+  margin-right: 5px;
 }
 
 .drop_zone {
@@ -261,10 +314,12 @@ article#motion_posts .close_container button:active {
 
 /* ########## footer ########## */
 footer#motion_cr {
+  padding: 20px;
   background: var(--translucent-black);
   text-align: center;
 }
 
 footer#motion_cr p#cr_text {
   color: var(--smokywhite);
+  font-size: 20px;
 }
