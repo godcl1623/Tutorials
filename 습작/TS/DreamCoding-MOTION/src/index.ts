@@ -148,8 +148,14 @@ type SectionTxt = {
   postsCntClass: string;
 }
 
+type DOMRectTemp<T> = {
+  [P in keyof T]?: T[P]
+};
+
+type DOMRectEdited = DOMRectTemp<DOMRect>;
+
 class Dnd {
-  static clientCoords = {};
+  static clientCoords: DOMRectEdited;
 
   static lastElDir: string = '';
 
@@ -182,7 +188,7 @@ class Dnd {
     } else if (!eTargetToHTML.className) {
       Dnd.clientCoords = parentsTwo?.getBoundingClientRect() as DOMRect;
     }
-    const itemMid = Dnd.clientCoords.top + (Dnd.clientCoords.height / 2);
+    const itemMid: number = (Dnd.clientCoords.top as number) + ((Dnd.clientCoords.height as number) / 2);
     if (event.clientY > itemMid) {
       Dnd.lastElDir = 'bot';
     } else if (event.clientY < itemMid) {
@@ -298,7 +304,6 @@ class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, Section
     $section.appendChild($div);
     const dnd = new Dnd();
     dnd.dragEventsController($section);
-    // Dnd.dropEventsController();
     return $section;
   };
 

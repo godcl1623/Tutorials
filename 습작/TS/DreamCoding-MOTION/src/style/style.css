@@ -323,3 +323,9 @@ footer#motion_cr p#cr_text {
   color: var(--smokywhite);
   font-size: 20px;
 }
+
+@media (max-width: 1024px) {
+  article#motion_container {
+    width: 100%;
+  }
+}

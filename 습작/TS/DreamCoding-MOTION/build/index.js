@@ -145,7 +145,6 @@ class Dnd {
     }
 }
 _a = Dnd;
-Dnd.clientCoords = {};
 Dnd.lastElDir = '';
 Dnd.initYCoord = 0;
 Dnd.lastElIdx = 0;
@@ -244,7 +243,6 @@ class SectionCreator extends ProtoPostCreator {
         $section.appendChild($div);
         const dnd = new Dnd();
         dnd.dragEventsController($section);
-        // Dnd.dropEventsController();
         return $section;
     }
     ;

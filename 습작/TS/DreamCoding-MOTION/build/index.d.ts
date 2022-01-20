@@ -42,8 +42,12 @@ declare type SectionMedia = {
 declare type SectionTxt = {
     postsCntClass: string;
 };
+declare type DOMRectTemp<T> = {
+    [P in keyof T]?: T[P];
+};
+declare type DOMRectEdited = DOMRectTemp<DOMRect>;
 declare class Dnd {
-    static clientCoords: {};
+    static clientCoords: DOMRectEdited;
     static lastElDir: string;
     static initYCoord: number;
     static lastElIdx: number;
