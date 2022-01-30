@@ -1,4 +1,11 @@
+/* index.html에서 모듈 적용할 요소 불러오기 */
+
+/* AppComponent Class 생성 */
+
 /* eslint-disable class-methods-use-this */
+
+/* 포스트 추가 모듈 */
+
 /* 1. 추가 메뉴 모듈화 */
 type BasePayload = {
   forVal: string;
@@ -134,6 +141,7 @@ function modalCloser(bg: Element | null, btn: Element | null | undefined): void 
 modalOpener(menuBtns, modalBg, modalForm);
 modalCloser(modalBg, modalCloseBtn);
 
+/* 포스트 추가 모듈 */
 /* 3. 포스트 추가 메커니즘 */
 type SectionBase = {
   sectionClass: string;
