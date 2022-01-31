@@ -1,6 +1,14 @@
 /* index.html에서 모듈 적용할 요소 불러오기 */
-
+// const indexElement: HTMLElement = document.querySelector('article#motion_container');
 /* AppComponent Class 생성 */
+/*
+  class App {
+    appendElement = () => {}
+  }
+
+  const app = new App();
+  app.appendElement() => motion_container에 메뉴들 추가
+*/
 
 /* eslint-disable class-methods-use-this */
 
