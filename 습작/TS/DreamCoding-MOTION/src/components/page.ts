@@ -94,7 +94,7 @@ class PostCreator extends ProtoPostCreator<BasePayload, MediaPayload, TxtPayload
 /* 2. 모달창 여닫기 */
 const motionMenu = document.querySelector('#motion_menu');
 const menuBtns = motionMenu?.querySelectorAll('.menu_items');
-const modalBg = document.querySelector('#modal_bg');
+const modalBg = document.querySelector('#modal');
 const modalForm = modalBg?.querySelector('form#form_post');
 const modalCloseBtn = modalBg?.querySelector('#btn_close');
 let selectedMenu: string | null = '';
@@ -129,7 +129,7 @@ function modalCloser(bg: Element | null, btn: Element | null | undefined): void 
   targets.forEach(target =>
     target?.addEventListener('click', (e): void => {
       const eTargetToHTML = e.target as HTMLElement;
-      if (eTargetToHTML.id === 'modal_bg' || eTargetToHTML.id === 'btn_close' || eTargetToHTML.id === 'btn_add') {
+      if (eTargetToHTML.id === 'modal' || eTargetToHTML.id === 'btn_close' || eTargetToHTML.id === 'btn_add') {
         bg?.classList.add('disabled');
       }
     })

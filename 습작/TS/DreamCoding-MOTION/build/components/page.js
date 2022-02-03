@@ -61,7 +61,7 @@ const test = () => {
     /* 2. 모달창 여닫기 */
     const motionMenu = document.querySelector('#motion_menu');
     const menuBtns = motionMenu === null || motionMenu === void 0 ? void 0 : motionMenu.querySelectorAll('.menu_items');
-    const modalBg = document.querySelector('#modal_bg');
+    const modalBg = document.querySelector('#modal');
     const modalForm = modalBg === null || modalBg === void 0 ? void 0 : modalBg.querySelector('form#form_post');
     const modalCloseBtn = modalBg === null || modalBg === void 0 ? void 0 : modalBg.querySelector('#btn_close');
     let selectedMenu = '';
@@ -91,7 +91,7 @@ const test = () => {
         const targets = [bg, btn];
         targets.forEach(target => target === null || target === void 0 ? void 0 : target.addEventListener('click', (e) => {
             const eTargetToHTML = e.target;
-            if (eTargetToHTML.id === 'modal_bg' || eTargetToHTML.id === 'btn_close' || eTargetToHTML.id === 'btn_add') {
+            if (eTargetToHTML.id === 'modal' || eTargetToHTML.id === 'btn_close' || eTargetToHTML.id === 'btn_add') {
                 bg === null || bg === void 0 ? void 0 : bg.classList.add('disabled');
             }
         }));
