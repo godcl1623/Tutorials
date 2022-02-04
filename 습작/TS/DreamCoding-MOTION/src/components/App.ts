@@ -12,7 +12,7 @@ class App {
     components.forEach(component => { this.container.innerHTML += component });
   }
 
-  render() {
+  render(): HTMLDivElement {
     return this.container;
   }
 }
