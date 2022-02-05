@@ -153,8 +153,8 @@ function modalCloser(bg: Element | null, btn: Element | null | undefined): void 
     })
   );
 }
-modalOpener(menuBtns, modalBg, modalForm);
-modalCloser(modalBg, modalCloseBtn);
+// modalOpener(menuBtns, modalBg, modalForm);
+// modalCloser(modalBg, modalCloseBtn);
 
 /* 포스트 추가 모듈 */
 /* 3. 포스트 추가 메커니즘 */

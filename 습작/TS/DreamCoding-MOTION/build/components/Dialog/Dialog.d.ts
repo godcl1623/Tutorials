@@ -1,5 +1,5 @@
 import { ComponentTemplate } from '../PseudoComp.js';
-declare type Payload = {
+export declare type Payload = {
     forVal?: string;
     labelTxt?: string;
     nameVal?: string;
@@ -11,4 +11,3 @@ export default class PostCreateDialog extends ComponentTemplate {
     constructor(menuType: string, payload: Payload);
     private generateDialog;
 }
-export {};

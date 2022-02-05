@@ -1,4 +1,5 @@
 import { ComponentTemplate } from './PseudoComp.js';
+import PostCreateDialog, { Payload } from './Dialog/Dialog.js';
 
 class Main extends ComponentTemplate {
   constructor() {

@@ -108,8 +108,6 @@ const test = () => {
             }
         }));
     }
-    modalOpener(menuBtns, modalBg, modalForm);
-    modalCloser(modalBg, modalCloseBtn);
     // App 수준 추가
     class Dnd {
         constructor() {

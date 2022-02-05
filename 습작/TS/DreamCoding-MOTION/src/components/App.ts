@@ -18,5 +18,4 @@ class App {
 }
 
 const AppComponent = new App();
-
 export default AppComponent.render().innerHTML;

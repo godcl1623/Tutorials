@@ -1,7 +1,8 @@
-import { ComponentTemplate } from './PseudoComp.js';
+import { ComponentTemplate } from '../PseudoComp.js';
+
 class Modal extends ComponentTemplate {
-    constructor() {
-        super(`
+  constructor() {
+    super(`
       <div id="modal_body">
         <div class="close_container">
           <button id="btn_close">×</button>
@@ -18,7 +19,7 @@ class Modal extends ComponentTemplate {
         </form>
       </div>
     `);
-    }
+  }
 }
+
 export default new Modal().render().innerHTML;
-//# sourceMappingURL=Modal.js.map
