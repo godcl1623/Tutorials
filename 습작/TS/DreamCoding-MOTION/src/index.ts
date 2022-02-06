@@ -2,7 +2,7 @@ import App from './components/App.js';
 // import TotalComponent from './components/page.js';
 import TempComponent from './components/temp.js';
 import Modal from './components/Modal/Modal.js';
-import PostCreateDialog, { Payload } from './components/Dialog/Dialog.js';
+import PostCreateDialog, { DialogPayload } from './components/Dialog/Dialog.js';
 import { SectionCreator } from './components/page.js';
 
 const root = document.querySelector('div#root');
@@ -38,7 +38,7 @@ class TempDOM {
       const modalForm = modalBg?.querySelector('form#form_post');
       this.selectedMenu = eTargetToHTML.textContent! as string;
       const _payloadCondition = this.selectedMenu === 'IMAGE' || this.selectedMenu === 'VIDEO';
-      const _payloadTest: Payload = {
+      const _payloadTest: DialogPayload = {
         forVal: _payloadCondition ? 'URL' : 'Body',
         labelTxt: _payloadCondition ? 'URL' : 'Body',
         nameVal: _payloadCondition ? 'URL' : 'Body',

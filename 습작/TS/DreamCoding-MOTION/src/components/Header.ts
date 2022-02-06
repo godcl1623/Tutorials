@@ -1,4 +1,4 @@
-import PostCreateDialog, { Payload } from './Dialog/Dialog.js';
+import PostCreateDialog, { DialogPayload } from './Dialog/Dialog.js';
 import ComponentTemplate from './PseudoComp.js';
 
 type OpenListener = () => void;
@@ -54,7 +54,7 @@ class Header extends ComponentTemplate {
       const modalForm = modalBg?.querySelector('form#form_post');
       const selectedMenu = eTargetToHTML.textContent! as string;
       const _payloadCondition = selectedMenu === 'IMAGE' || selectedMenu === 'VIDEO';
-      const _payloadTest: Payload = {
+      const _payloadTest: DialogPayload = {
         forVal: _payloadCondition ? 'URL' : 'Body',
         labelTxt: _payloadCondition ? 'URL' : 'Body',
         nameVal: _payloadCondition ? 'URL' : 'Body',

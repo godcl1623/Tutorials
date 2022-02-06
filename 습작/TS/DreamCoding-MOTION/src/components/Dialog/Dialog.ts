@@ -1,6 +1,6 @@
 import ComponentTemplate from '../PseudoComp.js';
 
-export type Payload = {
+export type DialogPayload = {
   forVal?: string;
   labelTxt?: string;
   nameVal?: string;
@@ -8,11 +8,11 @@ export type Payload = {
 }
 
 export default class PostCreateDialog extends ComponentTemplate {
-  private payload: Payload;
+  private payload: DialogPayload;
 
   private menuType: string;
 
-  constructor(menuType: string, payload: Payload) {
+  constructor(menuType: string, payload: DialogPayload) {
     super(`
       <label></label>
     `);
@@ -25,7 +25,7 @@ export default class PostCreateDialog extends ComponentTemplate {
     this.container.appendChild(valInput);
   }
 
-  private generateDialog(menuType: string, payload: Payload) {
+  private generateDialog(menuType: string, payload: DialogPayload) {
     const element = menuType === 'IMAGE' || menuType === 'VIDEO' ? 'input' : 'textarea';
     const $value = document.createElement(element)! as HTMLInputElement | HTMLTextAreaElement;
     $value.name = payload.nameVal! as string;
