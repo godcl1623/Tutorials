@@ -1,4 +1,4 @@
-import { ComponentTemplate } from '../PseudoComp.js';
+import ComponentTemplate from '../PseudoComp.js';
 
 export type Payload = {
   forVal?: string;

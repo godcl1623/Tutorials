@@ -1,5 +1,5 @@
 import PostCreateDialog from './Dialog/Dialog.js';
-import { ComponentTemplate } from './PseudoComp.js';
+import ComponentTemplate from './PseudoComp.js';
 class MenuBtns extends ComponentTemplate {
     constructor(menuTxt) {
         super(`
@@ -10,7 +10,6 @@ class MenuBtns extends ComponentTemplate {
         this.menuTxt = menuTxt;
         this.menuBtn = this.container.querySelector('button.menu_btn');
         this.menuBtn.textContent = this.menuTxt;
-        this.menuBtn.className += ` ${menuTxt}`;
     }
     attachTo(cntRoot) {
         cntRoot.appendChild(this.container.querySelector('li'));

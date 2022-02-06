@@ -1,6 +1,6 @@
 import PostCreateDialog from './Dialog/Dialog.js';
 
-const test = () => {
+// const test = () => {
   /* eslint-disable class-methods-use-this */
 
 /* 포스트 추가 모듈 */
@@ -109,50 +109,50 @@ const modalBg = document.querySelector('#modal');
 const modalForm = modalBg?.querySelector('form#form_post');
 const modalCloseBtn = modalBg?.querySelector('#btn_close');
 let selectedMenu: string | null = '';
-function modalOpener(
-  // eslint-disable-next-line no-undef
-  btns: NodeListOf<Element> | undefined,
-  modalBg: Element | null,
-  modalForm: Element | null | undefined
-): void {
-  btns?.forEach(btn =>
-    btn.addEventListener('click', (e): void => {
-      // null인 경우가 있을 수 있으므로 주의
-      const eTargetToHTML = e.target as HTMLElement;
-      selectedMenu = eTargetToHTML.textContent;
-      const _payloadCondition = eTargetToHTML.textContent === 'IMAGE' || eTargetToHTML.textContent === 'VIDEO';
-      const _payloadTest: Payload = {
-        forVal: _payloadCondition ? 'URL' : 'Body',
-        labelTxt: _payloadCondition ? 'URL' : 'Body',
-        nameVal: _payloadCondition ? 'URL' : 'Body',
-        classVal: _payloadCondition ? 'url need_ext' : 'body need_ext'
-      };
-      const postCreator = new PostCreateDialog(eTargetToHTML.textContent! as string, _payloadTest);
-      const $inputCnt = postCreator.render();
-      const targetCtn = modalForm?.querySelector('.ap_target');
-      modalBg?.classList.remove('disabled');
-      const titleVal = (modalForm?.childNodes[1].childNodes[3] as HTMLInputElement);
-      if (titleVal.value !== '') titleVal.value = '';
-      if (targetCtn?.childNodes.length === 0) {
-        targetCtn.appendChild($inputCnt);
-      } else {
-        targetCtn?.replaceChild($inputCnt, targetCtn.querySelector('div')! as HTMLDivElement);
-      }
-    })
-  );
-}
+// function modalOpener(
+//   // eslint-disable-next-line no-undef
+//   btns: NodeListOf<Element> | undefined,
+//   modalBg: Element | null,
+//   modalForm: Element | null | undefined
+// ): void {
+//   btns?.forEach(btn =>
+//     btn.addEventListener('click', (e): void => {
+//       // null인 경우가 있을 수 있으므로 주의
+//       const eTargetToHTML = e.target as HTMLElement;
+//       selectedMenu = eTargetToHTML.textContent;
+//       const _payloadCondition = eTargetToHTML.textContent === 'IMAGE' || eTargetToHTML.textContent === 'VIDEO';
+//       const _payloadTest: Payload = {
+//         forVal: _payloadCondition ? 'URL' : 'Body',
+//         labelTxt: _payloadCondition ? 'URL' : 'Body',
+//         nameVal: _payloadCondition ? 'URL' : 'Body',
+//         classVal: _payloadCondition ? 'url need_ext' : 'body need_ext'
+//       };
+//       const postCreator = new PostCreateDialog(eTargetToHTML.textContent! as string, _payloadTest);
+//       const $inputCnt = postCreator.render();
+//       const targetCtn = modalForm?.querySelector('.ap_target');
+//       modalBg?.classList.remove('disabled');
+//       const titleVal = (modalForm?.childNodes[1].childNodes[3] as HTMLInputElement);
+//       if (titleVal.value !== '') titleVal.value = '';
+//       if (targetCtn?.childNodes.length === 0) {
+//         targetCtn.appendChild($inputCnt);
+//       } else {
+//         targetCtn?.replaceChild($inputCnt, targetCtn.querySelector('div')! as HTMLDivElement);
+//       }
+//     })
+//   );
+// }
 
-function modalCloser(bg: Element | null, btn: Element | null | undefined): void {
-  const targets = [bg, btn];
-  targets.forEach(target =>
-    target?.addEventListener('click', (e): void => {
-      const eTargetToHTML = e.target as HTMLElement;
-      if (eTargetToHTML.id === 'modal' || eTargetToHTML.id === 'btn_close' || eTargetToHTML.id === 'btn_add') {
-        bg?.classList.add('disabled');
-      }
-    })
-  );
-}
+// function modalCloser(bg: Element | null, btn: Element | null | undefined): void {
+//   const targets = [bg, btn];
+//   targets.forEach(target =>
+//     target?.addEventListener('click', (e): void => {
+//       const eTargetToHTML = e.target as HTMLElement;
+//       if (eTargetToHTML.id === 'modal' || eTargetToHTML.id === 'btn_close' || eTargetToHTML.id === 'btn_add') {
+//         bg?.classList.add('disabled');
+//       }
+//     })
+//   );
+// }
 // modalOpener(menuBtns, modalBg, modalForm);
 // modalCloser(modalBg, modalCloseBtn);
 
@@ -178,7 +178,7 @@ type DOMRectTemp<T> = {
 type DOMRectEdited = DOMRectTemp<DOMRect>;
 
 // App 수준 추가
-class Dnd {
+export class Dnd {
   static clientCoords: DOMRectEdited;
 
   static lastElDir: string = '';
@@ -281,7 +281,7 @@ class Dnd {
 }
 
 // Main 수준 추가
-class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, SectionTxt> {
+export class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, SectionTxt> {
   protected static _itemId: number = 0;
 
   get itemId(): number {
@@ -471,7 +471,7 @@ modalForm?.addEventListener('submit', (e): void => {
   sectionCreator.itemId++;
 });
 
-Dnd.dropEventsController();
-}
+// Dnd.dropEventsController();
+// }
 
-export default test;
+// export default test;

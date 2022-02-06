@@ -1,5 +1,5 @@
 import PostCreateDialog, { Payload } from './Dialog/Dialog.js';
-import { ComponentTemplate } from './PseudoComp.js';
+import ComponentTemplate from './PseudoComp.js';
 
 type OpenListener = () => void;
 type CloseListener = () => void;
@@ -18,7 +18,6 @@ class MenuBtns extends ComponentTemplate {
     this.menuTxt = menuTxt;
     this.menuBtn = this.container.querySelector('button.menu_btn')! as HTMLButtonElement;
     this.menuBtn.textContent = this.menuTxt;
-    this.menuBtn.className += ` ${menuTxt}`;
   }
 
   attachTo(cntRoot: HTMLElement): void {
