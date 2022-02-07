@@ -20,6 +20,7 @@ class TempDOM {
         btns.forEach(btn => {
             this.registerModalOpen(btn);
         });
+        this.delPost(TempDOM.appRoot);
     }
     createPortal(htmlContents, modalRoot) {
         TempDOM.modalRoot = modalRoot;
@@ -95,11 +96,17 @@ class TempDOM {
                 throw new Error('Invalid menuType input error !');
         }
     }
-    delPost(e) {
-        const eTargetToHTML = e.target;
-        const delTarget = eTargetToHTML.parentNode.parentNode;
-        const delCnt = TempDOM.appRoot.querySelector('article#motion_posts');
-        delCnt === null || delCnt === void 0 ? void 0 : delCnt.removeChild(delTarget);
+    delPost(tgt) {
+        tgt.addEventListener('click', (e) => {
+            const eTargetToHTML = e.target;
+            if (eTargetToHTML.className === 'btn_del') {
+                const delTarget = eTargetToHTML.parentNode.parentNode;
+                const delCnt = TempDOM.appRoot.querySelector('article#motion_posts');
+                delCnt === null || delCnt === void 0 ? void 0 : delCnt.removeChild(delTarget);
+            }
+        });
+    }
+    enableDrag(cnt) {
     }
 }
 const tempDOM = new TempDOM();

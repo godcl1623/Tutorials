@@ -9,6 +9,7 @@ import ImagePost from './components/Page/Items/Image.js';
 import VideoPost from './components/Page/Items/Video.js';
 import NotePost from './components/Page/Items/Note.js';
 import TaskPost from './components/Page/Items/Task.js';
+import Dnd from './components/page.js';
 
 const root = document.querySelector('div#root');
 const modal = document.querySelector('div#modal');
@@ -31,6 +32,7 @@ class TempDOM {
     btns.forEach(btn => {
       this.registerModalOpen(btn! as HTMLButtonElement);
     })
+    this.delPost(TempDOM.appRoot);
   }
   
   createPortal(htmlContents: string, modalRoot: HTMLDivElement) {
@@ -111,11 +113,19 @@ class TempDOM {
     }
   }
 
-  private delPost(e: Event): void {
-    const eTargetToHTML = e.target as HTMLElement;
-    const delTarget = (eTargetToHTML.parentNode!.parentNode! as HTMLElement);
-    const delCnt = (TempDOM.appRoot! as HTMLElement).querySelector('article#motion_posts');
-    delCnt?.removeChild(delTarget);
+  private delPost(tgt: HTMLElement): void {
+    tgt.addEventListener('click', (e: Event) => {
+      const eTargetToHTML = e.target as HTMLElement;
+      if (eTargetToHTML.className === 'btn_del') {
+        const delTarget = (eTargetToHTML.parentNode!.parentNode! as HTMLElement);
+        const delCnt = (TempDOM.appRoot! as HTMLElement).querySelector('article#motion_posts');
+        delCnt?.removeChild(delTarget);
+      }
+    });
+  }
+
+  private enableDrag(cnt: HTMLElement): void {
+
   }
 }
 

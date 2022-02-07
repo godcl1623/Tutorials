@@ -68,7 +68,7 @@ const modalForm = modalBg === null || modalBg === void 0 ? void 0 : modalBg.quer
 const modalCloseBtn = modalBg === null || modalBg === void 0 ? void 0 : modalBg.querySelector('#btn_close');
 let selectedMenu = '';
 // App 수준 추가
-export class Dnd {
+export default class Dnd {
     constructor() {
         this.chkLastIdx = (event) => {
             const eTargetToHTML = event.target;
@@ -170,177 +170,164 @@ Dnd.dropEventsController = () => {
     });
 };
 // Main 수준 추가
-export class SectionCreator extends ProtoPostCreator {
-    constructor(
-    // eslint-disable-next-line no-unused-vars
-    menuType, 
-    // eslint-disable-next-line no-unused-vars
-    title, 
-    // eslint-disable-next-line no-unused-vars
-    url, 
-    // eslint-disable-next-line no-unused-vars
-    body) {
-        super();
-        this.menuType = menuType;
-        this.title = title;
-        this.url = url;
-        this.body = body;
-    }
-    get itemId() {
-        return SectionCreator._itemId;
-    }
-    set itemId(val) {
-        SectionCreator._itemId = val;
-    }
-    /* 4. 포스트 삭제 메커니즘 */
-    delPost(e) {
-        const eTargetToHTML = e.target;
-        const delTarget = eTargetToHTML.parentNode.parentNode;
-        const delCnt = document.querySelector('article#motion_posts');
-        delCnt === null || delCnt === void 0 ? void 0 : delCnt.removeChild(delTarget);
-    }
-    baseModule(ipt) {
-        const $section = document.createElement('section');
-        $section.className = ipt.sectionClass;
-        $section.draggable = true;
-        $section.dataset.itemId = String(this.itemId);
-        const $div = document.createElement('div');
-        $div.className = 'close_container';
-        const $btn = document.createElement('button');
-        $btn.className = 'btn_del';
-        $btn.innerText = '×';
-        $btn.addEventListener('click', this.delPost);
-        $div.appendChild($btn);
-        $section.appendChild($div);
-        const dnd = new Dnd();
-        dnd.dragEventsController($section);
-        return $section;
-    }
-    ;
-    mediaPostCreator(ipt, url, title) {
-        const mediaCnt = document.createElement('div');
-        mediaCnt.className = ipt.imgWrapperClass;
-        if (this.menuType === 'IMAGE') {
-            const $img = document.createElement('img');
-            $img.src = url;
-            $img.alt = 'img';
-            mediaCnt.appendChild($img);
-        }
-        else {
-            const $iframe = document.createElement('iframe');
-            const rawUrl = url.includes('=') ? url.split('=') : url.split('/');
-            $iframe.src = `https://www.youtube.com/embed/${rawUrl[rawUrl.length - 1]}`;
-            $iframe.title = 'YouTube video player';
-            $iframe.frameBorder = '0';
-            $iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-            $iframe.allowFullscreen = true;
-            mediaCnt.appendChild($iframe);
-        }
-        const titleCnt = document.createElement('div');
-        titleCnt.className = ipt.titleWrapperClass;
-        const $h2 = document.createElement('h2');
-        $h2.textContent = title;
-        titleCnt.appendChild($h2);
-        return [titleCnt, mediaCnt];
-    }
-    ;
-    textPostCreator(ipt, body, title) {
-        const postCnt = document.createElement('div');
-        postCnt.className = ipt.postsCntClass;
-        if (this.menuType === 'NOTE') {
-            const $h2 = document.createElement('h2');
-            $h2.textContent = title;
-            const $p = document.createElement('p');
-            $p.textContent = body;
-            postCnt.appendChild($h2);
-            postCnt.appendChild($p);
-        }
-        else {
-            const $h2 = document.createElement('h2');
-            $h2.textContent = title;
-            const bodyCnt = document.createElement('div');
-            const $input = document.createElement('input');
-            $input.type = 'checkbox';
-            $input.name = 'checkbox';
-            $input.addEventListener('click', (e) => {
-                const eTargetToHTML = e.target;
-                const parentToHTML = eTargetToHTML.parentElement;
-                const textDeco = parentToHTML.childNodes[1].style.textDecoration;
-                if (textDeco === '' || textDeco === 'none') {
-                    parentToHTML.childNodes[1].style.textDecoration = 'line-through';
-                }
-                else {
-                    parentToHTML.childNodes[1].style.textDecoration = 'none';
-                }
-            });
-            const $label = document.createElement('label');
-            $label.htmlFor = 'checkbox';
-            $label.textContent = body;
-            bodyCnt.appendChild($input);
-            bodyCnt.appendChild($label);
-            postCnt.appendChild($h2);
-            postCnt.appendChild(bodyCnt);
-        }
-        return postCnt;
-    }
-    ;
-    ctnCreator() {
-        let result;
-        if (this.menuType === 'IMAGE') {
-            const sectionBase = {
-                sectionClass: 'media image'
-            };
-            const sectionMedia = {
-                imgWrapperClass: 'image_wrapper',
-                titleWrapperClass: 'posts_title'
-            };
-            const baseCnt = this.baseModule(sectionBase);
-            const mediaPost = this.mediaPostCreator(sectionMedia, this.url, this.title);
-            mediaPost.forEach(media => baseCnt.appendChild(media));
-            result = baseCnt;
-        }
-        else if (this.menuType === 'VIDEO') {
-            const sectionBase = {
-                sectionClass: 'media video'
-            };
-            const sectionMedia = {
-                imgWrapperClass: 'video_wrapper',
-                titleWrapperClass: 'posts_title'
-            };
-            const baseCnt = this.baseModule(sectionBase);
-            const mediaPost = this.mediaPostCreator(sectionMedia, this.url, this.title);
-            mediaPost.forEach(media => baseCnt.appendChild(media));
-            result = baseCnt;
-        }
-        else if (this.menuType === 'NOTE') {
-            const sectionBase = {
-                sectionClass: 'posts note'
-            };
-            const sectionTxt = {
-                postsCntClass: 'posts_container'
-            };
-            const baseCnt = this.baseModule(sectionBase);
-            const txtPost = this.textPostCreator(sectionTxt, this.body, this.title);
-            baseCnt.appendChild(txtPost);
-            result = baseCnt;
-        }
-        else {
-            const sectionBase = {
-                sectionClass: 'posts task'
-            };
-            const sectionTxt = {
-                postsCntClass: 'posts_container'
-            };
-            const baseCnt = this.baseModule(sectionBase);
-            const txtPost = this.textPostCreator(sectionTxt, this.body, this.title);
-            baseCnt.appendChild(txtPost);
-            result = baseCnt;
-        }
-        return result;
-    }
-    ;
-}
-SectionCreator._itemId = 0;
+// export class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, SectionTxt> {
+//   protected static _itemId: number = 0;
+//   get itemId(): number {
+//     return SectionCreator._itemId;
+//   }
+//   set itemId(val: number) {
+//     SectionCreator._itemId = val
+//   }
+//   constructor(
+//     // eslint-disable-next-line no-unused-vars
+//     protected menuType: string | null,
+//     // eslint-disable-next-line no-unused-vars
+//     protected title?: string,
+//     // eslint-disable-next-line no-unused-vars
+//     protected url?: string,
+//     // eslint-disable-next-line no-unused-vars
+//     protected body?: string
+//   ) {
+//     super();
+//   }
+//   /* 4. 포스트 삭제 메커니즘 */
+//   protected delPost(e: Event): void {
+//     const eTargetToHTML = e.target as HTMLElement;
+//     const delTarget = (eTargetToHTML.parentNode!.parentNode! as HTMLElement);
+//     const delCnt = document.querySelector('article#motion_posts') as HTMLElement;
+//     delCnt?.removeChild(delTarget);
+//   }
+//   protected baseModule(ipt: SectionBase): HTMLElement {
+//     const $section = document.createElement('section');
+//     $section.className = ipt.sectionClass;
+//     $section.draggable = true;
+//     $section.dataset.itemId = String(this.itemId);
+//     const $div = document.createElement('div');
+//     $div.className = 'close_container';
+//     const $btn = document.createElement('button');
+//     $btn.className = 'btn_del';
+//     $btn.innerText = '×';
+//     $btn.addEventListener('click', this.delPost);
+//     $div.appendChild($btn);
+//     $section.appendChild($div);
+//     const dnd = new Dnd();
+//     dnd.dragEventsController($section);
+//     return $section;
+//   };
+//   protected mediaPostCreator(ipt: SectionMedia, url: string, title: string): HTMLElement[] {
+//     const mediaCnt = document.createElement('div');
+//     mediaCnt.className = ipt.imgWrapperClass;
+//     if (this.menuType === 'IMAGE') {
+//       const $img = document.createElement('img');
+//       $img.src = url;
+//       $img.alt = 'img';
+//       mediaCnt.appendChild($img);
+//     } else {
+//       const $iframe = document.createElement('iframe');
+//       const rawUrl: string[] = url.includes('=') ? url.split('=') : url.split('/');
+//       $iframe.src = `https://www.youtube.com/embed/${rawUrl[rawUrl.length - 1]}`;
+//       $iframe.title = 'YouTube video player';
+//       $iframe.frameBorder = '0';
+//       $iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+//       $iframe.allowFullscreen = true;
+//       mediaCnt.appendChild($iframe);
+//     }
+//     const titleCnt = document.createElement('div');
+//     titleCnt.className = ipt.titleWrapperClass;
+//     const $h2 = document.createElement('h2');
+//     $h2.textContent = title;
+//     titleCnt.appendChild($h2);
+//     return [titleCnt, mediaCnt];
+//   };
+//   protected textPostCreator(ipt: SectionTxt, body: string, title: string): HTMLElement {
+//     const postCnt = document.createElement('div');
+//     postCnt.className = ipt.postsCntClass;
+//     if (this.menuType === 'NOTE') {
+//       const $h2 = document.createElement('h2');
+//       $h2.textContent = title;
+//       const $p = document.createElement('p');
+//       $p.textContent = body;
+//       postCnt.appendChild($h2);
+//       postCnt.appendChild($p);
+//     } else {
+//       const $h2 = document.createElement('h2');
+//       $h2.textContent = title;
+//       const bodyCnt = document.createElement('div');
+//       const $input = document.createElement('input');
+//       $input.type = 'checkbox';
+//       $input.name = 'checkbox'
+//       $input.addEventListener('click', (e: Event): void => {
+//         const eTargetToHTML = e.target as HTMLElement;
+//         const parentToHTML = eTargetToHTML.parentElement as HTMLElement;
+//         const textDeco: string = (parentToHTML.childNodes[1] as HTMLElement).style.textDecoration;
+//         if (textDeco === '' || textDeco === 'none') {
+//           (parentToHTML.childNodes[1] as HTMLElement).style.textDecoration = 'line-through';
+//         } else {
+//           (parentToHTML.childNodes[1] as HTMLElement).style.textDecoration = 'none';
+//         }
+//       });
+//       const $label = document.createElement('label');
+//       $label.htmlFor = 'checkbox';
+//       $label.textContent = body;
+//       bodyCnt.appendChild($input);
+//       bodyCnt.appendChild($label);
+//       postCnt.appendChild($h2);
+//       postCnt.appendChild(bodyCnt);
+//     }
+//     return postCnt;
+//   };
+//   ctnCreator(): HTMLElement {
+//     let result: HTMLElement;
+//     if (this.menuType === 'IMAGE') {
+//       const sectionBase: SectionBase = {
+//         sectionClass: 'media image'
+//       };
+//       const sectionMedia: SectionMedia = {
+//         imgWrapperClass: 'image_wrapper',
+//         titleWrapperClass: 'posts_title'
+//       };
+//       const baseCnt = this.baseModule(sectionBase);
+//       const mediaPost = this.mediaPostCreator(sectionMedia, this.url!, this.title!);
+//       mediaPost.forEach(media => baseCnt.appendChild(media));
+//       result = baseCnt;
+//     } else if (this.menuType === 'VIDEO') {
+//       const sectionBase: SectionBase = {
+//         sectionClass: 'media video'
+//       };
+//       const sectionMedia: SectionMedia = {
+//         imgWrapperClass: 'video_wrapper',
+//         titleWrapperClass: 'posts_title'
+//       };
+//       const baseCnt = this.baseModule(sectionBase);
+//       const mediaPost = this.mediaPostCreator(sectionMedia, this.url!, this.title!);
+//       mediaPost.forEach(media => baseCnt.appendChild(media));
+//       result = baseCnt;
+//     } else if (this.menuType === 'NOTE') {
+//       const sectionBase: SectionBase = {
+//         sectionClass: 'posts note'
+//       };
+//       const sectionTxt: SectionTxt = {
+//         postsCntClass: 'posts_container'
+//       };
+//       const baseCnt = this.baseModule(sectionBase);
+//       const txtPost = this.textPostCreator(sectionTxt, this.body!, this.title!);
+//       baseCnt.appendChild(txtPost);
+//       result = baseCnt;
+//     } else {
+//       const sectionBase: SectionBase = {
+//         sectionClass: 'posts task'
+//       };
+//       const sectionTxt: SectionTxt = {
+//         postsCntClass: 'posts_container'
+//       };
+//       const baseCnt = this.baseModule(sectionBase);
+//       const txtPost = this.textPostCreator(sectionTxt, this.body!, this.title!);
+//       baseCnt.appendChild(txtPost);
+//       result = baseCnt;
+//     }
+//     return result;
+//   };
+// }
 // modalForm?.addEventListener('submit', (e): void => {
 //   e.preventDefault();
 //   type SubmitVals = HTMLInputElement | HTMLTextAreaElement;

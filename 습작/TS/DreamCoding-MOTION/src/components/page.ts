@@ -178,7 +178,7 @@ type DOMRectTemp<T> = {
 type DOMRectEdited = DOMRectTemp<DOMRect>;
 
 // App 수준 추가
-export class Dnd {
+export default class Dnd {
   static clientCoords: DOMRectEdited;
 
   static lastElDir: string = '';
@@ -281,172 +281,172 @@ export class Dnd {
 }
 
 // Main 수준 추가
-export class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, SectionTxt> {
-  protected static _itemId: number = 0;
+// export class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, SectionTxt> {
+//   protected static _itemId: number = 0;
 
-  get itemId(): number {
-    return SectionCreator._itemId;
-  }
+//   get itemId(): number {
+//     return SectionCreator._itemId;
+//   }
 
-  set itemId(val: number) {
-    SectionCreator._itemId = val
-  }
+//   set itemId(val: number) {
+//     SectionCreator._itemId = val
+//   }
 
-  constructor(
-    // eslint-disable-next-line no-unused-vars
-    protected menuType: string | null,
-    // eslint-disable-next-line no-unused-vars
-    protected title?: string,
-    // eslint-disable-next-line no-unused-vars
-    protected url?: string,
-    // eslint-disable-next-line no-unused-vars
-    protected body?: string
-  ) {
-    super();
-  }
+//   constructor(
+//     // eslint-disable-next-line no-unused-vars
+//     protected menuType: string | null,
+//     // eslint-disable-next-line no-unused-vars
+//     protected title?: string,
+//     // eslint-disable-next-line no-unused-vars
+//     protected url?: string,
+//     // eslint-disable-next-line no-unused-vars
+//     protected body?: string
+//   ) {
+//     super();
+//   }
 
-  /* 4. 포스트 삭제 메커니즘 */
-  protected delPost(e: Event): void {
-    const eTargetToHTML = e.target as HTMLElement;
-    const delTarget = (eTargetToHTML.parentNode!.parentNode! as HTMLElement);
-    const delCnt = document.querySelector('article#motion_posts') as HTMLElement;
-    delCnt?.removeChild(delTarget);
-  }
+//   /* 4. 포스트 삭제 메커니즘 */
+//   protected delPost(e: Event): void {
+//     const eTargetToHTML = e.target as HTMLElement;
+//     const delTarget = (eTargetToHTML.parentNode!.parentNode! as HTMLElement);
+//     const delCnt = document.querySelector('article#motion_posts') as HTMLElement;
+//     delCnt?.removeChild(delTarget);
+//   }
 
-  protected baseModule(ipt: SectionBase): HTMLElement {
-    const $section = document.createElement('section');
-    $section.className = ipt.sectionClass;
-    $section.draggable = true;
-    $section.dataset.itemId = String(this.itemId);
-    const $div = document.createElement('div');
-    $div.className = 'close_container';
-    const $btn = document.createElement('button');
-    $btn.className = 'btn_del';
-    $btn.innerText = '×';
-    $btn.addEventListener('click', this.delPost);
-    $div.appendChild($btn);
-    $section.appendChild($div);
-    const dnd = new Dnd();
-    dnd.dragEventsController($section);
-    return $section;
-  };
+//   protected baseModule(ipt: SectionBase): HTMLElement {
+//     const $section = document.createElement('section');
+//     $section.className = ipt.sectionClass;
+//     $section.draggable = true;
+//     $section.dataset.itemId = String(this.itemId);
+//     const $div = document.createElement('div');
+//     $div.className = 'close_container';
+//     const $btn = document.createElement('button');
+//     $btn.className = 'btn_del';
+//     $btn.innerText = '×';
+//     $btn.addEventListener('click', this.delPost);
+//     $div.appendChild($btn);
+//     $section.appendChild($div);
+//     const dnd = new Dnd();
+//     dnd.dragEventsController($section);
+//     return $section;
+//   };
 
-  protected mediaPostCreator(ipt: SectionMedia, url: string, title: string): HTMLElement[] {
-    const mediaCnt = document.createElement('div');
-    mediaCnt.className = ipt.imgWrapperClass;
-    if (this.menuType === 'IMAGE') {
-      const $img = document.createElement('img');
-      $img.src = url;
-      $img.alt = 'img';
-      mediaCnt.appendChild($img);
-    } else {
-      const $iframe = document.createElement('iframe');
-      const rawUrl: string[] = url.includes('=') ? url.split('=') : url.split('/');
-      $iframe.src = `https://www.youtube.com/embed/${rawUrl[rawUrl.length - 1]}`;
-      $iframe.title = 'YouTube video player';
-      $iframe.frameBorder = '0';
-      $iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-      $iframe.allowFullscreen = true;
-      mediaCnt.appendChild($iframe);
-    }
-    const titleCnt = document.createElement('div');
-    titleCnt.className = ipt.titleWrapperClass;
-    const $h2 = document.createElement('h2');
-    $h2.textContent = title;
-    titleCnt.appendChild($h2);
-    return [titleCnt, mediaCnt];
-  };
+//   protected mediaPostCreator(ipt: SectionMedia, url: string, title: string): HTMLElement[] {
+//     const mediaCnt = document.createElement('div');
+//     mediaCnt.className = ipt.imgWrapperClass;
+//     if (this.menuType === 'IMAGE') {
+//       const $img = document.createElement('img');
+//       $img.src = url;
+//       $img.alt = 'img';
+//       mediaCnt.appendChild($img);
+//     } else {
+//       const $iframe = document.createElement('iframe');
+//       const rawUrl: string[] = url.includes('=') ? url.split('=') : url.split('/');
+//       $iframe.src = `https://www.youtube.com/embed/${rawUrl[rawUrl.length - 1]}`;
+//       $iframe.title = 'YouTube video player';
+//       $iframe.frameBorder = '0';
+//       $iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+//       $iframe.allowFullscreen = true;
+//       mediaCnt.appendChild($iframe);
+//     }
+//     const titleCnt = document.createElement('div');
+//     titleCnt.className = ipt.titleWrapperClass;
+//     const $h2 = document.createElement('h2');
+//     $h2.textContent = title;
+//     titleCnt.appendChild($h2);
+//     return [titleCnt, mediaCnt];
+//   };
 
-  protected textPostCreator(ipt: SectionTxt, body: string, title: string): HTMLElement {
-    const postCnt = document.createElement('div');
-    postCnt.className = ipt.postsCntClass;
-    if (this.menuType === 'NOTE') {
-      const $h2 = document.createElement('h2');
-      $h2.textContent = title;
-      const $p = document.createElement('p');
-      $p.textContent = body;
-      postCnt.appendChild($h2);
-      postCnt.appendChild($p);
-    } else {
-      const $h2 = document.createElement('h2');
-      $h2.textContent = title;
-      const bodyCnt = document.createElement('div');
-      const $input = document.createElement('input');
-      $input.type = 'checkbox';
-      $input.name = 'checkbox'
-      $input.addEventListener('click', (e: Event): void => {
-        const eTargetToHTML = e.target as HTMLElement;
-        const parentToHTML = eTargetToHTML.parentElement as HTMLElement;
-        const textDeco: string = (parentToHTML.childNodes[1] as HTMLElement).style.textDecoration;
-        if (textDeco === '' || textDeco === 'none') {
-          (parentToHTML.childNodes[1] as HTMLElement).style.textDecoration = 'line-through';
-        } else {
-          (parentToHTML.childNodes[1] as HTMLElement).style.textDecoration = 'none';
-        }
-      });
-      const $label = document.createElement('label');
-      $label.htmlFor = 'checkbox';
-      $label.textContent = body;
-      bodyCnt.appendChild($input);
-      bodyCnt.appendChild($label);
-      postCnt.appendChild($h2);
-      postCnt.appendChild(bodyCnt);
-    }
-    return postCnt;
-  };
+//   protected textPostCreator(ipt: SectionTxt, body: string, title: string): HTMLElement {
+//     const postCnt = document.createElement('div');
+//     postCnt.className = ipt.postsCntClass;
+//     if (this.menuType === 'NOTE') {
+//       const $h2 = document.createElement('h2');
+//       $h2.textContent = title;
+//       const $p = document.createElement('p');
+//       $p.textContent = body;
+//       postCnt.appendChild($h2);
+//       postCnt.appendChild($p);
+//     } else {
+//       const $h2 = document.createElement('h2');
+//       $h2.textContent = title;
+//       const bodyCnt = document.createElement('div');
+//       const $input = document.createElement('input');
+//       $input.type = 'checkbox';
+//       $input.name = 'checkbox'
+//       $input.addEventListener('click', (e: Event): void => {
+//         const eTargetToHTML = e.target as HTMLElement;
+//         const parentToHTML = eTargetToHTML.parentElement as HTMLElement;
+//         const textDeco: string = (parentToHTML.childNodes[1] as HTMLElement).style.textDecoration;
+//         if (textDeco === '' || textDeco === 'none') {
+//           (parentToHTML.childNodes[1] as HTMLElement).style.textDecoration = 'line-through';
+//         } else {
+//           (parentToHTML.childNodes[1] as HTMLElement).style.textDecoration = 'none';
+//         }
+//       });
+//       const $label = document.createElement('label');
+//       $label.htmlFor = 'checkbox';
+//       $label.textContent = body;
+//       bodyCnt.appendChild($input);
+//       bodyCnt.appendChild($label);
+//       postCnt.appendChild($h2);
+//       postCnt.appendChild(bodyCnt);
+//     }
+//     return postCnt;
+//   };
 
-  ctnCreator(): HTMLElement {
-    let result: HTMLElement;
-    if (this.menuType === 'IMAGE') {
-      const sectionBase: SectionBase = {
-        sectionClass: 'media image'
-      };
-      const sectionMedia: SectionMedia = {
-        imgWrapperClass: 'image_wrapper',
-        titleWrapperClass: 'posts_title'
-      };
-      const baseCnt = this.baseModule(sectionBase);
-      const mediaPost = this.mediaPostCreator(sectionMedia, this.url!, this.title!);
-      mediaPost.forEach(media => baseCnt.appendChild(media));
-      result = baseCnt;
-    } else if (this.menuType === 'VIDEO') {
-      const sectionBase: SectionBase = {
-        sectionClass: 'media video'
-      };
-      const sectionMedia: SectionMedia = {
-        imgWrapperClass: 'video_wrapper',
-        titleWrapperClass: 'posts_title'
-      };
-      const baseCnt = this.baseModule(sectionBase);
-      const mediaPost = this.mediaPostCreator(sectionMedia, this.url!, this.title!);
-      mediaPost.forEach(media => baseCnt.appendChild(media));
-      result = baseCnt;
-    } else if (this.menuType === 'NOTE') {
-      const sectionBase: SectionBase = {
-        sectionClass: 'posts note'
-      };
-      const sectionTxt: SectionTxt = {
-        postsCntClass: 'posts_container'
-      };
-      const baseCnt = this.baseModule(sectionBase);
-      const txtPost = this.textPostCreator(sectionTxt, this.body!, this.title!);
-      baseCnt.appendChild(txtPost);
-      result = baseCnt;
-    } else {
-      const sectionBase: SectionBase = {
-        sectionClass: 'posts task'
-      };
-      const sectionTxt: SectionTxt = {
-        postsCntClass: 'posts_container'
-      };
-      const baseCnt = this.baseModule(sectionBase);
-      const txtPost = this.textPostCreator(sectionTxt, this.body!, this.title!);
-      baseCnt.appendChild(txtPost);
-      result = baseCnt;
-    }
-    return result;
-  };
-}
+//   ctnCreator(): HTMLElement {
+//     let result: HTMLElement;
+//     if (this.menuType === 'IMAGE') {
+//       const sectionBase: SectionBase = {
+//         sectionClass: 'media image'
+//       };
+//       const sectionMedia: SectionMedia = {
+//         imgWrapperClass: 'image_wrapper',
+//         titleWrapperClass: 'posts_title'
+//       };
+//       const baseCnt = this.baseModule(sectionBase);
+//       const mediaPost = this.mediaPostCreator(sectionMedia, this.url!, this.title!);
+//       mediaPost.forEach(media => baseCnt.appendChild(media));
+//       result = baseCnt;
+//     } else if (this.menuType === 'VIDEO') {
+//       const sectionBase: SectionBase = {
+//         sectionClass: 'media video'
+//       };
+//       const sectionMedia: SectionMedia = {
+//         imgWrapperClass: 'video_wrapper',
+//         titleWrapperClass: 'posts_title'
+//       };
+//       const baseCnt = this.baseModule(sectionBase);
+//       const mediaPost = this.mediaPostCreator(sectionMedia, this.url!, this.title!);
+//       mediaPost.forEach(media => baseCnt.appendChild(media));
+//       result = baseCnt;
+//     } else if (this.menuType === 'NOTE') {
+//       const sectionBase: SectionBase = {
+//         sectionClass: 'posts note'
+//       };
+//       const sectionTxt: SectionTxt = {
+//         postsCntClass: 'posts_container'
+//       };
+//       const baseCnt = this.baseModule(sectionBase);
+//       const txtPost = this.textPostCreator(sectionTxt, this.body!, this.title!);
+//       baseCnt.appendChild(txtPost);
+//       result = baseCnt;
+//     } else {
+//       const sectionBase: SectionBase = {
+//         sectionClass: 'posts task'
+//       };
+//       const sectionTxt: SectionTxt = {
+//         postsCntClass: 'posts_container'
+//       };
+//       const baseCnt = this.baseModule(sectionBase);
+//       const txtPost = this.textPostCreator(sectionTxt, this.body!, this.title!);
+//       baseCnt.appendChild(txtPost);
+//       result = baseCnt;
+//     }
+//     return result;
+//   };
+// }
 
 // modalForm?.addEventListener('submit', (e): void => {
 //   e.preventDefault();
