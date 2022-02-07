@@ -1,15 +1,14 @@
-import ComponentTemplate from './PseudoComp.js';
-
+import ComponentTemplate from '../../Util/PseudoComp.js';
 class Footer extends ComponentTemplate {
-  constructor() {
-    super(`
+    constructor() {
+        super(`
       <footer id="motion_cr">
         <p id="cr_text">
           ⓒ Copyright by Dream Coding Academy. All rights reserved.
         </p>
       </footer>
     `);
-  }
+    }
 }
-
 export default new Footer().render().innerHTML;
+//# sourceMappingURL=Footer.js.map

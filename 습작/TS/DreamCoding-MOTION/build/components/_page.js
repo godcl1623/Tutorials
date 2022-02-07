@@ -1,47 +1,6 @@
-import PostCreateDialog from './Dialog/Dialog.js';
-
-// const test = () => {
-  /* eslint-disable class-methods-use-this */
-
-/* 포스트 추가 모듈 */
-
-/* 1. 추가 메뉴 모듈화 */
-type BasePayload = {
-  forVal: string;
-  labelTxt: string;
-};
-
-type MediaPayload = {
-  nameVal: BasePayload['forVal'];
-  classVal: string;
-};
-
-type TxtPayload = MediaPayload;
-
-type Payload = {
-  forVal?: string;
-  labelTxt?: string;
-  nameVal?: string;
-  classVal?: string;
+var _a;
+class ProtoPostCreator {
 }
-
-interface IPostCreator {
-  ctnCreator(): HTMLElement | HTMLElement[];
-}
-
-abstract class ProtoPostCreator<B, M, T> implements IPostCreator {
-  // eslint-disable-next-line no-unused-vars
-  protected abstract baseModule(ipt: B): HTMLElement;
-
-  // eslint-disable-next-line no-unused-vars
-  protected abstract mediaPostCreator(ipt: M, url?: string, title?: string): HTMLElement | HTMLElement[];
-
-  // eslint-disable-next-line no-unused-vars
-  protected abstract textPostCreator(ipt: T, body?: string, title?: string): HTMLElement;
-
-  abstract ctnCreator(): HTMLElement | HTMLElement[];
-}
-
 /* ########## Dialog.ts로 대체 ##########
 class PostCreator extends ProtoPostCreator<BasePayload, MediaPayload, TxtPayload> {
   // eslint-disable-next-line no-unused-vars
@@ -101,197 +60,124 @@ class PostCreator extends ProtoPostCreator<BasePayload, MediaPayload, TxtPayload
   }
 }
 */
-
 /* 2. 모달창 여닫기 - App 수준 추가? */
 const motionMenu = document.querySelector('#motion_menu');
-const menuBtns = motionMenu?.querySelectorAll('.menu_items');
+const menuBtns = motionMenu === null || motionMenu === void 0 ? void 0 : motionMenu.querySelectorAll('.menu_items');
 const modalBg = document.querySelector('#modal');
-const modalForm = modalBg?.querySelector('form#form_post');
-const modalCloseBtn = modalBg?.querySelector('#btn_close');
-let selectedMenu: string | null = '';
-// function modalOpener(
-//   // eslint-disable-next-line no-undef
-//   btns: NodeListOf<Element> | undefined,
-//   modalBg: Element | null,
-//   modalForm: Element | null | undefined
-// ): void {
-//   btns?.forEach(btn =>
-//     btn.addEventListener('click', (e): void => {
-//       // null인 경우가 있을 수 있으므로 주의
-//       const eTargetToHTML = e.target as HTMLElement;
-//       selectedMenu = eTargetToHTML.textContent;
-//       const _payloadCondition = eTargetToHTML.textContent === 'IMAGE' || eTargetToHTML.textContent === 'VIDEO';
-//       const _payloadTest: Payload = {
-//         forVal: _payloadCondition ? 'URL' : 'Body',
-//         labelTxt: _payloadCondition ? 'URL' : 'Body',
-//         nameVal: _payloadCondition ? 'URL' : 'Body',
-//         classVal: _payloadCondition ? 'url need_ext' : 'body need_ext'
-//       };
-//       const postCreator = new PostCreateDialog(eTargetToHTML.textContent! as string, _payloadTest);
-//       const $inputCnt = postCreator.render();
-//       const targetCtn = modalForm?.querySelector('.ap_target');
-//       modalBg?.classList.remove('disabled');
-//       const titleVal = (modalForm?.childNodes[1].childNodes[3] as HTMLInputElement);
-//       if (titleVal.value !== '') titleVal.value = '';
-//       if (targetCtn?.childNodes.length === 0) {
-//         targetCtn.appendChild($inputCnt);
-//       } else {
-//         targetCtn?.replaceChild($inputCnt, targetCtn.querySelector('div')! as HTMLDivElement);
-//       }
-//     })
-//   );
-// }
-
-// function modalCloser(bg: Element | null, btn: Element | null | undefined): void {
-//   const targets = [bg, btn];
-//   targets.forEach(target =>
-//     target?.addEventListener('click', (e): void => {
-//       const eTargetToHTML = e.target as HTMLElement;
-//       if (eTargetToHTML.id === 'modal' || eTargetToHTML.id === 'btn_close' || eTargetToHTML.id === 'btn_add') {
-//         bg?.classList.add('disabled');
-//       }
-//     })
-//   );
-// }
-// modalOpener(menuBtns, modalBg, modalForm);
-// modalCloser(modalBg, modalCloseBtn);
-
-/* 포스트 추가 모듈 */
-/* 3. 포스트 추가 메커니즘 */
-type SectionBase = {
-  sectionClass: string;
-};
-
-type SectionMedia = {
-  imgWrapperClass: string;
-  titleWrapperClass: string;
-}
-
-type SectionTxt = {
-  postsCntClass: string;
-}
-
-type DOMRectTemp<T> = {
-  [P in keyof T]?: T[P]
-};
-
-type DOMRectEdited = DOMRectTemp<DOMRect>;
-
+const modalForm = modalBg === null || modalBg === void 0 ? void 0 : modalBg.querySelector('form#form_post');
+const modalCloseBtn = modalBg === null || modalBg === void 0 ? void 0 : modalBg.querySelector('#btn_close');
+let selectedMenu = '';
 // App 수준 추가
 export default class Dnd {
-  static clientCoords: DOMRectEdited;
-
-  static lastElDir: string = '';
-
-  static initYCoord: number = 0;
-
-  static lastElIdx: number = 0;
-
-  static dragged: HTMLElement | null = null;
-
-  static motionPosts: HTMLElement = document.querySelector('article#motion_posts') as HTMLElement;
-
-  chkLastIdx = (event: Event): void => {
-    const eTargetToHTML = event.target as HTMLElement;
-    const parentOne = eTargetToHTML.parentElement;
-    const parentsTwo = parentOne?.parentElement;
-    const sectionLists = Array.from(Dnd.motionPosts.childNodes).filter(item => (item as HTMLElement).className);
-    if (eTargetToHTML instanceof HTMLDivElement && eTargetToHTML.className) {
-      Dnd.lastElIdx = sectionLists.indexOf(parentOne as HTMLElement);
-    } else if (!eTargetToHTML.className) {
-      Dnd.lastElIdx = sectionLists.indexOf(parentsTwo as HTMLElement);
+    constructor() {
+        this.chkLastIdx = (event) => {
+            const eTargetToHTML = event.target;
+            const parentOne = eTargetToHTML.parentElement;
+            const parentsTwo = parentOne === null || parentOne === void 0 ? void 0 : parentOne.parentElement;
+            const sectionLists = Array.from(Dnd.motionPosts.childNodes).filter(item => item.className);
+            if (eTargetToHTML instanceof HTMLDivElement && eTargetToHTML.className) {
+                Dnd.lastElIdx = sectionLists.indexOf(parentOne);
+            }
+            else if (!eTargetToHTML.className) {
+                Dnd.lastElIdx = sectionLists.indexOf(parentsTwo);
+            }
+        };
+        this.itemTopOrBot = (event) => {
+            const eTargetToHTML = event.target;
+            const parentOne = eTargetToHTML.parentElement;
+            const parentsTwo = parentOne === null || parentOne === void 0 ? void 0 : parentOne.parentElement;
+            if (eTargetToHTML instanceof HTMLDivElement) {
+                Dnd.clientCoords = parentOne === null || parentOne === void 0 ? void 0 : parentOne.getBoundingClientRect();
+            }
+            else if (!eTargetToHTML.className) {
+                Dnd.clientCoords = parentsTwo === null || parentsTwo === void 0 ? void 0 : parentsTwo.getBoundingClientRect();
+            }
+            const itemMid = Dnd.clientCoords.top + (Dnd.clientCoords.height / 2);
+            if (event.clientY > itemMid) {
+                Dnd.lastElDir = 'bot';
+            }
+            else if (event.clientY < itemMid) {
+                Dnd.lastElDir = 'top';
+            }
+            else {
+                throw new Error('Section direction declaration error !');
+            }
+        };
+        this.dragEventsController = (tgt) => {
+            tgt.addEventListener('dragstart', (e) => {
+                Dnd.dragged = e.target;
+            });
+            tgt.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                this.chkLastIdx(e);
+                this.itemTopOrBot(e);
+            });
+        };
     }
-  }
-
-  itemTopOrBot = (event: MouseEvent): void => {
-    const eTargetToHTML = event.target as HTMLElement;
-    const parentOne = eTargetToHTML.parentElement;
-    const parentsTwo = parentOne?.parentElement;
-    if (eTargetToHTML instanceof HTMLDivElement) {
-      Dnd.clientCoords = parentOne?.getBoundingClientRect() as DOMRect;
-    } else if (!eTargetToHTML.className) {
-      Dnd.clientCoords = parentsTwo?.getBoundingClientRect() as DOMRect;
-    }
-    const itemMid: number = (Dnd.clientCoords.top as number) + ((Dnd.clientCoords.height as number) / 2);
-    if (event.clientY > itemMid) {
-      Dnd.lastElDir = 'bot';
-    } else if (event.clientY < itemMid) {
-      Dnd.lastElDir = 'top';
-    } else {
-      throw new Error('Section direction declaration error !');
-    }
-  }
-
-  dragEventsController = (tgt: HTMLElement): void => {
-    tgt.addEventListener('dragstart', (e: DragEvent): void => {
-      Dnd.dragged = e.target as HTMLElement;
-    });
-    tgt.addEventListener('dragover', (e: DragEvent): void => {
-      e.preventDefault();
-      this.chkLastIdx(e);
-      this.itemTopOrBot(e)
-    });
-  }
-
-  static dropEventsController = (): void => {
-    this.motionPosts.addEventListener('dragover', (e: DragEvent): void => {
-      e.preventDefault();
-    });
-    this.motionPosts.addEventListener('drop', (e: DragEvent): void => {
-      e.preventDefault();
-      // motionPosts nodeList
-      // eslint-disable-next-line no-undef
-      const sectionLists: ChildNode[] = Array.from(this.motionPosts.childNodes)
-        .filter(item => (item as HTMLElement).className);
-      const currIdx: number = sectionLists.indexOf(this.dragged as HTMLElement);
-      // eslint-disable-next-line no-undef
-      let frontList: ChildNode[] = [];
-      // eslint-disable-next-line no-undef
-      let rearList: ChildNode[] = [];
-      // eslint-disable-next-line no-undef
-      let dragFilteredList: ChildNode[] = [];
-      // eslint-disable-next-line no-undef
-      let newList: ChildNode[] = [];
-      // 1. 현재 motionPosts nodeList 내 아이템 전체 삭제
-      sectionLists.forEach(section => this.motionPosts.removeChild(section));
-      // 2. nodeList 분리
-      if (this.lastElDir === 'top') {
-        frontList = sectionLists.slice(0, this.lastElIdx);
-        rearList = sectionLists.slice(this.lastElIdx, sectionLists.length);
-      } else {
-        frontList = sectionLists.slice(0, this.lastElIdx + 1);
-        rearList = sectionLists.slice(this.lastElIdx + 1, sectionLists.length);
-      }
-      // 3. 드래그 아이템 추가 & 5. 리스트 합치기
-      if (currIdx < this.lastElIdx) {
-        dragFilteredList = frontList.filter(section => section !== this.dragged);
-        dragFilteredList.push(this.dragged as HTMLElement);
-        newList = dragFilteredList.concat(rearList);
-      } else if (currIdx > this.lastElIdx) {
-        dragFilteredList = rearList.filter(section => section !== this.dragged);
-        frontList.push(this.dragged as HTMLElement);
-        newList = frontList.concat(dragFilteredList);
-      } else {
-        newList = sectionLists;
-      }
-      // 4. 새 리스트 node에 추가
-      newList.forEach(section => this.motionPosts.appendChild(section));
-    });
-  }
 }
-
+_a = Dnd;
+Dnd.lastElDir = '';
+Dnd.initYCoord = 0;
+Dnd.lastElIdx = 0;
+Dnd.dragged = null;
+Dnd.motionPosts = document.querySelector('article#motion_posts');
+Dnd.dropEventsController = () => {
+    _a.motionPosts.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
+    _a.motionPosts.addEventListener('drop', (e) => {
+        e.preventDefault();
+        // motionPosts nodeList
+        // eslint-disable-next-line no-undef
+        const sectionLists = Array.from(_a.motionPosts.childNodes)
+            .filter(item => item.className);
+        const currIdx = sectionLists.indexOf(_a.dragged);
+        // eslint-disable-next-line no-undef
+        let frontList = [];
+        // eslint-disable-next-line no-undef
+        let rearList = [];
+        // eslint-disable-next-line no-undef
+        let dragFilteredList = [];
+        // eslint-disable-next-line no-undef
+        let newList = [];
+        // 1. 현재 motionPosts nodeList 내 아이템 전체 삭제
+        sectionLists.forEach(section => _a.motionPosts.removeChild(section));
+        // 2. nodeList 분리
+        if (_a.lastElDir === 'top') {
+            frontList = sectionLists.slice(0, _a.lastElIdx);
+            rearList = sectionLists.slice(_a.lastElIdx, sectionLists.length);
+        }
+        else {
+            frontList = sectionLists.slice(0, _a.lastElIdx + 1);
+            rearList = sectionLists.slice(_a.lastElIdx + 1, sectionLists.length);
+        }
+        // 3. 드래그 아이템 추가 & 5. 리스트 합치기
+        if (currIdx < _a.lastElIdx) {
+            dragFilteredList = frontList.filter(section => section !== _a.dragged);
+            dragFilteredList.push(_a.dragged);
+            newList = dragFilteredList.concat(rearList);
+        }
+        else if (currIdx > _a.lastElIdx) {
+            dragFilteredList = rearList.filter(section => section !== _a.dragged);
+            frontList.push(_a.dragged);
+            newList = frontList.concat(dragFilteredList);
+        }
+        else {
+            newList = sectionLists;
+        }
+        // 4. 새 리스트 node에 추가
+        newList.forEach(section => _a.motionPosts.appendChild(section));
+    });
+};
 // Main 수준 추가
 // export class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, SectionTxt> {
 //   protected static _itemId: number = 0;
-
 //   get itemId(): number {
 //     return SectionCreator._itemId;
 //   }
-
 //   set itemId(val: number) {
 //     SectionCreator._itemId = val
 //   }
-
 //   constructor(
 //     // eslint-disable-next-line no-unused-vars
 //     protected menuType: string | null,
@@ -304,7 +190,6 @@ export default class Dnd {
 //   ) {
 //     super();
 //   }
-
 //   /* 4. 포스트 삭제 메커니즘 */
 //   protected delPost(e: Event): void {
 //     const eTargetToHTML = e.target as HTMLElement;
@@ -312,7 +197,6 @@ export default class Dnd {
 //     const delCnt = document.querySelector('article#motion_posts') as HTMLElement;
 //     delCnt?.removeChild(delTarget);
 //   }
-
 //   protected baseModule(ipt: SectionBase): HTMLElement {
 //     const $section = document.createElement('section');
 //     $section.className = ipt.sectionClass;
@@ -330,7 +214,6 @@ export default class Dnd {
 //     dnd.dragEventsController($section);
 //     return $section;
 //   };
-
 //   protected mediaPostCreator(ipt: SectionMedia, url: string, title: string): HTMLElement[] {
 //     const mediaCnt = document.createElement('div');
 //     mediaCnt.className = ipt.imgWrapperClass;
@@ -356,7 +239,6 @@ export default class Dnd {
 //     titleCnt.appendChild($h2);
 //     return [titleCnt, mediaCnt];
 //   };
-
 //   protected textPostCreator(ipt: SectionTxt, body: string, title: string): HTMLElement {
 //     const postCnt = document.createElement('div');
 //     postCnt.className = ipt.postsCntClass;
@@ -394,7 +276,6 @@ export default class Dnd {
 //     }
 //     return postCnt;
 //   };
-
 //   ctnCreator(): HTMLElement {
 //     let result: HTMLElement;
 //     if (this.menuType === 'IMAGE') {
@@ -447,7 +328,6 @@ export default class Dnd {
 //     return result;
 //   };
 // }
-
 // modalForm?.addEventListener('submit', (e): void => {
 //   e.preventDefault();
 //   type SubmitVals = HTMLInputElement | HTMLTextAreaElement;
@@ -470,8 +350,7 @@ export default class Dnd {
 //   selectedMenu = '';
 //   sectionCreator.itemId++;
 // });
-
 // Dnd.dropEventsController();
 // }
-
 // export default test;
+//# sourceMappingURL=_page.js.map

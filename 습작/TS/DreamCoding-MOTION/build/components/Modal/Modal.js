@@ -1,4 +1,4 @@
-import ComponentTemplate from '../PseudoComp.js';
+import ComponentTemplate from '../Util/PseudoComp.js';
 class Modal extends ComponentTemplate {
     constructor() {
         super(`

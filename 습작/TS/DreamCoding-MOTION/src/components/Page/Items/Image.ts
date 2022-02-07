@@ -1,4 +1,4 @@
-import ComponentTemplate from '../../PseudoComp.js';
+import ComponentTemplate from '../../Util/PseudoComp.js';
 
 export default class ImagePost extends ComponentTemplate {
   private title: string;

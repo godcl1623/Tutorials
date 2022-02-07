@@ -1,7 +1,7 @@
-import App from './components/App.js';
+var _a;
+import App from './components/Core/App.js';
 import Modal from './components/Modal/Modal.js';
 import PostCreateDialog from './components/Dialog/Dialog.js';
-// import { SectionCreator } from './components/page.js';
 import SectionCreator from './components/Page/Section.js';
 import ImagePost from './components/Page/Items/Image.js';
 import VideoPost from './components/Page/Items/Video.js';
@@ -11,6 +11,52 @@ const root = document.querySelector('div#root');
 const modal = document.querySelector('div#modal');
 class TempDOM {
     constructor() {
+        this.chkLastIdx = (event) => {
+            const eTargetToHTML = event.target;
+            const parentOne = eTargetToHTML.parentElement;
+            const parentsTwo = parentOne === null || parentOne === void 0 ? void 0 : parentOne.parentElement;
+            const motionPosts = TempDOM.appRoot.querySelector('article#motion_posts');
+            const sectionLists = Array.from(motionPosts.childNodes).filter(item => item.className);
+            if (eTargetToHTML instanceof HTMLDivElement && eTargetToHTML.className) {
+                TempDOM.lastElIdx = sectionLists.indexOf(parentOne);
+            }
+            else if (!eTargetToHTML.className) {
+                TempDOM.lastElIdx = sectionLists.indexOf(parentsTwo);
+            }
+        };
+        this.itemTopOrBot = (event) => {
+            const eTargetToHTML = event.target;
+            const parentOne = eTargetToHTML.parentElement;
+            const parentsTwo = parentOne === null || parentOne === void 0 ? void 0 : parentOne.parentElement;
+            if (eTargetToHTML instanceof HTMLDivElement) {
+                TempDOM.clientCoords = parentOne === null || parentOne === void 0 ? void 0 : parentOne.getBoundingClientRect();
+            }
+            else if (!eTargetToHTML.className) {
+                TempDOM.clientCoords = parentsTwo === null || parentsTwo === void 0 ? void 0 : parentsTwo.getBoundingClientRect();
+            }
+            const itemMid = TempDOM.clientCoords.top + (TempDOM.clientCoords.height / 2);
+            if (event.clientY > itemMid) {
+                TempDOM.lastElDir = 'bot';
+            }
+            else if (event.clientY < itemMid) {
+                TempDOM.lastElDir = 'top';
+            }
+            else {
+                throw new Error('Section direction declaration error !');
+            }
+        };
+        this.dragEventsController = (tgt) => {
+            tgt.addEventListener('dragstart', (e) => {
+                TempDOM.dragged = e.target;
+            });
+            tgt.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                if (!e.target.id) {
+                    this.chkLastIdx(e);
+                    this.itemTopOrBot(e);
+                }
+            });
+        };
         TempDOM.selectedMenu = '';
     }
     render(appContents, appRoot) {
@@ -21,6 +67,8 @@ class TempDOM {
             this.registerModalOpen(btn);
         });
         this.delPost(TempDOM.appRoot);
+        this.dragEventsController(TempDOM.appRoot);
+        TempDOM.dropEventsController();
     }
     createPortal(htmlContents, modalRoot) {
         TempDOM.modalRoot = modalRoot;
@@ -106,11 +154,61 @@ class TempDOM {
             }
         });
     }
-    enableDrag(cnt) {
-    }
 }
+_a = TempDOM;
+TempDOM.lastElDir = '';
+TempDOM.lastElIdx = 0;
+TempDOM.dragged = null;
+TempDOM.dropEventsController = () => {
+    const motionPosts = TempDOM.appRoot.querySelector('article#motion_posts');
+    motionPosts.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
+    motionPosts.addEventListener('drop', (e) => {
+        e.preventDefault();
+        // motionPosts nodeList
+        // eslint-disable-next-line no-undef
+        const sectionLists = Array.from(motionPosts.childNodes)
+            .filter(item => item.className);
+        const currIdx = sectionLists.indexOf(_a.dragged);
+        // eslint-disable-next-line no-undef
+        let frontList = [];
+        // eslint-disable-next-line no-undef
+        let rearList = [];
+        // eslint-disable-next-line no-undef
+        let dragFilteredList = [];
+        // eslint-disable-next-line no-undef
+        let newList = [];
+        // 1. 현재 motionPosts nodeList 내 아이템 전체 삭제
+        sectionLists.forEach(section => motionPosts.removeChild(section));
+        // 2. nodeList 분리
+        if (_a.lastElDir === 'top') {
+            frontList = sectionLists.slice(0, _a.lastElIdx);
+            rearList = sectionLists.slice(_a.lastElIdx, sectionLists.length);
+        }
+        else {
+            frontList = sectionLists.slice(0, _a.lastElIdx + 1);
+            rearList = sectionLists.slice(_a.lastElIdx + 1, sectionLists.length);
+        }
+        // 3. 드래그 아이템 추가 & 5. 리스트 합치기
+        if (currIdx < _a.lastElIdx) {
+            dragFilteredList = frontList.filter(section => section !== _a.dragged);
+            dragFilteredList.push(_a.dragged);
+            newList = dragFilteredList.concat(rearList);
+        }
+        else if (currIdx > _a.lastElIdx) {
+            dragFilteredList = rearList.filter(section => section !== _a.dragged);
+            frontList.push(_a.dragged);
+            newList = frontList.concat(dragFilteredList);
+        }
+        else {
+            newList = sectionLists;
+        }
+        // 4. 새 리스트 node에 추가
+        newList.forEach(section => motionPosts.appendChild(section));
+    });
+};
 const tempDOM = new TempDOM();
 tempDOM.render(App, root);
 tempDOM.createPortal(Modal, modal);
-// TotalComponent();
 //# sourceMappingURL=index.js.map

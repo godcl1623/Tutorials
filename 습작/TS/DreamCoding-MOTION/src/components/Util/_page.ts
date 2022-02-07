@@ -1,4 +1,4 @@
-import PostCreateDialog from './Dialog/Dialog.js';
+import PostCreateDialog from '../Dialog/Dialog.js';
 
 // const test = () => {
   /* eslint-disable class-methods-use-this */

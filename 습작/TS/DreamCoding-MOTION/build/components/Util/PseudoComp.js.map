@@ -1,0 +1,1 @@
+{"version":3,"file":"PseudoComp.js","sourceRoot":"","sources":["../../../src/components/Util/PseudoComp.ts"],"names":[],"mappings":"AAIA,MAAM,CAAC,OAAO,OAAO,iBAAiB;IAGpC,YAAY,mBAA2B;QACrC,IAAI,CAAC,SAAS,GAAG,QAAQ,CAAC,aAAa,CAAC,KAAK,CAAC,CAAC;QAC/C,IAAI,CAAC,SAAS,CAAC,SAAS,GAAG,mBAAmB,CAAC;IACjD,CAAC;IAED,MAAM;QACJ,OAAO,IAAI,CAAC,SAAS,CAAC;IACxB,CAAC;CACF"}

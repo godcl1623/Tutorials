@@ -1,6 +1,6 @@
-import Header from './Header.js';
-import Main from './Main.js';
-import Footer from './Footer.js';
+import Header from './Parts/Header.js';
+import Main from './Parts/Main.js';
+import Footer from './Parts/Footer.js';
 
 class App {
   private container: HTMLDivElement;
