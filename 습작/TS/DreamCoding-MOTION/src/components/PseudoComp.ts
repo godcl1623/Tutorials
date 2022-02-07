@@ -1,5 +1,5 @@
 interface ComponentBuilder {
-  render(): HTMLDivElement;
+  render(): HTMLElement;
 }
 
 export default class ComponentTemplate implements ComponentBuilder {
@@ -10,7 +10,7 @@ export default class ComponentTemplate implements ComponentBuilder {
     this.container.innerHTML = htmlStructureString;
   }
 
-  render() {
+  render(): HTMLElement {
     return this.container;
   }
 }

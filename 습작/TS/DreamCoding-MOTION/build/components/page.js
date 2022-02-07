@@ -341,28 +341,28 @@ export class SectionCreator extends ProtoPostCreator {
     ;
 }
 SectionCreator._itemId = 0;
-modalForm === null || modalForm === void 0 ? void 0 : modalForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const eTargetToHTML = e.target;
-    const formVals = [];
-    const motionPosts = document.querySelector('article#motion_posts');
-    let $section;
-    let sectionCreator;
-    Object.keys(eTargetToHTML)
-        .slice(0, 2)
-        .forEach(key => formVals.push(eTargetToHTML[key].value));
-    if (selectedMenu === 'IMAGE' || selectedMenu === 'VIDEO') {
-        sectionCreator = new SectionCreator(selectedMenu, formVals[0], formVals[1]);
-        $section = sectionCreator.ctnCreator();
-    }
-    else {
-        sectionCreator = new SectionCreator(selectedMenu, formVals[0], '', formVals[1]);
-        $section = sectionCreator.ctnCreator();
-    }
-    motionPosts === null || motionPosts === void 0 ? void 0 : motionPosts.appendChild($section);
-    selectedMenu = '';
-    sectionCreator.itemId++;
-});
+// modalForm?.addEventListener('submit', (e): void => {
+//   e.preventDefault();
+//   type SubmitVals = HTMLInputElement | HTMLTextAreaElement;
+//   const eTargetToHTML = e.target as HTMLFormElement;
+//   const formVals: string[] = [];
+//   const motionPosts = document.querySelector('article#motion_posts') as HTMLElement;
+//   let $section: HTMLElement;
+//   let sectionCreator: SectionCreator;
+//   Object.keys(eTargetToHTML)
+//   .slice(0, 2)
+//   .forEach(key => formVals.push((eTargetToHTML[key] as SubmitVals).value));
+//   if (selectedMenu === 'IMAGE' || selectedMenu === 'VIDEO') {
+//     sectionCreator = new SectionCreator(selectedMenu, formVals[0], formVals[1])
+//     $section = sectionCreator.ctnCreator();
+//   } else {
+//     sectionCreator = new SectionCreator(selectedMenu, formVals[0], '', formVals[1]);
+//     $section = sectionCreator.ctnCreator();
+//   }
+//   motionPosts?.appendChild($section);
+//   selectedMenu = '';
+//   sectionCreator.itemId++;
+// });
 // Dnd.dropEventsController();
 // }
 // export default test;

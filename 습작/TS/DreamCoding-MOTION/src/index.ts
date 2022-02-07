@@ -3,48 +3,60 @@ import App from './components/App.js';
 import TempComponent from './components/temp.js';
 import Modal from './components/Modal/Modal.js';
 import PostCreateDialog, { DialogPayload } from './components/Dialog/Dialog.js';
-import { SectionCreator } from './components/page.js';
+// import { SectionCreator } from './components/page.js';
+import SectionCreator from './components/Page/Section.js';
+import ImagePost from './components/Page/Items/Image.js';
+import VideoPost from './components/Page/Items/Video.js';
+import NotePost from './components/Page/Items/Note.js';
+import TaskPost from './components/Page/Items/Task.js';
 
 const root = document.querySelector('div#root');
 const modal = document.querySelector('div#modal');
 
 class TempDOM {
-  private selectedMenu: string;
+  private static selectedMenu: string;
+
+  private static appRoot: null | HTMLDivElement;
+
+  private static modalRoot: null | HTMLDivElement;
 
   constructor() {
-    this.selectedMenu = '';
+    TempDOM.selectedMenu = '';
   }
 
   render(appContents: string, appRoot: HTMLDivElement) {
-    appRoot.innerHTML = appContents;
-    const btns = appRoot.querySelectorAll('button.menu_btn');
+    TempDOM.appRoot = appRoot;
+    TempDOM.appRoot.innerHTML = appContents;
+    const btns = TempDOM.appRoot.querySelectorAll('button.menu_btn');
     btns.forEach(btn => {
       this.registerModalOpen(btn! as HTMLButtonElement);
     })
   }
   
   createPortal(htmlContents: string, modalRoot: HTMLDivElement) {
-    modalRoot.className = 'disabled';
-    modalRoot.innerHTML = htmlContents;
-    const modalForm = modalRoot.querySelector('form#form_post');
-    this.registerModalClose(modalRoot);
+    TempDOM.modalRoot = modalRoot;
+    TempDOM.modalRoot.className = 'disabled';
+    TempDOM.modalRoot.innerHTML = htmlContents;
+    const modalForm = TempDOM.modalRoot.querySelector('form#form_post');
+    this.registerModalClose(TempDOM.modalRoot);
     this.registerSubmit(modalForm! as HTMLFormElement);
   }
 
   private registerModalOpen(tgt: HTMLButtonElement) {
     tgt.addEventListener('click', (e): void => {
       const eTargetToHTML = e.target as HTMLElement;
-      const modalBg = document.querySelector('#modal');
+      // const modalBg = document.querySelector('#modal');
+      const modalBg = TempDOM.modalRoot;
       const modalForm = modalBg?.querySelector('form#form_post');
-      this.selectedMenu = eTargetToHTML.textContent! as string;
-      const _payloadCondition = this.selectedMenu === 'IMAGE' || this.selectedMenu === 'VIDEO';
+      TempDOM.selectedMenu = eTargetToHTML.textContent! as string;
+      const _payloadCondition = TempDOM.selectedMenu === 'IMAGE' || TempDOM.selectedMenu === 'VIDEO';
       const _payloadTest: DialogPayload = {
         forVal: _payloadCondition ? 'URL' : 'Body',
         labelTxt: _payloadCondition ? 'URL' : 'Body',
         nameVal: _payloadCondition ? 'URL' : 'Body',
         classVal: _payloadCondition ? 'url need_ext' : 'body need_ext'
       };
-      const postCreator = new PostCreateDialog(this.selectedMenu! as string, _payloadTest);
+      const postCreator = new PostCreateDialog(TempDOM.selectedMenu! as string, _payloadTest);
       const $inputCnt = postCreator.render();
       const targetCtn = modalForm?.querySelector('.ap_target');
       modalBg?.classList.remove('disabled');
@@ -73,23 +85,37 @@ class TempDOM {
       type SubmitVals = HTMLInputElement | HTMLTextAreaElement;
       const eTargetToHTML = e.target as HTMLFormElement;
       const formVals: string[] = [];
-      const motionPosts = document.querySelector('article#motion_posts') as HTMLElement;
-      let $section: HTMLElement;
-      let sectionCreator: SectionCreator;
+      const motionPosts = (TempDOM.appRoot! as HTMLElement).querySelector('article#motion_posts') as HTMLElement;
+      const $section = new SectionCreator(TempDOM.selectedMenu).render();
       Object.keys(eTargetToHTML)
-      .slice(0, 2)
-      .forEach(key => formVals.push((eTargetToHTML[key] as SubmitVals).value));
-      if (this.selectedMenu === 'IMAGE' || this.selectedMenu === 'VIDEO') {
-        sectionCreator = new SectionCreator(this.selectedMenu, formVals[0], formVals[1])
-        $section = sectionCreator.ctnCreator();
-      } else {
-        sectionCreator = new SectionCreator(this.selectedMenu, formVals[0], '', formVals[1]);
-        $section = sectionCreator.ctnCreator();
-      }
+        .slice(0, 2)
+        .forEach(key => formVals.push((eTargetToHTML[key] as SubmitVals).value));
+      $section.innerHTML += this.generatePosts(formVals[0], formVals[1]).render().innerHTML;
       motionPosts?.appendChild($section);
-      this.selectedMenu = '';
-      sectionCreator.itemId++;
+      TempDOM.selectedMenu = '';
     });
+  }
+
+  private generatePosts(title: string, content: string) {
+    switch (TempDOM.selectedMenu) {
+      case 'IMAGE':
+        return new ImagePost(title, content);
+      case 'VIDEO':
+        return new VideoPost(title, content);
+      case 'NOTE':
+        return new NotePost(title, content);
+      case 'TASK':
+        return new TaskPost(title, content);
+      default:
+        throw new Error('Invalid menuType input error !');
+    }
+  }
+
+  private delPost(e: Event): void {
+    const eTargetToHTML = e.target as HTMLElement;
+    const delTarget = (eTargetToHTML.parentNode!.parentNode! as HTMLElement);
+    const delCnt = (TempDOM.appRoot! as HTMLElement).querySelector('article#motion_posts');
+    delCnt?.removeChild(delTarget);
   }
 }
 

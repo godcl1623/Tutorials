@@ -448,28 +448,28 @@ export class SectionCreator extends ProtoPostCreator<SectionBase, SectionMedia, 
   };
 }
 
-modalForm?.addEventListener('submit', (e): void => {
-  e.preventDefault();
-  type SubmitVals = HTMLInputElement | HTMLTextAreaElement;
-  const eTargetToHTML = e.target as HTMLFormElement;
-  const formVals: string[] = [];
-  const motionPosts = document.querySelector('article#motion_posts') as HTMLElement;
-  let $section: HTMLElement;
-  let sectionCreator: SectionCreator;
-  Object.keys(eTargetToHTML)
-  .slice(0, 2)
-  .forEach(key => formVals.push((eTargetToHTML[key] as SubmitVals).value));
-  if (selectedMenu === 'IMAGE' || selectedMenu === 'VIDEO') {
-    sectionCreator = new SectionCreator(selectedMenu, formVals[0], formVals[1])
-    $section = sectionCreator.ctnCreator();
-  } else {
-    sectionCreator = new SectionCreator(selectedMenu, formVals[0], '', formVals[1]);
-    $section = sectionCreator.ctnCreator();
-  }
-  motionPosts?.appendChild($section);
-  selectedMenu = '';
-  sectionCreator.itemId++;
-});
+// modalForm?.addEventListener('submit', (e): void => {
+//   e.preventDefault();
+//   type SubmitVals = HTMLInputElement | HTMLTextAreaElement;
+//   const eTargetToHTML = e.target as HTMLFormElement;
+//   const formVals: string[] = [];
+//   const motionPosts = document.querySelector('article#motion_posts') as HTMLElement;
+//   let $section: HTMLElement;
+//   let sectionCreator: SectionCreator;
+//   Object.keys(eTargetToHTML)
+//   .slice(0, 2)
+//   .forEach(key => formVals.push((eTargetToHTML[key] as SubmitVals).value));
+//   if (selectedMenu === 'IMAGE' || selectedMenu === 'VIDEO') {
+//     sectionCreator = new SectionCreator(selectedMenu, formVals[0], formVals[1])
+//     $section = sectionCreator.ctnCreator();
+//   } else {
+//     sectionCreator = new SectionCreator(selectedMenu, formVals[0], '', formVals[1]);
+//     $section = sectionCreator.ctnCreator();
+//   }
+//   motionPosts?.appendChild($section);
+//   selectedMenu = '';
+//   sectionCreator.itemId++;
+// });
 
 // Dnd.dropEventsController();
 // }

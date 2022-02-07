@@ -1,9 +1,9 @@
 interface ComponentBuilder {
-    render(): HTMLDivElement;
+    render(): HTMLElement;
 }
 export default class ComponentTemplate implements ComponentBuilder {
     protected container: HTMLDivElement;
     constructor(htmlStructureString: string);
-    render(): HTMLDivElement;
+    render(): HTMLElement;
 }
 export {};
