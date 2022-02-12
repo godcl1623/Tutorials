@@ -1,6 +1,7 @@
 import React from 'react';
 import Knight from './Knight';
 import Square from './Square';
+import { moveKnight } from './Game'
 
 // function renderSquare(i, [knightX, knightY]) {
 //   const x = i % 8;
@@ -39,6 +40,7 @@ import Square from './Square';
 // export default Board;
 
 function renderSquare(i, [knightX, knightY]) {
+// function renderSquare(i, knightPosition) {
   const x = i % 8;
   const y = Math.floor(i / 8);
   const isKnightHere = x === knightX && y === knightY;
