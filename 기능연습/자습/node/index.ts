@@ -29,10 +29,18 @@ app.get('/test', (req: Request, res: Response) => {
 })
 
 wss.on('connection', function(ws: any) {
-  ws.send('hello! this message sent from server !')
+  console.log('websocket comm connected');
   ws.on('message', function(message: any) {
-    console.log('received: %s', message);
+    console.log('received: ', message.toString())
+    ws.send(message.toString());
   })
+  ws.on('close', (ss: any) => {
+    console.log('closed')
+  })
+})
+
+wss.on('close', (ws: any) => {
+  console.log('close')
 })
 
 app.listen(app.get('port'), () => console.log(`server is running at port ${app.get('port')}`));

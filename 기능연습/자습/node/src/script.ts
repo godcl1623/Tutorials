@@ -1,22 +1,36 @@
-const ctn = document.querySelector('#container');
-const reqBtn = (ctn as HTMLElement).querySelector('#req-btn');
-// (reqBtn as HTMLButtonElement).addEventListener('click', async e => {
-//   const url = 'http://localhost:3001/test'
-//   fetch(url)
-//     .then(res => res.text())
-//     .then(data => console.log(data))
-// });
-(reqBtn as HTMLButtonElement).addEventListener('click', e => {
+let cntFlag: boolean = false;
+const ctn = document.querySelector('#container') as HTMLElement;
+const connectBtn = ctn.querySelector('#connect') as HTMLElement;
+let cntWs: any = null;
+connectBtn.addEventListener('click', e => {
   const ws = new WebSocket('ws://localhost:3002');
   ws.onopen = function(event) {
-    ws.send('client message: Hi !');
+    alert('websocket comm connected !');
+    cntWs = ws;
   }
-
-  ws.onmessage = function(event) {
-    console.log('server message: ', event.data);
-  }
-
   ws.onerror = function(event) {
-    console.log('server error message: ', (event as any).data);
+    alert((event as any).data);
   }
 });
+const sendBtn = ctn.querySelector('#sender') as HTMLElement;
+sendBtn.addEventListener('click', e => {
+  cntWs.send('test');
+})
+const closeBtn = ctn.querySelector('#close') as HTMLElement;
+closeBtn.addEventListener('click', e => {
+  cntWs.close();
+})
+const ctn2 = document.querySelector('#container2') as HTMLElement;
+const sendText = ctn2.querySelector('input[name=sendText]') as HTMLElement;
+const textInput = ctn2.querySelector('input[name=textInput]') as HTMLInputElement;
+const chatWindow = ctn2.querySelector('textarea[name=chatWindow]') as HTMLTextAreaElement;
+sendText.addEventListener('click', e => {
+  cntWs.send(textInput.value)
+  cntWs.onmessage = async function(msg: any) {
+    // console.log(JSON.parse(msg.data))
+    chatWindow.value += `user: ${msg.data}\n`
+  }
+});
+chatWindow.style.width = '500px';
+chatWindow.style.height = '500px';
+chatWindow.value = '';

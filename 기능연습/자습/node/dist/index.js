@@ -29,9 +29,16 @@ app.get('/test', (req, res) => {
     res.send('foo from server');
 });
 wss.on('connection', function (ws) {
-    ws.send('hello! this message sent from server !');
+    console.log('websocket comm connected');
     ws.on('message', function (message) {
-        console.log('received: %s', message);
+        console.log('received: ', message.toString());
+        ws.send(message.toString());
     });
+    ws.on('close', (ss) => {
+        console.log('closed');
+    });
+});
+wss.on('close', (ws) => {
+    console.log('close');
 });
 app.listen(app.get('port'), () => console.log(`server is running at port ${app.get('port')}`));
