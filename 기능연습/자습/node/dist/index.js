@@ -30,12 +30,33 @@ app.get('/test', (req, res) => {
 });
 wss.on('connection', function (ws) {
     console.log('websocket comm connected');
-    ws.on('message', function (message) {
-        console.log('received: ', message.toString());
-        ws.send(message.toString());
-    });
+    // ws.on('message', function(message: any) {
+    //   console.log('received: ', message.toString())
+    //   // ws.send(message.toString());
+    //   let count: number = 0;
+    //   setInterval(() => {
+    //     // console.log('test')
+    //     ws.send('test')
+    //   }, 100);
+    // })
+    // setInterval(() => {
+    //   // console.log('test')
+    //   ws.send('test');
+    // }, 500);
+    let count = 1;
+    const sendMsg = setInterval(() => {
+        console.log(`${count}/100`);
+        ws.send(`${count}/100`);
+        count++;
+        if (count > 100) {
+            ws.send('process completed !');
+            ws.close();
+            clearInterval(sendMsg);
+        }
+    }, 250);
     ws.on('close', (ss) => {
         console.log('closed');
+        clearInterval(sendMsg);
     });
 });
 wss.on('close', (ws) => {

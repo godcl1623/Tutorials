@@ -12,11 +12,23 @@ let cntFlag = false;
 const ctn = document.querySelector('#container');
 const connectBtn = ctn.querySelector('#connect');
 let cntWs = null;
+const ctn2 = document.querySelector('#container2');
+const sendText = ctn2.querySelector('input[name=sendText]');
+const textInput = ctn2.querySelector('input[name=textInput]');
+const chatWindow = ctn2.querySelector('textarea[name=chatWindow]');
 connectBtn.addEventListener('click', e => {
     const ws = new WebSocket('ws://localhost:3002');
     ws.onopen = function (event) {
-        alert('websocket comm connected !');
+        // alert('websocket comm connected !');
+        chatWindow.value += 'websocket comm connected !\n';
+        ws.send('comm start');
         cntWs = ws;
+    };
+    ws.onmessage = function (msg) {
+        return __awaiter(this, void 0, void 0, function* () {
+            chatWindow.value = `${msg.data}\n`;
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        });
     };
     ws.onerror = function (event) {
         alert(event.data);
@@ -30,19 +42,13 @@ const closeBtn = ctn.querySelector('#close');
 closeBtn.addEventListener('click', e => {
     cntWs.close();
 });
-const ctn2 = document.querySelector('#container2');
-const sendText = ctn2.querySelector('input[name=sendText]');
-const textInput = ctn2.querySelector('input[name=textInput]');
-const chatWindow = ctn2.querySelector('textarea[name=chatWindow]');
-sendText.addEventListener('click', e => {
-    cntWs.send(textInput.value);
-    cntWs.onmessage = function (msg) {
-        return __awaiter(this, void 0, void 0, function* () {
-            // console.log(JSON.parse(msg.data))
-            chatWindow.value += `user: ${msg.data}\n`;
-        });
-    };
-});
+// sendText.addEventListener('click', e => {
+//   cntWs.send(textInput.value)
+//   cntWs.onmessage = async function(msg: any) {
+//     console.log(JSON.parse(msg.data))
+//     chatWindow.value += `user: ${msg.data}\n`
+//   }
+// });
 chatWindow.style.width = '500px';
 chatWindow.style.height = '500px';
 chatWindow.value = '';
