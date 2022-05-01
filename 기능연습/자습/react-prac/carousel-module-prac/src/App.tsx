@@ -1,5 +1,7 @@
 import React from 'react';
 import Carousel from './Carousel';
+import './style.css';
+import foo from './data.json';
 
 export default function App() {
   return (
@@ -11,7 +13,7 @@ export default function App() {
         height: '600px'
       }}
     >
-      <Carousel />
+      <Carousel data={foo.colors}/>
     </div>
   );
 }
