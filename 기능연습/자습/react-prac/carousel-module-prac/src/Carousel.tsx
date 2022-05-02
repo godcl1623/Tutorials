@@ -1,7 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
+import Buttons from './modes/Buttons';
 
 type Props = {
-  data: any[]
+  data: any[],
+  mode: string
 }
 
 function setClientSizes(originalState: any, setState: ((any: any) => void), newState: any) {
@@ -16,6 +18,7 @@ function setClientSizes(originalState: any, setState: ((any: any) => void), newS
 function Content({ color, number, width }: any) {
   return (
     <div
+      className="carousel_content"
       style={{
         width: width,
         height: '100%',
@@ -27,11 +30,14 @@ function Content({ color, number, width }: any) {
   );
 }
 
-export default function Carousel({ data }: Props) {
+export default function Carousel({ data, mode }: Props) {
   const [carouselClientSizes, setCarouselClientSizes] = useState<any>();
   const [carouselItemIdx, setItemIdx] = useState<number>(0);
   const [flag, setFlag] = useState<boolean>(false);
   const carouselCnt = useRef<HTMLDivElement | null>(null);
+  const carouselTimer = useRef<any>();
+  const progressTimer = useRef<any>();
+  const progressVal = useRef<number>(0);
   const carWidth = carouselClientSizes ? carouselClientSizes.width : 0;
 
   useEffect(() => {
@@ -67,38 +73,42 @@ export default function Carousel({ data }: Props) {
     }
   }, [flag])
 
+  useEffect(() => {
+    if (mode === 'timer') {
+      carouselTimer.current = setInterval(() => setItemIdx(prevVal => prevVal += 1), 3000);
+      progressTimer.current = setInterval(() => progressVal.current += 1, 300);
+    }
+    return () => {
+      clearInterval(carouselTimer.current);
+      clearInterval(progressTimer.current);
+      carouselTimer.current = undefined;
+      progressTimer.current = undefined;
+      progressVal.current = 0;
+    };
+  }, [mode])
+
   const carouselContents = (data: any[], width: number | string) => {
-    const preArr = (
-      data.map((ele: any, idx: number) => <Content color={ele} number={idx + 1} width={width} />)
-    );
-    return [preArr[preArr.length - 1], ...preArr, preArr[0]];
+    const processedData = [data[data.length - 1], ...data, data[0]];
+    return processedData.map((ele: any, idx: number) => {
+      return (
+        <React.Fragment key={idx}>
+          <Content color={ele} number={idx} width={width} />
+        </React.Fragment>
+      );
+    });
   };
 
   return (
     <>
-      <button
-        id="btn_left"
-        style={{
-          width: '30px',
-          height: '30px',
-          border: '1px solid black',
-          borderRadius: '50%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'absolute',
-          top: carouselClientSizes ? (carouselClientSizes.height / 2) : '50%',
-          left: carouselClientSizes ? (carouselClientSizes.left) - 40 : '0',
-          transform: 'translateY(-50%)',
-          cursor: 'pointer',
-          background: 'white',
-          color: 'black'
-        }}
-        disabled={flag}
-        onClick={e => setItemIdx(prevVal => prevVal -= 1)}
-      >
-        ◀
-      </button>
+      {
+        mode === 'button'
+        ?
+          <Buttons
+            direction='left'
+            utils={{ flag, setState: setItemIdx, carouselClientSizes }}
+          />
+        : ''
+      }
       <div
         id="carousel_container"
         ref={carouselCnt}
@@ -128,30 +138,25 @@ export default function Carousel({ data }: Props) {
             carouselContents(data, carWidth)
           }
         </div>
+        <div
+          style={{
+            width: `${progressVal.current}%`,
+            height: '5px',
+            position: 'absolute',
+            background: 'black',
+            transition: 'all 0.3s'
+          }}
+        />
       </div>
-      <button
-        id="btn_right"
-        style={{
-          width: '30px',
-          height: '30px',
-          border: '1px solid black',
-          borderRadius: '50%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'absolute',
-          top: carouselClientSizes ? (carouselClientSizes.height / 2) : '50%',
-          left: carouselClientSizes ? (carouselClientSizes.left + carouselClientSizes.width) + 10 : '0',
-          transform: 'translateY(-50%)',
-          cursor: 'pointer',
-          background: 'white',
-          color: 'black'
-        }}
-        onClick={e => setItemIdx(prevVal => prevVal += 1)}
-        disabled={flag}
-      >
-        ▶
-      </button>
+      {
+        mode === 'button'
+        ?
+          <Buttons
+            direction='right'
+            utils={{ flag, setState: setItemIdx, carouselClientSizes }}
+          />
+        : ''
+      }
     </>
   );
 }
