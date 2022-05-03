@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import Carousel from './Carousel';
+import './style.css';
+import foo from './data.json';
 
-function App() {
+export default function App() {
+  const [mode, setMode] = useState<string>('button');
+  useEffect(() => {
+    // if (mode === 'button') {
+    //   alert('button');
+    // } else {
+    //   alert('timer');
+    // }
+  }, [mode])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div
+        id="outer_container"
+        style={{
+          border: '1px solid black',
+          width: '800px',
+          height: '600px'
+        }}
+      >
+        <Carousel data={foo.colors} mode={mode} />
+      </div>
+      <button
+        onClick={e => {
+          if (mode === 'button') {
+            setMode('timer')
+          } else {
+            setMode('button')
+          }
+        }}
+      >모드 전환</button>
+    </>
   );
 }
-
-export default App;
